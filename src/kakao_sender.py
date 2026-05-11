@@ -229,6 +229,62 @@ def _send_group(access_token, items, header_base, is_external):
     return sent
 
 
+def _shorten_company(name: str) -> str:
+    """Very compact 2-3 char company codes."""
+    mapping = {
+        "한국투자금융지주": "지주",
+        "한국투자증권": "증권",
+        "한국투자신탁운용": "운용",
+        "한국투자밸류자산운용": "밸류",
+        "한국투자파트너스": "VC",
+        "한국투자프라이빗에쿼티": "PE",
+        "한국투자캐피탈": "캐피탈",
+        "한국투자저축은행": "저축",
+        "한국투자리얼에셋운용": "리얼",
+        "한국투자액셀러레이터": "액셀",
+    }
+    return mapping.get(name, name)
+
+
+def _pack_external_to_text(items: list[dict]) -> list[str]:
+    """Pack external-media items into minimal text messages.
+
+    Per-entry format (most compact possible):
+        🔴[증권] 짧은 제목..
+        URL
+    Media name is omitted (URL host conveys it). Title capped to 25 chars.
+    Each message ≤195 chars. Header lines for multi-message handled by caller.
+    """
+    entries = []
+    for it in items:
+        emoji = SENTIMENT_EMOJI.get(it.get("sentiment", "neutral"), "🟡")
+        company = _shorten_company(it.get("company", ""))
+        title = it.get("title", "")
+        if len(title) > 25:
+            title = title[:23] + ".."
+        url = it.get("link", "")
+        entry = f"{emoji}[{company}] {title}\n{url}"
+        entries.append(entry)
+
+    # Greedy pack <=TEXT_BODY_LIMIT chars per message
+    chunks = []
+    current = ""
+    for e in entries:
+        sep = "\n" if current else ""
+        candidate = current + sep + e
+        if len(candidate) > TEXT_BODY_LIMIT:
+            if current:
+                chunks.append(current)
+            if len(e) > TEXT_BODY_LIMIT:
+                e = e[:TEXT_BODY_LIMIT]
+            current = e
+        else:
+            current = candidate
+    if current:
+        chunks.append(current)
+    return chunks
+
+
 def send_daily_news(access_token, items, header_title_base):
     if not items:
         _send_template(access_token, _build_text_template(
@@ -241,8 +297,29 @@ def send_daily_news(access_token, items, header_title_base):
     print(f"[INFO] Send split: naver={len(naver_items)}, external={len(external_items)}", flush=True)
 
     sent = 0
+    # 1) Naver: list 카드 (▶ 버튼이 정상 작동)
     sent += _send_group(access_token, naver_items, header_title_base, is_external=False)
-    sent += _send_group(access_token, external_items, "📰 외부 매체 기사", is_external=True)
+
+    # 2) External: text 메시지 (URL 본문 포함, 카톡이 자동 하이퍼링크)
+    if external_items:
+        text_chunks = _pack_external_to_text(external_items)
+        total_ext = len(text_chunks)
+        print(f"[INFO] External packed into {total_ext} text message(s).", flush=True)
+        for i, body in enumerate(text_chunks, 1):
+            header = "📰 외부 매체 기사" if total_ext == 1 else f"📰 외부 매체 기사 ({i}/{total_ext})"
+            full = f"{header}\n\n{body}"
+            if len(full) > 200:
+                # Header가 들어가서 limit 초과 시 entry 다시 압축
+                full = full[:200]
+            try:
+                _send_template(access_token, _build_text_template(full))
+                sent += 1
+            except requests.HTTPError as e:
+                print(f"[ERROR] external text send failed ({i}/{total_ext}): {e}", flush=True)
+                if e.response is not None:
+                    print(f"[ERROR] Body: {e.response.text}", flush=True)
+                raise
+            time.sleep(0.4)
     return sent
 
 
