@@ -1,9 +1,6 @@
-"""Kakao memo (talk-to-self) message sender.
-
-- Naver-URL articles  -> list cards (button -> Naver article directly)
-- External-URL articles -> list cards with Naver search URL as the click target
-"""
+"""Kakao memo (talk-to-self) message sender."""
 import json
+import re
 import requests
 import time
 import urllib.parse
@@ -16,9 +13,6 @@ MAX_PER_LIST = 5
 MIN_PER_LIST = 2
 TEXT_BODY_LIMIT = 195
 
-# 카카오 [제품 링크 관리]에 등록되어 있어야 하는 도메인들:
-#   - n.news.naver.com
-#   - search.naver.com  <-- 외부 매체 카드 link 용
 DEFAULT_HEADER_LINK = "https://n.news.naver.com"
 SEARCH_BASE = "https://search.naver.com/search.naver?where=news&query="
 
@@ -58,12 +52,38 @@ def _media_name_from_url(url: str) -> str:
     return host or "외부 매체"
 
 
+def _clean_search_query(title: str) -> str:
+    """Strip quotes/ellipsis/truncation markers so Naver search matches more articles."""
+    s = title
+    # Remove various quote characters (straight and curly)
+    s = re.sub(r"[\"'\u201C\u201D\u2018\u2019\u00B4`]", "", s)
+    # Replace ellipsis and dot-runs with space
+    s = re.sub(r"[\u2026\u22EF\u30FB\u2027]+", " ", s)  # …  ⋯  ・  ‧
+    s = re.sub(r"\.{2,}", " ", s)                         # ...
+    # 가운데점(·) 2개 이상 연속만 공백으로 (단일 ·는 회사명 구분에 정상 사용되므로 보존)
+    s = re.sub(r"\u00B7{2,}", " ", s)
+    # Drop bracket markers but keep their content
+    s = re.sub(r"[\[\]\u3010\u3011\u300C\u300D\u300E\u300F<>()()]", "", s)
+    # Collapse whitespace
+    s = re.sub(r"\s+", " ", s).strip()
+    # Remove trailing "엑..." / "한투..." style truncation tokens (Korean syllable + dots already gone)
+    # Drop a trailing single short fragment that's clearly a cut-off (1-2 chars at very end)
+    parts = s.split(" ")
+    if parts and len(parts[-1]) <= 2:
+        parts = parts[:-1]
+    s = " ".join(parts)
+    # Cap length to avoid too-restrictive exact-phrase behavior
+    if len(s) > 40:
+        s = s[:40].rsplit(" ", 1)[0] or s[:40]
+    return s
+
+
 def _naver_search_url(title: str) -> str:
-    return SEARCH_BASE + urllib.parse.quote(title)
+    cleaned = _clean_search_query(title)
+    return SEARCH_BASE + urllib.parse.quote(cleaned)
 
 
 def split_for_list_template(items: list, max_per_chunk: int = MAX_PER_LIST) -> list[list]:
-    """Balanced split into chunks of size 2-5 (1 only if total==1)."""
     n = len(items)
     if n == 0:
         return []
@@ -82,7 +102,6 @@ def split_for_list_template(items: list, max_per_chunk: int = MAX_PER_LIST) -> l
 
 
 def _build_card_naver(item: dict) -> dict:
-    """Build one content entry for Naver-hosted article (direct link)."""
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
     title = f"{emoji} [{item.get('company', '')}] {item.get('title', '')}"
     if len(title) > 100:
@@ -97,7 +116,6 @@ def _build_card_naver(item: dict) -> dict:
 
 
 def _build_card_external(item: dict) -> dict:
-    """Build one content entry for external-media article (link -> Naver search)."""
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
     title = f"{emoji} [{item.get('company', '')}] {item.get('title', '')}"
     if len(title) > 100:
@@ -116,11 +134,7 @@ def _build_card_external(item: dict) -> dict:
     }
 
 
-def _build_list_template(
-    items: list[dict],
-    header_title: str,
-    is_external: bool = False,
-) -> dict:
+def _build_list_template(items, header_title, is_external=False):
     assert MIN_PER_LIST <= len(items) <= MAX_PER_LIST
     build = _build_card_external if is_external else _build_card_naver
     contents = [build(it) for it in items]
@@ -141,8 +155,7 @@ def _build_list_template(
     }
 
 
-def _build_feed_template(item: dict, header_title: str, is_external: bool = False) -> dict:
-    """Used when only 1 item exists (list template needs >=2)."""
+def _build_feed_template(item, header_title, is_external=False):
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
     if is_external:
         link_url = _naver_search_url(item.get("title", ""))
@@ -190,23 +203,14 @@ def _send_template(access_token: str, template: dict) -> dict:
     return response.json()
 
 
-def _send_group(
-    access_token: str,
-    items: list[dict],
-    header_base: str,
-    is_external: bool,
-) -> int:
-    """Send a group of items (Naver or external) as list/feed messages."""
+def _send_group(access_token, items, header_base, is_external):
     if not items:
         return 0
     chunks = split_for_list_template(items)
     total = len(chunks)
     sent = 0
     for i, chunk in enumerate(chunks, 1):
-        if total == 1:
-            header = header_base
-        else:
-            header = f"{header_base} ({i}/{total})"
+        header = header_base if total == 1 else f"{header_base} ({i}/{total})"
         if len(chunk) == 1:
             template = _build_feed_template(chunk[0], header, is_external=is_external)
         else:
@@ -223,15 +227,7 @@ def _send_group(
     return sent
 
 
-def send_daily_news(
-    access_token: str,
-    items: list[dict],
-    header_title_base: str,
-) -> int:
-    """Send daily news. Naver and external items each get their own list cards.
-
-    Returns: total Kakao messages sent.
-    """
+def send_daily_news(access_token, items, header_title_base):
     if not items:
         _send_template(access_token, _build_text_template(
             f"{header_title_base}\n금일 보고 대상 신규 기사 없음."
@@ -240,10 +236,7 @@ def send_daily_news(
 
     naver_items = [it for it in items if _is_naver_link(it.get("link", ""))]
     external_items = [it for it in items if not _is_naver_link(it.get("link", ""))]
-    print(
-        f"[INFO] Send split: naver={len(naver_items)}, external={len(external_items)}",
-        flush=True,
-    )
+    print(f"[INFO] Send split: naver={len(naver_items)}, external={len(external_items)}", flush=True)
 
     sent = 0
     sent += _send_group(access_token, naver_items, header_title_base, is_external=False)
@@ -251,8 +244,7 @@ def send_daily_news(
     return sent
 
 
-def send_weekly_digest_text(access_token: str, text: str) -> int:
-    """Weekly digest stays as text (hierarchical, URLs in body remain tappable)."""
+def send_weekly_digest_text(access_token, text):
     chunks = []
     current = ""
     for line in text.split("\n"):
