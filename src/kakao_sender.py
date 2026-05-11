@@ -66,15 +66,17 @@ def _clean_search_query(title: str) -> str:
     s = re.sub(r"[\[\]\u3010\u3011\u300C\u300D\u300E\u300F<>()()]", "", s)
     # Collapse whitespace
     s = re.sub(r"\s+", " ", s).strip()
-    # Remove trailing "엑..." / "한투..." style truncation tokens (Korean syllable + dots already gone)
-    # Drop a trailing single short fragment that's clearly a cut-off (1-2 chars at very end)
+    # Drop trailing 1-2 char fragment (likely truncated word like "엑", "격돌")
     parts = s.split(" ")
     if parts and len(parts[-1]) <= 2:
         parts = parts[:-1]
+    # Cap to 6 keywords for broader matching (long queries match too narrowly)
+    if len(parts) > 6:
+        parts = parts[:6]
     s = " ".join(parts)
-    # Cap length to avoid too-restrictive exact-phrase behavior
-    if len(s) > 40:
-        s = s[:40].rsplit(" ", 1)[0] or s[:40]
+    # Hard length cap as safety net
+    if len(s) > 30:
+        s = s[:30].rsplit(" ", 1)[0] or s[:30]
     return s
 
 
