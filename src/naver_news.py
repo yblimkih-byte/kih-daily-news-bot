@@ -1,15 +1,15 @@
-"""Naver News search client."""
+"""Naver News search client. Collects both Naver-hosted and external-media articles."""
 import os
 import re
 import time
 import requests
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
+from urllib.parse import urlparse
 
 
 NAVER_NEWS_API = "https://openapi.naver.com/v1/search/news.json"
 
-# 10개 모니터링 대상 회사 검색어
 TARGET_COMPANIES = [
     {"name": "한국투자금융지주", "queries": ["한국투자금융지주"]},
     {"name": "한국투자증권", "queries": ["한국투자증권"]},
@@ -27,7 +27,6 @@ KST = timezone(timedelta(hours=9))
 
 
 def _strip_html(text: str) -> str:
-    """Remove HTML tags from Naver API response."""
     text = re.sub(r"<[^>]+>", "", text)
     text = text.replace("&quot;", '"').replace("&amp;", "&")
     text = text.replace("&lt;", "<").replace("&gt;", ">").replace("&#39;", "'")
@@ -35,18 +34,44 @@ def _strip_html(text: str) -> str:
 
 
 def _parse_pub_date(pub_date_str: str) -> datetime:
-    """Parse RFC 2822 datetime to KST-aware datetime."""
     dt = parsedate_to_datetime(pub_date_str)
     return dt.astimezone(KST)
 
 
 def _is_naver_news_link(url: str) -> bool:
-    """Check if URL is a Naver News article."""
-    return "n.news.naver.com" in url or "m.news.naver.com" in url or "news.naver.com" in url
+    """Strict: URL must be on a Naver news domain (registered with Kakao)."""
+    if not url:
+        return False
+    return any(d in url for d in (
+        "://n.news.naver.com",
+        "://m.news.naver.com",
+        "://news.naver.com",
+    ))
+
+
+def extract_media_name(url: str) -> str:
+    """Extract a short, human-readable media name from a URL.
+
+    Examples:
+        https://www.mk.co.kr/news/...        -> 'mk.co.kr'
+        https://biz.chosun.com/...           -> 'chosun.com'
+        https://www.hankyung.com/article/... -> 'hankyung.com'
+    """
+    try:
+        host = urlparse(url).hostname or ""
+    except Exception:
+        return "외부 매체"
+    if not host:
+        return "외부 매체"
+    # Drop common prefixes
+    for prefix in ("www.", "m.", "biz.", "news.", "view.", "mobile."):
+        if host.startswith(prefix):
+            host = host[len(prefix):]
+            break
+    return host or "외부 매체"
 
 
 def _search_one_query(query: str, display: int = 30) -> list[dict]:
-    """Call Naver News API for a single query."""
     headers = {
         "X-Naver-Client-Id": os.environ["NAVER_CLIENT_ID"],
         "X-Naver-Client-Secret": os.environ["NAVER_CLIENT_SECRET"],
@@ -63,24 +88,13 @@ def _search_one_query(query: str, display: int = 30) -> list[dict]:
 
 
 def fetch_recent_news(hours_back: int = 24) -> list[dict]:
-    """Fetch news articles from the last N hours for all target companies.
-
-    Returns:
-        list[dict]: Each article has:
-            - company: str
-            - title: str (HTML-stripped)
-            - description: str (HTML-stripped)
-            - link: str (Naver news link if available, else original)
-            - original_link: str
-            - pub_date: ISO 8601 datetime string (KST)
-            - is_naver: bool
-    """
+    """Fetch news articles from the last N hours for all target companies."""
     cutoff = datetime.now(KST) - timedelta(hours=hours_back)
     all_articles = []
     seen_links = set()
+    stats = {"naver": 0, "external": 0, "old": 0, "no_match": 0, "dup": 0}
 
     for company in TARGET_COMPANIES:
-        company_articles = []
         for query in company["queries"]:
             try:
                 items = _search_one_query(query)
@@ -95,7 +109,7 @@ def fetch_recent_news(hours_back: int = 24) -> list[dict]:
                 original_link = item.get("originallink", "")
                 pub_date_raw = item.get("pubDate", "")
 
-                if not title or not link:
+                if not title or not (link or original_link):
                     continue
 
                 try:
@@ -104,35 +118,57 @@ def fetch_recent_news(hours_back: int = 24) -> list[dict]:
                     continue
 
                 if pub_dt < cutoff:
+                    stats["old"] += 1
                     continue
 
-                # Naver link preference
-                primary_link = link if _is_naver_news_link(link) else original_link or link
+                # Prefer Naver URL if available, else use original media URL
+                is_naver = _is_naver_news_link(link)
+                primary_link = link if is_naver else (original_link or link)
+                if not primary_link:
+                    continue
+
                 if primary_link in seen_links:
+                    stats["dup"] += 1
                     continue
                 seen_links.add(primary_link)
 
-                # Filter: must mention company name in title or description
+                # Company name matching
                 company_name_short = company["name"].replace("한국투자", "")
                 if (company["name"] not in title
                         and company["name"] not in description
                         and company_name_short not in title
                         and company_name_short not in description):
+                    stats["no_match"] += 1
                     continue
 
-                company_articles.append({
+                media = extract_media_name(primary_link) if not is_naver else "네이버뉴스"
+
+                all_articles.append({
                     "company": company["name"],
                     "title": title,
                     "description": description,
                     "link": primary_link,
                     "original_link": original_link,
                     "pub_date": pub_dt.isoformat(),
-                    "is_naver": _is_naver_news_link(primary_link),
+                    "is_naver": is_naver,
+                    "media": media,
                 })
+                if is_naver:
+                    stats["naver"] += 1
+                else:
+                    stats["external"] += 1
 
-            time.sleep(0.3)  # Be polite to Naver API
+            time.sleep(0.3)
 
-        all_articles.extend(company_articles)
+    print(
+        f"[INFO] Naver search: total={len(all_articles)} "
+        f"(naver={stats['naver']}, external={stats['external']}), "
+        f"skipped_old={stats['old']}, skipped_no_match={stats['no_match']}, "
+        f"skipped_dup={stats['dup']}",
+        flush=True,
+    )
+    for i, a in enumerate(all_articles[:30], 1):
+        tag = "N" if a["is_naver"] else "E"
+        print(f"[DEBUG] {i:2d}[{tag}] [{a['company']}] {a['link'][:60]}", flush=True)
 
-    print(f"[INFO] Collected {len(all_articles)} articles across {len(TARGET_COMPANIES)} companies.", flush=True)
     return all_articles
