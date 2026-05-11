@@ -5,6 +5,12 @@ import re
 from pathlib import Path
 from anthropic import Anthropic
 
+try:
+    from json_repair import repair_json
+    HAS_REPAIR = True
+except ImportError:
+    HAS_REPAIR = False
+
 
 ANTHROPIC_MODEL = "claude-haiku-4-5"
 
@@ -64,28 +70,47 @@ def _trim_article(a: dict) -> dict:
 
 
 def _extract_json(text: str) -> dict | None:
+    """Try to extract a JSON object from Claude's response.
+
+    Strategy:
+    1. Strip markdown fences
+    2. Strict json.loads
+    3. json-repair (auto-fixes unescaped quotes, trailing commas, etc.)
+    4. Manual truncation recovery
+    """
     text = text.strip()
+    # Strip markdown fences
     text = re.sub(r"^```(?:json)?\s*", "", text)
     text = re.sub(r"\s*```\s*$", "", text)
+
+    # 1. Strict parse
     try:
         return json.loads(text)
-    except json.JSONDecodeError:
-        pass
+    except json.JSONDecodeError as e:
+        print(f"[WARN] Strict JSON parse failed: {e}", flush=True)
+
+    # 2. json-repair (handles unescaped quotes, missing commas, etc.)
+    if HAS_REPAIR:
+        try:
+            repaired = repair_json(text)
+            result = json.loads(repaired)
+            print("[INFO] JSON recovered by json-repair.", flush=True)
+            return result
+        except Exception as e:
+            print(f"[WARN] json-repair failed: {e}", flush=True)
+
+    # 3. Manual truncation recovery (for cut-off responses)
     if '"filtered"' in text:
-        last_brace = text.rfind("},")
-        if last_brace != -1:
-            candidate = text[: last_brace + 1] + "]}"
-            try:
-                return json.loads(candidate)
-            except json.JSONDecodeError:
-                pass
-        last_complete = text.rfind("}\n")
-        if last_complete != -1:
-            candidate = text[: last_complete + 1] + "]}"
-            try:
-                return json.loads(candidate)
-            except json.JSONDecodeError:
-                pass
+        for closing in ("},", "}\n"):
+            last_pos = text.rfind(closing)
+            if last_pos != -1:
+                candidate = text[: last_pos + 1] + "]}"
+                try:
+                    result = json.loads(candidate)
+                    print(f"[INFO] JSON recovered by truncation at '{closing}'.", flush=True)
+                    return result
+                except json.JSONDecodeError:
+                    continue
     return None
 
 
@@ -136,8 +161,10 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
     result = _extract_json(text)
     if result is None:
         print(f"[ERROR] Failed to parse Claude response. Length={len(text)}", flush=True)
-        print(f"[ERROR] First 500 chars: {text[:500]}", flush=True)
-        print(f"[ERROR] Last 200 chars: {text[-200:]}", flush=True)
+        # Dump full response in chunks for diagnosis
+        chunk_size = 2000
+        for i in range(0, len(text), chunk_size):
+            print(f"[ERROR_DUMP {i}-{i+chunk_size}] {text[i:i+chunk_size]}", flush=True)
         return []
 
     filtered = result.get("filtered", [])
