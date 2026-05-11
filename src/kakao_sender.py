@@ -1,23 +1,27 @@
-"""Kakao memo (talk-to-self) message sender with auto Naver/external split."""
+"""Kakao memo (talk-to-self) message sender.
+
+- Naver-URL articles  -> list cards (button -> Naver article directly)
+- External-URL articles -> list cards with Naver search URL as the click target
+"""
 import json
 import requests
 import time
+import urllib.parse
 from urllib.parse import urlparse
 
 
 KAKAO_MEMO_URL = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
 
-# 카카오 list 템플릿 제약
 MAX_PER_LIST = 5
 MIN_PER_LIST = 2
-
-# 카카오 text 템플릿 본문 한도 (안전 마진)
 TEXT_BODY_LIMIT = 195
 
-# 기본 헤더 링크 (반드시 카카오 [제품 링크 관리]에 등록된 도메인이어야 함)
+# 카카오 [제품 링크 관리]에 등록되어 있어야 하는 도메인들:
+#   - n.news.naver.com
+#   - search.naver.com  <-- 외부 매체 카드 link 용
 DEFAULT_HEADER_LINK = "https://n.news.naver.com"
+SEARCH_BASE = "https://search.naver.com/search.naver?where=news&query="
 
-# Placeholder 이미지 (카카오 공개 CDN)
 DEFAULT_IMAGE_URL = (
     "https://mud-kage.kakao.com/dn/bDPMIb/btqgeoTRQvd/"
     "49BuF1gNo6UXkdbKecx600/kakaolink40_original.png"
@@ -54,8 +58,12 @@ def _media_name_from_url(url: str) -> str:
     return host or "외부 매체"
 
 
+def _naver_search_url(title: str) -> str:
+    return SEARCH_BASE + urllib.parse.quote(title)
+
+
 def split_for_list_template(items: list, max_per_chunk: int = MAX_PER_LIST) -> list[list]:
-    """Split items into balanced chunks of size 2-5 (1 only when total==1)."""
+    """Balanced split into chunks of size 2-5 (1 only if total==1)."""
     n = len(items)
     if n == 0:
         return []
@@ -73,21 +81,51 @@ def split_for_list_template(items: list, max_per_chunk: int = MAX_PER_LIST) -> l
     return chunks
 
 
-def _build_list_template(items: list[dict], header_title: str) -> dict:
+def _build_card_naver(item: dict) -> dict:
+    """Build one content entry for Naver-hosted article (direct link)."""
+    emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
+    title = f"{emoji} [{item.get('company', '')}] {item.get('title', '')}"
+    if len(title) > 100:
+        title = title[:97] + "..."
+    link_url = item.get("link", DEFAULT_HEADER_LINK)
+    return {
+        "title": title,
+        "description": item.get("summary", ""),
+        "image_url": DEFAULT_IMAGE_URL,
+        "link": {"web_url": link_url, "mobile_web_url": link_url},
+    }
+
+
+def _build_card_external(item: dict) -> dict:
+    """Build one content entry for external-media article (link -> Naver search)."""
+    emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
+    title = f"{emoji} [{item.get('company', '')}] {item.get('title', '')}"
+    if len(title) > 100:
+        title = title[:97] + "..."
+    media = item.get("media") or _media_name_from_url(item.get("link", ""))
+    summary = item.get("summary", "")
+    description = f"📰 {media} | {summary}" if summary else f"📰 {media}"
+    if len(description) > 80:
+        description = description[:77] + "..."
+    search_url = _naver_search_url(item.get("title", ""))
+    return {
+        "title": title,
+        "description": description,
+        "image_url": DEFAULT_IMAGE_URL,
+        "link": {"web_url": search_url, "mobile_web_url": search_url},
+    }
+
+
+def _build_list_template(
+    items: list[dict],
+    header_title: str,
+    is_external: bool = False,
+) -> dict:
     assert MIN_PER_LIST <= len(items) <= MAX_PER_LIST
-    contents = []
-    for item in items:
-        emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
-        title = f"{emoji} [{item.get('company', '')}] {item.get('title', '')}"
-        if len(title) > 100:
-            title = title[:97] + "..."
-        link_url = item.get("link", DEFAULT_HEADER_LINK)
-        contents.append({
-            "title": title,
-            "description": item.get("summary", ""),
-            "image_url": DEFAULT_IMAGE_URL,
-            "link": {"web_url": link_url, "mobile_web_url": link_url},
-        })
+    build = _build_card_external if is_external else _build_card_naver
+    contents = [build(it) for it in items]
+    button_url = "https://search.naver.com" if is_external else DEFAULT_HEADER_LINK
+    button_title = "네이버 뉴스 검색" if is_external else "네이버 뉴스 더보기"
     return {
         "object_type": "list",
         "header_title": header_title,
@@ -97,35 +135,40 @@ def _build_list_template(items: list[dict], header_title: str) -> dict:
         },
         "contents": contents,
         "buttons": [{
-            "title": "네이버 뉴스 더보기",
-            "link": {
-                "web_url": DEFAULT_HEADER_LINK,
-                "mobile_web_url": DEFAULT_HEADER_LINK,
-            },
+            "title": button_title,
+            "link": {"web_url": button_url, "mobile_web_url": button_url},
         }],
     }
 
 
-def _build_feed_template(item: dict, header_title: str) -> dict:
+def _build_feed_template(item: dict, header_title: str, is_external: bool = False) -> dict:
+    """Used when only 1 item exists (list template needs >=2)."""
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
-    link_url = item.get("link", DEFAULT_HEADER_LINK)
+    if is_external:
+        link_url = _naver_search_url(item.get("title", ""))
+        media = item.get("media") or _media_name_from_url(item.get("link", ""))
+        desc_extra = f"\n📰 {media}"
+        btn_title = "네이버 뉴스 검색"
+    else:
+        link_url = item.get("link", DEFAULT_HEADER_LINK)
+        desc_extra = ""
+        btn_title = "기사 보기"
     return {
         "object_type": "feed",
         "content": {
             "title": f"{emoji} [{item.get('company', '')}] {item.get('title', '')}",
-            "description": f"{header_title}\n\n{item.get('summary', '')}",
+            "description": f"{header_title}\n{item.get('summary', '')}{desc_extra}",
             "image_url": DEFAULT_IMAGE_URL,
             "link": {"web_url": link_url, "mobile_web_url": link_url},
         },
         "buttons": [{
-            "title": "기사 보기",
+            "title": btn_title,
             "link": {"web_url": link_url, "mobile_web_url": link_url},
         }],
     }
 
 
 def _build_text_template(text: str) -> dict:
-    """Text body up to ~200 chars. URLs in body become tappable links in KakaoTalk."""
     return {
         "object_type": "text",
         "text": text[:200],
@@ -147,42 +190,37 @@ def _send_template(access_token: str, template: dict) -> dict:
     return response.json()
 
 
-def _pack_external_entries(items: list[dict]) -> list[str]:
-    """Pack external-media items into text chunks <= TEXT_BODY_LIMIT chars each.
-
-    Each entry format (compact, URL-tappable in KakaoTalk):
-        🔴 [회사] 제목 (40자내)
-        📰 매체  URL
-    """
-    entries = []
-    for it in items:
-        emoji = SENTIMENT_EMOJI.get(it.get("sentiment", "neutral"), "🟡")
-        company = it.get("company", "")
-        title = it.get("title", "")
-        if len(title) > 45:
-            title = title[:43] + ".."
-        media = _media_name_from_url(it.get("link", ""))
-        url = it.get("link", "")
-        entry = f"{emoji} [{company}] {title}\n📰 {media}\n{url}"
-        entries.append(entry)
-
-    # Pack greedily into <=TEXT_BODY_LIMIT char chunks
-    chunks = []
-    current = ""
-    for e in entries:
-        sep = "\n\n" if current else ""
-        if len(current) + len(sep) + len(e) > TEXT_BODY_LIMIT:
-            if current:
-                chunks.append(current)
-            # Single entry larger than limit? Truncate the title further
-            if len(e) > TEXT_BODY_LIMIT:
-                e = e[:TEXT_BODY_LIMIT - 3] + "..."
-            current = e
+def _send_group(
+    access_token: str,
+    items: list[dict],
+    header_base: str,
+    is_external: bool,
+) -> int:
+    """Send a group of items (Naver or external) as list/feed messages."""
+    if not items:
+        return 0
+    chunks = split_for_list_template(items)
+    total = len(chunks)
+    sent = 0
+    for i, chunk in enumerate(chunks, 1):
+        if total == 1:
+            header = header_base
         else:
-            current += sep + e
-    if current:
-        chunks.append(current)
-    return chunks
+            header = f"{header_base} ({i}/{total})"
+        if len(chunk) == 1:
+            template = _build_feed_template(chunk[0], header, is_external=is_external)
+        else:
+            template = _build_list_template(chunk, header, is_external=is_external)
+        try:
+            _send_template(access_token, template)
+            sent += 1
+        except requests.HTTPError as e:
+            print(f"[ERROR] send failed ({i}/{total}, external={is_external}): {e}", flush=True)
+            if e.response is not None:
+                print(f"[ERROR] Body: {e.response.text}", flush=True)
+            raise
+        time.sleep(0.4)
+    return sent
 
 
 def send_daily_news(
@@ -190,9 +228,9 @@ def send_daily_news(
     items: list[dict],
     header_title_base: str,
 ) -> int:
-    """Send daily news: Naver-URL items as list cards, external items as text.
+    """Send daily news. Naver and external items each get their own list cards.
 
-    Returns: total number of Kakao messages sent.
+    Returns: total Kakao messages sent.
     """
     if not items:
         _send_template(access_token, _build_text_template(
@@ -200,66 +238,21 @@ def send_daily_news(
         ))
         return 1
 
-    # Split by Naver vs external
     naver_items = [it for it in items if _is_naver_link(it.get("link", ""))]
     external_items = [it for it in items if not _is_naver_link(it.get("link", ""))]
-
     print(
         f"[INFO] Send split: naver={len(naver_items)}, external={len(external_items)}",
         flush=True,
     )
 
-    sent_count = 0
-
-    # 1) Naver items -> list/feed templates
-    if naver_items:
-        chunks = split_for_list_template(naver_items)
-        total = len(chunks)
-        for i, chunk in enumerate(chunks, 1):
-            if total == 1:
-                header = header_title_base
-            elif i == 1:
-                header = f"{header_title_base} (네이버 {i}/{total})"
-            else:
-                header = f"한국투자금융그룹 데일리 뉴스 (네이버 {i}/{total})"
-
-            template = _build_feed_template(chunk[0], header) if len(chunk) == 1 \
-                else _build_list_template(chunk, header)
-            try:
-                _send_template(access_token, template)
-                sent_count += 1
-            except requests.HTTPError as e:
-                print(f"[ERROR] list send failed ({i}/{total}): {e}", flush=True)
-                if e.response is not None:
-                    print(f"[ERROR] Body: {e.response.text}", flush=True)
-                raise
-            time.sleep(0.4)
-
-    # 2) External items -> text chunks
-    if external_items:
-        ext_chunks = _pack_external_entries(external_items)
-        total_ext = len(ext_chunks)
-        for i, body in enumerate(ext_chunks, 1):
-            if total_ext == 1:
-                header_line = "📰 외부 매체 기사"
-            else:
-                header_line = f"📰 외부 매체 기사 ({i}/{total_ext})"
-            full = f"{header_line}\n\n{body}"
-            try:
-                _send_template(access_token, _build_text_template(full))
-                sent_count += 1
-            except requests.HTTPError as e:
-                print(f"[ERROR] text send failed ({i}/{total_ext}): {e}", flush=True)
-                if e.response is not None:
-                    print(f"[ERROR] Body: {e.response.text}", flush=True)
-                raise
-            time.sleep(0.4)
-
-    return sent_count
+    sent = 0
+    sent += _send_group(access_token, naver_items, header_title_base, is_external=False)
+    sent += _send_group(access_token, external_items, "📰 외부 매체 기사", is_external=True)
+    return sent
 
 
 def send_weekly_digest_text(access_token: str, text: str) -> int:
-    """Send weekly digest as text chunks. URLs in body remain tappable in KakaoTalk."""
+    """Weekly digest stays as text (hierarchical, URLs in body remain tappable)."""
     chunks = []
     current = ""
     for line in text.split("\n"):
