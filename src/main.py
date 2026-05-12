@@ -95,9 +95,9 @@ def build_header_title(items, now, slot_label):
     counts = {"negative": 0, "neutral": 0, "positive": 0}
     for it in items:
         counts[it.get("sentiment", "neutral")] += 1
-    time_str = now.strftime("%H:%M")
+    # 형식: "05-12(화) 16:38 🔴3 🟡10 🟢2"
     return (
-        f"📅 {now.strftime('%Y-%m-%d')} ({weekday}) {time_str} "
+        f"📅 {now.strftime('%m-%d')}({weekday}) {now.strftime('%H:%M')} "
         f"🔴{counts['negative']} 🟡{counts['neutral']} 🟢{counts['positive']}"
     )
 
