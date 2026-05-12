@@ -1,7 +1,10 @@
 """Main entry point for KIH Daily News Bot — multi-channel + cross-slot dedupe.
 
-Sends to one or more channels (Kakao 'memo' / Email / Telegram) at 4 KST slots:
-    07:40 / 09:10 / 13:30 / 17:00
+Behavior:
+- Weekdays (Mon-Fri, non-holiday): send at all 4 slots (07:40/09:10/13:30/17:00 KST)
+- Weekends (Sat-Sun) & Korean public holidays: send only at the 17:00 'close' slot
+  - Other slots still trigger via cron, but exit early with no send
+- Manual triggers always proceed regardless of weekday/holiday
 
 Channel toggles (env vars, default true for Kakao, false for the others):
     ENABLE_KAKAO     'true'/'false' (default true)
@@ -10,8 +13,7 @@ Channel toggles (env vars, default true for Kakao, false for the others):
 
 Cross-slot dedupe:
     Articles already sent in the last SENT_HISTORY_DAYS (default 3) days are
-    filtered out before AI processing, then this slot's sent items are recorded.
-    History file (.sent_history.json) is committed by daily.yml.
+    filtered out before AI processing.
 """
 import json
 import os
@@ -20,6 +22,8 @@ from datetime import datetime, timezone, timedelta
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
+import holidays
 
 from naver_news import fetch_recent_news
 from ai_processor import process_daily_news, process_weekly_digest
@@ -38,6 +42,12 @@ SLOT_CONFIG = [
     (17, 0, 3.7, "close"),
 ]
 
+# On weekends/holidays, only this slot label sends. Others skip.
+OFF_DAY_SEND_SLOT = "close"
+
+# Korean public holidays (incl. substitute holidays). The library auto-updates yearly.
+_KR_HOLIDAYS = holidays.country_holidays("KR")
+
 
 def _flag(name: str, default: bool) -> bool:
     raw = os.environ.get(name, str(default)).strip().lower()
@@ -50,7 +60,7 @@ ENABLE_TELEGRAM = _flag("ENABLE_TELEGRAM", False)
 
 
 # --------------------------------------------------------------------------- #
-# Slot / lock helpers                                                          #
+# Slot / off-day / lock helpers                                                #
 # --------------------------------------------------------------------------- #
 
 def determine_slot(now: datetime) -> dict:
@@ -64,6 +74,20 @@ def determine_slot(now: datetime) -> dict:
                 "is_morning": label == "morning",
             }
     return {"label": "manual", "hours_back": 4.0, "is_morning": False}
+
+
+def is_off_day(now: datetime) -> tuple[bool, str]:
+    """Return (is_off, reason_string). Off-day = weekend or Korean holiday."""
+    wd = now.weekday()
+    if wd == 5:
+        return True, "토요일"
+    if wd == 6:
+        return True, "일요일"
+    d = now.date()
+    if d in _KR_HOLIDAYS:
+        name = _KR_HOLIDAYS.get(d, "공휴일")
+        return True, f"공휴일({name})"
+    return False, ""
 
 
 def is_duplicate_trigger(slot_label: str, now: datetime) -> bool:
@@ -247,17 +271,8 @@ def _dispatch_telegram_weekly(digest: dict, now: datetime) -> int:
         return 0
 
 
-# --------------------------------------------------------------------------- #
-# Main pipeline                                                                #
-# --------------------------------------------------------------------------- #
-
 def _link_items_to_articles(items: list[dict], articles: list[dict]) -> list[dict]:
-    """Attach _url_key / _title_key from collected articles back onto AI-filtered items.
-
-    The AI filter (ai_processor) outputs items by idx and re-attaches link, but
-    strips the _url_key / _title_key fields. We re-merge them by URL match so
-    that sent_history.record_sent has the correct dedupe keys.
-    """
+    """Re-attach _url_key / _title_key from collected articles back onto AI-filtered items."""
     url_to_keys = {}
     for a in articles:
         link = a.get("link") or ""
@@ -273,18 +288,37 @@ def _link_items_to_articles(items: list[dict], articles: list[dict]) -> list[dic
     return items
 
 
+# --------------------------------------------------------------------------- #
+# Main pipeline                                                                #
+# --------------------------------------------------------------------------- #
+
 def main():
     now = datetime.now(KST)
     slot = determine_slot(now)
-    is_friday_morning = now.weekday() == 4 and slot["is_morning"]
+    off, off_reason = is_off_day(now)
+    is_friday_morning = (now.weekday() == 4) and slot["is_morning"] and not off
 
     print(f"[INFO] Run started at {now.isoformat()}", flush=True)
     print(f"[INFO] Slot: {slot['label']}, hours_back: {slot['hours_back']}", flush=True)
+    print(f"[INFO] Off-day: {off} ({off_reason or 'N/A'})", flush=True)
     print(f"[INFO] Channels: KAKAO={ENABLE_KAKAO}, EMAIL={ENABLE_EMAIL}, TELEGRAM={ENABLE_TELEGRAM}", flush=True)
     print(f"[INFO] is_friday_morning: {is_friday_morning}", flush=True)
 
     if not (ENABLE_KAKAO or ENABLE_EMAIL or ENABLE_TELEGRAM):
         print("[FATAL] No channel enabled. Set at least one of ENABLE_KAKAO/EMAIL/TELEGRAM.", flush=True)
+        return
+
+    # === Off-day gating ===
+    # On weekends and Korean public holidays, send only at the OFF_DAY_SEND_SLOT (default 'close' = 17:00).
+    # Manual triggers bypass this rule.
+    if off and slot["label"] != "manual" and slot["label"] != OFF_DAY_SEND_SLOT:
+        print(
+            f"[INFO] Off-day ({off_reason}). Slot '{slot['label']}' is skipped — "
+            f"only the '{OFF_DAY_SEND_SLOT}' slot sends on off-days. Exiting.",
+            flush=True,
+        )
+        # Still update lock file so duplicate triggers within the same slot don't re-run.
+        update_lock_file(slot["label"], now)
         return
 
     if is_duplicate_trigger(slot["label"], now):
@@ -295,18 +329,17 @@ def main():
     print(f"[STEP 1] Fetching news from Naver (window: {slot['hours_back']}h)...", flush=True)
     daily_articles = fetch_recent_news(hours_back=slot["hours_back"])
 
-    # 2. Cross-slot dedupe: drop anything we already sent in the last N days
+    # 2. Cross-slot dedupe
     print("[STEP 2] Cross-slot dedupe (history file)...", flush=True)
     daily_articles, hist_dropped = filter_unseen(daily_articles)
     print(f"[STEP 2] After history dedupe: {len(daily_articles)} articles "
           f"(dropped {hist_dropped} previously-sent).", flush=True)
 
-    # 3. AI filter (shared across all channels)
+    # 3. AI filter
     daily_items = []
     if daily_articles:
         print("[STEP 3] Processing daily news with Claude...", flush=True)
         daily_items = process_daily_news(daily_articles)
-        # Re-attach dedupe keys lost during AI step
         daily_items = _link_items_to_articles(daily_items, daily_articles)
         print(f"[STEP 3] After AI filter: {len(daily_items)} items.", flush=True)
     else:
@@ -314,7 +347,7 @@ def main():
 
     header_title = build_header_title(daily_items, now, slot["label"])
 
-    # 4. Dispatch to channels
+    # 4. Dispatch
     sent_summary = {"kakao": 0, "email": 0, "telegram": 0}
     if daily_items:
         print("[STEP 4] Dispatching to channels...", flush=True)
@@ -324,7 +357,7 @@ def main():
     else:
         print("[INFO] No items to dispatch.", flush=True)
 
-    # 5. Record sent items into history (only if at least one channel succeeded)
+    # 5. Record sent items into history
     any_sent = sum(sent_summary.values()) > 0
     if any_sent and daily_items:
         print("[STEP 5] Recording sent items to history...", flush=True)
@@ -332,7 +365,7 @@ def main():
     else:
         print("[STEP 5] No successful sends. History not updated.", flush=True)
 
-    # 6. Friday weekly digest
+    # 6. Friday weekly digest (skips automatically if Friday is an off-day)
     if is_friday_morning:
         print("[STEP 6] Friday weekly digest...", flush=True)
         weekly_articles = fetch_recent_news(hours_back=24 * 7)
@@ -347,7 +380,7 @@ def main():
             weekly_summary["telegram"] = _dispatch_telegram_weekly(digest, now)
         print(f"[STEP 6] Weekly summary: {weekly_summary}", flush=True)
 
-    # 7. Update lock file on a matched slot
+    # 7. Update lock file
     if slot["label"] != "manual":
         update_lock_file(slot["label"], now)
 
