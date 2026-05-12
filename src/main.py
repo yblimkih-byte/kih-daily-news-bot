@@ -25,10 +25,10 @@ WEEKDAYS_KR = ["월", "화", "수", "목", "금", "토", "일"]
 LOCK_FILE = Path(__file__).parent.parent / ".last_send.json"
 
 SLOT_CONFIG = [
-    (7, 40, 14.5, "morning"),
-    (9, 30, 2.0, "pre_open"),
-    (14, 0, 4.7, "midday"),
-    (17, 30, 3.7, "close"),
+    (7, 40, 14.8, "morning"),
+    (9, 10, 1.6, "pre_open"),
+    (13, 30, 4.5, "midday"),
+    (17, 0, 3.7, "close"),
 ]
 
 
