@@ -87,7 +87,7 @@ def _search_one_query(query: str, display: int = 30) -> list[dict]:
     return response.json().get("items", [])
 
 
-def fetch_recent_news(hours_back: int = 24) -> list[dict]:
+def fetch_recent_news(hours_back: float = 24) -> list[dict]:
     """Fetch news articles from the last N hours for all target companies."""
     cutoff = datetime.now(KST) - timedelta(hours=hours_back)
     all_articles = []
