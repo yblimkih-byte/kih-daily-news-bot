@@ -11,7 +11,8 @@ KAKAO_MEMO_URL = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
 
 MAX_PER_LIST = 5
 MIN_PER_LIST = 2
-TEXT_BODY_LIMIT = 195
+# Body 한도. 헤더(예: "📰 외부 매체 기사 (1/3)" ≈ 22자) + 빈 줄 + 안전마진 미리 차감.
+TEXT_BODY_LIMIT = 170
 
 DEFAULT_HEADER_LINK = "https://n.news.naver.com"
 SEARCH_BASE = "https://search.naver.com/search.naver?where=news&query="
@@ -247,41 +248,37 @@ def _shorten_company(name: str) -> str:
 
 
 def _pack_external_to_text(items: list[dict]) -> list[str]:
-    """Pack external-media items into minimal text messages.
+    """Pack external-media items as 1 entry per message.
 
-    Per-entry format (most compact possible):
-        🔴[증권] 짧은 제목..
-        URL
-    Media name is omitted (URL host conveys it). Title capped to 25 chars.
-    Each message ≤195 chars. Header lines for multi-message handled by caller.
+    Kakao text body limit (~200 chars) combined with long URLs (50-80 chars
+    each) means 2+ entries per message often truncates the second URL.
+    Going 1-per-message guarantees URL accuracy.
+
+    Per-entry: '🔴[지주] 짧은 제목..\nURL'
     """
-    entries = []
+    chunks = []
     for it in items:
         emoji = SENTIMENT_EMOJI.get(it.get("sentiment", "neutral"), "🟡")
         company = _shorten_company(it.get("company", ""))
         title = it.get("title", "")
-        if len(title) > 25:
-            title = title[:23] + ".."
         url = it.get("link", "")
-        entry = f"{emoji}[{company}] {title}\n{url}"
-        entries.append(entry)
 
-    # Greedy pack <=TEXT_BODY_LIMIT chars per message
-    chunks = []
-    current = ""
-    for e in entries:
-        sep = "\n" if current else ""
-        candidate = current + sep + e
-        if len(candidate) > TEXT_BODY_LIMIT:
-            if current:
-                chunks.append(current)
-            if len(e) > TEXT_BODY_LIMIT:
-                e = e[:TEXT_BODY_LIMIT]
-            current = e
-        else:
-            current = candidate
-    if current:
-        chunks.append(current)
+        # Reserve space for emoji + brackets + company + space + newline + URL
+        reserved = len(emoji) + 2 + len(company) + 2 + len(url) + 4  # safety margin
+        title_room = TEXT_BODY_LIMIT - reserved
+        if title_room < 5:
+            title_room = 5
+        if len(title) > title_room:
+            title = title[:title_room - 2] + ".."
+
+        entry = f"{emoji}[{company}] {title}\n{url}"
+        # Hard guard: if still too long (extreme URLs), keep URL whole and trim title harder
+        if len(entry) > TEXT_BODY_LIMIT:
+            extra = len(entry) - TEXT_BODY_LIMIT
+            if len(title) > extra + 2:
+                title = title[: len(title) - extra - 2] + ".."
+                entry = f"{emoji}[{company}] {title}\n{url}"
+        chunks.append(entry)
     return chunks
 
 
@@ -308,8 +305,17 @@ def send_daily_news(access_token, items, header_title_base):
         for i, body in enumerate(text_chunks, 1):
             header = "📰 외부 매체 기사" if total_ext == 1 else f"📰 외부 매체 기사 ({i}/{total_ext})"
             full = f"{header}\n\n{body}"
+            # NEVER truncate. If overflow, drop the trailing newline; if still over,
+            # drop the header. Truncating would corrupt the URL at the bottom.
             if len(full) > 200:
-                # Header가 들어가서 limit 초과 시 entry 다시 압축
+                full = f"{header}\n{body}"  # try without blank line
+            if len(full) > 200:
+                full = body  # drop header rather than truncate URL
+                print(f"[WARN] msg {i}/{total_ext} dropped header to preserve URL", flush=True)
+            if len(full) > 200:
+                # Last resort: should not happen because _pack_external_to_text
+                # already enforces TEXT_BODY_LIMIT (=195). But guard anyway.
+                print(f"[ERROR] msg {i}/{total_ext} still over 200 chars: {len(full)}", flush=True)
                 full = full[:200]
             try:
                 _send_template(access_token, _build_text_template(full))
