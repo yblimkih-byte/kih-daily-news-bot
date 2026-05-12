@@ -106,7 +106,8 @@ def split_for_list_template(items: list, max_per_chunk: int = MAX_PER_LIST) -> l
 
 def _build_card_naver(item: dict) -> dict:
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
-    title = f"{emoji} [{item.get('company', '')}] {item.get('title', '')}"
+    company = _shorten_company(item.get("company", ""))
+    title = f"{emoji} [{company}] {item.get('title', '')}"
     if len(title) > 100:
         title = title[:97] + "..."
     link_url = item.get("link", DEFAULT_HEADER_LINK)
@@ -120,7 +121,8 @@ def _build_card_naver(item: dict) -> dict:
 
 def _build_card_external(item: dict) -> dict:
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
-    title = f"{emoji} [{item.get('company', '')}] {item.get('title', '')}"
+    company = _shorten_company(item.get("company", ""))
+    title = f"{emoji} [{company}] {item.get('title', '')}"
     if len(title) > 100:
         title = title[:97] + "..."
     media = item.get("media") or _media_name_from_url(item.get("link", ""))
@@ -160,6 +162,7 @@ def _build_list_template(items, header_title, is_external=False):
 
 def _build_feed_template(item, header_title, is_external=False):
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
+    company = _shorten_company(item.get("company", ""))
     if is_external:
         link_url = _naver_search_url(item.get("title", ""))
         media = item.get("media") or _media_name_from_url(item.get("link", ""))
@@ -172,7 +175,7 @@ def _build_feed_template(item, header_title, is_external=False):
     return {
         "object_type": "feed",
         "content": {
-            "title": f"{emoji} [{item.get('company', '')}] {item.get('title', '')}",
+            "title": f"{emoji} [{company}] {item.get('title', '')}",
             "description": f"{header_title}\n{item.get('summary', '')}{desc_extra}",
             "image_url": DEFAULT_IMAGE_URL,
             "link": {"web_url": link_url, "mobile_web_url": link_url},
@@ -191,6 +194,20 @@ def _build_text_template(text: str) -> dict:
         "link": {
             "web_url": DEFAULT_HEADER_LINK,
             "mobile_web_url": DEFAULT_HEADER_LINK,
+        },
+    }
+
+
+def _build_text_template_with_link(text: str, link_url: str) -> dict:
+    """text 템플릿에 link 지정. '자세히 보기' 버튼이 이 URL로 이동.
+    카카오 [제품 링크 관리]에 등록되지 않은 도메인일 경우 폴백되지만, 본문 URL을
+    클릭하도록 사용자에게 안내했으므로 보조적인 동작."""
+    return {
+        "object_type": "text",
+        "text": text[:200],
+        "link": {
+            "web_url": link_url or DEFAULT_HEADER_LINK,
+            "mobile_web_url": link_url or DEFAULT_HEADER_LINK,
         },
     }
 
@@ -231,30 +248,31 @@ def _send_group(access_token, items, header_base, is_external):
 
 
 def _shorten_company(name: str) -> str:
-    """Very compact 2-3 char company codes."""
+    """User-defined company tag abbreviations."""
     mapping = {
         "한국투자금융지주": "지주",
         "한국투자증권": "증권",
-        "한국투자신탁운용": "운용",
-        "한국투자밸류자산운용": "밸류",
-        "한국투자파트너스": "VC",
-        "한국투자프라이빗에쿼티": "PE",
+        "한국투자신탁운용": "한투운용",
+        "한국투자밸류자산운용": "밸류운용",
+        "한국투자리얼에셋운용": "리얼에셋",
+        "한국투자저축은행": "저축은행",
+        "한국투자부동산신탁": "부동산신탁",
         "한국투자캐피탈": "캐피탈",
-        "한국투자저축은행": "저축",
-        "한국투자리얼에셋운용": "리얼",
-        "한국투자액셀러레이터": "액셀",
+        "한국투자프라이빗에쿼티": "PE",
+        "한국투자PE": "PE",
+        "한국투자파트너스": "파트너스",
+        "한국투자액셀러레이터": "AC",
     }
     return mapping.get(name, name)
 
 
-def _pack_external_to_text(items: list[dict]) -> list[str]:
+def _pack_external_to_text(items: list[dict]) -> list[tuple[str, str]]:
     """Pack external-media items as 1 entry per message.
 
-    Kakao text body limit (~200 chars) combined with long URLs (50-80 chars
-    each) means 2+ entries per message often truncates the second URL.
-    Going 1-per-message guarantees URL accuracy.
-
-    Per-entry: '🔴[지주] 짧은 제목..\nURL'
+    Returns: list of (body_text, entry_url) tuples.
+    The entry_url is used as the text template's link.web_url so that the
+    '자세히 보기' button at least goes to that article (rather than a random
+    fallback). URL in body remains the primary click target.
     """
     chunks = []
     for it in items:
@@ -263,8 +281,7 @@ def _pack_external_to_text(items: list[dict]) -> list[str]:
         title = it.get("title", "")
         url = it.get("link", "")
 
-        # Reserve space for emoji + brackets + company + space + newline + URL
-        reserved = len(emoji) + 2 + len(company) + 2 + len(url) + 4  # safety margin
+        reserved = len(emoji) + 2 + len(company) + 2 + len(url) + 4
         title_room = TEXT_BODY_LIMIT - reserved
         if title_room < 5:
             title_room = 5
@@ -272,13 +289,12 @@ def _pack_external_to_text(items: list[dict]) -> list[str]:
             title = title[:title_room - 2] + ".."
 
         entry = f"{emoji}[{company}] {title}\n{url}"
-        # Hard guard: if still too long (extreme URLs), keep URL whole and trim title harder
         if len(entry) > TEXT_BODY_LIMIT:
             extra = len(entry) - TEXT_BODY_LIMIT
             if len(title) > extra + 2:
                 title = title[: len(title) - extra - 2] + ".."
                 entry = f"{emoji}[{company}] {title}\n{url}"
-        chunks.append(entry)
+        chunks.append((entry, url))
     return chunks
 
 
@@ -293,6 +309,26 @@ def send_daily_news(access_token, items, header_title_base):
     external_items = [it for it in items if not _is_naver_link(it.get("link", ""))]
     print(f"[INFO] Send split: naver={len(naver_items)}, external={len(external_items)}", flush=True)
 
+    # Sentiment breakdown logging
+    total_counts = {"negative": 0, "neutral": 0, "positive": 0}
+    naver_counts = {"negative": 0, "neutral": 0, "positive": 0}
+    ext_counts = {"negative": 0, "neutral": 0, "positive": 0}
+    for it in items:
+        s = it.get("sentiment", "neutral")
+        total_counts[s] = total_counts.get(s, 0) + 1
+    for it in naver_items:
+        s = it.get("sentiment", "neutral")
+        naver_counts[s] = naver_counts.get(s, 0) + 1
+    for it in external_items:
+        s = it.get("sentiment", "neutral")
+        ext_counts[s] = ext_counts.get(s, 0) + 1
+    print(
+        f"[INFO] Sentiment total: 🔴{total_counts['negative']} 🟡{total_counts['neutral']} 🟢{total_counts['positive']}; "
+        f"naver: 🔴{naver_counts['negative']} 🟡{naver_counts['neutral']} 🟢{naver_counts['positive']}; "
+        f"external: 🔴{ext_counts['negative']} 🟡{ext_counts['neutral']} 🟢{ext_counts['positive']}",
+        flush=True,
+    )
+
     sent = 0
     # 1) Naver: list 카드 (▶ 버튼이 정상 작동)
     sent += _send_group(access_token, naver_items, header_title_base, is_external=False)
@@ -302,23 +338,23 @@ def send_daily_news(access_token, items, header_title_base):
         text_chunks = _pack_external_to_text(external_items)
         total_ext = len(text_chunks)
         print(f"[INFO] External packed into {total_ext} text message(s).", flush=True)
-        for i, body in enumerate(text_chunks, 1):
-            header = "📰 외부 매체 기사" if total_ext == 1 else f"📰 외부 매체 기사 ({i}/{total_ext})"
+        for i, (body, entry_url) in enumerate(text_chunks, 1):
+            header = "📰 기타 매체 기사" if total_ext == 1 else f"📰 기타 매체 기사 ({i}/{total_ext})"
             full = f"{header}\n\n{body}"
-            # NEVER truncate. If overflow, drop the trailing newline; if still over,
-            # drop the header. Truncating would corrupt the URL at the bottom.
             if len(full) > 200:
-                full = f"{header}\n{body}"  # try without blank line
+                full = f"{header}\n{body}"
             if len(full) > 200:
-                full = body  # drop header rather than truncate URL
+                full = body
                 print(f"[WARN] msg {i}/{total_ext} dropped header to preserve URL", flush=True)
             if len(full) > 200:
-                # Last resort: should not happen because _pack_external_to_text
-                # already enforces TEXT_BODY_LIMIT (=195). But guard anyway.
                 print(f"[ERROR] msg {i}/{total_ext} still over 200 chars: {len(full)}", flush=True)
                 full = full[:200]
             try:
-                _send_template(access_token, _build_text_template(full))
+                # text 템플릿의 link.web_url을 해당 entry의 실제 기사 URL로 설정.
+                # 카카오 [제품 링크 관리]에 등록된 도메인이 아니면 폴백되지만,
+                # 본문의 URL이 카톡 자동 하이퍼링크 처리로 클릭 가능하므로 사용자에게는
+                # 본문 URL 클릭을 유도. '자세히 보기' 버튼은 카카오 정책상 제거 불가.
+                _send_template(access_token, _build_text_template_with_link(full, entry_url))
                 sent += 1
             except requests.HTTPError as e:
                 print(f"[ERROR] external text send failed ({i}/{total_ext}): {e}", flush=True)
