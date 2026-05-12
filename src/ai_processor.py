@@ -140,13 +140,31 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
         '  "filtered": [\n'
         "    {\n"
         '      "idx": 기사의 idx 번호 (정수),\n'
+        '      "main_company": "기사의 실질 주체 회사명 (아래 목록 중 하나만)",\n'
         '      "sentiment": "positive | neutral | negative",\n'
         '      "summary": "40자 이내 한 줄 요약 (주술 구조)",\n'
         '      "importance": 1-10\n'
         "    }\n"
         "  ]\n"
         "}\n\n"
-        "중요: title과 link 필드는 응답에 포함하지 말 것 (idx로 식별).\n\n"
+        "main_company는 반드시 다음 11개 중 하나의 정확한 회사명으로 응답:\n"
+        "- 한국투자금융지주\n"
+        "- 한국투자증권\n"
+        "- 한국투자신탁운용\n"
+        "- 한국투자밸류자산운용\n"
+        "- 한국투자파트너스\n"
+        "- 한국투자프라이빗에쿼티\n"
+        "- 한국투자캐피탈\n"
+        "- 한국투자저축은행\n"
+        "- 한국투자리얼에셋운용\n"
+        "- 한국투자부동산신탁\n"
+        "- 한국투자액셀러레이터\n\n"
+        "main_company 판정 원칙 (중요):\n"
+        "- 기사 본문에서 '실질적 주체'로 다뤄지는 회사 1개를 선택.\n"
+        "- 예: 기사 제목·본문이 '한국투자금융지주 자회사 한국투자증권은 ...' 또는 \n"
+        "  '한국투자금융지주의 한국투자증권이 ...'와 같이 자회사 활동을 다룰 때는 자회사명(이 경우 '한국투자증권')을 선택.\n"
+        "- 지주회사 자체의 결정·실적·인사·자본 변동 등이 주된 내용일 때만 '한국투자금융지주' 선택.\n"
+        "- 검색에 사용된 회사명(입력 데이터의 company 필드)과 main_company가 다를 수 있음. 본문 기준으로 재판단.\n\n"
         "필터링 원칙 (엄격히 준수):\n"
         "1. 기사 출처(네이버 직접 등재 여부)는 필터링 기준이 아님. 외부 매체(매일경제·한국경제·조선비즈 등) 기사도 동등하게 평가할 것.\n"
         "2. 다음 기사는 무조건 포함: 부정 감성, 글로벌 금융기업 MOU, 금융제도·규제 변경, 임원 인사, 분기 실적, 자회사 변동, 신규 펀드 설정/청산, M&A.\n"
@@ -174,16 +192,34 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
 
     ai_items = result.get("filtered", [])
 
-    # Re-attach original data by idx (no URL corruption possible)
+    # Whitelist of valid main_company values
+    VALID_COMPANIES = {
+        "한국투자금융지주", "한국투자증권", "한국투자신탁운용", "한국투자밸류자산운용",
+        "한국투자파트너스", "한국투자프라이빗에쿼티", "한국투자캐피탈", "한국투자저축은행",
+        "한국투자리얼에셋운용", "한국투자부동산신탁", "한국투자액셀러레이터",
+    }
+
+    # Re-attach original data by idx; use main_company from AI for tagging
     enriched = []
+    reclass_count = 0
     for ai_item in ai_items:
         idx = ai_item.get("idx")
         if idx is None or not isinstance(idx, int) or idx < 0 or idx >= len(selected):
             print(f"[WARN] Invalid idx in AI response: {idx}", flush=True)
             continue
         src = selected[idx]
+        # main_company: AI가 본문 기준으로 재판정한 실질 주체 회사
+        # 화이트리스트 검증 후 invalid면 src의 검색 기준 회사로 fallback
+        main_company = ai_item.get("main_company") or src.get("company")
+        if main_company not in VALID_COMPANIES:
+            print(f"[WARN] Invalid main_company '{main_company}' for idx={idx}; using src company.", flush=True)
+            main_company = src.get("company")
+        # Log reclassifications for visibility
+        if main_company != src.get("company"):
+            print(f"[INFO] Reclassified idx={idx}: '{src.get('company')}' → '{main_company}'", flush=True)
+            reclass_count += 1
         enriched.append({
-            "company": src.get("company"),
+            "company": main_company,
             "title": src.get("title"),
             "link": src.get("link"),
             "is_naver": src.get("is_naver", False),
@@ -192,6 +228,8 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
             "summary": ai_item.get("summary", ""),
             "importance": ai_item.get("importance", 5),
         })
+    if reclass_count:
+        print(f"[INFO] Total reclassifications: {reclass_count}", flush=True)
 
     n_naver = sum(1 for it in enriched if it.get("is_naver"))
     n_ext = sum(1 for it in enriched if not it.get("is_naver"))
