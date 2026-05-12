@@ -1,8 +1,15 @@
-"""Main entry point for KIH Daily News Bot.
+"""Main entry point for KIH Daily News Bot — multi-channel version.
 
-Sends 4 times per day in KST: 07:40, 09:30, 14:00, 17:30.
-Each slot has 3 redundant cron triggers (5min apart) for reliability.
-Duplicate-trigger guard: a lock file in the repo tracks last-sent slot+date.
+Sends to one or more channels (Kakao 'memo' / Email / Telegram) at 4 KST slots:
+    07:40 / 09:10 / 13:30 / 17:00
+
+Channel toggles via env vars (default true for Kakao, false for the others):
+    ENABLE_KAKAO     'true'/'false' (default true)
+    ENABLE_EMAIL     'true'/'false' (default false)
+    ENABLE_TELEGRAM  'true'/'false' (default false)
+
+Each channel is independent: failure in one does not block the others.
+Same news collection + AI filter is shared across all channels.
 """
 import json
 import os
@@ -12,16 +19,14 @@ from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
-from token_manager import refresh_kakao_access_token
 from naver_news import fetch_recent_news
 from ai_processor import process_daily_news, process_weekly_digest
-from kakao_sender import send_daily_news, send_weekly_digest_text
 
 
 KST = timezone(timedelta(hours=9))
 WEEKDAYS_KR = ["월", "화", "수", "목", "금", "토", "일"]
 
-# Lock file path (relative to repo root). Updated each successful send.
+# Lock file path (relative to repo root). Updated each successful run.
 LOCK_FILE = Path(__file__).parent.parent / ".last_send.json"
 
 SLOT_CONFIG = [
@@ -32,7 +37,25 @@ SLOT_CONFIG = [
 ]
 
 
-def determine_slot(now: datetime) -> dict | None:
+# --------------------------------------------------------------------------- #
+# Channel toggles                                                              #
+# --------------------------------------------------------------------------- #
+
+def _flag(name: str, default: bool) -> bool:
+    raw = os.environ.get(name, str(default)).strip().lower()
+    return raw in ("1", "true", "yes", "on", "y", "t")
+
+
+ENABLE_KAKAO = _flag("ENABLE_KAKAO", True)
+ENABLE_EMAIL = _flag("ENABLE_EMAIL", False)
+ENABLE_TELEGRAM = _flag("ENABLE_TELEGRAM", False)
+
+
+# --------------------------------------------------------------------------- #
+# Slot / lock helpers                                                          #
+# --------------------------------------------------------------------------- #
+
+def determine_slot(now: datetime) -> dict:
     for hour, minute, hours_back, label in SLOT_CONFIG:
         slot_dt = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
         delta_min = abs((now - slot_dt).total_seconds()) / 60
@@ -42,18 +65,10 @@ def determine_slot(now: datetime) -> dict | None:
                 "hours_back": hours_back,
                 "is_morning": label == "morning",
             }
-    return {
-        "label": "manual",
-        "hours_back": 4.0,
-        "is_morning": False,
-    }
+    return {"label": "manual", "hours_back": 4.0, "is_morning": False}
 
 
 def is_duplicate_trigger(slot_label: str, now: datetime) -> bool:
-    """Return True if this same slot already sent successfully today.
-
-    Manual runs (slot=='manual') always proceed.
-    """
     if slot_label == "manual":
         return False
     if not LOCK_FILE.exists():
@@ -64,7 +79,7 @@ def is_duplicate_trigger(slot_label: str, now: datetime) -> bool:
         print(f"[WARN] Failed to read lock file: {e}", flush=True)
         return False
     last_slot = data.get("slot")
-    last_date = data.get("date")  # YYYY-MM-DD KST
+    last_date = data.get("date")
     today = now.strftime("%Y-%m-%d")
     if last_slot == slot_label and last_date == today:
         print(
@@ -77,7 +92,6 @@ def is_duplicate_trigger(slot_label: str, now: datetime) -> bool:
 
 
 def update_lock_file(slot_label: str, now: datetime) -> None:
-    """Write lock file with this slot's send info."""
     data = {
         "slot": slot_label,
         "date": now.strftime("%Y-%m-%d"),
@@ -95,7 +109,6 @@ def build_header_title(items, now, slot_label):
     counts = {"negative": 0, "neutral": 0, "positive": 0}
     for it in items:
         counts[it.get("sentiment", "neutral")] += 1
-    # 형식: "05-12(화) 16:38 🔴3 🟡10 🟢2"
     return (
         f"📅 {now.strftime('%m-%d')}({weekday}) {now.strftime('%H:%M')} "
         f"🔴{counts['negative']} 🟡{counts['neutral']} 🟢{counts['positive']}"
@@ -103,6 +116,7 @@ def build_header_title(items, now, slot_label):
 
 
 def format_weekly_digest_text(digest, now):
+    """Plain-text weekly digest (used by Kakao only)."""
     week_ago = now - timedelta(days=7)
     period = f"{week_ago.strftime('%m/%d')} ~ {now.strftime('%m/%d')}"
 
@@ -134,6 +148,123 @@ def format_weekly_digest_text(digest, now):
     return msg
 
 
+def weekly_period_label(now: datetime) -> str:
+    week_ago = now - timedelta(days=7)
+    return f"{week_ago.strftime('%m/%d')} ~ {now.strftime('%m/%d')}"
+
+
+# --------------------------------------------------------------------------- #
+# Channel dispatchers                                                          #
+# --------------------------------------------------------------------------- #
+
+def _dispatch_kakao_daily(daily_items, header_title) -> int:
+    """Returns number of messages sent (0 if disabled or no items)."""
+    if not ENABLE_KAKAO:
+        return 0
+    if not daily_items:
+        return 0
+    try:
+        from token_manager import refresh_kakao_access_token
+        from kakao_sender import send_daily_news
+        print("[CH:KAKAO] Refreshing Kakao access token...", flush=True)
+        token_data = refresh_kakao_access_token()
+        access_token = token_data["access_token"]
+        print(f"[CH:KAKAO] Token acquired (expires in {token_data['expires_in']}s).", flush=True)
+        msgs = send_daily_news(access_token, daily_items, header_title)
+        print(f"[CH:KAKAO] Sent {msgs} message(s).", flush=True)
+        return msgs
+    except Exception as e:
+        print(f"[CH:KAKAO][ERROR] {type(e).__name__}: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        return 0
+
+
+def _dispatch_kakao_weekly(now: datetime) -> int:
+    if not ENABLE_KAKAO:
+        return 0
+    try:
+        from token_manager import refresh_kakao_access_token
+        from kakao_sender import send_weekly_digest_text
+        print("[CH:KAKAO][weekly] Fetching weekly news...", flush=True)
+        weekly_articles = fetch_recent_news(hours_back=24 * 7)
+        if not weekly_articles:
+            print("[CH:KAKAO][weekly] No articles. Skipping.", flush=True)
+            return 0
+        digest = process_weekly_digest(weekly_articles)
+        if not digest.get("by_company"):
+            print("[CH:KAKAO][weekly] Digest empty. Skipping.", flush=True)
+            return 0
+        token_data = refresh_kakao_access_token()
+        weekly_text = format_weekly_digest_text(digest, now)
+        msgs = send_weekly_digest_text(token_data["access_token"], weekly_text)
+        print(f"[CH:KAKAO][weekly] Sent in {msgs} chunks.", flush=True)
+        return msgs
+    except Exception as e:
+        print(f"[CH:KAKAO][weekly][ERROR] {type(e).__name__}: {e}", flush=True)
+        return 0
+
+
+def _dispatch_email_daily(daily_items, header_title) -> int:
+    if not ENABLE_EMAIL:
+        return 0
+    if not daily_items:
+        return 0
+    try:
+        from email_sender import send_daily_news_email
+        return send_daily_news_email(daily_items, header_title)
+    except Exception as e:
+        print(f"[CH:EMAIL][ERROR] {type(e).__name__}: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        return 0
+
+
+def _dispatch_email_weekly(digest: dict, now: datetime) -> int:
+    if not ENABLE_EMAIL:
+        return 0
+    if not digest.get("by_company"):
+        return 0
+    try:
+        from email_sender import send_weekly_digest_email
+        return send_weekly_digest_email(digest, weekly_period_label(now))
+    except Exception as e:
+        print(f"[CH:EMAIL][weekly][ERROR] {type(e).__name__}: {e}", flush=True)
+        return 0
+
+
+def _dispatch_telegram_daily(daily_items, header_title) -> int:
+    if not ENABLE_TELEGRAM:
+        return 0
+    if not daily_items:
+        return 0
+    try:
+        from telegram_sender import send_daily_news_telegram
+        return send_daily_news_telegram(daily_items, header_title)
+    except Exception as e:
+        print(f"[CH:TG][ERROR] {type(e).__name__}: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        return 0
+
+
+def _dispatch_telegram_weekly(digest: dict, now: datetime) -> int:
+    if not ENABLE_TELEGRAM:
+        return 0
+    if not digest.get("by_company"):
+        return 0
+    try:
+        from telegram_sender import send_weekly_digest_telegram
+        return send_weekly_digest_telegram(digest, weekly_period_label(now))
+    except Exception as e:
+        print(f"[CH:TG][weekly][ERROR] {type(e).__name__}: {e}", flush=True)
+        return 0
+
+
+# --------------------------------------------------------------------------- #
+# Main pipeline                                                                #
+# --------------------------------------------------------------------------- #
+
 def main():
     now = datetime.now(KST)
     slot = determine_slot(now)
@@ -141,71 +272,67 @@ def main():
 
     print(f"[INFO] Run started at {now.isoformat()}", flush=True)
     print(f"[INFO] Slot: {slot['label']}, hours_back: {slot['hours_back']}", flush=True)
+    print(f"[INFO] Channels: KAKAO={ENABLE_KAKAO}, EMAIL={ENABLE_EMAIL}, TELEGRAM={ENABLE_TELEGRAM}", flush=True)
     print(f"[INFO] is_friday_morning: {is_friday_morning}", flush=True)
 
-    # Duplicate-trigger guard
-    if is_duplicate_trigger(slot["label"], now):
-        print("[INFO] Skipping duplicate trigger. Exiting.", flush=True)
+    if not (ENABLE_KAKAO or ENABLE_EMAIL or ENABLE_TELEGRAM):
+        print("[FATAL] No channel enabled. Set at least one of ENABLE_KAKAO/EMAIL/TELEGRAM.", flush=True)
         return
 
-    print("[STEP 1] Refreshing Kakao access token...", flush=True)
-    token_data = refresh_kakao_access_token()
-    access_token = token_data["access_token"]
-    print(f"[STEP 1] Access token acquired (expires in {token_data['expires_in']}s).", flush=True)
+    if is_duplicate_trigger(slot["label"], now):
+        print("[INFO] Skipping duplicate trigger.", flush=True)
+        return
 
-    print(f"[STEP 2] Fetching news from Naver (window: {slot['hours_back']}h)...", flush=True)
+    # 1. Collect news
+    print(f"[STEP 1] Fetching news from Naver (window: {slot['hours_back']}h)...", flush=True)
     daily_articles = fetch_recent_news(hours_back=slot["hours_back"])
 
-    sent_anything = False
-
+    # 2. AI filter (shared across all channels)
+    daily_items = []
     if daily_articles:
-        print("[STEP 3] Processing daily news with Claude...", flush=True)
+        print("[STEP 2] Processing daily news with Claude...", flush=True)
         daily_items = process_daily_news(daily_articles)
-        print(f"[STEP 3] After AI filter: {len(daily_items)} items.", flush=True)
-
-        if daily_items:
-            print("[STEP 4] Sending daily news...", flush=True)
-            header_title = build_header_title(daily_items, now, slot["label"])
-            msgs_sent = send_daily_news(access_token, daily_items, header_title)
-            print(f"[STEP 4] Sent {msgs_sent} message(s).", flush=True)
-            sent_anything = True
-        else:
-            print("[INFO] AI filter returned 0 items. No daily message.", flush=True)
+        print(f"[STEP 2] After AI filter: {len(daily_items)} items.", flush=True)
     else:
-        print("[INFO] No articles in window. No daily message.", flush=True)
+        print("[INFO] No articles in window.", flush=True)
 
+    header_title = build_header_title(daily_items, now, slot["label"])
+
+    # 3. Dispatch daily to each enabled channel
+    sent_summary = {"kakao": 0, "email": 0, "telegram": 0}
+    if daily_items:
+        print("[STEP 3] Dispatching to channels...", flush=True)
+        sent_summary["kakao"] = _dispatch_kakao_daily(daily_items, header_title)
+        sent_summary["email"] = _dispatch_email_daily(daily_items, header_title)
+        sent_summary["telegram"] = _dispatch_telegram_daily(daily_items, header_title)
+    else:
+        print("[INFO] No items to dispatch.", flush=True)
+
+    # 4. Friday weekly digest (independent fetch — runs even if daily is empty)
     if is_friday_morning:
-        if _send_weekly_digest(access_token, now):
-            sent_anything = True
+        print("[STEP 4] Friday weekly digest...", flush=True)
+        # Reuse a single AI call across email + telegram; Kakao has its own path
+        # because it pre-builds text. For efficiency, we fetch+process once and
+        # share the digest result.
+        weekly_articles = fetch_recent_news(hours_back=24 * 7)
+        digest = {}
+        if weekly_articles:
+            digest = process_weekly_digest(weekly_articles)
 
-    # Always update lock file when slot matched (even if 0 messages sent),
-    # so duplicate cron triggers within the same slot don't re-run the pipeline.
+        # Kakao uses its own text builder
+        weekly_summary = {"kakao": 0, "email": 0, "telegram": 0}
+        if ENABLE_KAKAO:
+            weekly_summary["kakao"] = _dispatch_kakao_weekly(now)
+        if digest.get("by_company"):
+            weekly_summary["email"] = _dispatch_email_weekly(digest, now)
+            weekly_summary["telegram"] = _dispatch_telegram_weekly(digest, now)
+        print(f"[STEP 4] Weekly summary: {weekly_summary}", flush=True)
+
+    # 5. Always update lock file on a matched slot
     if slot["label"] != "manual":
         update_lock_file(slot["label"], now)
 
-    print(f"[INFO] Run completed. sent_anything={sent_anything}", flush=True)
-
-
-def _send_weekly_digest(access_token: str, now: datetime) -> bool:
-    """Returns True if at least one weekly message was sent."""
-    print("[STEP 5] Fetching weekly news (Friday morning)...", flush=True)
-    weekly_articles = fetch_recent_news(hours_back=24 * 7)
-    print(f"[STEP 5] Weekly articles collected: {len(weekly_articles)}", flush=True)
-    if not weekly_articles:
-        print("[INFO] No weekly articles. Skipping weekly digest.", flush=True)
-        return False
-
-    print("[STEP 5] Generating weekly digest with Claude...", flush=True)
-    digest = process_weekly_digest(weekly_articles)
-    if not digest.get("by_company"):
-        print("[INFO] Weekly digest empty. Skipping send.", flush=True)
-        return False
-
-    print("[STEP 5] Sending weekly digest (text format)...", flush=True)
-    weekly_text = format_weekly_digest_text(digest, now)
-    msgs_sent = send_weekly_digest_text(access_token, weekly_text)
-    print(f"[STEP 5] Weekly digest sent in {msgs_sent} chunks.", flush=True)
-    return True
+    print(f"[INFO] Run completed. Daily sent: {sent_summary}", flush=True)
 
 
 if __name__ == "__main__":
