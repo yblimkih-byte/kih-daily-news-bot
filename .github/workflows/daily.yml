@@ -2,11 +2,28 @@ name: KIH Daily News Bot
 
 on:
   schedule:
-    # KST → UTC 변환 (KST = UTC + 9)
-    - cron: '40 22 * * *'   # 07:40 KST (전일 22:40 UTC)
-    - cron: '30 0 * * *'    # 09:30 KST (당일 00:30 UTC)
-    - cron: '0 5 * * *'     # 14:00 KST (당일 05:00 UTC)
-    - cron: '30 8 * * *'    # 17:30 KST (당일 08:30 UTC)
+    # 슬롯당 3개 cron (5분 간격). 어느 하나라도 트리거되면 슬롯 매칭됨.
+    # 코드의 ±25분 매칭 윈도우와 결합하면 사실상 누락 0%.
+    
+    # 07:40 KST slot (UTC 22:40 / 22:45 / 22:50)
+    - cron: '40 22 * * *'
+    - cron: '45 22 * * *'
+    - cron: '50 22 * * *'
+    
+    # 09:30 KST slot (UTC 00:30 / 00:35 / 00:40)
+    - cron: '30 0 * * *'
+    - cron: '35 0 * * *'
+    - cron: '40 0 * * *'
+    
+    # 14:00 KST slot (UTC 05:00 / 05:05 / 05:10)
+    - cron: '0 5 * * *'
+    - cron: '5 5 * * *'
+    - cron: '10 5 * * *'
+    
+    # 17:30 KST slot (UTC 08:30 / 08:35 / 08:40)
+    - cron: '30 8 * * *'
+    - cron: '35 8 * * *'
+    - cron: '40 8 * * *'
   workflow_dispatch: {}
 
 jobs:
