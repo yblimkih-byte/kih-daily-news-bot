@@ -1,15 +1,17 @@
-"""Main entry point for KIH Daily News Bot — multi-channel version.
+"""Main entry point for KIH Daily News Bot — multi-channel + cross-slot dedupe.
 
 Sends to one or more channels (Kakao 'memo' / Email / Telegram) at 4 KST slots:
     07:40 / 09:10 / 13:30 / 17:00
 
-Channel toggles via env vars (default true for Kakao, false for the others):
+Channel toggles (env vars, default true for Kakao, false for the others):
     ENABLE_KAKAO     'true'/'false' (default true)
     ENABLE_EMAIL     'true'/'false' (default false)
     ENABLE_TELEGRAM  'true'/'false' (default false)
 
-Each channel is independent: failure in one does not block the others.
-Same news collection + AI filter is shared across all channels.
+Cross-slot dedupe:
+    Articles already sent in the last SENT_HISTORY_DAYS (default 3) days are
+    filtered out before AI processing, then this slot's sent items are recorded.
+    History file (.sent_history.json) is committed by daily.yml.
 """
 import json
 import os
@@ -21,12 +23,12 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 from naver_news import fetch_recent_news
 from ai_processor import process_daily_news, process_weekly_digest
+from sent_history import filter_unseen, record_sent
 
 
 KST = timezone(timedelta(hours=9))
 WEEKDAYS_KR = ["월", "화", "수", "목", "금", "토", "일"]
 
-# Lock file path (relative to repo root). Updated each successful run.
 LOCK_FILE = Path(__file__).parent.parent / ".last_send.json"
 
 SLOT_CONFIG = [
@@ -36,10 +38,6 @@ SLOT_CONFIG = [
     (17, 0, 3.7, "close"),
 ]
 
-
-# --------------------------------------------------------------------------- #
-# Channel toggles                                                              #
-# --------------------------------------------------------------------------- #
 
 def _flag(name: str, default: bool) -> bool:
     raw = os.environ.get(name, str(default)).strip().lower()
@@ -116,7 +114,6 @@ def build_header_title(items, now, slot_label):
 
 
 def format_weekly_digest_text(digest, now):
-    """Plain-text weekly digest (used by Kakao only)."""
     week_ago = now - timedelta(days=7)
     period = f"{week_ago.strftime('%m/%d')} ~ {now.strftime('%m/%d')}"
 
@@ -154,14 +151,11 @@ def weekly_period_label(now: datetime) -> str:
 
 
 # --------------------------------------------------------------------------- #
-# Channel dispatchers                                                          #
+# Channel dispatchers (each isolated by try/except)                            #
 # --------------------------------------------------------------------------- #
 
 def _dispatch_kakao_daily(daily_items, header_title) -> int:
-    """Returns number of messages sent (0 if disabled or no items)."""
-    if not ENABLE_KAKAO:
-        return 0
-    if not daily_items:
+    if not ENABLE_KAKAO or not daily_items:
         return 0
     try:
         from token_manager import refresh_kakao_access_token
@@ -206,9 +200,7 @@ def _dispatch_kakao_weekly(now: datetime) -> int:
 
 
 def _dispatch_email_daily(daily_items, header_title) -> int:
-    if not ENABLE_EMAIL:
-        return 0
-    if not daily_items:
+    if not ENABLE_EMAIL or not daily_items:
         return 0
     try:
         from email_sender import send_daily_news_email
@@ -221,9 +213,7 @@ def _dispatch_email_daily(daily_items, header_title) -> int:
 
 
 def _dispatch_email_weekly(digest: dict, now: datetime) -> int:
-    if not ENABLE_EMAIL:
-        return 0
-    if not digest.get("by_company"):
+    if not ENABLE_EMAIL or not digest.get("by_company"):
         return 0
     try:
         from email_sender import send_weekly_digest_email
@@ -234,9 +224,7 @@ def _dispatch_email_weekly(digest: dict, now: datetime) -> int:
 
 
 def _dispatch_telegram_daily(daily_items, header_title) -> int:
-    if not ENABLE_TELEGRAM:
-        return 0
-    if not daily_items:
+    if not ENABLE_TELEGRAM or not daily_items:
         return 0
     try:
         from telegram_sender import send_daily_news_telegram
@@ -249,9 +237,7 @@ def _dispatch_telegram_daily(daily_items, header_title) -> int:
 
 
 def _dispatch_telegram_weekly(digest: dict, now: datetime) -> int:
-    if not ENABLE_TELEGRAM:
-        return 0
-    if not digest.get("by_company"):
+    if not ENABLE_TELEGRAM or not digest.get("by_company"):
         return 0
     try:
         from telegram_sender import send_weekly_digest_telegram
@@ -264,6 +250,28 @@ def _dispatch_telegram_weekly(digest: dict, now: datetime) -> int:
 # --------------------------------------------------------------------------- #
 # Main pipeline                                                                #
 # --------------------------------------------------------------------------- #
+
+def _link_items_to_articles(items: list[dict], articles: list[dict]) -> list[dict]:
+    """Attach _url_key / _title_key from collected articles back onto AI-filtered items.
+
+    The AI filter (ai_processor) outputs items by idx and re-attaches link, but
+    strips the _url_key / _title_key fields. We re-merge them by URL match so
+    that sent_history.record_sent has the correct dedupe keys.
+    """
+    url_to_keys = {}
+    for a in articles:
+        link = a.get("link") or ""
+        if link:
+            url_to_keys[link] = (a.get("_url_key", ""), a.get("_title_key", ""))
+    for it in items:
+        link = it.get("link") or ""
+        u_key, t_key = url_to_keys.get(link, ("", ""))
+        if u_key and "_url_key" not in it:
+            it["_url_key"] = u_key
+        if t_key and "_title_key" not in it:
+            it["_title_key"] = t_key
+    return items
+
 
 def main():
     now = datetime.now(KST)
@@ -287,48 +295,59 @@ def main():
     print(f"[STEP 1] Fetching news from Naver (window: {slot['hours_back']}h)...", flush=True)
     daily_articles = fetch_recent_news(hours_back=slot["hours_back"])
 
-    # 2. AI filter (shared across all channels)
+    # 2. Cross-slot dedupe: drop anything we already sent in the last N days
+    print("[STEP 2] Cross-slot dedupe (history file)...", flush=True)
+    daily_articles, hist_dropped = filter_unseen(daily_articles)
+    print(f"[STEP 2] After history dedupe: {len(daily_articles)} articles "
+          f"(dropped {hist_dropped} previously-sent).", flush=True)
+
+    # 3. AI filter (shared across all channels)
     daily_items = []
     if daily_articles:
-        print("[STEP 2] Processing daily news with Claude...", flush=True)
+        print("[STEP 3] Processing daily news with Claude...", flush=True)
         daily_items = process_daily_news(daily_articles)
-        print(f"[STEP 2] After AI filter: {len(daily_items)} items.", flush=True)
+        # Re-attach dedupe keys lost during AI step
+        daily_items = _link_items_to_articles(daily_items, daily_articles)
+        print(f"[STEP 3] After AI filter: {len(daily_items)} items.", flush=True)
     else:
-        print("[INFO] No articles in window.", flush=True)
+        print("[INFO] No fresh articles to process.", flush=True)
 
     header_title = build_header_title(daily_items, now, slot["label"])
 
-    # 3. Dispatch daily to each enabled channel
+    # 4. Dispatch to channels
     sent_summary = {"kakao": 0, "email": 0, "telegram": 0}
     if daily_items:
-        print("[STEP 3] Dispatching to channels...", flush=True)
+        print("[STEP 4] Dispatching to channels...", flush=True)
         sent_summary["kakao"] = _dispatch_kakao_daily(daily_items, header_title)
         sent_summary["email"] = _dispatch_email_daily(daily_items, header_title)
         sent_summary["telegram"] = _dispatch_telegram_daily(daily_items, header_title)
     else:
         print("[INFO] No items to dispatch.", flush=True)
 
-    # 4. Friday weekly digest (independent fetch — runs even if daily is empty)
+    # 5. Record sent items into history (only if at least one channel succeeded)
+    any_sent = sum(sent_summary.values()) > 0
+    if any_sent and daily_items:
+        print("[STEP 5] Recording sent items to history...", flush=True)
+        record_sent(daily_items)
+    else:
+        print("[STEP 5] No successful sends. History not updated.", flush=True)
+
+    # 6. Friday weekly digest
     if is_friday_morning:
-        print("[STEP 4] Friday weekly digest...", flush=True)
-        # Reuse a single AI call across email + telegram; Kakao has its own path
-        # because it pre-builds text. For efficiency, we fetch+process once and
-        # share the digest result.
+        print("[STEP 6] Friday weekly digest...", flush=True)
         weekly_articles = fetch_recent_news(hours_back=24 * 7)
         digest = {}
         if weekly_articles:
             digest = process_weekly_digest(weekly_articles)
-
-        # Kakao uses its own text builder
         weekly_summary = {"kakao": 0, "email": 0, "telegram": 0}
         if ENABLE_KAKAO:
             weekly_summary["kakao"] = _dispatch_kakao_weekly(now)
         if digest.get("by_company"):
             weekly_summary["email"] = _dispatch_email_weekly(digest, now)
             weekly_summary["telegram"] = _dispatch_telegram_weekly(digest, now)
-        print(f"[STEP 4] Weekly summary: {weekly_summary}", flush=True)
+        print(f"[STEP 6] Weekly summary: {weekly_summary}", flush=True)
 
-    # 5. Always update lock file on a matched slot
+    # 7. Update lock file on a matched slot
     if slot["label"] != "manual":
         update_lock_file(slot["label"], now)
 
