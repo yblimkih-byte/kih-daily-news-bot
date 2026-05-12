@@ -1,8 +1,6 @@
 name: KIH Daily News Bot
 
 on:
-  # 외부 cron 서비스(cron-job.org)가 GitHub API의 workflow_dispatch를 호출.
-  # GitHub Actions 자체 cron은 무료 tier 누락이 잦아 사용하지 않음.
   workflow_dispatch: {}
 
 jobs:
@@ -10,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     permissions:
-      contents: write  # 락 파일 commit/push 용
+      contents: write  # 락 파일 + 발송 이력 파일 commit/push 용
 
     steps:
       - name: Checkout
@@ -34,41 +32,53 @@ jobs:
           NAVER_CLIENT_SECRET: ${{ secrets.NAVER_CLIENT_SECRET }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
 
-          # ----- 채널 토글 (Secrets 또는 vars 사용 가능) -----
-          # 값이 비어 있으면 main.py 기본값(KAKAO=true, 나머지 false) 적용
+          # ----- 채널 토글 -----
           ENABLE_KAKAO: ${{ vars.ENABLE_KAKAO || secrets.ENABLE_KAKAO || 'true' }}
           ENABLE_EMAIL: ${{ vars.ENABLE_EMAIL || secrets.ENABLE_EMAIL || 'false' }}
           ENABLE_TELEGRAM: ${{ vars.ENABLE_TELEGRAM || secrets.ENABLE_TELEGRAM || 'false' }}
 
-          # ----- KakaoTalk (기존 로직) -----
+          # ----- KakaoTalk -----
           KAKAO_REST_API_KEY: ${{ secrets.KAKAO_REST_API_KEY }}
           KAKAO_REFRESH_TOKEN: ${{ secrets.KAKAO_REFRESH_TOKEN }}
 
-          # ----- Email (신규) -----
+          # ----- Email -----
           SMTP_HOST: ${{ vars.SMTP_HOST || 'smtp.gmail.com' }}
           SMTP_PORT: ${{ vars.SMTP_PORT || '587' }}
           SMTP_USER: ${{ secrets.SMTP_USER }}
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           EMAIL_RECIPIENTS: ${{ secrets.EMAIL_RECIPIENTS }}
           EMAIL_FROM_NAME: ${{ vars.EMAIL_FROM_NAME || 'KIH News Bot' }}
-          EMAIL_DELIVERY_MODE: ${{ vars.EMAIL_DELIVERY_MODE || 'to' }}  # to | bcc | individual
+          EMAIL_DELIVERY_MODE: ${{ vars.EMAIL_DELIVERY_MODE || 'to' }}
 
-          # ----- Telegram (신규) -----
+          # ----- Telegram -----
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_IDS: ${{ secrets.TELEGRAM_CHAT_IDS }}
+
+          # ----- Dedupe retention (days). Default 3. -----
+          SENT_HISTORY_DAYS: ${{ vars.SENT_HISTORY_DAYS || '3' }}
 
           PYTHONIOENCODING: utf-8
         run: python src/main.py
 
-      - name: Commit lock file if updated
+      - name: Commit state files if updated
         if: always()
         run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          changes=0
           if [ -f .last_send.json ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
             git add .last_send.json
-            git diff --cached --quiet || git commit -m "chore: update lock file [skip ci]"
-            git push || echo "[WARN] Lock file push failed (likely concurrent run)"
+            changes=1
+          fi
+          if [ -f .sent_history.json ]; then
+            git add .sent_history.json
+            changes=1
+          fi
+
+          if [ "$changes" -eq 1 ]; then
+            git diff --cached --quiet || git commit -m "chore: update state files [skip ci]"
+            git push || echo "[WARN] State push failed (likely concurrent run)"
           else
-            echo "No lock file to commit (slot was 'manual' or first run)."
+            echo "No state files to commit."
           fi
