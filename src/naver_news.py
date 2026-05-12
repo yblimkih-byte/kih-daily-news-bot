@@ -1,4 +1,9 @@
-"""Naver News search client. Collects both Naver-hosted and external-media articles."""
+"""Naver News search client. Collects both Naver-hosted and external-media articles.
+
+Dedupe layers (in order):
+  1. URL normalization (strip tracking params, unify host) → blocks identical-article duplicates
+  2. Title fingerprint → blocks same-event-different-media duplicates within one slot
+"""
 import os
 import re
 import time
@@ -6,6 +11,10 @@ import requests
 from datetime import datetime, timedelta, timezone
 from email.utils import parsedate_to_datetime
 from urllib.parse import urlparse
+
+# Reuse normalization helpers from sent_history so dedupe keys are consistent
+# across in-slot dedupe and cross-slot history checks.
+from sent_history import normalize_url, normalize_title
 
 
 NAVER_NEWS_API = "https://openapi.naver.com/v1/search/news.json"
@@ -40,7 +49,6 @@ def _parse_pub_date(pub_date_str: str) -> datetime:
 
 
 def _is_naver_news_link(url: str) -> bool:
-    """Strict: URL must be on a Naver news domain (registered with Kakao)."""
     if not url:
         return False
     return any(d in url for d in (
@@ -51,20 +59,12 @@ def _is_naver_news_link(url: str) -> bool:
 
 
 def extract_media_name(url: str) -> str:
-    """Extract a short, human-readable media name from a URL.
-
-    Examples:
-        https://www.mk.co.kr/news/...        -> 'mk.co.kr'
-        https://biz.chosun.com/...           -> 'chosun.com'
-        https://www.hankyung.com/article/... -> 'hankyung.com'
-    """
     try:
         host = urlparse(url).hostname or ""
     except Exception:
         return "외부 매체"
     if not host:
         return "외부 매체"
-    # Drop common prefixes
     for prefix in ("www.", "m.", "biz.", "news.", "view.", "mobile."):
         if host.startswith(prefix):
             host = host[len(prefix):]
@@ -89,11 +89,18 @@ def _search_one_query(query: str, display: int = 30) -> list[dict]:
 
 
 def fetch_recent_news(hours_back: float = 24) -> list[dict]:
-    """Fetch news articles from the last N hours for all target companies."""
+    """Fetch news articles from the last N hours for all target companies.
+
+    In-slot dedupe is enforced by:
+      - seen_url_keys: normalized URLs (handles tracking params, m./www., scheme)
+      - seen_title_keys: normalized titles (handles same event reported by multiple media)
+    """
     cutoff = datetime.now(KST) - timedelta(hours=hours_back)
     all_articles = []
-    seen_links = set()
-    stats = {"naver": 0, "external": 0, "old": 0, "no_match": 0, "dup": 0}
+    seen_url_keys = set()
+    seen_title_keys = set()
+    stats = {"naver": 0, "external": 0, "old": 0, "no_match": 0,
+             "dup_url": 0, "dup_title": 0}
 
     for company in TARGET_COMPANIES:
         for query in company["queries"]:
@@ -122,18 +129,24 @@ def fetch_recent_news(hours_back: float = 24) -> list[dict]:
                     stats["old"] += 1
                     continue
 
-                # Prefer Naver URL if available, else use original media URL
                 is_naver = _is_naver_news_link(link)
                 primary_link = link if is_naver else (original_link or link)
                 if not primary_link:
                     continue
 
-                if primary_link in seen_links:
-                    stats["dup"] += 1
+                # --- Layer 1: URL fingerprint (canonical) ---
+                url_key = normalize_url(primary_link)
+                if url_key and url_key in seen_url_keys:
+                    stats["dup_url"] += 1
                     continue
-                seen_links.add(primary_link)
 
-                # Company name matching
+                # --- Layer 2: title fingerprint (same event, different media) ---
+                title_key = normalize_title(title)
+                if title_key and title_key in seen_title_keys:
+                    stats["dup_title"] += 1
+                    continue
+
+                # --- Company match in title or description ---
                 company_name_short = company["name"].replace("한국투자", "")
                 if (company["name"] not in title
                         and company["name"] not in description
@@ -141,6 +154,11 @@ def fetch_recent_news(hours_back: float = 24) -> list[dict]:
                         and company_name_short not in description):
                     stats["no_match"] += 1
                     continue
+
+                if url_key:
+                    seen_url_keys.add(url_key)
+                if title_key:
+                    seen_title_keys.add(title_key)
 
                 media = extract_media_name(primary_link) if not is_naver else "네이버뉴스"
 
@@ -153,6 +171,9 @@ def fetch_recent_news(hours_back: float = 24) -> list[dict]:
                     "pub_date": pub_dt.isoformat(),
                     "is_naver": is_naver,
                     "media": media,
+                    # Carry the dedupe keys so downstream code (sent_history) can re-use them
+                    "_url_key": url_key,
+                    "_title_key": title_key,
                 })
                 if is_naver:
                     stats["naver"] += 1
@@ -165,7 +186,7 @@ def fetch_recent_news(hours_back: float = 24) -> list[dict]:
         f"[INFO] Naver search: total={len(all_articles)} "
         f"(naver={stats['naver']}, external={stats['external']}), "
         f"skipped_old={stats['old']}, skipped_no_match={stats['no_match']}, "
-        f"skipped_dup={stats['dup']}",
+        f"skipped_dup_url={stats['dup_url']}, skipped_dup_title={stats['dup_title']}",
         flush=True,
     )
     for i, a in enumerate(all_articles[:30], 1):
