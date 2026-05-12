@@ -3,23 +3,23 @@ name: KIH Daily News Bot
 on:
   schedule:
     # 슬롯당 3개 cron (5분 간격). 어느 하나라도 트리거되면 슬롯 매칭됨.
-    # 코드의 ±25분 매칭 윈도우와 결합하면 사실상 누락 0%.
-    
+    # 코드의 락 파일이 같은 슬롯의 중복 발송을 차단함.
+
     # 07:40 KST slot (UTC 22:40 / 22:45 / 22:50)
     - cron: '40 22 * * *'
     - cron: '45 22 * * *'
     - cron: '50 22 * * *'
-    
+
     # 09:30 KST slot (UTC 00:30 / 00:35 / 00:40)
     - cron: '30 0 * * *'
     - cron: '35 0 * * *'
     - cron: '40 0 * * *'
-    
+
     # 14:00 KST slot (UTC 05:00 / 05:05 / 05:10)
     - cron: '0 5 * * *'
     - cron: '5 5 * * *'
     - cron: '10 5 * * *'
-    
+
     # 17:30 KST slot (UTC 08:30 / 08:35 / 08:40)
     - cron: '30 8 * * *'
     - cron: '35 8 * * *'
@@ -30,6 +30,8 @@ jobs:
   send-news:
     runs-on: ubuntu-latest
     timeout-minutes: 10
+    permissions:
+      contents: write  # 락 파일 commit/push 권한
 
     steps:
       - name: Checkout
@@ -55,3 +57,17 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           PYTHONIOENCODING: utf-8
         run: python src/main.py
+
+      - name: Commit lock file if updated
+        if: always()
+        run: |
+          if [ -f .last_send.json ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add .last_send.json
+            # commit만, push 실패해도 워크플로우는 성공 처리
+            git diff --cached --quiet || git commit -m "chore: update lock file [skip ci]"
+            git push || echo "[WARN] Lock file push failed (likely concurrent run)"
+          else
+            echo "No lock file to commit (slot was 'manual' or first run)."
+          fi
