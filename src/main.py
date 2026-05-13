@@ -67,7 +67,7 @@ def determine_slot(now: datetime) -> dict:
     for hour, minute, hours_back, label in SLOT_CONFIG:
         slot_dt = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
         delta_min = abs((now - slot_dt).total_seconds()) / 60
-        if delta_min <= 40:
+        if delta_min <= 15:
             return {
                 "label": label,
                 "hours_back": hours_back,
