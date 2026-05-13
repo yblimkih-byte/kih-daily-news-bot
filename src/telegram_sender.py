@@ -104,9 +104,8 @@ def _build_messages_daily(items: list[dict], header_title: str) -> list[str]:
     sorted_items = _sort_items(items)
 
     header = (
-        f"<b>{html_escape(header_title)}</b>\n"
-        f"🔴 {counts['negative']} · 🟡 {counts['neutral']} · 🟢 {counts['positive']} · "
-        f"총 {sum(counts.values())}건\n"
+        f"<b>{html_escape(header_title)}</b>  "
+        f"<i>(총 {sum(counts.values())}건)</i>\n"
     )
 
     if not sorted_items:
