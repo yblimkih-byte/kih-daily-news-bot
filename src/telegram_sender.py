@@ -46,6 +46,27 @@ def _shorten_company(name: str) -> str:
     return mapping.get(name, name)
 
 
+def _shorten_sector(name: str) -> str:
+    """Sector tag abbreviations (always with '업' suffix to distinguish from company tags)."""
+    mapping = {
+        "증권업": "증권업",
+        "자산운용업": "운용업",
+        "신탁업": "신탁업",
+        "저축은행업": "저축은행업",
+        "캐피탈·여전업": "여전업",
+        "벤처투자업": "VC업",
+        "금융지주업": "지주업",
+    }
+    return mapping.get(name, name)
+
+
+def _get_item_tag(item: dict) -> str:
+    """Return the bracket tag: '[증권]' for company, '[운용업]' for sector."""
+    if item.get("category") == "sector":
+        return _shorten_sector(item.get("sector", "") or "")
+    return _shorten_company(item.get("company", "") or "")
+
+
 def _get_chat_ids() -> list[str]:
     raw = os.environ.get("TELEGRAM_CHAT_IDS", "")
     return [c.strip() for c in raw.split(",") if c.strip()]
@@ -70,7 +91,7 @@ def _counts(items: list[dict]) -> dict:
 
 def _format_item_html(it: dict) -> str:
     emoji = SENTIMENT_EMOJI.get(it.get("sentiment", "neutral"), "🟡")
-    company = _shorten_company(it.get("company", ""))
+    company = _get_item_tag(it)
     title = it.get("title", "")
     summary = it.get("summary", "")
     link = it.get("link", "")
@@ -104,8 +125,9 @@ def _build_messages_daily(items: list[dict], header_title: str) -> list[str]:
     sorted_items = _sort_items(items)
 
     header = (
-        f"<b>{html_escape(header_title)}</b>  "
-        f"<i>(총 {sum(counts.values())}건)</i>\n"
+        f"<b>{html_escape(header_title)}</b>\n"
+        f"🔴 {counts['negative']} · 🟡 {counts['neutral']} · 🟢 {counts['positive']} · "
+        f"총 {sum(counts.values())}건\n"
     )
 
     if not sorted_items:
@@ -251,6 +273,11 @@ def send_daily_news_telegram(items: list[dict], header_title: str) -> int:
             time.sleep(0.4)  # rate-limit safety (Telegram: max 30 msg/sec global)
     print(f"[INFO][telegram] Total sent: {sent}", flush=True)
     return sent
+
+
+def send_sector_news_telegram(items: list[dict], header_title: str) -> int:
+    """Send sector news. Same logic as daily, header text differs."""
+    return send_daily_news_telegram(items, header_title)
 
 
 def send_weekly_digest_telegram(digest: dict, period_label: str) -> int:
