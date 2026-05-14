@@ -11,8 +11,11 @@ KAKAO_MEMO_URL = "https://kapi.kakao.com/v2/api/talk/memo/default/send"
 
 MAX_PER_LIST = 5
 MIN_PER_LIST = 2
-# Body 한도. 헤더(예: "📰 외부 매체 기사 (1/3)" ≈ 22자) + 빈 줄 + 안전마진 미리 차감.
-TEXT_BODY_LIMIT = 170
+# 카카오 text 템플릿 본문 한도 (실측 200자). 묶기 알고리즘이 이 값 안에서
+# 헤더·기사 entry·구분 빈 줄을 모두 관리한다.
+TEXT_BODY_LIMIT = 200
+# 외부 매체 entry의 제목 최대 길이 (회사태그 제외, 풀 URL과 함께 한 메시지에 묶기 위한 균형값)
+EXT_TITLE_MAX = 25
 
 DEFAULT_HEADER_LINK = "https://n.news.naver.com"
 SEARCH_BASE = "https://search.naver.com/search.naver?where=news&query="
@@ -266,36 +269,104 @@ def _shorten_company(name: str) -> str:
     return mapping.get(name, name)
 
 
-def _pack_external_to_text(items: list[dict]) -> list[tuple[str, str]]:
-    """Pack external-media items as 1 entry per message.
+def _build_external_entry(item: dict) -> tuple[str, str]:
+    """Build one external-media entry string + its primary URL.
 
-    Returns: list of (body_text, entry_url) tuples.
-    The entry_url is used as the text template's link.web_url so that the
-    '자세히 보기' button at least goes to that article (rather than a random
-    fallback). URL in body remains the primary click target.
+    Returns: (entry_text, url). entry_text format:
+        🔴[증권] 한국투자증권, 분기 영업이익 36..
+        https://www.example.com/news/12345
     """
-    chunks = []
+    emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
+    company = _shorten_company(item.get("company", ""))
+    title = item.get("title", "") or ""
+    url = item.get("link", "") or ""
+
+    # 제목은 EXT_TITLE_MAX(25자)까지. 회사태그 길이와 무관하게 제목 자체의 글자수 기준.
+    if len(title) > EXT_TITLE_MAX:
+        title = title[:EXT_TITLE_MAX - 2] + ".."
+
+    return f"{emoji}[{company}] {title}\n{url}", url
+
+
+def _pack_external_to_text(items: list[dict]) -> list[tuple[str, str]]:
+    """Pack external-media items into as few 200-char messages as possible.
+
+    Greedy algorithm:
+      1. Build each item's entry (emoji + tag + truncated title + URL).
+      2. First pass with a worst-case header reserve (22 chars for "📰 외부 매체 (99/99)\\n\\n")
+         to estimate chunk boundaries.
+      3. Second pass rebuilds each chunk with its actual header — guaranteed under
+         TEXT_BODY_LIMIT because real header is always ≤ worst-case.
+
+    Returns: list of (full_message_text, primary_entry_url).
+      - full_message_text already includes the header.
+      - primary_entry_url is the URL of the FIRST entry in the chunk (used as
+        text-template link target).
+    """
+    if not items:
+        return []
+
+    # Build all entries first
+    entries = []  # list of (entry_text, url)
     for it in items:
-        emoji = SENTIMENT_EMOJI.get(it.get("sentiment", "neutral"), "🟡")
-        company = _shorten_company(it.get("company", ""))
-        title = it.get("title", "")
-        url = it.get("link", "")
+        e, u = _build_external_entry(it)
+        # Defensive: a single entry must fit in TEXT_BODY_LIMIT minus header reserve.
+        # If URL alone is too long, we already can't help that; just include it.
+        entries.append((e, u))
 
-        reserved = len(emoji) + 2 + len(company) + 2 + len(url) + 4
-        title_room = TEXT_BODY_LIMIT - reserved
-        if title_room < 5:
-            title_room = 5
-        if len(title) > title_room:
-            title = title[:title_room - 2] + ".."
+    # Worst-case header for two-digit / two-digit: "📰 외부 매체 (10/10)\n\n"
+    # = '📰' (1) + ' 외부 매체 (' (8) + '10/10) ' part... compute exactly:
+    sample_header = "📰 외부 매체 (10/10)\n\n"
+    header_reserve = len(sample_header)
+    # Per-entry separator: "\n\n" between adjacent entries (2 chars)
+    SEP = "\n\n"
 
-        entry = f"{emoji}[{company}] {title}\n{url}"
-        if len(entry) > TEXT_BODY_LIMIT:
-            extra = len(entry) - TEXT_BODY_LIMIT
-            if len(title) > extra + 2:
-                title = title[: len(title) - extra - 2] + ".."
-                entry = f"{emoji}[{company}] {title}\n{url}"
-        chunks.append((entry, url))
-    return chunks
+    # Pass 1: pack into groups under (LIMIT - header_reserve)
+    groups = []
+    current_group = []
+    current_len = 0
+    for entry_text, url in entries:
+        addition = len(entry_text) + (len(SEP) if current_group else 0)
+        if current_len + addition > (TEXT_BODY_LIMIT - header_reserve):
+            if current_group:
+                groups.append(current_group)
+            current_group = [(entry_text, url)]
+            current_len = len(entry_text)
+        else:
+            current_group.append((entry_text, url))
+            current_len += addition
+    if current_group:
+        groups.append(current_group)
+
+    # Pass 2: build final messages with real headers
+    total = len(groups)
+    results = []
+    for i, group in enumerate(groups, 1):
+        if total == 1:
+            header = "📰 외부 매체\n\n"
+        else:
+            header = f"📰 외부 매체 ({i}/{total})\n\n"
+        body = header + SEP.join(e for e, _ in group)
+
+        # Safety check (should always pass given header_reserve in pass 1)
+        if len(body) > TEXT_BODY_LIMIT:
+            # Fallback: drop entries from the end until it fits
+            while len(group) > 1 and len(body) > TEXT_BODY_LIMIT:
+                dropped = group.pop()
+                print(f"[WARN] msg {i}/{total} overflow; dropped entry: {dropped[1][:60]}",
+                      flush=True)
+                body = header + SEP.join(e for e, _ in group)
+            # If still overflowing with 1 entry, the URL itself is huge — truncate body.
+            if len(body) > TEXT_BODY_LIMIT:
+                print(f"[ERROR] msg {i}/{total} still over {TEXT_BODY_LIMIT} chars "
+                      f"with single entry; hard-truncating.", flush=True)
+                body = body[:TEXT_BODY_LIMIT]
+
+        # Primary URL for the text template's link.web_url = first entry's URL
+        primary_url = group[0][1] if group else ""
+        results.append((body, primary_url))
+
+    return results
 
 
 def send_daily_news(access_token, items, header_title_base):
@@ -337,24 +408,24 @@ def send_daily_news(access_token, items, header_title_base):
     if external_items:
         text_chunks = _pack_external_to_text(external_items)
         total_ext = len(text_chunks)
-        print(f"[INFO] External packed into {total_ext} text message(s).", flush=True)
-        for i, (body, entry_url) in enumerate(text_chunks, 1):
-            header = "📰 기타 매체 기사" if total_ext == 1 else f"📰 기타 매체 기사 ({i}/{total_ext})"
-            full = f"{header}\n\n{body}"
-            if len(full) > 200:
-                full = f"{header}\n{body}"
-            if len(full) > 200:
-                full = body
-                print(f"[WARN] msg {i}/{total_ext} dropped header to preserve URL", flush=True)
-            if len(full) > 200:
-                print(f"[ERROR] msg {i}/{total_ext} still over 200 chars: {len(full)}", flush=True)
-                full = full[:200]
+        n_entries = len(external_items)
+        print(
+            f"[INFO] External packed: {n_entries} entries → {total_ext} text message(s) "
+            f"(avg {n_entries/max(total_ext,1):.1f} entries/msg).",
+            flush=True,
+        )
+        for i, (full_body, entry_url) in enumerate(text_chunks, 1):
+            # Defensive final check (should already be ≤ TEXT_BODY_LIMIT from packer)
+            if len(full_body) > TEXT_BODY_LIMIT:
+                print(f"[ERROR] msg {i}/{total_ext} over {TEXT_BODY_LIMIT} chars: {len(full_body)}",
+                      flush=True)
+                full_body = full_body[:TEXT_BODY_LIMIT]
             try:
-                # text 템플릿의 link.web_url을 해당 entry의 실제 기사 URL로 설정.
+                # text 템플릿의 link.web_url을 그룹 첫 entry의 실제 기사 URL로 설정.
                 # 카카오 [제품 링크 관리]에 등록된 도메인이 아니면 폴백되지만,
                 # 본문의 URL이 카톡 자동 하이퍼링크 처리로 클릭 가능하므로 사용자에게는
                 # 본문 URL 클릭을 유도. '자세히 보기' 버튼은 카카오 정책상 제거 불가.
-                _send_template(access_token, _build_text_template_with_link(full, entry_url))
+                _send_template(access_token, _build_text_template_with_link(full_body, entry_url))
                 sent += 1
             except requests.HTTPError as e:
                 print(f"[ERROR] external text send failed ({i}/{total_ext}): {e}", flush=True)
@@ -366,10 +437,12 @@ def send_daily_news(access_token, items, header_title_base):
 
 
 def send_weekly_digest_text(access_token, text):
+    # (i/total) prefix가 최대 8자 정도 추가되므로 본문 분할 한도는 그만큼 짧게.
+    WEEKLY_BODY_LIMIT = TEXT_BODY_LIMIT - 10
     chunks = []
     current = ""
     for line in text.split("\n"):
-        if len(current) + len(line) + 1 > TEXT_BODY_LIMIT:
+        if len(current) + len(line) + 1 > WEEKLY_BODY_LIMIT:
             if current:
                 chunks.append(current.rstrip())
             current = line + "\n"
@@ -381,8 +454,8 @@ def send_weekly_digest_text(access_token, text):
     total = len(chunks)
     for i, chunk in enumerate(chunks, 1):
         body = f"({i}/{total}) {chunk}" if total > 1 else chunk
-        if len(body) > 200:
-            body = body[:200]
+        if len(body) > TEXT_BODY_LIMIT:
+            body = body[:TEXT_BODY_LIMIT]
         _send_template(access_token, _build_text_template(body))
         time.sleep(0.4)
     return total
