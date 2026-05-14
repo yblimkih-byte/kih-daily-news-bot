@@ -1,9 +1,21 @@
-"""Claude AI processor for news filtering, sentiment analysis, and summarization."""
+"""AI processor for news filtering, sentiment analysis, summarization, and grouping.
+
+Backend: Google Gemini (default: gemini-3-flash-preview).
+
+Env vars:
+    GEMINI_API_KEY            (required) — Google AI Studio API key
+    GEMINI_MODEL              (optional) — model name override (default: gemini-3-flash-preview)
+
+Free tier (as of May 2026): 1,500 requests/day on Flash models.
+This bot uses ~5 requests/day, so cost is effectively $0 within the free tier.
+"""
 import json
 import os
 import re
 from pathlib import Path
-from anthropic import Anthropic
+
+from google import genai
+from google.genai import types
 
 try:
     from json_repair import repair_json
@@ -12,11 +24,13 @@ except ImportError:
     HAS_REPAIR = False
 
 
-ANTHROPIC_MODEL = "claude-haiku-4-5"
+# Default model. Override via GEMINI_MODEL env var.
+DEFAULT_MODEL = "gemini-3-flash-preview"
+GEMINI_MODEL = os.environ.get("GEMINI_MODEL", DEFAULT_MODEL).strip() or DEFAULT_MODEL
 
 MAX_TOKENS = 16000
 
-# 입력 기사 한도. 네이버 + 외부 모두 합쳐서. 외부 매체 정상 통과 위해 확대.
+# 입력 기사 한도. 네이버 + 외부 모두 합쳐서.
 MAX_ARTICLES_PER_CALL = 90
 
 # 외부 매체 기사를 입력에 보장할 최소 비중 (기사가 충분히 많을 때)
@@ -29,6 +43,18 @@ def _load_prompt() -> str:
     return PROMPT_PATH.read_text(encoding="utf-8")
 
 
+def _get_client() -> genai.Client:
+    """Build Gemini client. API key from GEMINI_API_KEY env var."""
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        raise RuntimeError(
+            "GEMINI_API_KEY environment variable is not set. "
+            "Get a free API key from https://aistudio.google.com/apikey "
+            "and register it as a GitHub Secret."
+        )
+    return genai.Client(api_key=api_key)
+
+
 def _preselect_articles(articles: list[dict], max_n: int) -> list[dict]:
     """Cap input to AI. Keep all Naver, then ensure external gets a fair share."""
     if len(articles) <= max_n:
@@ -37,11 +63,9 @@ def _preselect_articles(articles: list[dict], max_n: int) -> list[dict]:
     naver = [a for a in articles if a.get("is_naver")]
     external = [a for a in articles if not a.get("is_naver")]
 
-    # Reserve at least half of slots for external (if there's that many external)
     min_external_slots = int(max_n * MIN_EXTERNAL_RATIO)
     external_take = min(len(external), max(min_external_slots, max_n - len(naver)))
     naver_take = min(len(naver), max_n - external_take)
-    # If naver is small, give the rest to external
     if naver_take < max_n - external_take and len(external) > external_take:
         external_take = min(len(external), max_n - naver_take)
 
@@ -70,41 +94,47 @@ def _trim_article(a: dict) -> dict:
 
 
 def _extract_json(text: str) -> dict | None:
-    """Try to extract a JSON object from Claude's response.
+    """Try to extract a JSON object from Gemini's response.
 
-    Strategy:
-    1. Strip markdown fences
-    2. Strict json.loads
-    3. json-repair (auto-fixes unescaped quotes, trailing commas, etc.)
-    4. Manual truncation recovery
+    Even with response_mime_type='application/json', occasionally need to handle
+    surrounding whitespace / markdown fences. Strategies:
+      1. Strict json.loads
+      2. Strip markdown fences then strict
+      3. json-repair (handles unescaped quotes, trailing commas, etc.)
+      4. Manual truncation recovery
     """
     text = text.strip()
-    # Strip markdown fences
-    text = re.sub(r"^```(?:json)?\s*", "", text)
-    text = re.sub(r"\s*```\s*$", "", text)
 
-    # 1. Strict parse
+    # 1. Strict parse first (works when response_mime_type=application/json)
     try:
         return json.loads(text)
+    except json.JSONDecodeError:
+        pass
+
+    # 2. Strip markdown fences (legacy / fallback)
+    stripped = re.sub(r"^```(?:json)?\s*", "", text)
+    stripped = re.sub(r"\s*```\s*$", "", stripped)
+    try:
+        return json.loads(stripped)
     except json.JSONDecodeError as e:
         print(f"[WARN] Strict JSON parse failed: {e}", flush=True)
 
-    # 2. json-repair (handles unescaped quotes, missing commas, etc.)
+    # 3. json-repair
     if HAS_REPAIR:
         try:
-            repaired = repair_json(text)
+            repaired = repair_json(stripped)
             result = json.loads(repaired)
             print("[INFO] JSON recovered by json-repair.", flush=True)
             return result
         except Exception as e:
             print(f"[WARN] json-repair failed: {e}", flush=True)
 
-    # 3. Manual truncation recovery (for cut-off responses)
-    if '"filtered"' in text:
+    # 4. Manual truncation recovery
+    if '"filtered"' in stripped:
         for closing in ("},", "}\n"):
-            last_pos = text.rfind(closing)
+            last_pos = stripped.rfind(closing)
             if last_pos != -1:
-                candidate = text[: last_pos + 1] + "]}"
+                candidate = stripped[: last_pos + 1] + "]}"
                 try:
                     result = json.loads(candidate)
                     print(f"[INFO] JSON recovered by truncation at '{closing}'.", flush=True)
@@ -114,19 +144,37 @@ def _extract_json(text: str) -> dict | None:
     return None
 
 
+def _call_gemini(system_prompt: str, user_message: str) -> str:
+    """Send request to Gemini and return raw text response.
+
+    Uses response_mime_type='application/json' to force structured JSON output.
+    """
+    client = _get_client()
+    response = client.models.generate_content(
+        model=GEMINI_MODEL,
+        contents=user_message,
+        config=types.GenerateContentConfig(
+            system_instruction=system_prompt,
+            max_output_tokens=MAX_TOKENS,
+            temperature=0.2,  # 일관된 분류 결과 위해 낮게
+            response_mime_type="application/json",  # JSON 강제
+        ),
+    )
+    # response.text는 candidate[0]의 모든 text part 합친 것
+    return response.text or ""
+
+
 def process_daily_news(articles: list[dict]) -> list[dict]:
     if not articles:
         return []
 
     selected = _preselect_articles(articles, MAX_ARTICLES_PER_CALL)
 
-    # Each article gets a stable index. AI returns only the index; we re-attach
-    # the original link ourselves to eliminate URL corruption by the model.
+    # 각 기사에 stable idx 부여. AI는 idx만 응답하고, 코드가 link를 다시 매핑.
     indexed_articles = []
     for i, a in enumerate(selected):
         indexed_articles.append({"idx": i, **a})
 
-    client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     system_prompt = _load_prompt()
 
     user_message = (
@@ -189,17 +237,16 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
         "- 동일 event_group이 결과 배열에 2건 이상 들어가지 않도록 응답 전 반드시 자체 검증.\n"
     )
 
-    response = client.messages.create(
-        model=ANTHROPIC_MODEL,
-        max_tokens=MAX_TOKENS,
-        system=system_prompt,
-        messages=[{"role": "user", "content": user_message}],
-    )
+    print(f"[INFO] Calling Gemini ({GEMINI_MODEL}) for daily news...", flush=True)
+    try:
+        text = _call_gemini(system_prompt, user_message)
+    except Exception as e:
+        print(f"[ERROR] Gemini API call failed: {type(e).__name__}: {e}", flush=True)
+        return []
 
-    text = response.content[0].text
     result = _extract_json(text)
     if result is None:
-        print(f"[ERROR] Failed to parse Claude response. Length={len(text)}", flush=True)
+        print(f"[ERROR] Failed to parse Gemini response. Length={len(text)}", flush=True)
         chunk_size = 2000
         for i in range(0, len(text), chunk_size):
             print(f"[ERROR_DUMP {i}-{i+chunk_size}] {text[i:i+chunk_size]}", flush=True)
@@ -207,14 +254,13 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
 
     ai_items = result.get("filtered", [])
 
-    # Whitelist of valid main_company values
     VALID_COMPANIES = {
         "한국투자금융지주", "한국투자증권", "한국투자신탁운용", "한국투자밸류자산운용",
         "한국투자파트너스", "한국투자프라이빗에쿼티", "한국투자캐피탈", "한국투자저축은행",
         "한국투자리얼에셋운용", "한국투자부동산신탁", "한국투자액셀러레이터",
     }
 
-    # Re-attach original data by idx; use main_company from AI for tagging
+    # Re-attach original data by idx
     enriched = []
     reclass_count = 0
     for ai_item in ai_items:
@@ -223,13 +269,10 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
             print(f"[WARN] Invalid idx in AI response: {idx}", flush=True)
             continue
         src = selected[idx]
-        # main_company: AI가 본문 기준으로 재판정한 실질 주체 회사
-        # 화이트리스트 검증 후 invalid면 src의 검색 기준 회사로 fallback
         main_company = ai_item.get("main_company") or src.get("company")
         if main_company not in VALID_COMPANIES:
             print(f"[WARN] Invalid main_company '{main_company}' for idx={idx}; using src company.", flush=True)
             main_company = src.get("company")
-        # Log reclassifications for visibility
         if main_company != src.get("company"):
             print(f"[INFO] Reclassified idx={idx}: '{src.get('company')}' → '{main_company}'", flush=True)
             reclass_count += 1
@@ -252,11 +295,9 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
     print(f"[INFO] AI filter result (pre-group-dedupe): total={len(enriched)} "
           f"(naver={n_naver_pre}, external={n_ext_pre})", flush=True)
 
-    # --- Event-group dedupe (defensive: AI is instructed to do this, but verify in code) ---
-    # If AI happens to return multiple items with the same non-empty event_group, keep only
-    # the one with highest priority (naver-hosted > importance > earlier in list).
-    grouped = {}  # event_group -> chosen item
-    no_group = []  # items with empty event_group (treated as unique)
+    # --- Event-group dedupe (방어적: AI 지시에 더해 코드에서도 한 번 더 확인) ---
+    grouped = {}
+    no_group = []
     for it in enriched:
         eg = (it.get("event_group") or "").strip().lower()
         if not eg:
@@ -265,7 +306,6 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
         if eg not in grouped:
             grouped[eg] = it
         else:
-            # Pick the better one: naver wins, then higher importance
             current = grouped[eg]
             cur_score = (1 if current.get("is_naver") else 0, current.get("importance", 0))
             new_score = (1 if it.get("is_naver") else 0, it.get("importance", 0))
@@ -302,7 +342,6 @@ def process_weekly_digest(articles: list[dict]) -> dict:
     selected = _preselect_articles(articles, MAX_ARTICLES_PER_CALL * 2)
     indexed_articles = [{"idx": i, **a} for i, a in enumerate(selected)]
 
-    client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     system_prompt = _load_prompt()
 
     user_message = (
@@ -326,20 +365,18 @@ def process_weekly_digest(articles: list[dict]) -> dict:
         "한국투자증권 리서치센터 연구원의 종목 분석·목표주가 기사는 제외.\n"
     )
 
-    response = client.messages.create(
-        model=ANTHROPIC_MODEL,
-        max_tokens=MAX_TOKENS,
-        system=system_prompt,
-        messages=[{"role": "user", "content": user_message}],
-    )
+    print(f"[INFO] Calling Gemini ({GEMINI_MODEL}) for weekly digest...", flush=True)
+    try:
+        text = _call_gemini(system_prompt, user_message)
+    except Exception as e:
+        print(f"[ERROR] Gemini API call failed (weekly): {type(e).__name__}: {e}", flush=True)
+        return {"by_company": {}, "keywords": []}
 
-    text = response.content[0].text
     result = _extract_json(text)
     if result is None:
         print("[ERROR] Failed to parse weekly digest response.", flush=True)
         return {"by_company": {}, "keywords": []}
 
-    # Re-attach link by idx
     by_company = result.get("by_company", {})
     for company, items in by_company.items():
         for item in items:
