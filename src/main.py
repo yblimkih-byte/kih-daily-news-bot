@@ -26,7 +26,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import holidays
 
 from naver_news import fetch_recent_news
-from ai_processor import process_daily_news, process_weekly_digest
+from ai_processor import process_daily_news, process_sector_news, process_weekly_digest
 from sent_history import filter_unseen, record_sent
 
 
@@ -67,7 +67,7 @@ def determine_slot(now: datetime) -> dict:
     for hour, minute, hours_back, label in SLOT_CONFIG:
         slot_dt = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
         delta_min = abs((now - slot_dt).total_seconds()) / 60
-        if delta_min <= 15:
+        if delta_min <= 40:
             return {
                 "label": label,
                 "hours_back": hours_back,
@@ -198,6 +198,25 @@ def _dispatch_kakao_daily(daily_items, header_title) -> int:
         return 0
 
 
+def _dispatch_kakao_sector(sector_items, header_title) -> int:
+    if not ENABLE_KAKAO or not sector_items:
+        return 0
+    try:
+        from token_manager import refresh_kakao_access_token
+        from kakao_sender import send_sector_news
+        print("[CH:KAKAO][sector] Refreshing token...", flush=True)
+        token_data = refresh_kakao_access_token()
+        access_token = token_data["access_token"]
+        msgs = send_sector_news(access_token, sector_items, header_title)
+        print(f"[CH:KAKAO][sector] Sent {msgs} message(s).", flush=True)
+        return msgs
+    except Exception as e:
+        print(f"[CH:KAKAO][sector][ERROR] {type(e).__name__}: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        return 0
+
+
 def _dispatch_kakao_weekly(now: datetime) -> int:
     if not ENABLE_KAKAO:
         return 0
@@ -236,6 +255,19 @@ def _dispatch_email_daily(daily_items, header_title) -> int:
         return 0
 
 
+def _dispatch_email_sector(sector_items, header_title) -> int:
+    if not ENABLE_EMAIL or not sector_items:
+        return 0
+    try:
+        from email_sender import send_sector_news_email
+        return send_sector_news_email(sector_items, header_title)
+    except Exception as e:
+        print(f"[CH:EMAIL][sector][ERROR] {type(e).__name__}: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        return 0
+
+
 def _dispatch_email_weekly(digest: dict, now: datetime) -> int:
     if not ENABLE_EMAIL or not digest.get("by_company"):
         return 0
@@ -255,6 +287,19 @@ def _dispatch_telegram_daily(daily_items, header_title) -> int:
         return send_daily_news_telegram(daily_items, header_title)
     except Exception as e:
         print(f"[CH:TG][ERROR] {type(e).__name__}: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        return 0
+
+
+def _dispatch_telegram_sector(sector_items, header_title) -> int:
+    if not ENABLE_TELEGRAM or not sector_items:
+        return 0
+    try:
+        from telegram_sender import send_sector_news_telegram
+        return send_sector_news_telegram(sector_items, header_title)
+    except Exception as e:
+        print(f"[CH:TG][sector][ERROR] {type(e).__name__}: {e}", flush=True)
         import traceback
         traceback.print_exc()
         return 0
@@ -335,33 +380,57 @@ def main():
     print(f"[STEP 2] After history dedupe: {len(daily_articles)} articles "
           f"(dropped {hist_dropped} previously-sent).", flush=True)
 
-    # 3. AI filter
+    # 3. AI filter — 회사 카테고리
     daily_items = []
     if daily_articles:
-        print("[STEP 3] Processing daily news with Claude...", flush=True)
+        print("[STEP 3] Processing daily (company) news with AI...", flush=True)
         daily_items = process_daily_news(daily_articles)
         daily_items = _link_items_to_articles(daily_items, daily_articles)
-        print(f"[STEP 3] After AI filter: {len(daily_items)} items.", flush=True)
+        print(f"[STEP 3] After AI filter (company): {len(daily_items)} items.", flush=True)
     else:
         print("[INFO] No fresh articles to process.", flush=True)
 
-    header_title = build_header_title(daily_items, now, slot["label"])
+    # 3b. AI filter — 업권 카테고리 (별도 AI 호출)
+    sector_items = []
+    if daily_articles:
+        print("[STEP 3b] Processing sector news with AI...", flush=True)
+        sector_items = process_sector_news(daily_articles)
+        sector_items = _link_items_to_articles(sector_items, daily_articles)
+        print(f"[STEP 3b] After AI filter (sector): {len(sector_items)} items.", flush=True)
 
-    # 4. Dispatch
+    header_title = build_header_title(daily_items, now, slot["label"])
+    # 업권 발송용 헤더: 회사 발송 헤더와 시각적으로 구분.
+    sector_header_title = (
+        f"🏛️ {now.strftime('%m-%d')}({WEEKDAYS_KR[now.weekday()]}) "
+        f"{now.strftime('%H:%M')} 업권 거시 뉴스 ({len(sector_items)}건)"
+    )
+
+    # 4. Dispatch — 회사 카테고리
     sent_summary = {"kakao": 0, "email": 0, "telegram": 0}
     if daily_items:
-        print("[STEP 4] Dispatching to channels...", flush=True)
+        print("[STEP 4] Dispatching company news to channels...", flush=True)
         sent_summary["kakao"] = _dispatch_kakao_daily(daily_items, header_title)
         sent_summary["email"] = _dispatch_email_daily(daily_items, header_title)
         sent_summary["telegram"] = _dispatch_telegram_daily(daily_items, header_title)
     else:
-        print("[INFO] No items to dispatch.", flush=True)
+        print("[INFO] No company items to dispatch.", flush=True)
 
-    # 5. Record sent items into history
-    any_sent = sum(sent_summary.values()) > 0
-    if any_sent and daily_items:
+    # 4b. Dispatch — 업권 카테고리 (별도 메시지 그룹)
+    sector_sent_summary = {"kakao": 0, "email": 0, "telegram": 0}
+    if sector_items:
+        print("[STEP 4b] Dispatching sector news to channels...", flush=True)
+        sector_sent_summary["kakao"] = _dispatch_kakao_sector(sector_items, sector_header_title)
+        sector_sent_summary["email"] = _dispatch_email_sector(sector_items, sector_header_title)
+        sector_sent_summary["telegram"] = _dispatch_telegram_sector(sector_items, sector_header_title)
+    else:
+        print("[INFO] No sector items to dispatch.", flush=True)
+
+    # 5. Record sent items into history (회사 + 업권 모두)
+    any_sent = sum(sent_summary.values()) + sum(sector_sent_summary.values()) > 0
+    all_sent_items = daily_items + sector_items
+    if any_sent and all_sent_items:
         print("[STEP 5] Recording sent items to history...", flush=True)
-        record_sent(daily_items)
+        record_sent(all_sent_items)
     else:
         print("[STEP 5] No successful sends. History not updated.", flush=True)
 
@@ -384,7 +453,7 @@ def main():
     if slot["label"] != "manual":
         update_lock_file(slot["label"], now)
 
-    print(f"[INFO] Run completed. Daily sent: {sent_summary}", flush=True)
+    print(f"[INFO] Run completed. Company sent: {sent_summary}, Sector sent: {sector_sent_summary}", flush=True)
 
 
 if __name__ == "__main__":
