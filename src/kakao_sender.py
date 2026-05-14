@@ -109,7 +109,7 @@ def split_for_list_template(items: list, max_per_chunk: int = MAX_PER_LIST) -> l
 
 def _build_card_naver(item: dict) -> dict:
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
-    company = _shorten_company(item.get("company", ""))
+    company = _get_item_tag(item)
     title = f"{emoji} [{company}] {item.get('title', '')}"
     if len(title) > 100:
         title = title[:97] + "..."
@@ -124,7 +124,7 @@ def _build_card_naver(item: dict) -> dict:
 
 def _build_card_external(item: dict) -> dict:
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
-    company = _shorten_company(item.get("company", ""))
+    company = _get_item_tag(item)
     title = f"{emoji} [{company}] {item.get('title', '')}"
     if len(title) > 100:
         title = title[:97] + "..."
@@ -165,7 +165,7 @@ def _build_list_template(items, header_title, is_external=False):
 
 def _build_feed_template(item, header_title, is_external=False):
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
-    company = _shorten_company(item.get("company", ""))
+    company = _get_item_tag(item)
     if is_external:
         link_url = _naver_search_url(item.get("title", ""))
         media = item.get("media") or _media_name_from_url(item.get("link", ""))
@@ -269,6 +269,27 @@ def _shorten_company(name: str) -> str:
     return mapping.get(name, name)
 
 
+def _shorten_sector(name: str) -> str:
+    """Sector tag abbreviations (always with '업' suffix to distinguish from company tags)."""
+    mapping = {
+        "증권업": "증권업",
+        "자산운용업": "운용업",
+        "신탁업": "신탁업",
+        "저축은행업": "저축은행업",
+        "캐피탈·여전업": "여전업",
+        "벤처투자업": "VC업",
+        "금융지주업": "지주업",
+    }
+    return mapping.get(name, name)
+
+
+def _get_item_tag(item: dict) -> str:
+    """Return the bracket tag for an item: '[증권]' for company or '[운용업]' for sector."""
+    if item.get("category") == "sector":
+        return _shorten_sector(item.get("sector", "") or "")
+    return _shorten_company(item.get("company", "") or "")
+
+
 def _build_external_entry(item: dict) -> tuple[str, str]:
     """Build one external-media entry string + its primary URL.
 
@@ -277,7 +298,7 @@ def _build_external_entry(item: dict) -> tuple[str, str]:
         https://www.example.com/news/12345
     """
     emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
-    company = _shorten_company(item.get("company", ""))
+    company = _get_item_tag(item)
     title = item.get("title", "") or ""
     url = item.get("link", "") or ""
 
@@ -434,6 +455,14 @@ def send_daily_news(access_token, items, header_title_base):
                 raise
             time.sleep(0.4)
     return sent
+
+
+def send_sector_news(access_token, items, header_title_base):
+    """업권 거시 뉴스 발송. send_daily_news와 동일한 로직, 헤더만 다름.
+
+    items의 각 element는 category='sector'를 가지고 있어야 정확한 태그 표시됨.
+    """
+    return send_daily_news(access_token, items, header_title_base)
 
 
 def send_weekly_digest_text(access_token, text):
