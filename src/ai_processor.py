@@ -165,10 +165,22 @@ def _call_gemini(system_prompt: str, user_message: str) -> str:
 
 
 def process_daily_news(articles: list[dict]) -> list[dict]:
+    """회사 카테고리(category='company') 기사만 필터링·요약하여 반환.
+
+    업권 카테고리 기사가 섞여 있어도 자동으로 제외하고 회사 기사만 처리.
+    업권 카테고리는 별도로 process_sector_news()를 호출.
+    """
     if not articles:
         return []
 
-    selected = _preselect_articles(articles, MAX_ARTICLES_PER_CALL)
+    # 회사 카테고리 기사만 추림. category 필드가 없는 구버전 데이터는 안전상 회사로 간주.
+    company_articles = [a for a in articles
+                        if a.get("category", "company") == "company"]
+    if not company_articles:
+        print("[INFO] No company-category articles to process.", flush=True)
+        return []
+
+    selected = _preselect_articles(company_articles, MAX_ARTICLES_PER_CALL)
 
     # 각 기사에 stable idx 부여. AI는 idx만 응답하고, 코드가 link를 다시 매핑.
     indexed_articles = []
@@ -277,7 +289,9 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
             print(f"[INFO] Reclassified idx={idx}: '{src.get('company')}' → '{main_company}'", flush=True)
             reclass_count += 1
         enriched.append({
+            "category": "company",
             "company": main_company,
+            "sector": None,
             "title": src.get("title"),
             "link": src.get("link"),
             "is_naver": src.get("is_naver", False),
@@ -333,6 +347,175 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
         -x.get("importance", 0),
     ))
     return deduped
+
+
+def process_sector_news(articles: list[dict]) -> list[dict]:
+    """업권 카테고리(category='sector') 기사를 업권별로 필터링·요약하여 반환.
+
+    업권별 최대 3건. 중요도 기준 상위 3개. 단순 경쟁사 홍보·시황 분석은 제외.
+
+    Returns:
+        list of dicts with fields:
+        - category: "sector"
+        - sector: 업권명 (예: "증권업")
+        - title, link, is_naver, media, sentiment, summary, importance, event_group
+    """
+    if not articles:
+        return []
+
+    # 업권 카테고리만 추림.
+    sector_articles = [a for a in articles if a.get("category") == "sector"]
+    if not sector_articles:
+        print("[INFO] No sector-category articles to process.", flush=True)
+        return []
+
+    selected = _preselect_articles(sector_articles, MAX_ARTICLES_PER_CALL)
+    indexed_articles = [{"idx": i, **a} for i, a in enumerate(selected)]
+
+    system_prompt = _load_prompt()
+
+    user_message = (
+        "아래는 직전 24시간 동안 수집된 한국투자금융그룹과 동일 업권의 거시 뉴스 목록입니다.\n"
+        "각 기사는 'idx' 번호가 부여되어 있으며, 검색 시점에 매칭된 'sector' 필드가 있습니다.\n"
+        "시스템 프롬프트의 §4.5 (업권 거시 뉴스 판정 기준)을 적용하세요.\n\n"
+        f"기사 목록 ({len(indexed_articles)}건, JSON):\n"
+        f"{json.dumps(indexed_articles, ensure_ascii=False, indent=2)}\n\n"
+        "다음 JSON 형식으로만 응답. 다른 텍스트 절대 금지:\n"
+        "{\n"
+        '  "filtered": [\n'
+        "    {\n"
+        '      "idx": 기사의 idx 번호 (정수),\n'
+        '      "main_sector": "기사의 실질 영향 업권명 (아래 목록 중 하나만)",\n'
+        '      "sentiment": "positive | neutral | negative",\n'
+        '      "summary": "40자 이내 한 줄 요약 (주술 구조)",\n'
+        '      "importance": 1-10,\n'
+        '      "event_group": "이 기사가 다루는 사건의 고유 식별자 (영문 슬러그, 30자 이내)"\n'
+        "    }\n"
+        "  ]\n"
+        "}\n\n"
+        "main_sector는 반드시 다음 7개 중 하나의 정확한 업권명으로 응답:\n"
+        "- 증권업\n"
+        "- 자산운용업\n"
+        "- 신탁업\n"
+        "- 저축은행업\n"
+        "- 캐피탈·여전업\n"
+        "- 벤처투자업\n"
+        "- 금융지주업\n\n"
+        "업권 뉴스 포함 기준 (이 중 하나라도 해당하면 포함):\n"
+        "1. 정부·감독기관 활동: 금융위원회·금융감독원·기획재정부·한국은행의 정책 발표, 검사, 제재, 인허가\n"
+        "2. 법령·제도 변경: 자본시장법, 금융투자업감독규정, 여신전문금융업법, 신탁업법 등의 개정·시행\n"
+        "3. 업권 단체 결정: 금융투자협회·자산운용협회·여신금융협회·저축은행중앙회 등의 자율규제·합의\n"
+        "4. 시장 구조 변화: 업권 전체에 영향을 주는 거래소 규정 변경, 신상품군 도입, 시장 점유율 빅 시프트\n"
+        "5. 거시경제 이슈 중 해당 업권에 직접 영향: 기준금리, 환율, 부동산 정책, 가계부채 정책 등\n\n"
+        "제외 기준 (엄격히 적용):\n"
+        "1. 특정 경쟁사의 단순 상품 출시·홍보 (정부 정책과 무관한 회사 자체 활동)\n"
+        "2. 일반 시황 분석·종목 추천 글\n"
+        "3. 특정 종목의 목표주가·투자의견 (리서치센터 보고서 인용)\n"
+        "4. 단순 기업 정보 (인사·실적 등)이지만 업권 전반 영향 없는 것\n"
+        "5. 정부 정책이지만 본 업권과 무관한 것 (예: 부동산 정책은 신탁업·증권업에 영향, 통신 정책은 무관)\n\n"
+        "중요도(importance) 판정 가중치:\n"
+        "- 8-10: 즉각적인 업권 전반 영향 (예: 금감원 일제 검사, 자본시장법 개정)\n"
+        "- 5-7: 중기 정책 방향 변경 또는 시장 구조 변화 (예: 신상품 가이드라인 발표)\n"
+        "- 1-4: 간접 영향 또는 후속 보도 (예: 정책 해설 기사)\n\n"
+        "event_group 규칙: 같은 사건을 다른 매체가 보도한 경우 동일 슬러그 부여. "
+        "한 event_group에서 가장 정보량 많고 신뢰도 높은 매체 1건만 filtered 배열에 포함.\n"
+        "예: 'fsc-etf-regulation-2026', 'bok-rate-decision-may2026'\n\n"
+        "summary는 반드시 40자 이내, 군더더기 없이 간결하게.\n"
+        "보도 가치가 조금이라도 있으면 포함하되 위 제외 기준 5번을 엄격히 적용하여 본 업권과 무관한 기사는 빼세요.\n"
+    )
+
+    print(f"[INFO] Calling Gemini ({GEMINI_MODEL}) for sector news...", flush=True)
+    try:
+        text = _call_gemini(system_prompt, user_message)
+    except Exception as e:
+        print(f"[ERROR] Gemini sector API call failed: {type(e).__name__}: {e}", flush=True)
+        return []
+
+    result = _extract_json(text)
+    if result is None:
+        print(f"[ERROR] Failed to parse Gemini sector response. Length={len(text)}", flush=True)
+        return []
+
+    ai_items = result.get("filtered", [])
+
+    VALID_SECTORS = {
+        "증권업", "자산운용업", "신탁업", "저축은행업",
+        "캐피탈·여전업", "벤처투자업", "금융지주업",
+    }
+
+    enriched = []
+    for ai_item in ai_items:
+        idx = ai_item.get("idx")
+        if idx is None or not isinstance(idx, int) or idx < 0 or idx >= len(selected):
+            print(f"[WARN] Invalid idx in AI sector response: {idx}", flush=True)
+            continue
+        src = selected[idx]
+        main_sector = ai_item.get("main_sector") or src.get("sector")
+        if main_sector not in VALID_SECTORS:
+            print(f"[WARN] Invalid main_sector '{main_sector}' for idx={idx}; using src sector.", flush=True)
+            main_sector = src.get("sector")
+        enriched.append({
+            "category": "sector",
+            "company": None,
+            "sector": main_sector,
+            "title": src.get("title"),
+            "link": src.get("link"),
+            "is_naver": src.get("is_naver", False),
+            "media": src.get("media", ""),
+            "sentiment": ai_item.get("sentiment", "neutral"),
+            "summary": ai_item.get("summary", ""),
+            "importance": ai_item.get("importance", 5),
+            "event_group": ai_item.get("event_group", ""),
+        })
+
+    # --- Event-group dedupe (방어적) ---
+    grouped = {}
+    no_group = []
+    for it in enriched:
+        eg = (it.get("event_group") or "").strip().lower()
+        if not eg:
+            no_group.append(it)
+            continue
+        if eg not in grouped:
+            grouped[eg] = it
+        else:
+            current = grouped[eg]
+            cur_score = (1 if current.get("is_naver") else 0, current.get("importance", 0))
+            new_score = (1 if it.get("is_naver") else 0, it.get("importance", 0))
+            if new_score > cur_score:
+                grouped[eg] = it
+    deduped = list(grouped.values()) + no_group
+
+    # --- 업권별 최대 3건 제한 (중요도 상위) ---
+    by_sector = {}
+    for it in deduped:
+        sec = it.get("sector")
+        if sec not in by_sector:
+            by_sector[sec] = []
+        by_sector[sec].append(it)
+
+    final = []
+    for sec, items in by_sector.items():
+        items.sort(key=lambda x: -x.get("importance", 0))
+        before = len(items)
+        items = items[:3]
+        if before > 3:
+            print(f"[INFO] Sector '{sec}': trimmed {before}→3 (top importance)", flush=True)
+        final.extend(items)
+
+    # 최종 정렬: 감성 (부정→중립→긍정) → 중요도
+    final.sort(key=lambda x: (
+        0 if x.get("sentiment") == "negative"
+        else (1 if x.get("sentiment") == "neutral" else 2),
+        -x.get("importance", 0),
+    ))
+
+    print(f"[INFO] Sector filter result: {len(final)} items across {len(by_sector)} sector(s)", flush=True)
+    for sec, items in by_sector.items():
+        kept = [it for it in final if it.get("sector") == sec]
+        print(f"[INFO]   - {sec}: {len(kept)} kept", flush=True)
+
+    return final
 
 
 def process_weekly_digest(articles: list[dict]) -> dict:
