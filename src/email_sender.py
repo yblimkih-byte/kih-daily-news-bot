@@ -54,6 +54,27 @@ def _shorten_company(name: str) -> str:
     return mapping.get(name, name)
 
 
+def _shorten_sector(name: str) -> str:
+    """Sector tag abbreviations (always with '업' suffix to distinguish from company tags)."""
+    mapping = {
+        "증권업": "증권업",
+        "자산운용업": "운용업",
+        "신탁업": "신탁업",
+        "저축은행업": "저축은행업",
+        "캐피탈·여전업": "여전업",
+        "벤처투자업": "VC업",
+        "금융지주업": "지주업",
+    }
+    return mapping.get(name, name)
+
+
+def _get_item_tag(item: dict) -> str:
+    """Return the bracket tag: '[증권]' for company, '[운용업]' for sector."""
+    if item.get("category") == "sector":
+        return _shorten_sector(item.get("sector", "") or "")
+    return _shorten_company(item.get("company", "") or "")
+
+
 def _get_recipients() -> list[str]:
     raw = os.environ.get("EMAIL_RECIPIENTS", "")
     return [r.strip() for r in raw.split(",") if r.strip()]
@@ -106,7 +127,7 @@ def _build_text_body(items: list[dict], header_title: str) -> str:
     sorted_items = _sort_items(items)
     for it in sorted_items:
         emoji = SENTIMENT_EMOJI.get(it.get("sentiment", "neutral"), "🟡")
-        company = _shorten_company(it.get("company", ""))
+        company = _get_item_tag(it)
         title = it.get("title", "")
         summary = it.get("summary", "")
         link = it.get("link", "")
@@ -147,7 +168,7 @@ def _build_html_body(items: list[dict], header_title: str) -> str:
     for it in sorted_items:
         sent = it.get("sentiment", "neutral")
         color = SENTIMENT_COLOR.get(sent, "#666666")
-        company = html_escape(_shorten_company(it.get("company", "")))
+        company = html_escape(_get_item_tag(it))
         title = html_escape(it.get("title", ""))
         summary = html_escape(it.get("summary", ""))
         link = it.get("link", "") or "#"
@@ -458,6 +479,16 @@ def send_daily_news_email(items: list[dict], header_title: str) -> int:
         print(f"[ERROR][email] Daily send failed: {type(e).__name__}: {e}", flush=True)
         raise
     return sent
+
+
+def send_sector_news_email(items: list[dict], header_title: str) -> int:
+    """Send sector (industry-wide) news to recipients.
+
+    같은 _build_html_body / _build_text_body를 사용하므로 _get_item_tag가
+    items의 category 필드에 따라 자동으로 업권 태그를 표시한다.
+    헤더 텍스트만 업권 전용으로 다르게 전달.
+    """
+    return send_daily_news_email(items, header_title)
 
 
 def send_weekly_digest_email(digest: dict, period_label: str) -> int:
