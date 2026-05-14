@@ -60,8 +60,21 @@ def _get_recipients() -> list[str]:
 
 
 def _subject_from_header(header_title: str, prefix: str = "[KIH News]") -> str:
-    """Convert internal header (📅 05-12(화) 07:40 🔴2 🟡5 🟢1) → email subject."""
+    """Convert internal header (📅 05-12(화) 07:40 🔴2 🟡5 🟢1) → email subject.
+
+    이모지를 Outlook에서도 안전하게 보이는 텍스트로 변환:
+      📅 → 제거
+      🔴 N → 부정 N
+      🟡 N → 중립 N
+      🟢 N → 긍정 N
+    """
     cleaned = header_title.replace("📅 ", "").strip()
+    # 이모지 → 텍스트 라벨 (제목 줄은 Outlook 받은편지함 목록에 그대로 노출되므로 안전한 표기)
+    cleaned = cleaned.replace("🔴", "부정 ")
+    cleaned = cleaned.replace("🟡", "중립 ")
+    cleaned = cleaned.replace("🟢", "긍정 ")
+    # 중복 공백 정리
+    cleaned = " ".join(cleaned.split())
     return f"{prefix} {cleaned}"
 
 
@@ -111,89 +124,145 @@ def _build_text_body(items: list[dict], header_title: str) -> str:
 
 
 def _build_html_body(items: list[dict], header_title: str) -> str:
-    """HTML email body. Mobile-friendly, no external CSS."""
+    """HTML email body — Outlook 데스크톱 호환 table 기반 구현.
+
+    설계 원칙 (Outlook Word 엔진 호환):
+      - div 대신 nested table 사용 (Outlook은 table을 가장 안정적으로 렌더)
+      - border-radius / border-left 4px 대신 4px-wide bgcolor td 셀로 색깔 막대 구현
+      - 이모지(🔴🟡🟢) 대신 ● (BLACK CIRCLE, U+25CF) + color 사용
+      - 폰트는 '맑은 고딕'(Outlook 한글 표준) 우선
+      - 모바일에서도 자연스럽게 보이도록 가로폭 max-width 활용
+    """
     counts = _counts(items)
     sorted_items = _sort_items(items)
-
-    # Header strip
-    header_html = html_escape(header_title)
+    # 본문 헤더 텍스트: 이모지를 텍스트로 변환 (Outlook 호환). 원본 header_title은
+    # 다른 채널에서 사용 중이므로 이메일 본문 안에서만 변환.
+    header_clean = header_title.replace("📅", "").replace("🔴", "부정 ")
+    header_clean = header_clean.replace("🟡", "중립 ")
+    header_clean = header_clean.replace("🟢", "긍정 ")
+    header_clean = " ".join(header_clean.split())
+    header_html = html_escape(header_clean)
 
     rows_html_parts = []
     for it in sorted_items:
         sent = it.get("sentiment", "neutral")
-        emoji = SENTIMENT_EMOJI.get(sent, "🟡")
-        color = SENTIMENT_COLOR.get(sent, "#666")
-        company = _shorten_company(it.get("company", ""))
+        color = SENTIMENT_COLOR.get(sent, "#666666")
+        company = html_escape(_shorten_company(it.get("company", "")))
         title = html_escape(it.get("title", ""))
         summary = html_escape(it.get("summary", ""))
         link = it.get("link", "") or "#"
         link_attr = html_escape(link, quote=True)
         media = it.get("media") or ""
         media_html = (
-            f' <span style="color:#888;font-size:12px;">({html_escape(media)})</span>'
+            f' <span style="color:#888888;font-size:12px;">({html_escape(media)})</span>'
             if media and media != "네이버뉴스" else ""
         )
         is_naver = it.get("is_naver", False)
+        # N 배지: Outlook에서도 보이도록 table 셀로 만듦
         naver_badge = (
-            ' <span style="background:#1ec800;color:#fff;font-size:10px;'
-            'padding:1px 5px;border-radius:3px;vertical-align:middle;">N</span>'
+            ' <span style="background-color:#1ec800;color:#ffffff;font-size:10px;'
+            'padding:1px 5px;font-weight:bold;">N</span>'
             if is_naver else ""
         )
 
+        # 카드 = 2-column table: 왼쪽 4px 색깔 막대 | 오른쪽 내용
         rows_html_parts.append(f"""
-<div style="border-left:4px solid {color};padding:10px 14px;margin:10px 0;background:#fafafa;border-radius:0 4px 4px 0;">
-  <div style="font-size:15px;line-height:1.45;margin-bottom:4px;">
-    <span style="font-size:16px;">{emoji}</span>
-    <span style="color:{color};font-weight:600;">[{html_escape(company)}]</span>
-    <a href="{link_attr}" style="color:#1a0dab;text-decoration:none;font-weight:500;">{title}</a>
-    {naver_badge}{media_html}
-  </div>
-  <div style="color:#555;font-size:13px;line-height:1.4;margin-left:2px;">
-    {summary}
-  </div>
-</div>
-""")
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;margin-bottom:10px;background-color:#fafafa;">
+  <tr>
+    <td width="4" bgcolor="{color}" style="width:4px;background-color:{color};line-height:0;font-size:0;">&nbsp;</td>
+    <td style="padding:10px 14px;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+      <div style="font-size:15px;line-height:1.45;margin-bottom:6px;">
+        <span style="color:{color};font-weight:bold;font-size:16px;">●</span>
+        <span style="color:{color};font-weight:bold;">[{company}]</span>
+        <a href="{link_attr}" style="color:#1a0dab;text-decoration:none;font-weight:600;">{title}</a>
+        {naver_badge}{media_html}
+      </div>
+      <div style="color:#555555;font-size:13px;line-height:1.4;">
+        {summary}
+      </div>
+    </td>
+  </tr>
+</table>""")
 
     items_html = "".join(rows_html_parts) if rows_html_parts else (
-        '<div style="color:#888;padding:20px;text-align:center;">금일 보고 대상 신규 기사 없음.</div>'
+        '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+        '<tr><td align="center" style="color:#888888;padding:20px;font-family:\'맑은 고딕\',Arial,sans-serif;">'
+        '금일 보고 대상 신규 기사 없음.</td></tr></table>'
     )
 
-    return f"""<!DOCTYPE html>
-<html lang="ko">
+    # 카운트 줄: 이모지 대신 색깔 점 ● 사용 (Outlook 호환)
+    neg_color = SENTIMENT_COLOR["negative"]
+    neu_color = SENTIMENT_COLOR["neutral"]
+    pos_color = SENTIMENT_COLOR["positive"]
+    count_line = (
+        f'<span style="color:{neg_color};font-weight:bold;">●</span> 부정 {counts["negative"]}건 '
+        f'&nbsp;·&nbsp; '
+        f'<span style="color:{neu_color};font-weight:bold;">●</span> 중립 {counts["neutral"]}건 '
+        f'&nbsp;·&nbsp; '
+        f'<span style="color:{pos_color};font-weight:bold;">●</span> 긍정 {counts["positive"]}건 '
+        f'&nbsp;·&nbsp; 총 {sum(counts.values())}건'
+    )
+
+    return f"""<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <title>KIH Daily News</title>
+<!--[if mso]>
+<style type="text/css">
+table {{ border-collapse: collapse; }}
+td, th, div, p, a {{ font-family: '맑은 고딕', 'Malgun Gothic', Arial, sans-serif !important; }}
+</style>
+<![endif]-->
 </head>
-<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;">
-<div style="max-width:640px;margin:0 auto;padding:16px;background:#ffffff;">
+<body style="margin:0;padding:0;background-color:#f5f5f5;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
 
-  <!-- Header -->
-  <div style="border-bottom:2px solid #222;padding-bottom:10px;margin-bottom:14px;">
-    <div style="font-size:18px;font-weight:700;color:#222;">{header_html}</div>
-    <div style="font-size:13px;color:#666;margin-top:6px;">
-      🔴 부정 {counts['negative']}건 &nbsp;·&nbsp;
-      🟡 중립 {counts['neutral']}건 &nbsp;·&nbsp;
-      🟢 긍정 {counts['positive']}건 &nbsp;·&nbsp;
-      총 {sum(counts.values())}건
-    </div>
-  </div>
+<!-- Wrapper table (Outlook은 body style을 자주 무시하므로 wrapper로 한 번 더 감쌈) -->
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#f5f5f5" style="background-color:#f5f5f5;">
+  <tr>
+    <td align="center" style="padding:16px;">
 
-  <!-- Items -->
-  {items_html}
+      <!-- Container -->
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" style="max-width:640px;background-color:#ffffff;" bgcolor="#ffffff">
 
-  <!-- Footer -->
-  <div style="border-top:1px solid #ddd;margin-top:20px;padding-top:10px;color:#999;font-size:11px;text-align:center;">
-    KIH Daily News Bot · 자동 발송 메시지<br>
-    수신을 원치 않으시면 관리자에게 문의하세요.
-  </div>
+        <!-- Header -->
+        <tr>
+          <td style="padding:16px;border-bottom:2px solid #222222;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+            <div style="font-size:18px;font-weight:bold;color:#222222;">{header_html}</div>
+            <div style="font-size:13px;color:#666666;margin-top:6px;">
+              {count_line}
+            </div>
+          </td>
+        </tr>
 
-</div>
+        <!-- Items -->
+        <tr>
+          <td style="padding:14px 16px 4px 16px;">
+            {items_html}
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="padding:10px 16px 16px 16px;border-top:1px solid #dddddd;color:#999999;font-size:11px;text-align:center;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+            KIH Daily News Bot · 자동 발송 메시지<br />
+            수신을 원치 않으시면 관리자에게 문의하세요.
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>
+
 </body>
 </html>"""
 
 
 def _build_weekly_html(digest: dict, period_label: str) -> str:
+    """Weekly digest HTML — Outlook 데스크톱 호환 table 기반."""
     by_company = digest.get("by_company", {}) or {}
     keywords = digest.get("keywords", []) or []
     circled = "①②③④⑤⑥⑦⑧⑨⑩"
@@ -202,50 +271,96 @@ def _build_weekly_html(digest: dict, period_label: str) -> str:
     for company, issues in by_company.items():
         if not issues:
             continue
-        item_lis = []
+        # 각 회사 블록도 table로
+        item_rows = []
         for idx, item in enumerate(issues, 1):
             mark = circled[idx - 1] if idx <= 10 else f"({idx})"
             summary = html_escape(item.get("summary", ""))
             link = item.get("link", "") or "#"
             link_attr = html_escape(link, quote=True)
-            item_lis.append(
-                f'<li style="margin:6px 0;line-height:1.45;">'
-                f'<span style="color:#1e8e3e;font-weight:600;">{mark}</span> '
+            item_rows.append(
+                f'<tr><td style="padding:3px 0;font-family:\'맑은 고딕\',Arial,sans-serif;font-size:14px;line-height:1.45;">'
+                f'<span style="color:#1e8e3e;font-weight:bold;">{mark}</span> '
                 f'<a href="{link_attr}" style="color:#1a0dab;text-decoration:none;">{summary}</a>'
-                f'</li>'
+                f'</td></tr>'
             )
         company_blocks.append(
-            f'<div style="margin:14px 0;padding:10px 14px;background:#f7f7f7;border-radius:4px;">'
-            f'<div style="font-weight:700;color:#222;margin-bottom:6px;">[{html_escape(company)}]</div>'
-            f'<ul style="margin:0;padding-left:18px;font-size:14px;">{"".join(item_lis)}</ul>'
-            f'</div>'
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" '
+            f'style="border-collapse:collapse;margin:10px 0;background-color:#f7f7f7;" bgcolor="#f7f7f7">'
+            f'<tr><td style="padding:10px 14px;font-family:\'맑은 고딕\',Arial,sans-serif;">'
+            f'<div style="font-weight:bold;color:#222222;margin-bottom:6px;font-size:14px;">[{html_escape(company)}]</div>'
+            f'<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
+            f'{"".join(item_rows)}'
+            f'</table>'
+            f'</td></tr></table>'
         )
 
+    # 키워드: Outlook에서도 안전하게 보이도록 단순 span 나열
     keyword_html = " ".join(
-        f'<span style="display:inline-block;background:#e8f0fe;color:#1967d2;padding:3px 8px;border-radius:12px;margin:2px;font-size:12px;">#{html_escape(k)}</span>'
+        f'<span style="background-color:#e8f0fe;color:#1967d2;padding:3px 8px;font-size:12px;">#{html_escape(k)}</span>'
         for k in keywords
     )
 
-    return f"""<!DOCTYPE html>
-<html lang="ko">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"></head>
-<body style="margin:0;padding:0;background:#f5f5f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Apple SD Gothic Neo','Noto Sans KR',sans-serif;">
-<div style="max-width:640px;margin:0 auto;padding:16px;background:#ffffff;">
-  <div style="border-bottom:2px solid #1967d2;padding-bottom:10px;margin-bottom:14px;">
-    <div style="font-size:18px;font-weight:700;color:#1967d2;">📊 한국투자금융그룹 주간 종합</div>
-    <div style="font-size:13px;color:#666;margin-top:4px;">{html_escape(period_label)}</div>
-  </div>
+    empty_msg = '<div style="color:#888888;padding:14px;font-family:\'맑은 고딕\',Arial,sans-serif;">지난 1주간 주요 이슈 없음.</div>'
 
-  <div style="font-size:15px;font-weight:600;margin:14px 0 6px;color:#222;">▶ 회사별 주요 이슈</div>
-  {"".join(company_blocks) if company_blocks else '<div style="color:#888;padding:14px;">지난 1주간 주요 이슈 없음.</div>'}
+    return f"""<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>KIH Weekly Digest</title>
+<!--[if mso]>
+<style type="text/css">
+table {{ border-collapse: collapse; }}
+td, th, div, p, a {{ font-family: '맑은 고딕', 'Malgun Gothic', Arial, sans-serif !important; }}
+</style>
+<![endif]-->
+</head>
+<body style="margin:0;padding:0;background-color:#f5f5f5;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
 
-  <div style="font-size:15px;font-weight:600;margin:18px 0 8px;color:#222;">▶ 주간 핵심 키워드</div>
-  <div>{keyword_html if keyword_html else '<span style="color:#888;">N/A</span>'}</div>
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#f5f5f5" style="background-color:#f5f5f5;">
+  <tr>
+    <td align="center" style="padding:16px;">
 
-  <div style="border-top:1px solid #ddd;margin-top:20px;padding-top:10px;color:#999;font-size:11px;text-align:center;">
-    KIH Daily News Bot · 자동 발송 메시지
-  </div>
-</div>
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" style="max-width:640px;background-color:#ffffff;" bgcolor="#ffffff">
+
+        <!-- Header -->
+        <tr>
+          <td style="padding:16px;border-bottom:2px solid #1967d2;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+            <div style="font-size:18px;font-weight:bold;color:#1967d2;">[주간 종합] 한국투자금융그룹</div>
+            <div style="font-size:13px;color:#666666;margin-top:4px;">{html_escape(period_label)}</div>
+          </td>
+        </tr>
+
+        <!-- 회사별 이슈 -->
+        <tr>
+          <td style="padding:14px 16px 0 16px;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+            <div style="font-size:15px;font-weight:bold;margin-bottom:6px;color:#222222;">▶ 회사별 주요 이슈</div>
+            {"".join(company_blocks) if company_blocks else empty_msg}
+          </td>
+        </tr>
+
+        <!-- 키워드 -->
+        <tr>
+          <td style="padding:14px 16px;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+            <div style="font-size:15px;font-weight:bold;margin-bottom:8px;color:#222222;">▶ 주간 핵심 키워드</div>
+            <div>{keyword_html if keyword_html else '<span style="color:#888888;">N/A</span>'}</div>
+          </td>
+        </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="padding:10px 16px 16px 16px;border-top:1px solid #dddddd;color:#999999;font-size:11px;text-align:center;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+            KIH Daily News Bot · 자동 발송 메시지
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>
+
 </body>
 </html>"""
 
