@@ -141,7 +141,7 @@ def format_weekly_digest_text(digest, now):
     week_ago = now - timedelta(days=7)
     period = f"{week_ago.strftime('%m/%d')} ~ {now.strftime('%m/%d')}"
 
-    msg = f"📊 [{now.strftime('%Y-%m-%d')} 금] 한국투자금융그룹 주간 종합 ({period})\n"
+    msg = f"📊 [{now.strftime('%Y-%m-%d')} 금] 한국투자금융그룹 금주 종합 ({period})\n"
     msg += "━━━━━━━━━━━━━━━━━━━\n\n"
     msg += "▶ 회사별 주요 이슈\n\n"
 
