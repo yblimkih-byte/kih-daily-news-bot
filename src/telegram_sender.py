@@ -158,7 +158,7 @@ def _build_messages_daily(items: list[dict], header_title: str) -> list[str]:
 def _build_messages_weekly(digest: dict, period_label: str) -> list[str]:
     circled = "①②③④⑤⑥⑦⑧⑨⑩"
     header = (
-        f"<b>📊 한국투자금융그룹 주간 종합</b>\n"
+        f"<b>📊 한국투자금융그룹 금주 종합</b>\n"
         f"<i>{html_escape(period_label)}</i>\n\n"
         f"<b>▶ 회사별 주요 이슈</b>\n"
     )
@@ -188,7 +188,7 @@ def _build_messages_weekly(digest: dict, period_label: str) -> list[str]:
 
             if len(current) + len(company_block) > TELEGRAM_MAX_LENGTH:
                 messages.append(current.rstrip())
-                current = "<b>📊 주간 종합 (계속)</b>\n"
+                current = "<b>📊 금주 종합 (계속)</b>\n"
             current += company_block
 
     if keywords:
@@ -197,7 +197,7 @@ def _build_messages_weekly(digest: dict, period_label: str) -> list[str]:
         )
         if len(current) + len(kw_block) > TELEGRAM_MAX_LENGTH:
             messages.append(current.rstrip())
-            current = "<b>📊 주간 종합 (계속)</b>\n"
+            current = "<b>📊 금주 종합 (계속)</b>\n"
         current += kw_block
 
     if current.strip():
