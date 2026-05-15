@@ -12,6 +12,7 @@ This bot uses ~5 requests/day, so cost is effectively $0 within the free tier.
 import json
 import os
 import re
+import time
 from pathlib import Path
 
 from google import genai
@@ -27,6 +28,15 @@ except ImportError:
 # Default model. Override via GEMINI_MODEL env var.
 DEFAULT_MODEL = "gemini-3-flash-preview"
 GEMINI_MODEL = os.environ.get("GEMINI_MODEL", DEFAULT_MODEL).strip() or DEFAULT_MODEL
+
+# Fallback model when primary fails with transient errors (503 etc).
+# 안정 버전이라 preview보다 가용성 높음.
+FALLBACK_MODEL = os.environ.get("GEMINI_FALLBACK_MODEL", "gemini-2.5-flash").strip()
+
+# Retry policy for transient Gemini errors (503 UNAVAILABLE, 429 RESOURCE_EXHAUSTED, etc).
+# 3 attempts on primary model + 1 attempt on fallback model = 최대 4 attempts total.
+RETRY_ATTEMPTS_PRIMARY = 3
+RETRY_WAIT_SECONDS = [2, 4]  # 1차 실패 후 2초, 2차 실패 후 4초 대기
 
 MAX_TOKENS = 16000
 
@@ -144,24 +154,107 @@ def _extract_json(text: str) -> dict | None:
     return None
 
 
-def _call_gemini(system_prompt: str, user_message: str) -> str:
-    """Send request to Gemini and return raw text response.
+def _is_transient_error(exc: Exception) -> bool:
+    """Identify transient Gemini errors that warrant retry.
 
-    Uses response_mime_type='application/json' to force structured JSON output.
+    Transient (재시도 가치 있음):
+      - 503 UNAVAILABLE (server overload, "high demand")
+      - 429 RESOURCE_EXHAUSTED (rate limit)
+      - 5xx server errors
+      - Connection errors (timeout, reset)
+
+    Permanent (재시도 안 함):
+      - 401/403 (auth)
+      - 400 (bad request, invalid input)
     """
+    msg = str(exc)
+    # google-genai SDK는 HTTP 코드를 문자열에 포함시킴: "503 UNAVAILABLE", "429 RESOURCE_EXHAUSTED" 등
+    transient_signals = ["503", "UNAVAILABLE", "429", "RESOURCE_EXHAUSTED",
+                          "500", "INTERNAL", "504", "DEADLINE_EXCEEDED",
+                          "Connection", "Timeout", "timed out"]
+    permanent_signals = ["401", "403", "PERMISSION_DENIED", "UNAUTHENTICATED",
+                          "400", "INVALID_ARGUMENT", "NOT_FOUND"]
+    for sig in permanent_signals:
+        if sig in msg:
+            return False
+    for sig in transient_signals:
+        if sig in msg:
+            return True
+    # 보수적: 알 수 없는 에러는 transient로 간주하여 재시도
+    return True
+
+
+def _call_gemini_once(model: str, system_prompt: str, user_message: str) -> str:
+    """Single Gemini API call. May raise."""
     client = _get_client()
     response = client.models.generate_content(
-        model=GEMINI_MODEL,
+        model=model,
         contents=user_message,
         config=types.GenerateContentConfig(
             system_instruction=system_prompt,
             max_output_tokens=MAX_TOKENS,
-            temperature=0.2,  # 일관된 분류 결과 위해 낮게
-            response_mime_type="application/json",  # JSON 강제
+            temperature=0.2,
+            response_mime_type="application/json",
         ),
     )
-    # response.text는 candidate[0]의 모든 text part 합친 것
     return response.text or ""
+
+
+def _call_gemini(system_prompt: str, user_message: str) -> str:
+    """Send request to Gemini with retry on transient errors.
+
+    Strategy:
+      1. Try primary model (GEMINI_MODEL) up to RETRY_ATTEMPTS_PRIMARY times
+         with exponential-ish backoff (2s, 4s).
+      2. If all primary attempts fail with transient errors, fall back to
+         FALLBACK_MODEL (안정 버전) once.
+      3. Permanent errors (401, 400 etc) abort immediately without retry.
+
+    Returns raw response text. Raises only after all retries exhausted.
+    """
+    last_exc = None
+
+    # Phase 1: primary model retries
+    for attempt in range(1, RETRY_ATTEMPTS_PRIMARY + 1):
+        try:
+            text = _call_gemini_once(GEMINI_MODEL, system_prompt, user_message)
+            if attempt > 1:
+                print(f"[INFO][gemini] Primary model succeeded on attempt {attempt}/{RETRY_ATTEMPTS_PRIMARY}.",
+                      flush=True)
+            return text
+        except Exception as e:
+            last_exc = e
+            is_transient = _is_transient_error(e)
+            if not is_transient:
+                print(f"[ERROR][gemini] Permanent error on primary "
+                      f"(attempt {attempt}/{RETRY_ATTEMPTS_PRIMARY}): {type(e).__name__}: {e}",
+                      flush=True)
+                raise
+            if attempt < RETRY_ATTEMPTS_PRIMARY:
+                wait = RETRY_WAIT_SECONDS[attempt - 1] if (attempt - 1) < len(RETRY_WAIT_SECONDS) else RETRY_WAIT_SECONDS[-1]
+                print(f"[WARN][gemini] Transient error on primary "
+                      f"(attempt {attempt}/{RETRY_ATTEMPTS_PRIMARY}): {type(e).__name__}: {e}. "
+                      f"Retrying in {wait}s...", flush=True)
+                time.sleep(wait)
+            else:
+                print(f"[WARN][gemini] Primary model exhausted "
+                      f"({RETRY_ATTEMPTS_PRIMARY} attempts). Falling back to {FALLBACK_MODEL}.",
+                      flush=True)
+
+    # Phase 2: fallback model (single attempt)
+    if FALLBACK_MODEL and FALLBACK_MODEL != GEMINI_MODEL:
+        try:
+            print(f"[INFO][gemini] Attempting fallback model: {FALLBACK_MODEL}", flush=True)
+            text = _call_gemini_once(FALLBACK_MODEL, system_prompt, user_message)
+            print(f"[INFO][gemini] Fallback model {FALLBACK_MODEL} succeeded.", flush=True)
+            return text
+        except Exception as e:
+            print(f"[ERROR][gemini] Fallback model also failed: {type(e).__name__}: {e}",
+                  flush=True)
+            last_exc = e
+
+    # All attempts failed
+    raise last_exc if last_exc else RuntimeError("All Gemini call attempts failed without raising")
 
 
 def process_daily_news(articles: list[dict]) -> list[dict]:
@@ -171,13 +264,30 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
     업권 카테고리는 별도로 process_sector_news()를 호출.
     """
     if not articles:
+        print("[STEP 3][diag] Input articles list is empty.", flush=True)
         return []
 
     # 회사 카테고리 기사만 추림. category 필드가 없는 구버전 데이터는 안전상 회사로 간주.
     company_articles = [a for a in articles
                         if a.get("category", "company") == "company"]
+
+    # 진단 로그: 입력 카테고리 분포
+    sector_articles_count = sum(1 for a in articles if a.get("category") == "sector")
+    no_cat_count = sum(1 for a in articles if "category" not in a)
+    print(
+        f"[STEP 3][diag] Input breakdown: total={len(articles)}, "
+        f"company={len(company_articles)}, sector={sector_articles_count}, no_category={no_cat_count}",
+        flush=True,
+    )
+
     if not company_articles:
-        print("[INFO] No company-category articles to process.", flush=True)
+        print("[STEP 3][diag] No company-category articles to process. "
+              "원본 articles에 category='company' 항목이 없습니다.", flush=True)
+        # 더 자세한 진단: 첫 3건의 category 값 표시
+        for i, a in enumerate(articles[:3]):
+            print(f"[STEP 3][diag] articles[{i}]: category={a.get('category')!r}, "
+                  f"company={a.get('company')!r}, sector={a.get('sector')!r}, "
+                  f"title={(a.get('title') or '')[:40]!r}", flush=True)
         return []
 
     selected = _preselect_articles(company_articles, MAX_ARTICLES_PER_CALL)
@@ -250,21 +360,38 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
     )
 
     print(f"[INFO] Calling Gemini ({GEMINI_MODEL}) for daily news...", flush=True)
+    print(f"[STEP 3][diag] Sending {len(indexed_articles)} company articles to AI "
+          f"(user_message length: {len(user_message)} chars)", flush=True)
     try:
         text = _call_gemini(system_prompt, user_message)
     except Exception as e:
-        print(f"[ERROR] Gemini API call failed: {type(e).__name__}: {e}", flush=True)
+        print(f"[ERROR][STEP 3] Gemini API call failed: {type(e).__name__}: {e}", flush=True)
+        import traceback
+        traceback.print_exc()
+        return []
+
+    print(f"[STEP 3][diag] Gemini response received (length: {len(text)} chars).", flush=True)
+    if not text or len(text) < 20:
+        print(f"[ERROR][STEP 3] Gemini response is empty or too short: {text!r}", flush=True)
         return []
 
     result = _extract_json(text)
     if result is None:
-        print(f"[ERROR] Failed to parse Gemini response. Length={len(text)}", flush=True)
+        print(f"[ERROR][STEP 3] Failed to parse Gemini response. Length={len(text)}", flush=True)
         chunk_size = 2000
         for i in range(0, len(text), chunk_size):
             print(f"[ERROR_DUMP {i}-{i+chunk_size}] {text[i:i+chunk_size]}", flush=True)
         return []
 
     ai_items = result.get("filtered", [])
+    print(f"[STEP 3][diag] AI returned 'filtered' array with {len(ai_items)} items.", flush=True)
+    if not ai_items:
+        # 진단: 어떤 키들이 응답에 있는지
+        print(f"[WARN][STEP 3] AI returned empty 'filtered' array. "
+              f"Response keys: {list(result.keys())}", flush=True)
+        # 응답 처음 500자 표시
+        print(f"[WARN][STEP 3] Response preview: {text[:500]!r}", flush=True)
+        return []
 
     VALID_COMPANIES = {
         "한국투자금융지주", "한국투자증권", "한국투자신탁운용", "한국투자밸류자산운용",
