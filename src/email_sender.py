@@ -348,7 +348,7 @@ td, th, div, p, a {{ font-family: '맑은 고딕', 'Malgun Gothic', Arial, sans-
         <!-- Header -->
         <tr>
           <td style="padding:16px;border-bottom:2px solid #1967d2;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
-            <div style="font-size:18px;font-weight:bold;color:#1967d2;">[주간 종합] 한국투자금융그룹</div>
+            <div style="font-size:18px;font-weight:bold;color:#1967d2;">[금주 종합] 한국투자금융그룹</div>
             <div style="font-size:13px;color:#666666;margin-top:4px;">{html_escape(period_label)}</div>
           </td>
         </tr>
@@ -507,10 +507,10 @@ def send_weekly_digest_email(digest: dict, period_label: str) -> int:
     from_name = os.environ.get("EMAIL_FROM_NAME", "KIH News Bot")
     mode = os.environ.get("EMAIL_DELIVERY_MODE", "to").lower()
 
-    subject = f"[KIH News 주간 종합] {period_label}"
+    subject = f"[KIH News 금주 종합] {period_label}"
 
     # Plain text version
-    text_lines = [f"📊 한국투자금융그룹 주간 종합 ({period_label})", ""]
+    text_lines = [f"📊 한국투자금융그룹 금주 종합 ({period_label})", ""]
     for company, issues in (digest.get("by_company") or {}).items():
         if not issues:
             continue
