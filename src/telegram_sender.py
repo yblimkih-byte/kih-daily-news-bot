@@ -178,7 +178,7 @@ def _build_messages_unified(daily_items: list[dict], sector_items: list[dict],
             + (f" · 업권 {len(sector_items)}건" if sector_items else "")
         )
     elif sector_items:
-        header_lines.append(f"업권 거시 뉴스 {len(sector_items)}건")
+        header_lines.append(f"업권 뉴스 {len(sector_items)}건")
     header = "\n".join(header_lines) + "\n"
 
     if not daily_items and not sector_items:
@@ -204,7 +204,7 @@ def _build_messages_unified(daily_items: list[dict], sector_items: list[dict],
 
     # === 업권 섹션 ===
     if sector_items:
-        section_header = f"━━━━━━━━━━━━━━━━━━━━\n▶ 업권 거시 뉴스 ({len(sector_items)}건)\n━━━━━━━━━━━━━━━━━━━━\n\n"
+        section_header = f"━━━━━━━━━━━━━━━━━━━━\n▶ 업권 뉴스 ({len(sector_items)}건)\n━━━━━━━━━━━━━━━━━━━━\n\n"
         if len(current) + len(section_header) > TELEGRAM_MAX_LENGTH:
             messages.append(current.rstrip())
             current = f"<b>{html_escape(header_title)} (계속)</b>\n\n"
