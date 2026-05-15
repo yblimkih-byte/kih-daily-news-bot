@@ -386,13 +386,15 @@ def process_sector_news(articles: list[dict]) -> list[dict]:
         "    {\n"
         '      "idx": 기사의 idx 번호 (정수),\n'
         '      "main_sector": "기사의 실질 영향 업권명 (아래 목록 중 하나만)",\n'
-        '      "sentiment": "positive | neutral | negative",\n'
         '      "summary": "40자 이내 한 줄 요약 (주술 구조)",\n'
         '      "importance": 1-10,\n'
         '      "event_group": "이 기사가 다루는 사건의 고유 식별자 (영문 슬러그, 30자 이내)"\n'
         "    }\n"
         "  ]\n"
         "}\n\n"
+        "업권 뉴스는 정책·규제·시장 구조 변경 정보가 대부분이므로 감성(긍정/부정) 분류는 하지 않음. "
+        "회사 입장에 따라 같은 정책이 기회일 수도 위협일 수도 있어 일률적 감성 부여가 부적절. "
+        "중요도(importance)로만 우선순위 결정.\n\n"
         "main_sector는 반드시 다음 7개 중 하나의 정확한 업권명으로 응답:\n"
         "- 증권업\n"
         "- 자산운용업\n"
@@ -462,7 +464,9 @@ def process_sector_news(articles: list[dict]) -> list[dict]:
             "link": src.get("link"),
             "is_naver": src.get("is_naver", False),
             "media": src.get("media", ""),
-            "sentiment": ai_item.get("sentiment", "neutral"),
+            # sentiment 필드는 의도적으로 비움 (업권 뉴스는 감성 분류 안 함).
+            # 다운스트림 렌더러는 sentiment가 빈 문자열/None이면 이모지 표시 안 함.
+            "sentiment": "",
             "summary": ai_item.get("summary", ""),
             "importance": ai_item.get("importance", 5),
             "event_group": ai_item.get("event_group", ""),
@@ -503,12 +507,8 @@ def process_sector_news(articles: list[dict]) -> list[dict]:
             print(f"[INFO] Sector '{sec}': trimmed {before}→3 (top importance)", flush=True)
         final.extend(items)
 
-    # 최종 정렬: 감성 (부정→중립→긍정) → 중요도
-    final.sort(key=lambda x: (
-        0 if x.get("sentiment") == "negative"
-        else (1 if x.get("sentiment") == "neutral" else 2),
-        -x.get("importance", 0),
-    ))
+    # 최종 정렬: 중요도만 (업권 뉴스는 감성 분류를 하지 않으므로)
+    final.sort(key=lambda x: -x.get("importance", 0))
 
     print(f"[INFO] Sector filter result: {len(final)} items across {len(by_sector)} sector(s)", flush=True)
     for sec, items in by_sector.items():
