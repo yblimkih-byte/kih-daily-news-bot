@@ -367,6 +367,12 @@ def main():
         daily_items = process_daily_news(daily_articles)
         daily_items = _link_items_to_articles(daily_items, daily_articles)
         print(f"[STEP 3] After AI filter (company): {len(daily_items)} items.", flush=True)
+        # 진단: 입력에 회사 기사가 있었는데 AI 결과가 0이면 비정상 가능성 강조
+        company_input_count = sum(1 for a in daily_articles if a.get("category", "company") == "company")
+        if company_input_count > 0 and len(daily_items) == 0:
+            print(f"[WARN][STEP 3] ⚠️ Suspicious: {company_input_count} company articles in input "
+                  f"but AI returned 0. 가능 원인: AI 응답 파싱 실패 또는 모든 기사가 단순 홍보로 분류됨. "
+                  f"위의 [STEP 3][diag] 로그를 확인하세요.", flush=True)
     else:
         print("[INFO] No fresh articles to process.", flush=True)
 
@@ -382,7 +388,7 @@ def main():
     # 카카오용 업권 헤더 (카카오만 분리 발송)
     sector_header_title = (
         f"🏛️ {now.strftime('%m-%d')}({WEEKDAYS_KR[now.weekday()]}) "
-        f"{now.strftime('%H:%M')} 업권 거시 뉴스 ({len(sector_items)}건)"
+        f"{now.strftime('%H:%M')} 업권 뉴스 ({len(sector_items)}건)"
     )
 
     # 4. Dispatch
