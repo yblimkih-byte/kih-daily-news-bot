@@ -242,27 +242,17 @@ def _dispatch_kakao_weekly(now: datetime) -> int:
         return 0
 
 
-def _dispatch_email_daily(daily_items, header_title) -> int:
-    if not ENABLE_EMAIL or not daily_items:
+def _dispatch_email_unified(daily_items, sector_items, header_title) -> int:
+    """이메일은 회사 + 업권을 한 메일에 통합 발송."""
+    if not ENABLE_EMAIL:
+        return 0
+    if not daily_items and not sector_items:
         return 0
     try:
-        from email_sender import send_daily_news_email
-        return send_daily_news_email(daily_items, header_title)
+        from email_sender import send_unified_email
+        return send_unified_email(daily_items, sector_items, header_title)
     except Exception as e:
-        print(f"[CH:EMAIL][ERROR] {type(e).__name__}: {e}", flush=True)
-        import traceback
-        traceback.print_exc()
-        return 0
-
-
-def _dispatch_email_sector(sector_items, header_title) -> int:
-    if not ENABLE_EMAIL or not sector_items:
-        return 0
-    try:
-        from email_sender import send_sector_news_email
-        return send_sector_news_email(sector_items, header_title)
-    except Exception as e:
-        print(f"[CH:EMAIL][sector][ERROR] {type(e).__name__}: {e}", flush=True)
+        print(f"[CH:EMAIL][unified][ERROR] {type(e).__name__}: {e}", flush=True)
         import traceback
         traceback.print_exc()
         return 0
@@ -279,27 +269,17 @@ def _dispatch_email_weekly(digest: dict, now: datetime) -> int:
         return 0
 
 
-def _dispatch_telegram_daily(daily_items, header_title) -> int:
-    if not ENABLE_TELEGRAM or not daily_items:
+def _dispatch_telegram_unified(daily_items, sector_items, header_title) -> int:
+    """텔레그램은 회사 + 업권을 한 메시지(또는 자동 분할)에 통합 발송."""
+    if not ENABLE_TELEGRAM:
+        return 0
+    if not daily_items and not sector_items:
         return 0
     try:
-        from telegram_sender import send_daily_news_telegram
-        return send_daily_news_telegram(daily_items, header_title)
+        from telegram_sender import send_unified_telegram
+        return send_unified_telegram(daily_items, sector_items, header_title)
     except Exception as e:
-        print(f"[CH:TG][ERROR] {type(e).__name__}: {e}", flush=True)
-        import traceback
-        traceback.print_exc()
-        return 0
-
-
-def _dispatch_telegram_sector(sector_items, header_title) -> int:
-    if not ENABLE_TELEGRAM or not sector_items:
-        return 0
-    try:
-        from telegram_sender import send_sector_news_telegram
-        return send_sector_news_telegram(sector_items, header_title)
-    except Exception as e:
-        print(f"[CH:TG][sector][ERROR] {type(e).__name__}: {e}", flush=True)
+        print(f"[CH:TG][unified][ERROR] {type(e).__name__}: {e}", flush=True)
         import traceback
         traceback.print_exc()
         return 0
@@ -399,31 +379,42 @@ def main():
         print(f"[STEP 3b] After AI filter (sector): {len(sector_items)} items.", flush=True)
 
     header_title = build_header_title(daily_items, now, slot["label"])
-    # 업권 발송용 헤더: 회사 발송 헤더와 시각적으로 구분.
+    # 카카오용 업권 헤더 (카카오만 분리 발송)
     sector_header_title = (
         f"🏛️ {now.strftime('%m-%d')}({WEEKDAYS_KR[now.weekday()]}) "
         f"{now.strftime('%H:%M')} 업권 거시 뉴스 ({len(sector_items)}건)"
     )
 
-    # 4. Dispatch — 회사 카테고리
+    # 4. Dispatch
+    # 카카오: 회사 + 업권을 별도 메시지로 분리 발송 (카카오 200자 한도 때문)
+    # 이메일·텔레그램: 회사 + 업권을 한 메시지에 통합 발송
     sent_summary = {"kakao": 0, "email": 0, "telegram": 0}
-    if daily_items:
-        print("[STEP 4] Dispatching company news to channels...", flush=True)
-        sent_summary["kakao"] = _dispatch_kakao_daily(daily_items, header_title)
-        sent_summary["email"] = _dispatch_email_daily(daily_items, header_title)
-        sent_summary["telegram"] = _dispatch_telegram_daily(daily_items, header_title)
-    else:
-        print("[INFO] No company items to dispatch.", flush=True)
-
-    # 4b. Dispatch — 업권 카테고리 (별도 메시지 그룹)
     sector_sent_summary = {"kakao": 0, "email": 0, "telegram": 0}
-    if sector_items:
-        print("[STEP 4b] Dispatching sector news to channels...", flush=True)
-        sector_sent_summary["kakao"] = _dispatch_kakao_sector(sector_items, sector_header_title)
-        sector_sent_summary["email"] = _dispatch_email_sector(sector_items, sector_header_title)
-        sector_sent_summary["telegram"] = _dispatch_telegram_sector(sector_items, sector_header_title)
-    else:
-        print("[INFO] No sector items to dispatch.", flush=True)
+
+    # --- 카카오 (분리 발송 유지) ---
+    if daily_items or sector_items:
+        print("[STEP 4-kakao] Dispatching to Kakao (separate messages)...", flush=True)
+        if daily_items:
+            sent_summary["kakao"] = _dispatch_kakao_daily(daily_items, header_title)
+        if sector_items:
+            sector_sent_summary["kakao"] = _dispatch_kakao_sector(sector_items, sector_header_title)
+
+    # --- 이메일 (통합 발송) ---
+    if daily_items or sector_items:
+        print("[STEP 4-email] Dispatching to Email (unified message)...", flush=True)
+        email_total = _dispatch_email_unified(daily_items, sector_items, header_title)
+        # 통합 발송은 한 번이므로 카운트 분할은 의미상 daily/sector 합산.
+        # sent_summary에는 회사 + 업권 합산값을 기록 (sector_sent_summary는 0 유지하여 중복 방지).
+        sent_summary["email"] = email_total
+
+    # --- 텔레그램 (통합 발송) ---
+    if daily_items or sector_items:
+        print("[STEP 4-telegram] Dispatching to Telegram (unified message)...", flush=True)
+        telegram_total = _dispatch_telegram_unified(daily_items, sector_items, header_title)
+        sent_summary["telegram"] = telegram_total
+
+    if not daily_items and not sector_items:
+        print("[INFO] No items (company or sector) to dispatch.", flush=True)
 
     # 5. Record sent items into history (회사 + 업권 모두)
     any_sent = sum(sent_summary.values()) + sum(sector_sent_summary.values()) > 0
@@ -453,7 +444,16 @@ def main():
     if slot["label"] != "manual":
         update_lock_file(slot["label"], now)
 
-    print(f"[INFO] Run completed. Company sent: {sent_summary}, Sector sent: {sector_sent_summary}", flush=True)
+    # 채널별 로그:
+    # - kakao: 분리 발송이라 sent_summary['kakao'] = 회사 메시지 수, sector_sent_summary['kakao'] = 업권 메시지 수
+    # - email/telegram: 통합 발송이라 sent_summary['email'/'telegram'] = 통합 메시지 수 (sector_sent_summary은 0)
+    print(
+        f"[INFO] Run completed. "
+        f"Kakao: company={sent_summary['kakao']}, sector={sector_sent_summary['kakao']} (분리). "
+        f"Email: {sent_summary['email']} (통합, 회사 {len(daily_items)} + 업권 {len(sector_items)}). "
+        f"Telegram: {sent_summary['telegram']} (통합).",
+        flush=True,
+    )
 
 
 if __name__ == "__main__":
