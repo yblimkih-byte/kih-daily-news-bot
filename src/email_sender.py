@@ -382,7 +382,7 @@ def _build_unified_html_body(daily_items: list[dict], sector_items: list[dict],
         if sector_items:
             count_line += f' &nbsp;·&nbsp; 업권 {len(sector_items)}건'
     elif sector_items:
-        count_line = f'업권 거시 뉴스 {len(sector_items)}건'
+        count_line = f'업권 뉴스 {len(sector_items)}건'
     else:
         count_line = '신규 기사 없음'
 
@@ -413,7 +413,7 @@ def _build_unified_html_body(daily_items: list[dict], sector_items: list[dict],
             <div style="font-size:15px;font-weight:bold;color:#222222;margin:4px 0 10px 0;
                         padding-bottom:6px;border-bottom:1px solid #cccccc;
                         font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
-              ▶ 업권 거시 뉴스 ({len(sector_items)}건)
+              ▶ 업권 뉴스 ({len(sector_items)}건)
             </div>
             {sector_cards}
           </td>
