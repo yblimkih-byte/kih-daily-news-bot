@@ -90,7 +90,8 @@ def _counts(items: list[dict]) -> dict:
 
 
 def _format_item_html(it: dict) -> str:
-    emoji = SENTIMENT_EMOJI.get(it.get("sentiment", "neutral"), "🟡")
+    sent = it.get("sentiment", "") or ""
+    emoji = SENTIMENT_EMOJI.get(sent, "") if sent else ""
     company = _get_item_tag(it)
     title = it.get("title", "")
     summary = it.get("summary", "")
@@ -112,7 +113,9 @@ def _format_item_html(it: dict) -> str:
     if media and media != "네이버뉴스":
         media_tag = f' <i>({html_escape(media)})</i>'
 
-    line1 = f"{emoji} <b>[{company_safe}]</b> {title_html}{media_tag}"
+    # 회사: "🔴 <b>[증권]</b> 제목", 업권: "<b>[증권업]</b> 제목"
+    prefix = f"{emoji} " if emoji else ""
+    line1 = f"{prefix}<b>[{company_safe}]</b> {title_html}{media_tag}"
     if summary_safe:
         line2 = f"   <i>↳ {summary_safe}</i>"
         return f"{line1}\n{line2}"
@@ -155,7 +158,78 @@ def _build_messages_daily(items: list[dict], header_title: str) -> list[str]:
     return messages
 
 
-def _build_messages_weekly(digest: dict, period_label: str) -> list[str]:
+def _build_messages_unified(daily_items: list[dict], sector_items: list[dict],
+                              header_title: str) -> list[str]:
+    """Build unified Telegram messages combining company + sector news.
+
+    회사 0건이면 회사 섹션 생략. 업권 0건이면 업권 섹션 생략.
+    4000자 초과 시 자동 분할.
+    """
+    counts = _counts(daily_items)  # 회사만 카운트 (업권은 감성 없음)
+    sorted_daily = _sort_items(daily_items)
+    # 업권은 중요도 정렬되어 있음
+
+    # 헤더
+    header_lines = [f"<b>{html_escape(header_title)}</b>"]
+    if daily_items:
+        header_lines.append(
+            f"🔴 {counts['negative']} · 🟡 {counts['neutral']} · 🟢 {counts['positive']} · "
+            f"회사 {sum(counts.values())}건"
+            + (f" · 업권 {len(sector_items)}건" if sector_items else "")
+        )
+    elif sector_items:
+        header_lines.append(f"업권 거시 뉴스 {len(sector_items)}건")
+    header = "\n".join(header_lines) + "\n"
+
+    if not daily_items and not sector_items:
+        return [header + "\n금일 보고 대상 신규 기사 없음."]
+
+    messages = []
+    current = header + "\n"
+
+    # === 회사 섹션 ===
+    if daily_items:
+        section_header = f"━━━━━━━━━━━━━━━━━━━━\n▶ 회사 뉴스 ({len(daily_items)}건)\n━━━━━━━━━━━━━━━━━━━━\n\n"
+        if len(current) + len(section_header) > TELEGRAM_MAX_LENGTH:
+            messages.append(current.rstrip())
+            current = f"<b>{html_escape(header_title)} (계속)</b>\n\n"
+        current += section_header
+
+        for it in sorted_daily:
+            block = _format_item_html(it) + "\n\n"
+            if len(current) + len(block) > TELEGRAM_MAX_LENGTH:
+                messages.append(current.rstrip())
+                current = f"<b>{html_escape(header_title)} (계속)</b>\n\n"
+            current += block
+
+    # === 업권 섹션 ===
+    if sector_items:
+        section_header = f"━━━━━━━━━━━━━━━━━━━━\n▶ 업권 거시 뉴스 ({len(sector_items)}건)\n━━━━━━━━━━━━━━━━━━━━\n\n"
+        if len(current) + len(section_header) > TELEGRAM_MAX_LENGTH:
+            messages.append(current.rstrip())
+            current = f"<b>{html_escape(header_title)} (계속)</b>\n\n"
+        current += section_header
+
+        for it in sector_items:
+            block = _format_item_html(it) + "\n\n"
+            if len(current) + len(block) > TELEGRAM_MAX_LENGTH:
+                messages.append(current.rstrip())
+                current = f"<b>{html_escape(header_title)} (계속)</b>\n\n"
+            current += block
+
+    if current.strip():
+        messages.append(current.rstrip())
+
+    # Mark with (i/n) if multiple
+    if len(messages) > 1:
+        total = len(messages)
+        messages = [
+            f"<i>({i}/{total})</i>\n{m}" for i, m in enumerate(messages, 1)
+        ]
+    return messages
+
+
+
     circled = "①②③④⑤⑥⑦⑧⑨⑩"
     header = (
         f"<b>📊 한국투자금융그룹 금주 종합</b>\n"
@@ -212,6 +286,60 @@ def _build_messages_weekly(digest: dict, period_label: str) -> list[str]:
 # --------------------------------------------------------------------------- #
 # Transport                                                                    #
 # --------------------------------------------------------------------------- #
+
+def _build_messages_weekly(digest: dict, period_label: str) -> list[str]:
+    circled = "①②③④⑤⑥⑦⑧⑨⑩"
+    header = (
+        f"<b>📊 한국투자금융그룹 금주 종합</b>\n"
+        f"<i>{html_escape(period_label)}</i>\n\n"
+        f"<b>▶ 회사별 주요 이슈</b>\n"
+    )
+
+    by_company = digest.get("by_company", {}) or {}
+    keywords = digest.get("keywords", []) or []
+
+    messages = []
+    current = header
+
+    if not by_company:
+        current += "\n지난 1주간 주요 이슈 없음.\n"
+    else:
+        for company, issues in by_company.items():
+            if not issues:
+                continue
+            company_block = f"\n<b>[{html_escape(company)}]</b>\n"
+            for idx, item in enumerate(issues, 1):
+                mark = circled[idx - 1] if idx <= 10 else f"({idx})"
+                summary = html_escape(item.get("summary", ""))
+                link = item.get("link", "") or ""
+                if link:
+                    link_safe = html_escape(link, quote=True)
+                    company_block += f'  {mark} <a href="{link_safe}">{summary}</a>\n'
+                else:
+                    company_block += f"  {mark} {summary}\n"
+
+            if len(current) + len(company_block) > TELEGRAM_MAX_LENGTH:
+                messages.append(current.rstrip())
+                current = "<b>📊 금주 종합 (계속)</b>\n"
+            current += company_block
+
+    if keywords:
+        kw_block = "\n<b>▶ 주간 핵심 키워드</b>\n" + " ".join(
+            f"<code>#{html_escape(k)}</code>" for k in keywords
+        )
+        if len(current) + len(kw_block) > TELEGRAM_MAX_LENGTH:
+            messages.append(current.rstrip())
+            current = "<b>📊 금주 종합 (계속)</b>\n"
+        current += kw_block
+
+    if current.strip():
+        messages.append(current.rstrip())
+
+    if len(messages) > 1:
+        total = len(messages)
+        messages = [f"<i>({i}/{total})</i>\n{m}" for i, m in enumerate(messages, 1)]
+    return messages
+
 
 def _send_message(token: str, chat_id: str, text: str,
                   parse_mode: str = "HTML",
@@ -276,8 +404,57 @@ def send_daily_news_telegram(items: list[dict], header_title: str) -> int:
 
 
 def send_sector_news_telegram(items: list[dict], header_title: str) -> int:
-    """Send sector news. Same logic as daily, header text differs."""
+    """Send sector news. Same logic as daily, header text differs.
+
+    [LEGACY] 분리 발송 모드 호환용. 통합 발송에는 send_unified_telegram 사용.
+    """
     return send_daily_news_telegram(items, header_title)
+
+
+def send_unified_telegram(daily_items: list[dict], sector_items: list[dict],
+                           header_title: str) -> int:
+    """Send unified Telegram message(s) with both company and sector sections.
+
+    회사 0건이면 회사 섹션 생략. 업권 0건이면 업권 섹션 생략. 둘 다 0건이면 발송 안 함.
+    4000자 초과 시 자동 분할 (i/n) 표시.
+    """
+    if not daily_items and not sector_items:
+        print("[INFO][telegram] Both company and sector news empty. Skipping unified telegram.", flush=True)
+        return 0
+
+    token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    if not token:
+        print("[ERROR][telegram] TELEGRAM_BOT_TOKEN not set. Skipping.", flush=True)
+        return 0
+
+    chat_ids = _get_chat_ids()
+    if not chat_ids:
+        print("[INFO][telegram] TELEGRAM_CHAT_IDS empty. Skipping.", flush=True)
+        return 0
+
+    messages = _build_messages_unified(daily_items, sector_items, header_title)
+    total_per_chat = len(messages)
+    print(
+        f"[INFO][telegram] Sending unified: {total_per_chat} message(s) × {len(chat_ids)} chat(s) "
+        f"(company={len(daily_items)}, sector={len(sector_items)}).",
+        flush=True,
+    )
+
+    sent = 0
+    for chat_id in chat_ids:
+        for i, msg in enumerate(messages, 1):
+            try:
+                _send_message(token, chat_id, msg)
+                sent += 1
+            except Exception as e:
+                print(
+                    f"[ERROR][telegram] unified send failed (chat={chat_id}, {i}/{total_per_chat}): "
+                    f"{type(e).__name__}: {e}",
+                    flush=True,
+                )
+            time.sleep(0.4)
+    print(f"[INFO][telegram] Total unified sent: {sent}", flush=True)
+    return sent
 
 
 def send_weekly_digest_telegram(digest: dict, period_label: str) -> int:
