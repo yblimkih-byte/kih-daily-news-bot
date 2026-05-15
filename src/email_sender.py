@@ -126,14 +126,17 @@ def _build_text_body(items: list[dict], header_title: str) -> str:
     lines = [header_title, ""]
     sorted_items = _sort_items(items)
     for it in sorted_items:
-        emoji = SENTIMENT_EMOJI.get(it.get("sentiment", "neutral"), "🟡")
+        sent = it.get("sentiment", "") or ""
+        emoji = SENTIMENT_EMOJI.get(sent, "") if sent else ""
         company = _get_item_tag(it)
         title = it.get("title", "")
         summary = it.get("summary", "")
         link = it.get("link", "")
         media = it.get("media") or ""
         media_tag = f" ({media})" if media and media != "네이버뉴스" else ""
-        lines.append(f"{emoji} [{company}] {title}{media_tag}")
+        # 회사: "🔴 [증권] 제목", 업권: "[증권업] 제목"
+        prefix = f"{emoji} " if emoji else ""
+        lines.append(f"{prefix}[{company}] {title}{media_tag}")
         if summary:
             lines.append(f"    → {summary}")
         if link:
@@ -142,6 +145,60 @@ def _build_text_body(items: list[dict], header_title: str) -> str:
     lines.append("---")
     lines.append("KIH Daily News Bot")
     return "\n".join(lines)
+
+
+def _build_card_row_html(item: dict) -> str:
+    """Build a single card row (table) for one news item.
+
+    회사 카드 (sentiment 있음): 색깔 막대 + ● 점 + 색깔 태그
+    업권 카드 (sentiment=""): 회색 막대 + ● 없음 + 짙은 회색 태그 (시각적 절제)
+    """
+    sent = item.get("sentiment", "") or ""
+    is_sector = (item.get("category") == "sector") or (not sent)
+
+    if is_sector:
+        # 업권 카드: 색깔 강조 없음 (정책·규제 정보 중립적 표시)
+        bar_color = "#888888"
+        tag_color = "#444444"
+        dot_html = ""
+    else:
+        bar_color = SENTIMENT_COLOR.get(sent, "#666666")
+        tag_color = bar_color
+        dot_html = f'<span style="color:{bar_color};font-weight:bold;font-size:16px;">●</span>\n        '
+
+    company = html_escape(_get_item_tag(item))
+    title = html_escape(item.get("title", ""))
+    summary = html_escape(item.get("summary", ""))
+    link = item.get("link", "") or "#"
+    link_attr = html_escape(link, quote=True)
+    media = item.get("media") or ""
+    media_html = (
+        f' <span style="color:#888888;font-size:12px;">({html_escape(media)})</span>'
+        if media and media != "네이버뉴스" else ""
+    )
+    is_naver = item.get("is_naver", False)
+    naver_badge = (
+        ' <span style="background-color:#1ec800;color:#ffffff;font-size:10px;'
+        'padding:1px 5px;font-weight:bold;">N</span>'
+        if is_naver else ""
+    )
+
+    return f"""
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;margin-bottom:10px;background-color:#fafafa;">
+  <tr>
+    <td width="4" bgcolor="{bar_color}" style="width:4px;background-color:{bar_color};line-height:0;font-size:0;">&nbsp;</td>
+    <td style="padding:10px 14px;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+      <div style="font-size:15px;line-height:1.45;margin-bottom:6px;">
+        {dot_html}<span style="color:{tag_color};font-weight:bold;">[{company}]</span>
+        <a href="{link_attr}" style="color:#1a0dab;text-decoration:none;font-weight:600;">{title}</a>
+        {naver_badge}{media_html}
+      </div>
+      <div style="color:#555555;font-size:13px;line-height:1.4;">
+        {summary}
+      </div>
+    </td>
+  </tr>
+</table>"""
 
 
 def _build_html_body(items: list[dict], header_title: str) -> str:
@@ -164,46 +221,7 @@ def _build_html_body(items: list[dict], header_title: str) -> str:
     header_clean = " ".join(header_clean.split())
     header_html = html_escape(header_clean)
 
-    rows_html_parts = []
-    for it in sorted_items:
-        sent = it.get("sentiment", "neutral")
-        color = SENTIMENT_COLOR.get(sent, "#666666")
-        company = html_escape(_get_item_tag(it))
-        title = html_escape(it.get("title", ""))
-        summary = html_escape(it.get("summary", ""))
-        link = it.get("link", "") or "#"
-        link_attr = html_escape(link, quote=True)
-        media = it.get("media") or ""
-        media_html = (
-            f' <span style="color:#888888;font-size:12px;">({html_escape(media)})</span>'
-            if media and media != "네이버뉴스" else ""
-        )
-        is_naver = it.get("is_naver", False)
-        # N 배지: Outlook에서도 보이도록 table 셀로 만듦
-        naver_badge = (
-            ' <span style="background-color:#1ec800;color:#ffffff;font-size:10px;'
-            'padding:1px 5px;font-weight:bold;">N</span>'
-            if is_naver else ""
-        )
-
-        # 카드 = 2-column table: 왼쪽 4px 색깔 막대 | 오른쪽 내용
-        rows_html_parts.append(f"""
-<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="border-collapse:collapse;margin-bottom:10px;background-color:#fafafa;">
-  <tr>
-    <td width="4" bgcolor="{color}" style="width:4px;background-color:{color};line-height:0;font-size:0;">&nbsp;</td>
-    <td style="padding:10px 14px;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
-      <div style="font-size:15px;line-height:1.45;margin-bottom:6px;">
-        <span style="color:{color};font-weight:bold;font-size:16px;">●</span>
-        <span style="color:{color};font-weight:bold;">[{company}]</span>
-        <a href="{link_attr}" style="color:#1a0dab;text-decoration:none;font-weight:600;">{title}</a>
-        {naver_badge}{media_html}
-      </div>
-      <div style="color:#555555;font-size:13px;line-height:1.4;">
-        {summary}
-      </div>
-    </td>
-  </tr>
-</table>""")
+    rows_html_parts = [_build_card_row_html(it) for it in sorted_items]
 
     items_html = "".join(rows_html_parts) if rows_html_parts else (
         '<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">'
@@ -263,6 +281,187 @@ td, th, div, p, a {{ font-family: '맑은 고딕', 'Malgun Gothic', Arial, sans-
             {items_html}
           </td>
         </tr>
+
+        <!-- Footer -->
+        <tr>
+          <td style="padding:10px 16px 16px 16px;border-top:1px solid #dddddd;color:#999999;font-size:11px;text-align:center;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+            KIH Daily News Bot · 자동 발송 메시지<br />
+            수신을 원치 않으시면 관리자에게 문의하세요.
+          </td>
+        </tr>
+
+      </table>
+
+    </td>
+  </tr>
+</table>
+
+</body>
+</html>"""
+
+
+def _build_unified_text_body(daily_items: list[dict], sector_items: list[dict],
+                              header_title: str) -> str:
+    """Plain text fallback combining company news + sector news in one email."""
+    lines = [header_title, ""]
+
+    if daily_items:
+        lines.append("=" * 40)
+        lines.append("▶ 회사 뉴스")
+        lines.append("=" * 40)
+        sorted_daily = _sort_items(daily_items)
+        for it in sorted_daily:
+            sent = it.get("sentiment", "") or ""
+            emoji = SENTIMENT_EMOJI.get(sent, "") if sent else ""
+            company = _get_item_tag(it)
+            title = it.get("title", "")
+            summary = it.get("summary", "")
+            link = it.get("link", "")
+            media = it.get("media") or ""
+            media_tag = f" ({media})" if media and media != "네이버뉴스" else ""
+            prefix = f"{emoji} " if emoji else ""
+            lines.append(f"{prefix}[{company}] {title}{media_tag}")
+            if summary:
+                lines.append(f"    → {summary}")
+            if link:
+                lines.append(f"    {link}")
+            lines.append("")
+
+    if sector_items:
+        lines.append("=" * 40)
+        lines.append(f"▶ 업권 뉴스 ({len(sector_items)}건)")
+        lines.append("=" * 40)
+        # 업권은 중요도 순으로 이미 정렬되어 있음
+        for it in sector_items:
+            company = _get_item_tag(it)
+            title = it.get("title", "")
+            summary = it.get("summary", "")
+            link = it.get("link", "")
+            media = it.get("media") or ""
+            media_tag = f" ({media})" if media and media != "네이버뉴스" else ""
+            lines.append(f"[{company}] {title}{media_tag}")
+            if summary:
+                lines.append(f"    → {summary}")
+            if link:
+                lines.append(f"    {link}")
+            lines.append("")
+
+    lines.append("---")
+    lines.append("KIH Daily News Bot")
+    return "\n".join(lines)
+
+
+def _build_unified_html_body(daily_items: list[dict], sector_items: list[dict],
+                              header_title: str) -> str:
+    """HTML email body combining company news + sector news with section dividers.
+
+    회사 0건이면 회사 섹션 통째로 생략, 업권 0건이면 업권 섹션 통째로 생략.
+    """
+    counts = _counts(daily_items)  # 회사만 카운트 (업권은 감성 없음)
+
+    # 헤더 정리 (이모지 → 텍스트)
+    header_clean = header_title.replace("📅", "").replace("🔴", "부정 ")
+    header_clean = header_clean.replace("🟡", "중립 ").replace("🟢", "긍정 ")
+    header_clean = " ".join(header_clean.split())
+    header_html = html_escape(header_clean)
+
+    # 회사 카운트 줄
+    neg_color = SENTIMENT_COLOR["negative"]
+    neu_color = SENTIMENT_COLOR["neutral"]
+    pos_color = SENTIMENT_COLOR["positive"]
+    company_count = sum(counts.values())
+    if daily_items:
+        count_line = (
+            f'<span style="color:{neg_color};font-weight:bold;">●</span> 부정 {counts["negative"]}건 '
+            f'&nbsp;·&nbsp; '
+            f'<span style="color:{neu_color};font-weight:bold;">●</span> 중립 {counts["neutral"]}건 '
+            f'&nbsp;·&nbsp; '
+            f'<span style="color:{pos_color};font-weight:bold;">●</span> 긍정 {counts["positive"]}건 '
+            f'&nbsp;·&nbsp; 회사 {company_count}건'
+        )
+        if sector_items:
+            count_line += f' &nbsp;·&nbsp; 업권 {len(sector_items)}건'
+    elif sector_items:
+        count_line = f'업권 거시 뉴스 {len(sector_items)}건'
+    else:
+        count_line = '신규 기사 없음'
+
+    # 회사 섹션
+    company_section = ""
+    if daily_items:
+        sorted_daily = _sort_items(daily_items)
+        daily_cards = "".join(_build_card_row_html(it) for it in sorted_daily)
+        company_section = f"""
+        <tr>
+          <td style="padding:14px 16px 4px 16px;">
+            <div style="font-size:15px;font-weight:bold;color:#222222;margin:4px 0 10px 0;
+                        padding-bottom:6px;border-bottom:1px solid #cccccc;
+                        font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+              ▶ 회사 뉴스 ({company_count}건)
+            </div>
+            {daily_cards}
+          </td>
+        </tr>"""
+
+    # 업권 섹션
+    sector_section = ""
+    if sector_items:
+        sector_cards = "".join(_build_card_row_html(it) for it in sector_items)
+        sector_section = f"""
+        <tr>
+          <td style="padding:14px 16px 4px 16px;">
+            <div style="font-size:15px;font-weight:bold;color:#222222;margin:4px 0 10px 0;
+                        padding-bottom:6px;border-bottom:1px solid #cccccc;
+                        font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+              ▶ 업권 거시 뉴스 ({len(sector_items)}건)
+            </div>
+            {sector_cards}
+          </td>
+        </tr>"""
+
+    # 두 섹션 모두 비면 안내문
+    if not company_section and not sector_section:
+        empty_section = """
+        <tr>
+          <td align="center" style="padding:40px 16px;color:#888888;
+                                     font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+            금일 보고 대상 신규 기사 없음.
+          </td>
+        </tr>"""
+        company_section = empty_section
+
+    return f"""<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ko">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<title>KIH Daily News</title>
+<!--[if mso]>
+<style type="text/css">
+table {{ border-collapse: collapse; }}
+td, th, div, p, a {{ font-family: '맑은 고딕', 'Malgun Gothic', Arial, sans-serif !important; }}
+</style>
+<![endif]-->
+</head>
+<body style="margin:0;padding:0;background-color:#f5f5f5;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+
+<table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" bgcolor="#f5f5f5" style="background-color:#f5f5f5;">
+  <tr>
+    <td align="center" style="padding:16px;">
+
+      <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="640" style="max-width:640px;background-color:#ffffff;" bgcolor="#ffffff">
+
+        <!-- Header -->
+        <tr>
+          <td style="padding:16px;border-bottom:2px solid #222222;font-family:'맑은 고딕','Malgun Gothic',Arial,sans-serif;">
+            <div style="font-size:18px;font-weight:bold;color:#222222;">{header_html}</div>
+            <div style="font-size:13px;color:#666666;margin-top:6px;">
+              {count_line}
+            </div>
+          </td>
+        </tr>
+        {company_section}
+        {sector_section}
 
         <!-- Footer -->
         <tr>
@@ -487,8 +686,72 @@ def send_sector_news_email(items: list[dict], header_title: str) -> int:
     같은 _build_html_body / _build_text_body를 사용하므로 _get_item_tag가
     items의 category 필드에 따라 자동으로 업권 태그를 표시한다.
     헤더 텍스트만 업권 전용으로 다르게 전달.
+
+    [LEGACY] 이 함수는 분리 발송 모드의 호환성을 위해 유지. 통합 발송에는
+    send_unified_email을 사용한다.
     """
     return send_daily_news_email(items, header_title)
+
+
+def send_unified_email(daily_items: list[dict], sector_items: list[dict],
+                        header_title: str) -> int:
+    """Send unified email containing both company news and sector news in one message.
+
+    회사 0건이면 회사 섹션 통째로 생략, 업권 0건이면 업권 섹션 통째로 생략.
+    둘 다 0건이면 발송 안 함 (0 반환).
+    """
+    if not daily_items and not sector_items:
+        print("[INFO][email] Both company and sector news empty. Skipping unified email.", flush=True)
+        return 0
+
+    recipients = _get_recipients()
+    if not recipients:
+        print("[INFO][email] EMAIL_RECIPIENTS empty. Skipping email send.", flush=True)
+        return 0
+
+    smtp_user = os.environ.get("SMTP_USER")
+    smtp_password = os.environ.get("SMTP_PASSWORD")
+    if not smtp_user or not smtp_password:
+        print("[ERROR][email] SMTP_USER or SMTP_PASSWORD not set. Skipping.", flush=True)
+        return 0
+
+    from_name = os.environ.get("EMAIL_FROM_NAME", "KIH News Bot")
+    mode = os.environ.get("EMAIL_DELIVERY_MODE", "to").lower()
+
+    # 통합 발송용 헤더 (회사 카운트 위주, 업권은 별도 카운트로 본문에 표시)
+    subject = _subject_from_header(header_title)
+    if sector_items:
+        subject += f" + 업권 {len(sector_items)}건"
+
+    text_body = _build_unified_text_body(daily_items, sector_items, header_title)
+    html_body = _build_unified_html_body(daily_items, sector_items, header_title)
+
+    sent = 0
+    try:
+        if mode == "individual":
+            for r in recipients:
+                msg = _build_message(subject, text_body, html_body,
+                                     smtp_user, from_name, [r])
+                _smtp_send(msg, smtp_user, smtp_password, [r])
+                sent += 1
+                time.sleep(0.3)
+        elif mode == "bcc":
+            msg = _build_message(subject, text_body, html_body,
+                                 smtp_user, from_name, [smtp_user])
+            _smtp_send(msg, smtp_user, smtp_password, [smtp_user] + recipients)
+            sent = 1
+        else:
+            msg = _build_message(subject, text_body, html_body,
+                                 smtp_user, from_name, recipients)
+            _smtp_send(msg, smtp_user, smtp_password, recipients)
+            sent = 1
+        print(f"[INFO][email] Sent unified email (company={len(daily_items)}, "
+              f"sector={len(sector_items)}, mode={mode}, recipients={len(recipients)}).",
+              flush=True)
+    except Exception as e:
+        print(f"[ERROR][email] Unified send failed: {type(e).__name__}: {e}", flush=True)
+        raise
+    return sent
 
 
 def send_weekly_digest_email(digest: dict, period_label: str) -> int:
