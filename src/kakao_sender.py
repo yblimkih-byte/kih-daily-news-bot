@@ -32,6 +32,18 @@ SENTIMENT_EMOJI = {
 }
 
 
+def _emoji_for(item: dict) -> str:
+    """Return sentiment emoji for company items, empty string for sector items.
+
+    Sector items have sentiment="" (intentionally blank); no emoji should be shown.
+    Falls back to 🟡 for unrecognized non-empty sentiment values.
+    """
+    sentiment = item.get("sentiment", "")
+    if not sentiment:
+        return ""
+    return SENTIMENT_EMOJI.get(sentiment, "🟡")
+
+
 def _is_naver_link(url: str) -> bool:
     if not url:
         return False
@@ -108,9 +120,10 @@ def split_for_list_template(items: list, max_per_chunk: int = MAX_PER_LIST) -> l
 
 
 def _build_card_naver(item: dict) -> dict:
-    emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
+    emoji = _emoji_for(item)
     company = _get_item_tag(item)
-    title = f"{emoji} [{company}] {item.get('title', '')}"
+    prefix = (emoji + " ") if emoji else ""
+    title = f"{prefix}[{company}] {item.get('title', '')}"
     if len(title) > 100:
         title = title[:97] + "..."
     link_url = item.get("link", DEFAULT_HEADER_LINK)
@@ -123,9 +136,10 @@ def _build_card_naver(item: dict) -> dict:
 
 
 def _build_card_external(item: dict) -> dict:
-    emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
+    emoji = _emoji_for(item)
     company = _get_item_tag(item)
-    title = f"{emoji} [{company}] {item.get('title', '')}"
+    prefix = (emoji + " ") if emoji else ""
+    title = f"{prefix}[{company}] {item.get('title', '')}"
     if len(title) > 100:
         title = title[:97] + "..."
     media = item.get("media") or _media_name_from_url(item.get("link", ""))
@@ -164,7 +178,7 @@ def _build_list_template(items, header_title, is_external=False):
 
 
 def _build_feed_template(item, header_title, is_external=False):
-    emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
+    emoji = _emoji_for(item)
     company = _get_item_tag(item)
     if is_external:
         link_url = _naver_search_url(item.get("title", ""))
@@ -178,7 +192,7 @@ def _build_feed_template(item, header_title, is_external=False):
     return {
         "object_type": "feed",
         "content": {
-            "title": f"{emoji} [{company}] {item.get('title', '')}",
+            "title": f"{(emoji + ' ') if emoji else ''}[{company}] {item.get('title', '')}",
             "description": f"{header_title}\n{item.get('summary', '')}{desc_extra}",
             "image_url": DEFAULT_IMAGE_URL,
             "link": {"web_url": link_url, "mobile_web_url": link_url},
@@ -297,7 +311,7 @@ def _build_external_entry(item: dict) -> tuple[str, str]:
         🔴[증권] 한국투자증권, 분기 영업이익 36..
         https://www.example.com/news/12345
     """
-    emoji = SENTIMENT_EMOJI.get(item.get("sentiment", "neutral"), "🟡")
+    emoji = _emoji_for(item)
     company = _get_item_tag(item)
     title = item.get("title", "") or ""
     url = item.get("link", "") or ""
@@ -306,6 +320,8 @@ def _build_external_entry(item: dict) -> tuple[str, str]:
     if len(title) > EXT_TITLE_MAX:
         title = title[:EXT_TITLE_MAX - 2] + ".."
 
+    # 회사 카드: "🔴[증권] 제목"
+    # 업권 카드 (sentiment=""): "[증권업] 제목"
     return f"{emoji}[{company}] {title}\n{url}", url
 
 
