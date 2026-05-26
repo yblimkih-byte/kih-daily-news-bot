@@ -1,36 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://startuptoday.co.kr/news/articleView.html?idxno=801838",
-      "title_key": "증시활황에도이어진쓴소리코스피숫자보다중요한건",
-      "sent_at": "2026-05-23T17:03:25.230576+09:00",
-      "title_preview": "[현장] 증시 활황에도 이어진 쓴소리…\"코스피 숫자보다 중요한건…\""
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/448/0000613915?sid=102",
-      "title_key": "이차전지테마주가조작혐의알에프세미전현직대표구속",
-      "sent_at": "2026-05-23T17:03:25.230576+09:00",
-      "title_preview": "'이차전지 테마 '주가 조작 혐의…알에프세미 전현직 대표 구속"
-    },
-    {
-      "url_key": "https://pinpointnews.co.kr/news/articleView.html?idxno=454931",
-      "title_key": "200조토큰화시장흔드는clarity공포jp모건hsbc가선택한단하나",
-      "sent_at": "2026-05-23T17:03:25.230576+09:00",
-      "title_preview": "200조 토큰화 시장 흔드는 CLARITY 공포…JP모건·HSBC가 선택한 단 하나..."
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/001/0016095245?sid=104",
-      "title_key": "중국에진다트럼프ai규제멈춰세운실리콘밸리경고",
-      "sent_at": "2026-05-23T17:03:25.230576+09:00",
-      "title_preview": "\"중국에 진다\"…트럼프 AI규제 멈춰세운 실리콘밸리 경고"
-    },
-    {
-      "url_key": "https://tokenpost.kr/news/briefing/362645",
-      "title_key": "sec나스닥비트코인지수옵션거래승인外",
-      "sent_at": "2026-05-23T17:03:25.230576+09:00",
-      "title_preview": "[저녁 뉴스브리핑] SEC, 나스닥 비트코인 지수 옵션 거래 승인 外"
-    },
-    {
       "url_key": "https://econovill.com/news/articleView.html?idxno=740753",
       "title_key": "코스피8천선흔든변동성장세삼전닉스레버리지etf변수로부상",
       "sent_at": "2026-05-24T17:03:53.183440+09:00",
@@ -605,6 +575,198 @@
       "title_key": "isa가입자900만금액65조돌파곧1000만넘어설듯",
       "sent_at": "2026-05-26T13:32:26.622218+09:00",
       "title_preview": "[마켓Q] ISA 가입자 900만·금액 65조 돌파...곧 1000만 넘어설 듯"
+    },
+    {
+      "url_key": "https://financialpost.co.kr/news/articleView.html?idxno=260484",
+      "title_key": "한국투자증권전산검증및관리소홀로과태료1억",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "한국투자증권, 전산 검증 및 관리 소홀로 과태료 1억"
+    },
+    {
+      "url_key": "https://greened.kr/news/articleView.html?idxno=341299",
+      "title_key": "해외올인한투운용주춤kb운용반도체etf앞세워3위탈환",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "해외 올인 한투운용 주춤…KB운용, 반도체 ETF 앞세워 3위 탈환"
+    },
+    {
+      "url_key": "https://etoday.co.kr/news/view/2587612",
+      "title_key": "야나두적자지속에ipo먹구름투자계약위반피소까지",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "야나두, 적자 지속에 IPO 먹구름… 투자계약 위반 피소까지"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4416714",
+      "title_key": "한투운용etf조직분사추진패시브액티브이원화체제",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "한투운용 ETF 조직 분사 추진…패시브·액티브 이원화 체제"
+    },
+    {
+      "url_key": "https://insightkorea.co.kr/news/articleView.html?idxno=247048",
+      "title_key": "한투발행어음21조독주돈쏠림에위험도커져",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "[증권 머니무브①] 한투, 발행어음 21조 '독주'...돈 쏠림에 위험도 커져"
+    },
+    {
+      "url_key": "https://newstopkorea.com/news/articleView.html?idxno=45145",
+      "title_key": "최종gp발표임박박현주서정진픽은",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "[국민성장펀드] 최종 GP 발표 임박...박현주·서정진 픽은?"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006290690?sid=101",
+      "title_key": "7500억몸값엑소코바이오ipo냐ma냐그것이문제",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "'7500억 몸값' 엑소코바이오, IPO냐 M&A냐 '그것이 문제'"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005362898?sid=101",
+      "title_key": "금투업계해외사모대출투자3조수준펀드손실사례도없어",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "금투업계, 해외 사모대출 투자 3조 수준…펀드 손실사례도 없어"
+    },
+    {
+      "url_key": "https://cbci.co.kr/news/articleView.html?idxno=577191",
+      "title_key": "한화솔루션유상증자일정변경발행주식수5300만주로조정",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "[속보] 한화솔루션, 유상증자 일정 변경…발행주식 수 5300만주로 조정"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4416716",
+      "title_key": "반도체투자이어가도되나한투운용레버리지출격전긴급진단",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "\"반도체 투자 이어가도 되나\"…한투운용, 레버리지 출격 전 긴급 진단"
+    },
+    {
+      "url_key": "https://ggilbo.com/news/articleView.html?idxno=1160276",
+      "title_key": "스페이스x상장초읽기국내수혜관련주는",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "스페이스X 상장 초읽기… 국내 수혜 관련주는?"
+    },
+    {
+      "url_key": "https://ekoreanews.co.kr/news/articleView.html?idxno=86209",
+      "title_key": "한국금융지주1분기영업익1조원돌파수익다각화에성공",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "한국금융지주, 1분기 영업익 1조원 돌파… 수익 다각화에 성공"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005526501?sid=101",
+      "title_key": "닉스200만삼전30만주도장굳어지나2배etf에돈몰린다",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "'닉스 200만·삼전 30만' 주도장 굳어지나...2배 ETF에 돈 몰린다"
+    },
+    {
+      "url_key": "https://press9.kr/news/articleView.html?idxno=77034",
+      "title_key": "한국투자증권손익차등형공모펀드흥행누적설정액1조7000억원돌파",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "한국투자증권, 손익차등형 공모펀드 흥행…누적 설정액 1조7000억원 돌파"
+    },
+    {
+      "url_key": "https://smarttoday.co.kr/ko-kr/articles/107815",
+      "title_key": "웨어러블의료기기기업케어메디7일사용가능패치형인슐린펌프",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "웨어러블 의료기기 기업 케어메디, 7일 사용 가능 패치형 인슐린 펌프 ..."
+    },
+    {
+      "url_key": "https://wsobi.com/news/articleView.html?idxno=312471",
+      "title_key": "kb국민신한카드esg기반사회공헌디지털자산생",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "[금융계 4월 동향] KB국민·신한카드, ESG 기반 사회공헌·디지털자산 생..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/119/0003094488?sid=101",
+      "title_key": "세미파이브ai반도체계약최대실적겹호재에18",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "세미파이브, AI 반도체 계약·최대 실적 겹호재에 18%↑ [특징주]"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/629/0000502204?sid=101",
+      "title_key": "사후제재에서사전검열로컨설팅조사에금투업계벌벌",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "사후 제재에서 사전 검열로?…'컨설팅 조사'에 금투업계 '벌벌'"
+    },
+    {
+      "url_key": "https://ajunews.com/view/20260526152021657",
+      "title_key": "도약의대가취약층에몰린3高3고충격약한고리부터온다2금융",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "[도약의 대가, 취약층에 몰린 3高] 3고 충격, 약한 고리부터 온다…2금융..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005526442?sid=105",
+      "title_key": "크립토기관화시큐리타이즈증시입성임박rwa가속크립토브리핑",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "'크립토 기관화' 시큐리타이즈 증시 입성 임박…RWA 가속 [크립토브리핑..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/119/0003094411?sid=101",
+      "title_key": "주식불장속시기놓친금투세전문가재추진어렵다",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "주식 ‘불장’ 속 시기 놓친 금투세, 전문가 “재추진 어렵다”"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/001/0016100202?sid=101",
+      "title_key": "금감원예금보험공사광주은행공동검사착수",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "금감원·예금보험공사, 광주은행 공동검사 착수"
+    },
+    {
+      "url_key": "https://viva100.com/article/20260526500781",
+      "title_key": "상생압박에깎이는cet1비율은행권포용과밸류업사이딜",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "상생 압박에 깎이는 CET1 비율…은행권 ‘포용’과 ‘밸류업’ 사이 딜..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/001/0016099406?sid=101",
+      "title_key": "투자금녹아내릴수도10만명대기삼전닉스레버리지유의점은",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "\"투자금 녹아내릴수도\"…'10만명 대기' 삼전닉스 레버리지 유의점은"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/421/0008966210?sid=101",
+      "title_key": "李대통령국민참여성장펀드운용잘하면인센티브자산격차완화기",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "李대통령 \"국민참여성장펀드, 운용 잘하면 인센티브…자산격차 완화 기..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006290778?sid=101",
+      "title_key": "여신협회장선거민간출신이동철박경훈2파전부상",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "여신협회장 선거, 민간출신 이동철·박경훈 ‘2파전’ 부상"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/629/0000502256?sid=101",
+      "title_key": "nh농협금융대안신용평가시스템적용1금융갈아타기대출출시",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "NH농협금융, 대안신용평가시스템 적용 '1금융 갈아타기 대출' 출시"
+    },
+    {
+      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202605211526094160103619",
+      "title_key": "midas코스닥액티브론칭국내대표지수",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "[더벨][마이다스운용 ETF 2.0] MIDAS 코스닥 액티브 론칭, 국내 대표지수..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005291318?sid=101",
+      "title_key": "코스닥개인투자자매수세에장중1200돌파",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "코스닥 개인 투자자 매수세에 장중 1200 돌파"
+    },
+    {
+      "url_key": "https://newstopkorea.com/news/articleView.html?idxno=45146",
+      "title_key": "중소형gp도각축ai코스닥리그승자는",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "[국민성장펀드] 중소형 GP도 각축...AI·코스닥 리그 승자는?"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/001/0016099560?sid=101",
+      "title_key": "금투협부동산금융업계와인니방문도시개발투자모색",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "금투협, 부동산금융업계와 인니 방문…도시개발 투자 모색"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/030/0003431374?sid=102",
+      "title_key": "전남창조경제혁신센터스타트업투자역량강화교육투자유치전략",
+      "sent_at": "2026-05-26T17:04:40.677625+09:00",
+      "title_preview": "전남창조경제혁신센터, '스타트업 투자 역량 강화 교육'…투자유치 전략..."
     }
   ]
 }
