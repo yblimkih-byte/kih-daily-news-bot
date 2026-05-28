@@ -78,6 +78,47 @@ TARGET_SECTORS = [
 KST = timezone(timedelta(hours=9))
 
 
+# 회사별 매칭 별칭. 정식 회사명 + "한투" 접두사 약어만 허용.
+# "금융지주", "증권", "캐피탈" 같은 일반명사 단독 약어는 절대 포함하지 않는다.
+# (예: "국내 최대 금융지주", "KB증권" 같은 타사 기사 오매칭 방지)
+COMPANY_ALIASES = {
+    "한국투자금융지주": ["한국투자금융지주", "한투금융지주", "한투지주"],
+    "한국투자증권": ["한국투자증권", "한투증권"],
+    "한국투자신탁운용": ["한국투자신탁운용", "한투신탁운용", "한투운용", "한국운용"],
+    "한국투자밸류자산운용": ["한국투자밸류자산운용", "한투밸류", "밸류자산운용"],
+    "한국투자파트너스": ["한국투자파트너스", "한투파트너스"],
+    "한국투자프라이빗에쿼티": ["한국투자프라이빗에쿼티", "한국투자PE", "한투PE"],
+    "한국투자캐피탈": ["한국투자캐피탈", "한투캐피탈"],
+    "한국투자저축은행": ["한국투자저축은행", "한투저축은행"],
+    "한국투자리얼에셋운용": ["한국투자리얼에셋운용", "한투리얼에셋", "리얼에셋운용"],
+    "한국투자부동산신탁": ["한국투자부동산신탁", "한투부동산신탁"],
+    "한국투자액셀러레이터": ["한국투자액셀러레이터", "한투액셀러레이터"],
+}
+
+
+def _matches_company(company_name: str, title: str, description: str) -> bool:
+    """Return True if the article actually concerns the given KIH affiliate.
+
+    안전한 별칭(정식 회사명 + '한투' 접두사 약어)만 사용한다.
+    '금융지주', '증권' 같은 일반명사 단독으로는 매칭하지 않는다.
+    """
+    aliases = COMPANY_ALIASES.get(company_name, [company_name])
+    haystack_title = title or ""
+    haystack_desc = description or ""
+    for alias in aliases:
+        if alias in haystack_title or alias in haystack_desc:
+            return True
+    return False
+
+
+def _find_matching_company(title: str, description: str) -> str | None:
+    """Find which KIH affiliate (if any) an article concerns. None if no match."""
+    for company in TARGET_COMPANIES:
+        if _matches_company(company["name"], title, description):
+            return company["name"]
+    return None
+
+
 def _strip_html(text: str) -> str:
     text = re.sub(r"<[^>]+>", "", text)
     text = text.replace("&quot;", '"').replace("&amp;", "&")
@@ -191,11 +232,8 @@ def fetch_recent_news(hours_back: float = 24) -> list[dict]:
                     continue
 
                 # --- Company match in title or description ---
-                company_name_short = company["name"].replace("한국투자", "")
-                if (company["name"] not in title
-                        and company["name"] not in description
-                        and company_name_short not in title
-                        and company_name_short not in description):
+                # 안전한 별칭(정식명 + "한투" 약어)만 사용. 일반명사 약어 미사용.
+                if not _matches_company(company["name"], title, description):
                     stats["no_match"] += 1
                     continue
 
@@ -283,15 +321,9 @@ def fetch_recent_news(hours_back: float = 24) -> list[dict]:
 
                 # 업권 검색은 회사명 매칭 필터를 우회.
                 # 단, 회사 카테고리에 잡혔어야 할 기사가 누락되지 않도록
-                # 본문에 한투 계열사명이 명시되어 있으면 그 회사 카테고리로 재분류한다.
-                matched_company = None
-                for company in TARGET_COMPANIES:
-                    company_name_short = company["name"].replace("한국투자", "")
-                    if (company["name"] in title
-                            or company["name"] in description
-                            or company_name_short in title):
-                        matched_company = company["name"]
-                        break
+                # 본문에 한투 계열사명(정식명/한투약어)이 명시되어 있으면 회사로 재분류.
+                # 일반명사("금융지주", "증권")로는 절대 재분류하지 않는다.
+                matched_company = _find_matching_company(title, description)
 
                 if url_key:
                     seen_url_keys.add(url_key)
