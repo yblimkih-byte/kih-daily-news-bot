@@ -1,96 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://n.news.naver.com/mnews/article/029/0003028303?sid=101",
-      "title_key": "규제에확좁아진차별화삼전닉스레버리지대형독무대김지영의",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "규제에 확 좁아진 차별화…삼전닉스 레버리지, 대형 독무대? [김지영의..."
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/014/0005525980?sid=101",
-      "title_key": "저축은행6월중저신용자생활안정자금출시취약차주숨통",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "[단독] 저축은행, 6월 '중저신용자 생활안정자금' 출시...\"취약차주 숨통..."
-    },
-    {
-      "url_key": "https://econovill.com/news/articleView.html?idxno=740781",
-      "title_key": "내부통제강화외쳤지만금융사고6년간1조원웃돌아",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "내부통제 강화 외쳤지만…금융사고 6년간 1조원 웃돌아"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/018/0006290161?sid=101",
-      "title_key": "기업대출rw완화하자는금융권안된다는당국",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "기업대출 RW 완화하자는 금융권, 안된다는 당국"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/277/0005767339?sid=101",
-      "title_key": "7800선회복한코스피팔천피안착시도",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "[마켓 ING]7800선 회복한 코스피, '팔천피' 안착 시도"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/030/0003430925?sid=101",
-      "title_key": "조기완판국민성장펀드은행연합회망으로한도조회중복가입통제",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "조기 완판 '국민성장펀드', 은행연합회망으로 한도 조회…중복가입 통제"
-    },
-    {
-      "url_key": "https://joongangenews.com/news/articleView.html?idxno=521450",
-      "title_key": "최고연194금리청년적금내달출시국민성장펀드흥행잇는다",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "\"최고 연 19.4%금리\"청년적금 내달 출시...국민성장펀드 흥행 잇는다"
-    },
-    {
-      "url_key": "https://daily.hankooki.com/news/articleView.html?idxno=1369739",
-      "title_key": "초등학생도체크카드시대카드사미성년고객선점경쟁",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "\"초등학생도 체크카드 시대\"…카드사, '미성년 고객 선점' 경쟁"
-    },
-    {
-      "url_key": "https://bigtanews.co.kr/article/view/big202605250003",
-      "title_key": "왜가계부채는늘어날까",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "<이원호의 경제톡> 왜 가계부채는 늘어날까"
-    },
-    {
-      "url_key": "https://hidomin.com/news/articleView.html?idxno=706623",
-      "title_key": "송언석가상자산소득세폐지법후반기국회1호법안처리해야",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "송언석 \"가상자산 소득세 폐지법, 후반기 국회 1호 법안 처리해야\""
-    },
-    {
-      "url_key": "https://m-i.kr/news/articleView.html?idxno=1375563",
-      "title_key": "가상자산업계정부제도개선손놓고있어",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "가상자산 업계 \"정부, 제도 개선 손 놓고 있어\""
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/029/0003028299?sid=101",
-      "title_key": "7년만에비관료수장여신금융협회장민간정치학계경쟁",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "7년 만에 비관료 수장…여신금융협회장, 민간·정치·학계 ‘경쟁’"
-    },
-    {
-      "url_key": "https://idomin.com/news/articleView.html?idxno=2006492",
-      "title_key": "김경수도지사후보경남형유니콘기업키우겠다",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "김경수 도지사 후보 \"경남형 유니콘 기업 키우겠다\""
-    },
-    {
-      "url_key": "https://newsmaker.or.kr/news/articleView.html?idxno=177396",
-      "title_key": "5월셋째주etf시장반도체ai인프라강세",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "5월 셋째 주 ETF 시장, 반도체·AI 인프라 강세"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/009/0005684536?sid=101",
-      "title_key": "코트라베트남서k푸드수출원스톱지원",
-      "sent_at": "2026-05-25T17:04:51.269539+09:00",
-      "title_preview": "코트라, 베트남서 K푸드 수출 원스톱 지원"
-    },
-    {
       "url_key": "https://n.news.naver.com/mnews/article/422/0000868277?sid=101",
       "title_key": "전산장애잇따른한투증권전산관리소홀로과태료1억원",
       "sent_at": "2026-05-26T07:43:15.484460+09:00",
@@ -1865,6 +1775,72 @@
       "title_key": "6월에나오는정책금융상품찾아볼까",
       "sent_at": "2026-05-28T13:33:05.445840+09:00",
       "title_preview": "[경제돋보기] 6월에 나오는 '정책금융상품' 찾아볼까?"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006292356?sid=101",
+      "title_key": "약탈금융막는다금융위911개추심업체시장대수술",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "“약탈금융 막는다”…금융위, 911개 추심업체 시장 대수술"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/029/0003029009?sid=110",
+      "title_key": "신현송연내금리인상공식화고금리충격대비할때다",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "[사설] 신현송, 연내 금리 인상 공식화… 고금리 충격 대비할 때다"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005364263?sid=101",
+      "title_key": "생산적금융업종통일어때물은금감원이번엔전수조사",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "[단독]\"생산적금융 업종 통일 어때?\" 물은 금감원, 이번엔 전수조사"
+    },
+    {
+      "url_key": "https://dailysecu.com/news/articleView.html?idxno=206939",
+      "title_key": "금융권망분리규제완화본격화ai보안위협에금융ai보안연구소신설",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "금융권 망분리 규제 완화 본격화…AI 보안위협에 금융AI보안연구소 신설..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005364293?sid=101",
+      "title_key": "top2에단일종목레버리지까지분산보다집중etf택하는개미",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "TOP2에 단일종목 레버리지까지… 분산보다 집중 ETF 택하는 개미"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/366/0001167830?sid=101",
+      "title_key": "밸류업지수에sk스퀘어에이피알편입현대로템효성중공업편출",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "밸류업 지수에 SK스퀘어·에이피알 편입…현대로템·효성중공업 편출"
+    },
+    {
+      "url_key": "https://impacton.net/news/articleView.html?idxno=19044",
+      "title_key": "5월5주차국내esg핫클립",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "5월 5주차 국내 ESG 핫클립"
+    },
+    {
+      "url_key": "https://decenter.kr/article/20049341",
+      "title_key": "바이셀스탠다드특허기업금융sto확대50억투자유치",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "바이셀스탠다드, 특허·기업금융 STO 확대…50억 투자 유치"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/215/0001253616?sid=101",
+      "title_key": "중기부중소기업정책보호에서성장으로전환",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "중기부 “중소기업 정책, 보호에서 성장으로 전환”"
+    },
+    {
+      "url_key": "https://m-i.kr/news/articleView.html?idxno=1376782",
+      "title_key": "2금융권중금리대출늘리라지만규제때문에어렵다",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "2금융권 \"중금리 대출 늘리라지만 규제 때문에 어렵다\""
+    },
+    {
+      "url_key": "https://metroseoul.co.kr/article/20260528500369",
+      "title_key": "차기여신협회장3파전정책네트워크vs금융실무",
+      "sent_at": "2026-05-28T17:07:29.590209+09:00",
+      "title_preview": "차기 여신협회장 3파전…‘정책 네트워크’ vs ‘금융 실무'"
     }
   ]
 }
