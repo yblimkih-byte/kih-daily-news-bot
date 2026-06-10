@@ -1,114 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://etoday.co.kr/news/view/2591079",
-      "title_key": "etf500조삼성미래양강쏠림심화3위경쟁치열",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "ETF 500조 '삼성·미래' 양강 쏠림 심화… 3위 경쟁 치열"
-    },
-    {
-      "url_key": "https://viva100.com/article/20260607500162",
-      "title_key": "두산에너빌리티김해첫공급트리븐김해6월말분양",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "두산에너빌리티, 김해 첫 공급 ‘트리븐 김해’ 6월 말 분양"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/028/0002808473?sid=110",
-      "title_key": "금융사가코인거래소산이유",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "금융사가 코인 거래소 산 이유 [헬로, 크립토]"
-    },
-    {
-      "url_key": "https://g-enews.com/view.php?ud=202606071350312690fa4bb4fab2_1",
-      "title_key": "보험ma시장에훈풍보험업재편본격화에시장관심집중",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "보험 M&A 시장에 '훈풍'...보험업 재편 본격화에 시장 관심 집중"
-    },
-    {
-      "url_key": "https://etoday.co.kr/news/view/2590535",
-      "title_key": "회사채시장얼어붙자금융채만간신히등판이달최대3조조달",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "회사채 시장 얼어붙자 금융채만 ‘간신히’ 등판…이달 최대 3조 조달"
-    },
-    {
-      "url_key": "https://womaneconomy.co.kr/news/articleView.html?idxno=254786",
-      "title_key": "ok저축은행820억흑자에도웃기힘들다차익뒤가려진여신경고",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "OK저축은행, 820억 흑자에도 웃기 힘들다···차익 뒤 가려진 여신 경고..."
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/421/0008989651?sid=101",
-      "title_key": "李새국무총리후보자에한성숙지명첫기업인출신女총리",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "李, 새 국무총리 후보자에 한성숙 지명…첫 기업인 출신 女총리"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/030/0003435028?sid=101",
-      "title_key": "외국인투자약일까독일까금융당국국회시각엇갈려",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "'외국인 투자' 약일까 독일까…금융당국·국회 시각 엇갈려"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/119/0003098513?sid=101",
-      "title_key": "저축은행3곳중1곳두자릿수npl흑자에도커지는부실경고",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "저축은행 3곳 중 1곳 '두 자릿수 NPL'…흑자에도 커지는 부실 경고"
-    },
-    {
-      "url_key": "https://ekn.kr/web/view.php?key=20260607027290958",
-      "title_key": "1550원고환율복병금융지주배당자사주변수커진다",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "“1550원 고환율 복병”...금융지주, 배당·자사주 변수 커진다"
-    },
-    {
-      "url_key": "https://etoday.co.kr/news/view/2590843",
-      "title_key": "조각투자장외거래소2파전kdxㆍnxt본인가경쟁본격화",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "조각투자 장외거래소 2파전…KDXㆍNXT 본인가 경쟁 본격화"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/011/0004628411?sid=101",
-      "title_key": "은행계저축은행정책대출딜레마",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "은행계 저축은행, 정책대출 딜레마"
-    },
-    {
-      "url_key": "https://fntimes.com/html/view.php?ud=202606041636445441ed56b8e1f8_18",
-      "title_key": "이동철여신금융협회장내정자카드업계디지털전문성높은",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "[프로필] 이동철 여신금융협회장 내정자, 카드업계·디지털 전문성 높은..."
-    },
-    {
-      "url_key": "https://ggilbo.com/news/articleView.html?idxno=1162205",
-      "title_key": "원구성협상본격화상임위배분놓고강대강대치",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "원구성 협상 본격화… 상임위 배분 놓고 '강대 강' 대치"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/030/0003435074?sid=101",
-      "title_key": "수출입은행벤처중기지분15초과취득정책금융투자기능확대",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "수출입은행, 벤처·중기 지분 15% 초과 취득…정책금융 투자기능 확대"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/008/0005368157?sid=101",
-      "title_key": "지금안합치면끝생존위기감이키운보험사ma흥행",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "\"지금 안 합치면 끝\"…생존 위기감이 키운 보험사 M&A 흥행"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/018/0006300052?sid=105",
-      "title_key": "ai기업지분사들이나미국서떠오른국가주주실험",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "AI 기업 지분 사들이나…미국서 떠오른 ‘국가 주주’ 실험"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/018/0006299894?sid=101",
-      "title_key": "은행권대안신용평가도입속도자본규제정보활용은과제",
-      "sent_at": "2026-06-07T17:02:20.782377+09:00",
-      "title_preview": "은행권, 대안신용평가 도입 속도…자본규제·정보활용은 과제"
-    },
-    {
       "url_key": "https://dnews.co.kr/uhtml/view.jsp?idxno=202606071426257440329",
       "title_key": "빚투잔고사상첫38조원돌파레버리지증가에증권사이자수익",
       "sent_at": "2026-06-08T07:42:04.902277+09:00",
@@ -1589,6 +1481,144 @@
       "title_key": "신용점수권력은행서플랫폼으로포용금융타고뜨는네카토",
       "sent_at": "2026-06-10T13:37:21.055028+09:00",
       "title_preview": "신용점수 권력, 은행서 플랫폼으로 … 포용금융 타고 뜨는 네카토"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/293/0000086090?sid=101",
+      "title_key": "한국투자저축은행호실적민낯은부실자산에신용리스크도적색",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "한국투자저축은행 호실적?…민낯은 부실자산에 신용 리스크도 '적색'"
+    },
+    {
+      "url_key": "https://newsworker.co.kr/news/articleView.html?idxno=430584",
+      "title_key": "하락장인데폭등괴리율90치솟은sk하이닉스레버리지etf3종투자",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "하락장인데 폭등?…괴리율 90% 치솟은 SK하이닉스 레버리지 ETF 3종 투자..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/138/0002230459?sid=101",
+      "title_key": "저축은행pf폭탄꺼졌지만부동산업연체율은두자릿수",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "저축은행, PF 폭탄 꺼졌지만…부동산업 연체율은 두 자릿수"
+    },
+    {
+      "url_key": "https://newsdream.kr/news/articleView.html?idxno=112844",
+      "title_key": "지주사전환외친교보생명보험사매물군침이유",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "'지주사 전환' 외친 교보생명…보험사 매물 '군침' 이유"
+    },
+    {
+      "url_key": "https://news.mtn.co.kr/news-detail/2026061010034381418",
+      "title_key": "달아오르는보험ma태광의거침없는질주빅피처통할까mtn금융",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "달아오르는 보험 M&A, 태광의 거침없는 질주…'빅피처' 통할까 [MTN 금융..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/629/0000506580?sid=101",
+      "title_key": "1q실적왕미래에셋證개인국채흥행으로2q왕좌지킬까",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "'1Q 실적왕' 미래에셋證, 개인국채 흥행으로 2Q 왕좌 지킬까"
+    },
+    {
+      "url_key": "https://dealsite.co.kr/articles/163347",
+      "title_key": "현지규제파악어렵다금융사들금감원에지원요청",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "\"현지 규제 파악 어렵다\"…금융사들, 금감원에 지원 요청"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/293/0000086084?sid=101",
+      "title_key": "한샘자사주매입카드꺼냈다immpe인수금융연장시험대",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "한샘, 자사주 매입 카드 꺼냈다…IMM PE 인수금융 연장 '시험대'"
+    },
+    {
+      "url_key": "https://srtimes.kr/news/articleView.html?idxno=204977",
+      "title_key": "절세투자수요겨냥한isa경쟁신한투자증권현금리워드이벤트",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "절세 투자 수요 겨냥한 ISA 경쟁…신한투자증권, 현금 리워드 이벤트"
+    },
+    {
+      "url_key": "https://daily.hankooki.com/news/articleView.html?idxno=1375223",
+      "title_key": "지니너스100억cb물량출회임박fi엑시트에주가하락우려",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "지니너스, '100억 CB' 물량 출회 임박…FI 엑시트에 주가 하락 우려"
+    },
+    {
+      "url_key": "https://newsprime.co.kr/news/article.html?no=736295",
+      "title_key": "mg신용정보엠플러스자산운용부실채권처분mou",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "MG신용정보·엠플러스자산운용, 부실채권 처분 MOU"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/469/0000935714?sid=104",
+      "title_key": "12일부터광화문한강서대한민국서울곳곳월드컵응원전",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "12일부터 광화문·한강서 대~한민국… 서울 곳곳 월드컵 응원전"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/009/0005692030?sid=101",
+      "title_key": "한투pe보유skceb주식으로교환뒤매각1000억차익",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "한투PE, 보유 SKC EB 주식으로 교환 뒤 매각…1000억 차익"
+    },
+    {
+      "url_key": "https://sports.hankooki.com/news/articleView.html?idxno=6934272",
+      "title_key": "현대건설이자없는5000억원조달주가654상승",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "현대건설, 이자 없는 5000억원 조달…주가 6.54% 상승"
+    },
+    {
+      "url_key": "https://meconomynews.com/news/articleView.html?idxno=131800",
+      "title_key": "차명훈코인원대표의승부수전략적4각동맹퀀텀점프노린다",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "차명훈 코인원 대표의 승부수... '전략적 4각 동맹' 퀀텀점프 노린다"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/029/0003031078?sid=101",
+      "title_key": "저축은행대출대신투자로벌었다한투깜짝선두",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "저축은행, 대출 대신 투자로 벌었다…한투, 깜짝 ‘선두’"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005533153?sid=101",
+      "title_key": "2조몰린美우주항공etf운용사스페이스x편입전략경쟁치열",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "2조 몰린 美 우주항공 ETF...운용사, 스페이스X 편입 전략 경쟁 치열"
+    },
+    {
+      "url_key": "https://newsian.co.kr/news/articleView.html?idxno=90751",
+      "title_key": "sto제도화수혜잡아라막오른증권사선점경쟁",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "STO 제도화 '수혜' 잡아라…막 오른 증권사 선점 경쟁"
+    },
+    {
+      "url_key": "https://dnews.co.kr/uhtml/view.jsp?idxno=202606101040540990775",
+      "title_key": "kind베트남롱탄물류센터개발사업착공",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "KIND, 베트남 롱탄 물류센터 개발사업 착공"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006302379?sid=101",
+      "title_key": "퇴직연금아직도예금에묻어뒀니투자상품에머니무브가속",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "퇴직연금, 아직도 예금에 묻어뒀니?...투자상품에 '머니무브' 가속"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/243/0000098956?sid=101",
+      "title_key": "발행어음부터cma까지증권사수신경쟁격화",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "발행어음부터 CMA까지…증권사 수신 경쟁 격화"
+    },
+    {
+      "url_key": "https://pinpointnews.co.kr/news/articleView.html?idxno=459090",
+      "title_key": "한국투자증권울산석유화학공단노조협의회와퇴직연금지원협력",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "한국투자증권, 울산석유화학공단 노조협의회와 퇴직연금 지원 협력"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/030/0003436399?sid=101",
+      "title_key": "한국투자증권ai줍줍이벤트진행ai분석서비스경험",
+      "sent_at": "2026-06-10T17:06:27.131876+09:00",
+      "title_preview": "한국투자증권, 'AI 줍줍 이벤트' 진행…AI 분석 서비스 경험"
     }
   ]
 }
