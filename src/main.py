@@ -228,7 +228,14 @@ def _dispatch_kakao_weekly(now: datetime) -> int:
         if not weekly_articles:
             print("[CH:KAKAO][weekly] No articles. Skipping.", flush=True)
             return 0
-        digest = process_weekly_digest(weekly_articles)
+        # 주간 종합은 회사별 이슈만 다루므로 업권 기사 제외.
+        company_weekly = _company_only(weekly_articles)
+        print(f"[CH:KAKAO][weekly] Filtered to {len(company_weekly)} company articles "
+              f"(from {len(weekly_articles)} total).", flush=True)
+        if not company_weekly:
+            print("[CH:KAKAO][weekly] No company articles. Skipping.", flush=True)
+            return 0
+        digest = process_weekly_digest(company_weekly)
         if not digest.get("by_company"):
             print("[CH:KAKAO][weekly] Digest empty. Skipping.", flush=True)
             return 0
@@ -294,6 +301,16 @@ def _dispatch_telegram_weekly(digest: dict, now: datetime) -> int:
     except Exception as e:
         print(f"[CH:TG][weekly][ERROR] {type(e).__name__}: {e}", flush=True)
         return 0
+
+
+def _company_only(articles: list[dict]) -> list[dict]:
+    """Filter to company-category articles only.
+
+    Used by weekly digest: 주간 종합은 회사별 이슈 정리가 목적이므로
+    업권 거시 뉴스는 입력에서 제외. 토큰 절감 + AI 집중도 향상.
+    category 필드 없는 구버전 데이터는 안전하게 회사로 간주.
+    """
+    return [a for a in articles if a.get("category", "company") == "company"]
 
 
 def _link_items_to_articles(items: list[dict], articles: list[dict]) -> list[dict]:
@@ -437,7 +454,14 @@ def main():
         weekly_articles = fetch_recent_news(hours_back=24 * 7)
         digest = {}
         if weekly_articles:
-            digest = process_weekly_digest(weekly_articles)
+            # 주간 종합은 회사별 이슈 정리가 목적이므로 업권 기사 제외 (토큰 절감 + AI 집중).
+            company_weekly = _company_only(weekly_articles)
+            print(f"[STEP 6] Filtered to {len(company_weekly)} company articles "
+                  f"(from {len(weekly_articles)} total).", flush=True)
+            if company_weekly:
+                digest = process_weekly_digest(company_weekly)
+            else:
+                print("[STEP 6] No company articles. Skipping digest generation.", flush=True)
         weekly_summary = {"kakao": 0, "email": 0, "telegram": 0}
         if ENABLE_KAKAO:
             weekly_summary["kakao"] = _dispatch_kakao_weekly(now)
