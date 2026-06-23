@@ -174,6 +174,6 @@ Anthropic Claude로 되돌리려면 백업된 `ai_processor_anthropic_backup.py`
 
 ## See Also
 
-- [docs/INSTALL.md](../docs/INSTALL.md) - 설치 가이드 (처음 사용 시)
-- [docs/ARCHITECTURE.md](../docs/ARCHITECTURE.md) - 시스템 구조 상세
-- [docs/TROUBLESHOOTING.md](../docs/TROUBLESHOOTING.md) - 문제 해결
+- [docs/INSTALL.md](../main/docs/INSTALL.md) - 설치 가이드 (처음 사용 시)
+- [docs/ARCHITECTURE.md](../main/docs/ARCHITECTURE.md) - 시스템 구조 상세
+- [docs/TROUBLESHOOTING.md](../main/docs/TROUBLESHOOTING.md) - 문제 해결
