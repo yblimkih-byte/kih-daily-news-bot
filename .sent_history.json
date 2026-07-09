@@ -1,96 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://moneystorm.kr/news/articleView.html?idxno=4909",
-      "title_key": "10대금융지주중하나금융이여신건전성가장양호",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "10대 금융지주 중 하나금융이 여신건전성 가장 양호"
-    },
-    {
-      "url_key": "https://dnews.co.kr/uhtml/view.jsp?idxno=202607061519192710116",
-      "title_key": "한투운용액티브etf무더기상폐이면엔내부통제부실",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "한투운용 액티브ETF 무더기 상폐 이면엔 '내부통제 부실'"
-    },
-    {
-      "url_key": "https://financialreview.co.kr/news/articleView.html?idxno=43334",
-      "title_key": "단일종목레버리지etf논란확산",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "[정책리뷰] 단일종목 레버리지 ETF 논란 확산"
-    },
-    {
-      "url_key": "https://sisajournal-e.com/news/articleView.html?idxno=422225",
-      "title_key": "한투지주롯데손보인수검토빠듯한자본사정부담",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "한투지주, 롯데손보 인수 검토···빠듯한 자본사정 '부담'"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/015/0005306696?sid=101",
-      "title_key": "스페이스x휘청이자우주etf줄줄이하락",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "스페이스X 휘청이자…우주 ETF 줄줄이 하락"
-    },
-    {
-      "url_key": "https://seoulfn.com/news/articleView.html?idxno=632761",
-      "title_key": "금융지주증권사키우기속도자본확충경쟁본격화",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "금융지주, 증권사 키우기 '속도'···자본확충 경쟁 본격화"
-    },
-    {
-      "url_key": "https://news2day.co.kr/article/20260706500092",
-      "title_key": "한국금융지주레버리지etf수혜기대증권업최선호주",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "“한국금융지주, 레버리지 ETF 수혜 기대…증권업 최선호주”<iM證>"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/417/0001150487?sid=101",
-      "title_key": "한투키움k방산top5스페이스x채권혼합etf선보인다",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "[체크!ETF] 한투·키움, K방산 TOP5·스페이스X 채권혼합 ETF 선보인다"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/277/0005786132?sid=100",
-      "title_key": "하루만에48폭락말이돼삼전닉스레버리지etf상폐론까지번졌",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "'하루만에 48% 폭락' 말이 돼?…삼전닉스 레버리지 ETF, 상폐론까지 번졌..."
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/666/0000114138?sid=101",
-      "title_key": "금감원중징계홈플러스회생무산mbk평판리스크확산",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "금감원 중징계·홈플러스 회생 무산…MBK '평판 리스크' 확산"
-    },
-    {
-      "url_key": "https://newstomato.com/ReadNews.aspx?no=1306241",
-      "title_key": "법원고시로법뒤집을순없다금융위dls규제행정편의에제동",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "법원 \"고시로 법 뒤집을 순 없다\"…금융위, DLS 규제 '행정편의'에 제동"
-    },
-    {
-      "url_key": "https://sateconomy.co.kr/news/view/1065588594856679",
-      "title_key": "웰컴저축은행채권3000억팔아계열운용사npl사도등장",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "웰컴저축은행, 채권 3000억 팔아…계열 운용사·NPL사도 등장"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/030/0003444854?sid=101",
-      "title_key": "금융위2차국민참여성장펀드자펀드운용사선정착수3분기6000억",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "금융위, '2차 국민참여성장펀드' 자펀드 운용사 선정 착수…3분기 6000억..."
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/014/0005544304?sid=105",
-      "title_key": "정무위원장디지털자산기본법깊이다뤄야하반기입법속도기대감",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "정무위원장 \"디지털자산기본법, 깊이 다뤄야\"…하반기 입법 속도 기대감..."
-    },
-    {
-      "url_key": "https://joongangenews.com/news/articleView.html?idxno=530779",
-      "title_key": "은행권주가고공행진에etf불완전판매비상령",
-      "sent_at": "2026-07-06T17:05:01.363461+09:00",
-      "title_preview": "은행권, 주가 고공행진에 'ETF 불완전판매' 비상령"
-    },
-    {
       "url_key": "https://news2day.co.kr/article/20260706500182",
       "title_key": "뜨거운감자단일종목레버리지etf결국수술대오른다",
       "sent_at": "2026-07-07T07:44:54.607244+09:00",
@@ -1823,6 +1733,162 @@
       "title_key": "이어지는빚투행진은행권주담대증가폭1년만에최대",
       "sent_at": "2026-07-09T13:44:07.302565+09:00",
       "title_preview": "이어지는 '빚투' 행진…은행권 주담대 증가폭 1년만에 최대"
+    },
+    {
+      "url_key": "https://press9.kr/news/articleView.html?idxno=79192",
+      "title_key": "미래에셋증권단기투자성과1위fvpl손익1조7000억원육박",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "미래에셋증권, 단기 투자 성과 '1위'…FVPL 손익 1조7000억원 육박"
+    },
+    {
+      "url_key": "https://greened.kr/news/articleView.html?idxno=344688",
+      "title_key": "운용사는커진부담에한숨증권사는거",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "[레버리지 열풍의 그림자②] 운용사는 커진 부담에 '한숨'…증권사는 거..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/243/0000100234?sid=101",
+      "title_key": "미래에셋證한투와격차더벌린다2분기도1위예약",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "미래에셋證, 한투와 격차 더 벌린다…2분기도 ‘1위 예약’"
+    },
+    {
+      "url_key": "https://greened.kr/news/articleView.html?idxno=344657",
+      "title_key": "로봇ai테마열기식었나휴머노이드etf줄줄이두자릿수급락",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "로봇·AI 테마 열기 식었나...휴머노이드 ETF 줄줄이 두 자릿수 급락"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/028/0002813434?sid=101",
+      "title_key": "대폭락에도레버리지5조뛰어든개미들평균수익률30달해",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "대폭락에도 레버리지 5조 뛰어든 개미들…평균 수익률 -30% 달해"
+    },
+    {
+      "url_key": "https://newsfreezone.co.kr/news/articleView.html?idxno=698754",
+      "title_key": "신한금융계열증권사에자본대신고객몰아준다",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "신한금융, 계열 증권사에 '자본' 대신 '고객' 몰아준다"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005383951?sid=101",
+      "title_key": "코빗인수공정위승인금융가상자산합종연횡가속화",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "'코빗 인수' 공정위 승인…금융·가상자산 합종연횡 가속화"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/009/0005705207?sid=101",
+      "title_key": "위축된공모주시장하반기대어급등판에투심살아날까",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "위축된 공모주 시장… 하반기 '대어급' 등판에 투심 살아날까"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006326237?sid=101",
+      "title_key": "한국투자증권한국중견기업연합회와제1회중견기업cfo협의회개최",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "한국투자증권, 한국중견기업연합회와 '제1회 중견기업 CFO 협의회' 개최"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/346/0000112597?sid=103",
+      "title_key": "불면증디지털치료기기슬립큐neca등록1000",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "[의료장비 이모저모] 불면증 디지털 치료기기 ‘슬립큐’, NECA 등록 1000..."
+    },
+    {
+      "url_key": "https://press9.kr/news/articleView.html?idxno=79210",
+      "title_key": "한국투자증권랩씨드코스닥상장대표주관ai데이터기업ipo추진",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "한국투자증권, 랩씨드 코스닥 상장 대표주관…AI 데이터 기업 IPO 추진"
+    },
+    {
+      "url_key": "https://viva100.com/article/20260707501244",
+      "title_key": "외환시장사실상24시간개방증권업계환전인프라속도전나섰지만",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "외환시장 사실상 24시간 개방…증권업계 환전 인프라 속도전 나섰지만 ..."
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4424228",
+      "title_key": "운용街롤러코스터에서내리지말라조정은사모을기회",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "운용街 \"롤러코스터에서 내리지 말라…조정은 사모을 기회\""
+    },
+    {
+      "url_key": "https://popcornnews.net/news/articleView.html?idxno=126124",
+      "title_key": "im증권신종자본증권1500억원발행자기자본1조2900억원대로확대",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "iM증권, 신종자본증권 1500억 원 발행…자기자본 1조2900억 원대로 확대"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/029/0003036210?sid=101",
+      "title_key": "넓을수록돈된다지방청약시장중대형평형품귀현상",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "“넓을수록 돈 된다”… 지방 청약시장, 중대형 평형 ‘품귀 현상’"
+    },
+    {
+      "url_key": "https://ibabynews.com/news/articleView.html?idxno=152786",
+      "title_key": "예술의전당을넘어대학로까지서울예술단대표레퍼토",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "[문화 트렌드] 예술의전당을 넘어 대학로까지… 서울예술단 대표 레퍼토..."
+    },
+    {
+      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202607071048045040107014",
+      "title_key": "한투운용밸류업7테마손익차등재간접펀드내놓는다",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "[더벨]한투운용, '밸류업 7테마' 손익차등 재간접펀드 내놓는다"
+    },
+    {
+      "url_key": "https://pointdaily.co.kr/news/articleView.html?idxno=311335",
+      "title_key": "증권사sto시장선점경쟁후끈독자인프라구축",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "증권사, STO 시장 선점 경쟁 후끈…독자 인프라 구축"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005383929?sid=101",
+      "title_key": "단일종목레버리지etf보완책15일업무보고전나오나",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "단일종목 레버리지 ETF 보완책, 15일 업무보고 전 나오나"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/028/0002813417?sid=101",
+      "title_key": "jtbc중앙일보부실상태서도채권팔아대리인은이복현변호",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "“JTBC·중앙일보, 부실 상태서도 채권 팔아”…대리인은 ‘이복현 변호..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/117/0004083174?sid=103",
+      "title_key": "100조단기조달시대49개증권사유동성규제전면확",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "[MD포커스] “100조 단기조달 시대”…49개 증권사 유동성 규제 전면 확..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/003/0014057029?sid=101",
+      "title_key": "esg공시대상시기대폭확대재계법적리스크인프라비상",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "ESG 공시 대상·시기 대폭 확대…재계 \"법적 리스크·인프라 비상\""
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/032/0003457149?sid=101",
+      "title_key": "다주택자중과전영끌거래에빚투까지은행가계대출6월",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "다주택자 중과 전 ‘영끌’ 거래에 ‘빚투’까지···은행 가계대출 6월..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/030/0003446236?sid=101",
+      "title_key": "20일부터우체국서4대은행대출가능지방인터넷銀공동대출추진",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "20일부터 우체국서 4대 은행 대출 가능…지방·인터넷銀 공동대출 추진"
+    },
+    {
+      "url_key": "https://hansbiz.co.kr/news/articleView.html?idxno=849323",
+      "title_key": "서민금융지원법하반기입법추진정책대출재원확보",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "서민금융지원법, 하반기 입법 추진, 정책대출 재원 확보"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006326278?sid=101",
+      "title_key": "생산적금융40조투자앞둔보험업계kics가발목",
+      "sent_at": "2026-07-09T17:15:14.742709+09:00",
+      "title_preview": "생산적 금융 40조 투자 앞둔 보험업계…K-ICS가 '발목'"
     }
   ]
 }
