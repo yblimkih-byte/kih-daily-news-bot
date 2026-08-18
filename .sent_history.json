@@ -1,24 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://n.news.naver.com/mnews/article/277/0005803514?sid=101",
-      "title_key": "반년일하고227억받았다돈방석제대로앉은직장인들무슨일",
-      "sent_at": "2026-08-15T17:01:31.663852+09:00",
-      "title_preview": "\"반년 일하고 227억 받았다\"…돈방석 제대로 앉은 직장인들, 무슨 일"
-    },
-    {
-      "url_key": "https://econonews.co.kr/news/articleView.html?idxno=442891",
-      "title_key": "중기부한국벤처투자lp성장펀드출범차세대투자플랫폼연기금",
-      "sent_at": "2026-08-15T17:01:31.663852+09:00",
-      "title_preview": "중기부-한국벤처투자, 'LP성장펀드 출범'...차세대 투자 플랫폼, 연기금..."
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/665/0000007955?sid=101",
-      "title_key": "주택신속공급약속대로실행해부동산시장안정시켜야",
-      "sent_at": "2026-08-15T17:01:31.663852+09:00",
-      "title_preview": "\"주택 신속 공급\"… 약속대로 실행해 부동산 시장 안정시켜야"
-    },
-    {
       "url_key": "https://n.news.naver.com/mnews/article/422/0000896299?sid=101",
       "title_key": "초과수익에도상폐액티브etf상관계수논란",
       "sent_at": "2026-08-16T17:01:33.006567+09:00",
@@ -497,6 +479,162 @@
       "title_key": "예보전시금융위기대비을지연습사이버공격대응훈련",
       "sent_at": "2026-08-18T13:32:33.707338+09:00",
       "title_preview": "예보, 전시 금융위기 대비 을지연습…사이버공격 대응훈련"
+    },
+    {
+      "url_key": "https://dnews.co.kr/uhtml/view.jsp?idxno=202608181509388650368",
+      "title_key": "브로커리지는웃었지만ib는울었다상반기ib수수료수익",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "“브로커리지는 웃었지만 IB는 울었다”…상반기 IB수수료 수익↓"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005322011?sid=101",
+      "title_key": "세계3위피델리티의굴욕국내펀드설정액7000억증발",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "세계 3위 피델리티의 굴욕…국내 펀드 설정액 '7000억 증발'"
+    },
+    {
+      "url_key": "https://newsway.co.kr/news/view?ud=2026081815382660574",
+      "title_key": "내월급은어디쯤상반기평균급여1억넘긴기업속출",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "\"내 월급은 어디쯤?\"…상반기 평균급여 1억 넘긴 기업 속출"
+    },
+    {
+      "url_key": "https://newstopkorea.com/news/articleView.html?idxno=47095",
+      "title_key": "연봉킹오른윤호영카뱅대표주주환원율50달성주목",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "'연봉킹' 오른 윤호영 카뱅 대표…주주환원율 50% 달성 '주목'"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005401294?sid=101",
+      "title_key": "국장떠나지말라한국의해자반조방원주목전문가조언",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "\"국장 떠나지 말라…한국의 해자 '반·조·방·원' 주목\" 전문가 조언"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006353595?sid=101",
+      "title_key": "우리금융동양생명abl생명통합시동내년까지합병마무리",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "우리금융, 동양생명-ABL생명 통합 시동…내년까지 합병 마무리"
+    },
+    {
+      "url_key": "https://sisajournal-e.com/news/articleView.html?idxno=423131",
+      "title_key": "kb증권메리츠삼성제치고자기자본4위ib수익성회복시도",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "KB증권, 메리츠·삼성 제치고 자기자본 4위···'IB 수익성' 회복 시도"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005322020?sid=105",
+      "title_key": "라이드플럭스韓1호자율주행상장사도전",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "라이드플럭스, 韓 1호 자율주행 상장사 도전"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4430582",
+      "title_key": "한국투자신탁운용5년만에유상증자한투증권서600억조달",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "한국투자신탁운용, 5년 만에 유상증자…한투증권서 600억 조달"
+    },
+    {
+      "url_key": "https://news2day.co.kr/article/20260818500196",
+      "title_key": "한투nh투자證ima동시출격자금유치경쟁후끈",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "한투·NH투자證, IMA 동시 출격…자금 유치 경쟁 ‘후끈’"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006353479?sid=101",
+      "title_key": "한달간etf수익률상위는로봇etf수익률20쑥",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "한 달간 ETF 수익률 상위는 로봇 ‘ETF’..수익률 20% ‘쑥’↑"
+    },
+    {
+      "url_key": "https://asiaa.co.kr/news/articleView.html?idxno=259142",
+      "title_key": "코인원2026브랜드캠페인메인영상시리즈공개",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "코인원, '2026 브랜드 캠페인' 메인 영상 시리즈 공개"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005401402?sid=101",
+      "title_key": "롯데건설이랜드월드19일수요예측비우량채시장시험대",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "롯데건설·이랜드월드, 19일 수요예측…비우량채 시장 시험대"
+    },
+    {
+      "url_key": "https://businessplus.kr/news/articleView.html?idxno=115581",
+      "title_key": "irp166조로dc앞서증권사비중30눈앞",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "[퇴직연금 머니무브/상]IRP 166조로 DC 앞서…증권사 비중 30% 눈앞"
+    },
+    {
+      "url_key": "https://doctorstimes.com/news/articleView.html?idxno=239561",
+      "title_key": "8월18일",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "[의료기기업계 소식] 8월 18일"
+    },
+    {
+      "url_key": "https://pinpointnews.co.kr/news/articleView.html?idxno=477604",
+      "title_key": "주거pf자기자본규제2년미뤄진다제2금융권부담뒤로",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "주거 PF 자기자본 규제 2년 미뤄진다…제2금융권 부담 뒤로"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/448/0000634122?sid=101",
+      "title_key": "삼전닉스레버리지국조실평가받았다던금융위국조실은아니다",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "\"삼전닉스 레버리지, 국조실 평가받았다\"던 금융위…국조실은 \"아니다\""
+    },
+    {
+      "url_key": "https://mediapen.com/news/view/1117061",
+      "title_key": "조각투자시장11월개설토큰증권제도화가시권",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "'조각투자' 시장 11월 개설…토큰증권 '제도화' 가시권"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/031/0001050459?sid=101",
+      "title_key": "불황형흑자카드사들우대수수료대출규제이중고",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "'불황형 흑자' 카드사들⋯우대수수료·대출규제 '이중고'"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/030/0003458300?sid=101",
+      "title_key": "지역벤처에돈맥뚫는다첫출범지역성장펀드평균결성액900억",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "지역 벤처에 '돈맥' 뚫는다…첫 출범 '지역성장펀드', 평균 결성액 900억..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/030/0003458306?sid=101",
+      "title_key": "토큰증권이제는시행일에서역산할때다상",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "[블록체인 칼럼]토큰증권, 이제는 시행일에서 역산할 때다〈상〉"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/030/0003458294?sid=100",
+      "title_key": "박홍배의원주주활동활성화위한5룰개정안발의",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "박홍배 의원, 주주활동 활성화 위한 '5%룰' 개정안 발의"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/123/0002388550?sid=101",
+      "title_key": "①자회사상장자유에서예외로첫시험대는솔리다임",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "① 자회사 상장, 자유에서 예외로…첫 시험대는 솔리다임 [마켓프리즘]"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005401478?sid=101",
+      "title_key": "예보올해저축은행특별계정부채1조덜어내년정상청산",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "예보, 올해 저축은행 특별계정 부채 1조 덜어…\"내년 정상 청산\""
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005562926?sid=101",
+      "title_key": "etf잘될수록세금더낸다500조시장발목잡는낡은세제fn마",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "\"ETF 잘 될수록 세금 더 낸다\"…500조 시장 발목 잡는 '낡은 세제' [fn마..."
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005401410?sid=101",
+      "title_key": "출장비연40억더금융회사서울에있는데당국지방이전혼란",
+      "sent_at": "2026-08-18T17:02:23.087796+09:00",
+      "title_preview": "출장비 연 40억 더?...\"금융회사 서울에 있는데\" 당국 지방 이전 '혼란'"
     }
   ]
 }
