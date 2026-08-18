@@ -78,6 +78,45 @@ TARGET_SECTORS = [
 KST = timezone(timedelta(hours=9))
 
 
+# 수집에서 제외할 매체 도메인.
+# 여기 등록된 도메인의 기사는 회사·업권 양쪽 검색 모두에서 제외된다.
+# 네이버에 등재된 기사라도 원문 출처(originallink)가 이 목록이면 제외.
+# 서브도메인도 함께 차단됨 (예: "peoplewatch.co.kr" 등록 시 "www.peoplewatch.co.kr"도 차단).
+BLOCKED_DOMAINS = {
+    "peoplewatch.co.kr",
+}
+
+
+def _domain_of(url: str) -> str:
+    """Extract bare hostname (lowercased, no leading 'www.') from a URL."""
+    if not url:
+        return ""
+    try:
+        host = (urlparse(url).hostname or "").lower()
+    except Exception:
+        return ""
+    if host.startswith("www."):
+        host = host[4:]
+    return host
+
+
+def _is_blocked_domain(*urls: str) -> tuple[bool, str]:
+    """Return (True, matched_domain) if any given URL belongs to a blocked domain.
+
+    Checks both the article URL and its original-media URL, so a blocked outlet
+    cannot slip through by being syndicated onto Naver News.
+    Subdomains are covered: "biz.peoplewatch.co.kr" matches "peoplewatch.co.kr".
+    """
+    for url in urls:
+        host = _domain_of(url)
+        if not host:
+            continue
+        for blocked in BLOCKED_DOMAINS:
+            if host == blocked or host.endswith("." + blocked):
+                return True, blocked
+    return False, ""
+
+
 # 회사별 매칭 별칭. 정식 회사명 + "한투" 접두사 약어만 허용.
 # "금융지주", "증권", "캐피탈" 같은 일반명사 단독 약어는 절대 포함하지 않는다.
 # (예: "국내 최대 금융지주", "KB증권" 같은 타사 기사 오매칭 방지)
@@ -183,7 +222,7 @@ def fetch_recent_news(hours_back: float = 24) -> list[dict]:
     seen_url_keys = set()
     seen_title_keys = set()
     stats = {"naver": 0, "external": 0, "old": 0, "no_match": 0,
-             "dup_url": 0, "dup_title": 0,
+             "dup_url": 0, "dup_title": 0, "blocked": 0,
              "sector_naver": 0, "sector_external": 0}
 
     # === Phase 1: 회사 검색 (회사명 본문 매칭 필수) ===
@@ -217,6 +256,13 @@ def fetch_recent_news(hours_back: float = 24) -> list[dict]:
                 is_naver = _is_naver_news_link(link)
                 primary_link = link if is_naver else (original_link or link)
                 if not primary_link:
+                    continue
+
+                # --- Blocked media filter ---
+                # 네이버 등재본이라도 원문 출처가 차단 매체면 제외.
+                blocked, blocked_domain = _is_blocked_domain(primary_link, original_link, link)
+                if blocked:
+                    stats["blocked"] += 1
                     continue
 
                 # --- Layer 1: URL fingerprint (canonical) ---
@@ -269,7 +315,8 @@ def fetch_recent_news(hours_back: float = 24) -> list[dict]:
         f"[INFO] Naver search (companies): total={len(all_articles)} "
         f"(naver={stats['naver']}, external={stats['external']}), "
         f"skipped_old={stats['old']}, skipped_no_match={stats['no_match']}, "
-        f"skipped_dup_url={stats['dup_url']}, skipped_dup_title={stats['dup_title']}",
+        f"skipped_dup_url={stats['dup_url']}, skipped_dup_title={stats['dup_title']}, "
+        f"skipped_blocked={stats['blocked']}",
         flush=True,
     )
 
@@ -307,6 +354,12 @@ def fetch_recent_news(hours_back: float = 24) -> list[dict]:
                 is_naver = _is_naver_news_link(link)
                 primary_link = link if is_naver else (original_link or link)
                 if not primary_link:
+                    continue
+
+                # --- Blocked media filter (회사 루프와 동일 정책) ---
+                blocked, blocked_domain = _is_blocked_domain(primary_link, original_link, link)
+                if blocked:
+                    stats["blocked"] += 1
                     continue
 
                 url_key = normalize_url(primary_link)
