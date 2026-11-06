@@ -1,4 +1,4 @@
-google-genai>=0.3.0
+google-genai>=2.34.0,<3  # 3.x는 기본 API 버전이 v1로 바뀌어 preview 모델 404 발생 (2026-11-06 장애)
 requests>=2.31.0
 json-repair>=0.30.0
 holidays>=0.40

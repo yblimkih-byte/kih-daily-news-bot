@@ -33,6 +33,9 @@ GEMINI_MODEL = os.environ.get("GEMINI_MODEL", DEFAULT_MODEL).strip() or DEFAULT_
 # 안정 버전이라 preview보다 가용성 높음.
 FALLBACK_MODEL = os.environ.get("GEMINI_FALLBACK_MODEL", "gemini-2.5-flash").strip()
 
+# Gemini API 버전. preview 모델 사용 시 반드시 v1beta.
+GEMINI_API_VERSION = os.environ.get("GEMINI_API_VERSION", "v1beta").strip() or "v1beta"
+
 # Retry policy for transient Gemini errors (503 UNAVAILABLE, 429 RESOURCE_EXHAUSTED, etc).
 # 3 attempts on primary model + 1 attempt on fallback model = 최대 4 attempts total.
 RETRY_ATTEMPTS_PRIMARY = 3
@@ -62,7 +65,13 @@ def _get_client() -> genai.Client:
             "Get a free API key from https://aistudio.google.com/apikey "
             "and register it as a GitHub Secret."
         )
-    return genai.Client(api_key=api_key)
+    # API 버전을 v1beta로 명시. google-genai 3.0.0부터 기본값이 v1로 바뀌었고,
+    # preview 모델(gemini-3-flash-preview 등)은 v1beta에서만 제공됨.
+    # 버전 고정 없이 SDK 업데이트만으로 전 슬롯이 실패한 사례(2026-11-06 13:30) 재발 방지.
+    return genai.Client(
+        api_key=api_key,
+        http_options=types.HttpOptions(api_version=GEMINI_API_VERSION),
+    )
 
 
 def _preselect_articles(articles: list[dict], max_n: int) -> list[dict]:
@@ -184,6 +193,13 @@ def _is_transient_error(exc: Exception) -> bool:
     return True
 
 
+def _is_auth_error(exc: Exception) -> bool:
+    """API 키·권한 오류. 폴백 모델도 같은 키를 쓰므로 시도 무의미 → 즉시 중단."""
+    msg = str(exc)
+    return any(sig in msg for sig in ("401", "403", "UNAUTHENTICATED",
+                                      "PERMISSION_DENIED", "API_KEY_INVALID"))
+
+
 def _call_gemini_once(model: str, system_prompt: str, user_message: str) -> str:
     """Single Gemini API call. May raise."""
     client = _get_client()
@@ -229,7 +245,13 @@ def _call_gemini(system_prompt: str, user_message: str) -> str:
                 print(f"[ERROR][gemini] Permanent error on primary "
                       f"(attempt {attempt}/{RETRY_ATTEMPTS_PRIMARY}): {type(e).__name__}: {e}",
                       flush=True)
-                raise
+                if _is_auth_error(e):
+                    raise  # 키·권한 문제는 폴백해도 동일하게 실패
+                # 모델 미존재(404)·요청 형식(400) 등은 primary 재시도는 무의미하나
+                # 다른 모델에서는 성공할 수 있으므로 폴백 단계로 진행.
+                print(f"[WARN][gemini] Skipping remaining primary attempts; "
+                      f"trying fallback {FALLBACK_MODEL}.", flush=True)
+                break
             if attempt < RETRY_ATTEMPTS_PRIMARY:
                 wait = RETRY_WAIT_SECONDS[attempt - 1] if (attempt - 1) < len(RETRY_WAIT_SECONDS) else RETRY_WAIT_SECONDS[-1]
                 print(f"[WARN][gemini] Transient error on primary "
