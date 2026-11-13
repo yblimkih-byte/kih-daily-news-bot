@@ -13,7 +13,11 @@ Schema:
       "url_key": "<normalized url>",
       "title_key": "<normalized title>",
       "sent_at": "2026-05-12T17:00:00+09:00",
-      "title_preview": "한국투자증권 부산 디지털사이니지 ..."
+      "title_preview": "한국투자증권 부산 디지털사이니지 ...",
+      "story": "kis-busan-signage",          # 여러 회차에 걸친 큰 사건 단위 (AI 부여, 회차 간 재사용)
+      "event_group": "kis-busan-signage",    # 개별 보도 단위 (회차 내 중복 제거용)
+      "kind": "new_fact",                    # new_fact | analysis
+      "summary": "한투증권 부산 디지털사이니지 광고 집행"
     },
     ...
   ]
@@ -199,6 +203,30 @@ def filter_unseen(articles: list[dict]) -> tuple[list[dict], int]:
     return kept, dropped
 
 
+def to_context_entry(item: dict, sent_at: str) -> dict:
+    """발송 항목을 이력/AI 문맥용 공통 형식으로 변환."""
+    eg = (item.get("event_group") or "").strip().lower()
+    return {
+        "sent_at": sent_at,
+        "title_preview": (item.get("title") or "")[:60],
+        "story": (item.get("story") or "").strip().lower() or eg,
+        "event_group": eg,
+        "kind": item.get("novelty") or "new_fact",
+        "summary": (item.get("summary") or "")[:60],
+    }
+
+
+def load_recent_sent() -> list[dict]:
+    """최근 RETENTION_DAYS일 발송 이력 (오래된 순). AI의 사건 단위 중복 판정 문맥용.
+
+    구버전 항목은 story/kind/summary가 없을 수 있음 (AI가 제목만으로 판정).
+    """
+    now = datetime.now(KST)
+    entries = _prune(_load(), now)["entries"]
+    entries.sort(key=lambda e: e.get("sent_at", ""))
+    return entries
+
+
 def record_sent(items: list[dict]) -> None:
     """Append the given items to history. Should be called after a successful send."""
     if not items:
@@ -217,12 +245,9 @@ def record_sent(items: list[dict]) -> None:
         # Avoid duplicate rows
         if url_key in existing_urls or title_key in existing_titles:
             continue
-        data["entries"].append({
-            "url_key": url_key,
-            "title_key": title_key,
-            "sent_at": now.isoformat(),
-            "title_preview": (it.get("title") or "")[:60],
-        })
+        entry = {"url_key": url_key, "title_key": title_key}
+        entry.update(to_context_entry(it, now.isoformat()))
+        data["entries"].append(entry)
         existing_urls.add(url_key)
         existing_titles.add(title_key)
         added += 1

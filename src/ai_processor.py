@@ -112,6 +112,95 @@ def _trim_article(a: dict) -> dict:
     }
 
 
+# --------------------------------------------------------------------------- #
+# 회차 간 사건 단위 중복 판정 (story + novelty)                                #
+# --------------------------------------------------------------------------- #
+# story    : 여러 회차에 걸친 큰 사건 단위 슬러그. 발송 목록의 값을 재사용.
+# event_group: 개별 보도 단위 슬러그 (기존 규칙). 회차 내 중복 제거에만 사용.
+# novelty  : new_fact → 발송 / analysis → story당 첫 1건만 발송 / repeat → 제외
+NOVELTY_VALUES = {"new_fact", "analysis", "repeat"}
+NOVELTY_RANK = {"new_fact": 2, "analysis": 1, "repeat": 0}
+SENT_CONTEXT_MAX = 300  # AI에 넘길 최근 발송 목록 상한 (토큰 관리)
+
+
+def _norm_slug(v) -> str:
+    return (v or "").strip().lower()
+
+
+def _norm_novelty(v) -> str:
+    v = (v or "").strip().lower()
+    return v if v in NOVELTY_VALUES else "new_fact"  # 불명확하면 발송 쪽으로 (누락 방지)
+
+
+def _format_sent_context(sent_context: list[dict] | None) -> str:
+    """최근 발송 목록 + story/novelty 판정 지시문. sent_context가 비어 있으면 빈 문자열."""
+    if not sent_context:
+        return ""
+    kind_label = {"analysis": "분석", "new_fact": "사실"}
+    lines = []
+    for e in sent_context[-SENT_CONTEXT_MAX:]:
+        ts = (e.get("sent_at") or "")[5:16].replace("T", " ")
+        story = _norm_slug(e.get("story")) or "-"
+        kind = kind_label.get(e.get("kind"), "-")
+        title = (e.get("title_preview") or "")[:50]
+        summ = (e.get("summary") or "")[:40]
+        lines.append(f"{ts} | {story} | {kind} | {title}" + (f" | {summ}" if summ else ""))
+    return (
+        "\n[최근 발송 목록] 지난 3일간 이미 사용자에게 발송한 기사 "
+        f"({len(lines)}건, 형식: 발송시각 | story | 유형 | 제목 | 요약):\n"
+        + "\n".join(lines)
+        + "\n\n"
+        "[회차 간 중복 판정 규칙] (위 목록 기준, 모든 입력 기사에 적용)\n"
+        "- story: 여러 날에 걸쳐 후속 보도가 이어지는 '큰 사건' 단위 영문 슬러그 (예: 'ktb-bid-rigging-fine'). "
+        "입력 기사가 목록 속 기사와 같은 큰 사건이면 목록에 적힌 story 문자열을 그대로 재사용. "
+        "목록 항목의 story가 '-'이거나 새 사건이면 새 슬러그 부여 (영문 소문자+하이픈, 30자 이내).\n"
+        "- event_group은 기존 규칙(같은 시점·같은 행위의 개별 보도 단위)을 그대로 따름. "
+        "같은 story 안에서도 새 주체의 발표, 새 결정 등 서로 다른 사실이면 event_group을 다르게 부여.\n"
+        "- novelty 값 판정:\n"
+        "  - \"new_fact\": 목록에 없는 새 사건. 또는 목록 속 사건이지만 이미 발송된 제목·요약에 없던 새 사실이 있는 기사. "
+        "새 사실 예시: 새 주체의 입장·발표(정부 부처, 감독기관, 협회, 당사자 회사), 새 절차·결정(고발, 소송 제기, 이의신청, 공시, 충당금 반영, 제재 확정), "
+        "처음 공개된 수치(특히 한국투자 계열사 개별 금액·실적).\n"
+        "  - \"analysis\": 목록 속 사건에 대해 새 사실 없이 영향 분석·전망·쟁점 정리·종합 해설을 한 기사 "
+        "(예: 애널리스트의 실적 영향 추정, 사건 경과를 묶은 해설 기사).\n"
+        "  - \"repeat\": 목록 속 사건의 이미 알려진 사실을 다시 전한 기사 (늦은 재보도, 주간 정리, 반응·인용문만 바꾼 기사).\n"
+        "- 판단 근거는 제목과 description뿐이므로, 거기에 새 주체·새 결정·새 수치가 드러나지 않으면 new_fact로 판정하지 말 것.\n"
+        "- repeat 기사는 filtered 배열에서 제외하고, 그 idx를 skipped_repeat 배열에 넣을 것.\n\n"
+    )
+
+
+def _log_skipped_repeat(result: dict, selected: list[dict], tag: str) -> None:
+    for idx in result.get("skipped_repeat") or []:
+        if isinstance(idx, int) and 0 <= idx < len(selected):
+            print(f"[INFO][novelty][{tag}] AI judged repeat (excluded): "
+                  f"'{(selected[idx].get('title') or '')[:45]}'", flush=True)
+
+
+def _apply_sent_policy(items: list[dict], sent_context: list[dict] | None, tag: str) -> list[dict]:
+    """코드 차원 강제: repeat 제외 / analysis는 story당 1건 (이력 포함, 이번 회차 내 포함)."""
+    if not sent_context:
+        return items
+    analysis_stories = {_norm_slug(e.get("story")) for e in sent_context
+                        if e.get("kind") == "analysis" and _norm_slug(e.get("story"))}
+    kept = []
+    # 이번 회차에 analysis가 여러 건이면 중요도 높은 1건만 남기도록 중요도 순으로 검사
+    for it in sorted(items, key=lambda x: -x.get("importance", 0)):
+        nv, story = it.get("novelty"), _norm_slug(it.get("story"))
+        title = (it.get("title") or "")[:45]
+        if nv == "repeat":
+            print(f"[INFO][novelty][{tag}] Drop repeat: '{title}' (story={story})", flush=True)
+            continue
+        if nv == "analysis" and story:
+            if story in analysis_stories:
+                print(f"[INFO][novelty][{tag}] Drop analysis (already sent for story={story}): '{title}'", flush=True)
+                continue
+            analysis_stories.add(story)
+        kept.append(it)
+    counts = {k: sum(1 for it in kept if it.get("novelty") == k) for k in ("new_fact", "analysis")}
+    print(f"[INFO][novelty][{tag}] {len(items)} → {len(kept)} kept "
+          f"(new_fact={counts['new_fact']}, analysis={counts['analysis']})", flush=True)
+    return kept
+
+
 def _extract_json(text: str) -> dict | None:
     """Try to extract a JSON object from Gemini's response.
 
@@ -279,7 +368,7 @@ def _call_gemini(system_prompt: str, user_message: str) -> str:
     raise last_exc if last_exc else RuntimeError("All Gemini call attempts failed without raising")
 
 
-def process_daily_news(articles: list[dict]) -> list[dict]:
+def process_daily_news(articles: list[dict], sent_context: list[dict] | None = None) -> list[dict]:
     """회사 카테고리(category='company') 기사만 필터링·요약하여 반환.
 
     업권 카테고리 기사가 섞여 있어도 자동으로 제외하고 회사 기사만 처리.
@@ -324,7 +413,8 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
     user_message = (
         "아래는 직전 24시간 동안 수집된 한국투자금융그룹 관련 기사 목록입니다.\n"
         "각 기사는 'idx' 번호가 부여되어 있습니다.\n"
-        "시스템 프롬프트의 §4 (수집·선별 규칙), §5 (감성 분석) 기준을 적용하세요.\n\n"
+        "시스템 프롬프트의 §4 (수집·선별 규칙), §5 (감성 분석) 기준을 적용하세요.\n"
+        f"{_format_sent_context(sent_context)}"
         f"기사 목록 ({len(indexed_articles)}건, JSON):\n"
         f"{json.dumps(indexed_articles, ensure_ascii=False, indent=2)}\n\n"
         "다음 JSON 형식으로만 응답. 다른 텍스트 절대 금지:\n"
@@ -336,9 +426,12 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
         '      "sentiment": "positive | neutral | negative",\n'
         '      "summary": "40자 이내 한 줄 요약 (주술 구조)",\n'
         '      "importance": 1-10,\n'
-        '      "event_group": "이 기사가 다루는 실제 사건/사안의 고유 식별자 (아래 규칙 준수)"\n'
+        '      "event_group": "이 기사가 다루는 실제 사건/사안의 고유 식별자 (아래 규칙 준수)",\n'
+        '      "story": "여러 회차에 걸친 큰 사건 단위 슬러그 (최근 발송 목록에 같은 사건이 있으면 그 값 재사용)",\n'
+        '      "novelty": "new_fact | analysis | repeat"\n'
         "    }\n"
-        "  ]\n"
+        "  ],\n"
+        '  "skipped_repeat": [repeat로 판정해 제외한 기사의 idx 정수 목록]\n'
         "}\n\n"
         "main_company는 반드시 다음 11개 중 하나의 정확한 회사명으로 응답:\n"
         "- 한국투자금융지주\n"
@@ -452,10 +545,15 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
             "sentiment": ai_item.get("sentiment", "neutral"),
             "summary": ai_item.get("summary", ""),
             "importance": ai_item.get("importance", 5),
-            "event_group": ai_item.get("event_group", ""),
+            "event_group": _norm_slug(ai_item.get("event_group")),
+            "story": _norm_slug(ai_item.get("story")) or _norm_slug(ai_item.get("event_group")),
+            "novelty": _norm_novelty(ai_item.get("novelty")),
         })
     if reclass_count:
         print(f"[INFO] Total reclassifications: {reclass_count}", flush=True)
+
+    _log_skipped_repeat(result, selected, "company")
+    enriched = _apply_sent_policy(enriched, sent_context, "company")
 
     n_naver_pre = sum(1 for it in enriched if it.get("is_naver"))
     n_ext_pre = sum(1 for it in enriched if not it.get("is_naver"))
@@ -474,8 +572,10 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
             grouped[eg] = it
         else:
             current = grouped[eg]
-            cur_score = (1 if current.get("is_naver") else 0, current.get("importance", 0))
-            new_score = (1 if it.get("is_naver") else 0, it.get("importance", 0))
+            cur_score = (NOVELTY_RANK.get(current.get("novelty"), 2),
+                         1 if current.get("is_naver") else 0, current.get("importance", 0))
+            new_score = (NOVELTY_RANK.get(it.get("novelty"), 2),
+                         1 if it.get("is_naver") else 0, it.get("importance", 0))
             if new_score > cur_score:
                 print(f"[INFO] Group dedupe: replacing '{current.get('title','')[:30]}' "
                       f"with '{it.get('title','')[:30]}' (group={eg})", flush=True)
@@ -502,7 +602,7 @@ def process_daily_news(articles: list[dict]) -> list[dict]:
     return deduped
 
 
-def process_sector_news(articles: list[dict]) -> list[dict]:
+def process_sector_news(articles: list[dict], sent_context: list[dict] | None = None) -> list[dict]:
     """업권 카테고리(category='sector') 기사를 업권별로 필터링·요약하여 반환.
 
     업권별 최대 3건. 중요도 기준 상위 3개. 단순 경쟁사 홍보·시황 분석은 제외.
@@ -530,7 +630,8 @@ def process_sector_news(articles: list[dict]) -> list[dict]:
     user_message = (
         "아래는 직전 24시간 동안 수집된 한국투자금융그룹과 동일 업권의 거시 뉴스 목록입니다.\n"
         "각 기사는 'idx' 번호가 부여되어 있으며, 검색 시점에 매칭된 'sector' 필드가 있습니다.\n"
-        "시스템 프롬프트의 §4.5 (업권 거시 뉴스 판정 기준)을 적용하세요.\n\n"
+        "시스템 프롬프트의 §4.5 (업권 거시 뉴스 판정 기준)을 적용하세요.\n"
+        f"{_format_sent_context(sent_context)}"
         f"기사 목록 ({len(indexed_articles)}건, JSON):\n"
         f"{json.dumps(indexed_articles, ensure_ascii=False, indent=2)}\n\n"
         "다음 JSON 형식으로만 응답. 다른 텍스트 절대 금지:\n"
@@ -541,9 +642,12 @@ def process_sector_news(articles: list[dict]) -> list[dict]:
         '      "main_sector": "기사의 실질 영향 업권명 (아래 목록 중 하나만)",\n'
         '      "summary": "40자 이내 한 줄 요약 (주술 구조)",\n'
         '      "importance": 1-10,\n'
-        '      "event_group": "이 기사가 다루는 사건의 고유 식별자 (영문 슬러그, 30자 이내)"\n'
+        '      "event_group": "이 기사가 다루는 사건의 고유 식별자 (영문 슬러그, 30자 이내)",\n'
+        '      "story": "여러 회차에 걸친 큰 사건 단위 슬러그 (최근 발송 목록에 같은 사건이 있으면 그 값 재사용)",\n'
+        '      "novelty": "new_fact | analysis | repeat"\n'
         "    }\n"
-        "  ]\n"
+        "  ],\n"
+        '  "skipped_repeat": [repeat로 판정해 제외한 기사의 idx 정수 목록]\n'
         "}\n\n"
         "업권 뉴스는 정책·규제·시장 구조 변경 정보가 대부분이므로 감성(긍정/부정) 분류는 하지 않음. "
         "회사 입장에 따라 같은 정책이 기회일 수도 위협일 수도 있어 일률적 감성 부여가 부적절. "
@@ -630,8 +734,13 @@ def process_sector_news(articles: list[dict]) -> list[dict]:
             "sentiment": "",
             "summary": ai_item.get("summary", ""),
             "importance": ai_item.get("importance", 5),
-            "event_group": ai_item.get("event_group", ""),
+            "event_group": _norm_slug(ai_item.get("event_group")),
+            "story": _norm_slug(ai_item.get("story")) or _norm_slug(ai_item.get("event_group")),
+            "novelty": _norm_novelty(ai_item.get("novelty")),
         })
+
+    _log_skipped_repeat(result, selected, "sector")
+    enriched = _apply_sent_policy(enriched, sent_context, "sector")  # 업권별 3건 제한 전에 적용
 
     # --- Event-group dedupe (방어적) ---
     grouped = {}
@@ -645,8 +754,10 @@ def process_sector_news(articles: list[dict]) -> list[dict]:
             grouped[eg] = it
         else:
             current = grouped[eg]
-            cur_score = (1 if current.get("is_naver") else 0, current.get("importance", 0))
-            new_score = (1 if it.get("is_naver") else 0, it.get("importance", 0))
+            cur_score = (NOVELTY_RANK.get(current.get("novelty"), 2),
+                         1 if current.get("is_naver") else 0, current.get("importance", 0))
+            new_score = (NOVELTY_RANK.get(it.get("novelty"), 2),
+                         1 if it.get("is_naver") else 0, it.get("importance", 0))
             if new_score > cur_score:
                 grouped[eg] = it
     deduped = list(grouped.values()) + no_group

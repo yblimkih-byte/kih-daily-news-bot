@@ -27,7 +27,7 @@ import holidays
 
 from naver_news import fetch_recent_news
 from ai_processor import process_daily_news, process_sector_news, process_weekly_digest
-from sent_history import filter_unseen, record_sent
+from sent_history import filter_unseen, record_sent, load_recent_sent, to_context_entry
 
 
 KST = timezone(timedelta(hours=9))
@@ -377,11 +377,15 @@ def main():
     print(f"[STEP 2] After history dedupe: {len(daily_articles)} articles "
           f"(dropped {hist_dropped} previously-sent).", flush=True)
 
+    # 최근 3일 발송 목록: AI의 사건 단위 중복 판정(new_fact/analysis/repeat)에 사용
+    sent_ctx = load_recent_sent()
+    print(f"[STEP 2] Sent context for AI: {len(sent_ctx)} recent item(s).", flush=True)
+
     # 3. AI filter — 회사 카테고리
     daily_items = []
     if daily_articles:
         print("[STEP 3] Processing daily (company) news with AI...", flush=True)
-        daily_items = process_daily_news(daily_articles)
+        daily_items = process_daily_news(daily_articles, sent_ctx)
         daily_items = _link_items_to_articles(daily_items, daily_articles)
         print(f"[STEP 3] After AI filter (company): {len(daily_items)} items.", flush=True)
         # 진단: 입력에 회사 기사가 있었는데 AI 결과가 0이면 비정상 가능성 강조
@@ -397,7 +401,9 @@ def main():
     sector_items = []
     if daily_articles:
         print("[STEP 3b] Processing sector news with AI...", flush=True)
-        sector_items = process_sector_news(daily_articles)
+        # 이번 회차에 회사 뉴스로 선정된 기사도 '발송 예정'으로 넘겨 업권 쪽 중복 방지
+        sector_ctx = sent_ctx + [to_context_entry(it, now.isoformat()) for it in daily_items]
+        sector_items = process_sector_news(daily_articles, sector_ctx)
         sector_items = _link_items_to_articles(sector_items, daily_articles)
         print(f"[STEP 3b] After AI filter (sector): {len(sector_items)} items.", flush=True)
 
