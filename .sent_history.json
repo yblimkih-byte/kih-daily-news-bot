@@ -989,6 +989,136 @@
       "event_group": "financial-holding-overseas-expansion",
       "kind": "new_fact",
       "summary": "국내 금융지주, 해외 은행·증권사 인수로 해외자산 확대"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445061",
+      "title_key": "증시꺾이자고유재산직격탄운용사2분기1천억클럽10곳중8곳",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "증시 꺾이자 고유재산 '직격탄'…운용사 '2분기 1천억클럽' 10곳 중 8곳 ...",
+      "story": "kivam-q3-earnings-2026",
+      "event_group": "kivam-q3-loss-2026",
+      "kind": "new_fact",
+      "summary": "한투밸류운용, 3분기 400억 원 적자 기록"
+    },
+    {
+      "url_key": "https://socialvalue.kr/news/view/1065570729641553",
+      "title_key": "미래에셋k브랜드지수증권사부문부동의1위한투5계단하락한7위",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "미래에셋, K-브랜드지수 증권사 부문 부동의 1위…한투 5계단 하락한 7위",
+      "story": "kis-brand-reputation-2026",
+      "event_group": "kis-brand-reputation-drop",
+      "kind": "new_fact",
+      "summary": "한투증권, 브랜드지수 7위로 5계단 하락"
+    },
+    {
+      "url_key": "https://news.dealsitetv.com/articles/178472",
+      "title_key": "이석로대표사업재편이끌까",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "[CEO 전망대] [한국투자밸류자산운용] 이석로 대표, 사업 재편 이끌까…...",
+      "story": "kivam-ceo-lee-seok-ro",
+      "event_group": "kivam-ceo-lee-seok-ro-biz",
+      "kind": "new_fact",
+      "summary": "이석로 대표, 한투밸류운용 사업 재편 주도"
+    },
+    {
+      "url_key": "https://catchnews.kr/news/articleView.html?idxno=130589",
+      "title_key": "11월16일주식시장주요공시",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "11월 16일 주식시장 주요공시",
+      "story": "kis-daehan-cable-contract",
+      "event_group": "kis-daehan-cable-contract-2026",
+      "kind": "new_fact",
+      "summary": "한투증권, 대한전선과 2717억 규모 공급계약"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004682959?sid=101",
+      "title_key": "한투운용ace글로벌반도체etf비중1위교체sk하닉대신삼전",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "한투운용 ACE 글로벌반도체 ETF, 비중 1위 교체…SK하닉 대신 삼전",
+      "story": "kim-ace-semicon-rebalancing",
+      "event_group": "kim-ace-semicon-rebalancing-2026",
+      "kind": "new_fact",
+      "summary": "한투운용, ACE 글로벌반도체 ETF 리밸런싱"
+    },
+    {
+      "url_key": "https://eroun.net/news/articleView.html?idxno=95576",
+      "title_key": "서울한복판에서만나는새아파트돈의문마지막주거퍼즐경희궁",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "﻿서울 한복판에서 만나는 새 아파트…돈의문 마지막 주거 퍼즐 '경희궁...",
+      "story": "kit-gyeonghuigung-epit",
+      "event_group": "kit-gyeonghuigung-epit-project",
+      "kind": "new_fact",
+      "summary": "한투부동산신탁, 경희궁 에피트 시행 담당"
+    },
+    {
+      "url_key": "https://etoday.co.kr/news/view/2648962",
+      "title_key": "삼성easfa삼양컴텍등",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "[오늘의 IR] 삼성E&A·SFA·삼양컴텍 등",
+      "story": "kis-corp-day-2026",
+      "event_group": "kis-hanmi-corp-day-2026",
+      "kind": "new_fact",
+      "summary": "한투증권 주최 한미약품 Corp Day 참가"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005442102?sid=101",
+      "title_key": "방산용광학센서기업옵토닉스150상승하며코스닥데뷔",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "방산용 광학 센서 기업 옵토닉스, 150% 상승하며 코스닥 데뷔",
+      "story": "kis-ipo-optonics",
+      "event_group": "kis-ipo-optonics-listing",
+      "kind": "new_fact",
+      "summary": "한투증권 주관 옵토닉스, 코스닥 상장 첫날 급등"
+    },
+    {
+      "url_key": "https://asiaa.co.kr/news/articleView.html?idxno=271388",
+      "title_key": "포인트로채권투자까지kb증권토큰증권발행상환전과정검증",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "포인트로 채권 투자까지...KB증권, 토큰증권 발행·상환 전 과정 검증",
+      "story": "sto-regulation-2026",
+      "event_group": "kb-sto-verification",
+      "kind": "new_fact",
+      "summary": "KB증권, 토큰증권 발행·상환 전 과정 실증 완료"
+    },
+    {
+      "url_key": "https://raonnews.com/news/article.html?no=62816",
+      "title_key": "경영지도기준미달전금업자24곳선불잔액전체의8차지",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "경영지도기준 미달 전금업자 24곳…선불잔액 전체의 8% 차지",
+      "story": "electronic-finance-management-audit",
+      "event_group": "fss-electronic-finance-audit",
+      "kind": "new_fact",
+      "summary": "경영지도기준 미달 전금업자 24곳 금융위 조치 예고"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445066",
+      "title_key": "김연수칸서스대표100공개매수외엔답없어증시2배로",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "[인터뷰] 김연수 칸서스대표 \"100% 공개매수 외엔 답 없어…증시 2배로 ...",
+      "story": "mandatory-tender-offer-2026",
+      "event_group": "cansus-ceo-tender-offer-interview",
+      "kind": "new_fact",
+      "summary": "칸서스대표, 의무공개매수 100% 도입 필요성 주장"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006410814?sid=101",
+      "title_key": "번지진않았지만제이알중앙사태가남긴경고",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "[37th SRE][Cover]“번지진 않았지만”…제이알·중앙 사태가 남긴 경고",
+      "story": "joongang-debt-lawsuit",
+      "event_group": "joongang-debt-lawsuit-sre",
+      "kind": "new_fact",
+      "summary": "중앙그룹 채권 투자자, 증권사 임직원 등 검찰 고소"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006410826?sid=104",
+      "title_key": "美기관3분기데이터센터주서발뺐다전력주이탈2배",
+      "sent_at": "2026-11-17T09:11:58.903773+09:00",
+      "title_preview": "美 기관, 3분기 데이터센터주서 발 뺐다…전력주 이탈 2배",
+      "story": "us-data-center-stock-exit",
+      "event_group": "us-data-center-stock-exit",
+      "kind": "new_fact",
+      "summary": "美 기관투자자, 3분기 데이터센터 및 전력주 비중 축소"
     }
   ]
 }
