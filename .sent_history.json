@@ -1409,6 +1409,156 @@
       "event_group": "kim-keon-hee-cma-ruling",
       "kind": "analysis",
       "summary": "대법원, 김건희 자본시장법 위반 선고 생중계"
+    },
+    {
+      "url_key": "https://asiatoday.co.kr/kn/view.php?key=20261117010006700",
+      "title_key": "순익급감등악재겹친증권사들주가하락에울상",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "순익 급감 등 악재 겹친 증권사들…주가 하락에 '울상'",
+      "story": "kih-target-price-cut",
+      "event_group": "kih-target-price-cut",
+      "kind": "new_fact",
+      "summary": "KB증권, 한투지주 목표가 21.4% 하향"
+    },
+    {
+      "url_key": "https://investchosun.com/site/data/html_dir/2026/11/17/2026111780206.html",
+      "title_key": "단종레불똥튄액티브etf지수따라도상폐제도개선도",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "[Invest]'단종레' 불똥 튄 액티브 ETF…지수 따라도 상폐, 제도 개선도 ...",
+      "story": "kim-active-etf-delisting",
+      "event_group": "kim-active-etf-delisting",
+      "kind": "analysis",
+      "summary": "한투운용 액티브 ETF 상장폐지 잔혹사"
+    },
+    {
+      "url_key": "https://greenpostkorea.co.kr/news/articleView.html?idxno=308074",
+      "title_key": "은값60금값30폭락에비명금은etf수익률도비상",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "은값 60% ,금값 30% 폭락에 \"비명\"··· 금·은 ETF 수익률도 '비상'",
+      "story": "kim-gold-etf-drop",
+      "event_group": "kim-gold-etf-drop",
+      "kind": "new_fact",
+      "summary": "금값 폭락에 ACE KRX금현물 수익률 비상"
+    },
+    {
+      "url_key": "https://businessplus.kr/news/articleView.html?idxno=120032",
+      "title_key": "ai데이터센터냉각수주3조lg설비공급넘어구축",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "[LG의 신사업/①]AI 데이터센터 냉각 수주 3조…LG, 설비 공급 넘어 구축...",
+      "story": "kira-indonesia-dc",
+      "event_group": "kira-indonesia-dc",
+      "kind": "new_fact",
+      "summary": "인도네시아 데이터센터 합작법인 수주"
+    },
+    {
+      "url_key": "https://fntoday.co.kr/news/articleView.html?idxno=398722",
+      "title_key": "건대입구역서측구역성장거점형민간도심복합개발추진서울동북권",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "건대입구역 서측구역, 성장거점형 민간도심복합개발 추진…서울 동북권...",
+      "story": "kit-kondae-urban-dev",
+      "event_group": "kit-kondae-urban-dev",
+      "kind": "new_fact",
+      "summary": "건대입구역 민간도심복합개발 MOU 체결"
+    },
+    {
+      "url_key": "https://news2day.co.kr/article/20261118500006",
+      "title_key": "거래넘어자산관리로증권운용사플랫폼경쟁",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "[손안의 투자 전쟁①] 거래 넘어 자산관리로…증권·운용사 플랫폼 경쟁",
+      "story": "",
+      "event_group": "",
+      "kind": "new_fact",
+      "summary": "펀드 비교 플랫폼 '투자플러스' 출시"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/079/0004210901?sid=101",
+      "title_key": "미래에셋연속해킹주시하는당국금융사스스로약한고리찾아야",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "미래에셋 연속 해킹 주시하는 당국…\"금융사 스스로 약한고리 찾아야\"",
+      "story": "mirae-asset-hacking-2026",
+      "event_group": "fss-mirae-asset-hacking-audit",
+      "kind": "new_fact",
+      "summary": "금감원, 미래에셋 해킹 관련 위법 확인 및 검사 확대"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005605690?sid=101",
+      "title_key": "5천피깨진지금이적기vs증안펀드안먹히면더문제",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "\"5천피 깨진 지금이 적기\" vs \"증안펀드 안 먹히면 더 문제\"",
+      "story": "market-stabilization-fund-debate",
+      "event_group": "market-stabilization-fund-debate",
+      "kind": "new_fact",
+      "summary": "대통령 주재 간담회서 증안펀드 투입 등 부양책 논의"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005354919?sid=101",
+      "title_key": "올해코스피상장단1곳뿐ipo시장빙하기",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "올해 코스피 상장 단 1곳뿐…IPO 시장 '빙하기'",
+      "story": "ipo-market-slump-2026",
+      "event_group": "ipo-market-slump-2026",
+      "kind": "new_fact",
+      "summary": "올해 코스피 상장 1곳뿐, IPO 공모액 8년 만에 최소"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/009/0005765237?sid=101",
+      "title_key": "세금공과금11배늘었는데이게맞나요곡소리나오는이업계",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "세금·공과금 11배 늘었는데 이게 맞나요…곡소리 나오는 이 업계",
+      "story": "deposit-insurance-premium-hike",
+      "event_group": "deposit-insurance-premium-hike",
+      "kind": "new_fact",
+      "summary": "예보, 예금자보호 한도 상향 맞춰 예보료율 인상 검토"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005605699?sid=101",
+      "title_key": "수협發나비효과에확밀린금융당국인사",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "'수협發 나비효과'에 확 밀린 금융당국 인사",
+      "story": "fsc-personnel-delay",
+      "event_group": "fsc-personnel-delay",
+      "kind": "new_fact",
+      "summary": "금융위 사무처장 공석 장기화로 연말 금융입법 차질 우려"
+    },
+    {
+      "url_key": "https://nongaek.com/news/articleView.html?idxno=97507",
+      "title_key": "금융정의연대등금융권개인정보유출규탄대책촉구",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "[기자회견] 금융정의연대 등,금융권 개인정보유출 규탄... 대책 촉구",
+      "story": "financial-data-leak-2026",
+      "event_group": "financial-data-leak-protest",
+      "kind": "new_fact",
+      "summary": "시민단체, 7개 금융사 10만 명 개인정보 유출 규탄"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/029/0003059665?sid=101",
+      "title_key": "법인에열린저축은행자영업자대출은뚝",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "법인에 열린 저축은행… 자영업자 대출은 ‘뚝’",
+      "story": "savings-bank-loan-trend-2026",
+      "event_group": "savings-bank-loan-trend-2026",
+      "kind": "new_fact",
+      "summary": "저축은행 대출, 법인 비중 늘고 자영업자 비중 급감"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/005/0001885809?sid=105",
+      "title_key": "k게임성장판닫히나",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "K게임, 성장판 닫히나",
+      "story": "game-venture-investment-slump",
+      "event_group": "game-venture-investment-slump",
+      "kind": "new_fact",
+      "summary": "상반기 게임 벤처투자 76% 급감, 정책 지원 사각지대"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/030/0003486731?sid=101",
+      "title_key": "겉모습달리주눅든벤처뛰게만들라",
+      "sent_at": "2026-11-18T07:43:25.834716+09:00",
+      "title_preview": "[사설] 겉모습 달리 주눅 든 벤처, 뛰게 만들라",
+      "story": "venture-investment-record-3q2026",
+      "event_group": "venture-investment-analysis-3q2026",
+      "kind": "analysis",
+      "summary": "벤처투자 역대 최대 실적에도 안전 분야 쏠림 현상 우려"
     }
   ]
 }
