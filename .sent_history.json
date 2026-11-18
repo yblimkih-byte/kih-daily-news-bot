@@ -1799,6 +1799,166 @@
       "event_group": "kibo-startup-support-expansion",
       "kind": "new_fact",
       "summary": "기보, 스타트업과 민간 투자자 연결 지원 확대"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/469/0000966360?sid=101",
+      "title_key": "kdb생명매각협상또결렬6전7기도실패12년간이어진매각잔혹사",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "KDB생명 매각협상 또 결렬… 6전 7기도 실패, 12년간 이어진 매각 잔혹사",
+      "story": "kifh-kdb-life-acquisition",
+      "event_group": "kifh-kdb-life-termination",
+      "kind": "new_fact",
+      "summary": "KDB생명 매각 협상 최종 결렬 공식화"
+    },
+    {
+      "url_key": "https://news.ifm.kr/news/articleView.html?idxno=484801",
+      "title_key": "부동산신탁14개사865억원적자9조6천억원신탁계정대재무부담",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "부동산신탁 14개사 865억원 적자…9조6천억원 신탁계정대 '재무 부담'",
+      "story": "kit-financial-burden-2026",
+      "event_group": "kit-financial-burden-2026",
+      "kind": "new_fact",
+      "summary": "부동산신탁 적자 전환 및 재무 부담 가중"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/374/0000544528?sid=101",
+      "title_key": "한국투자증권6천500억원주주배정유상증자결정",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "한국투자증권, 6천500억원 주주배정 유상증자 결정",
+      "story": "kis-",
+      "event_group": "kis-",
+      "kind": "new_fact",
+      "summary": "지주 대상 6500억 유상증자 결정"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/031/0001076304?sid=101",
+      "title_key": "신한은행한투에카디프생명지분1499매각검토",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "신한은행, 한투에 카디프생명 지분 14.99% 매각 검토",
+      "story": "kih-cardiff-life-acquisition",
+      "event_group": "kih-cardiff-life-acquisition",
+      "kind": "new_fact",
+      "summary": "신한은행 보유 카디프생명 지분 인수 추진"
+    },
+    {
+      "url_key": "https://sisajournal-e.com/news/articleView.html?idxno=425130",
+      "title_key": "한투證투융자펀드전용계좌마련인프라투자에모이는업계시",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "한투證 '투융자 펀드 전용계좌' 마련···인프라 투자에 모이는 업계 시...",
+      "story": "kis-infra-fund-account",
+      "event_group": "kis-infra-fund-account",
+      "kind": "new_fact",
+      "summary": "인프라 투자용 투융자 펀드 전용계좌 출시"
+    },
+    {
+      "url_key": "https://womaneconomy.co.kr/news/articleView.html?idxno=261319",
+      "title_key": "유상호에12년증권사엔1조9000억원김남구회장의한투",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "[재계] 유상호에 12년, 증권사엔 1조9000억원···김남구 회장의 한투 ...",
+      "story": "kih-chairman-profile",
+      "event_group": "kih-chairman-profile",
+      "kind": "new_fact",
+      "summary": "김남구 회장, 자본 확충·전문경영인 체제 강화"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005355271?sid=101",
+      "title_key": "상장사분기배당빗장푼다여야수시배당제도입합의",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "[단독] 상장사 분기배당 빗장 푼다…여야, '수시배당제' 도입 합의",
+      "story": "quarterly-dividend-agreement",
+      "event_group": "quarterly-dividend-agreement",
+      "kind": "new_fact",
+      "summary": "여야, 상장사 분기·월배당 가능한 수시배당제 합의"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006411986?sid=101",
+      "title_key": "금융위토큰증권퍼블릭체인지향비금전신탁연내입법노력",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "금융위 \"토큰증권 퍼블릭 체인 지향…비금전신탁 연내 입법 노력\"",
+      "story": "sto-regulation-2026",
+      "event_group": "sto-non-monetary-trust-law",
+      "kind": "new_fact",
+      "summary": "금융위, 비금전신탁 수익증권 발행 연내 입법 추진"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006411981?sid=101",
+      "title_key": "금융사보안의무어겨정보새면매출3과징금처리주목",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "금융사 보안 의무 어겨 정보 새면 ‘매출 3%’ 과징금…처리 주목",
+      "story": "financial-security-legislation",
+      "event_group": "financial-security-penalty-law",
+      "kind": "new_fact",
+      "summary": "금융사 보안 의무 위반 시 매출 3% 과징금 추진"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/214/0001536388?sid=101",
+      "title_key": "3분기가계빚2천30조주택관련대출사상최대",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "3분기 가계빚 2천30조‥주택 관련 대출 '사상 최대'",
+      "story": "household-debt-3q2026",
+      "event_group": "household-debt-3q2026-report",
+      "kind": "new_fact",
+      "summary": "3분기 가계빚 2030조 돌파, 주담대 사상 최대"
+    },
+    {
+      "url_key": "https://lecturernews.com/news/articleView.html?idxno=207257",
+      "title_key": "자산은뛰고임금은걷는다",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "[이미루의 트렌드 세일즈] 자산은 뛰고 임금은 걷는다",
+      "story": "value-up-policy-2026",
+      "event_group": "value-up-policy-trend-analysis",
+      "kind": "analysis",
+      "summary": "상법 개정 및 자사주 소각 의무화 등 밸류업 가속"
+    },
+    {
+      "url_key": "https://dnews.co.kr/uhtml/view.jsp?idxno=202611181341450000635",
+      "title_key": "9월말은행권연체율059중장기상승세기조금융당국연말충당금",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "9월말 은행권 연체율 0.59%, 중장기 상승세 기조…금융당국, 연말 충당금...",
+      "story": "bank-delinquency-trend-2026",
+      "event_group": "bank-delinquency-sep2026",
+      "kind": "new_fact",
+      "summary": "은행권 연체율 0.59% 상승, 연말 충당금 압박"
+    },
+    {
+      "url_key": "https://iminju.net/news/articleView.html?idxno=172692",
+      "title_key": "저축은행서사라지는스탁론규제에밀리고수요는온투업으로",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "저축은행서 사라지는 스탁론…규제에 밀리고 수요는 온투업으로",
+      "story": "stock-loan-regulation",
+      "event_group": "savings-bank-stock-loan-stop",
+      "kind": "new_fact",
+      "summary": "저축은행 스탁론, 규제 강화에 신규 판매 중단"
+    },
+    {
+      "url_key": "https://newstomato.com/ReadNews.aspx?no=1320892",
+      "title_key": "저축은행판캠코구축물건너가나법안연내처리어려울듯",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "'저축은행판 캠코’ 구축 물 건너가나…법안 연내 처리 어려울 듯",
+      "story": "savings-bank-amc-delay",
+      "event_group": "savings-bank-amc-delay-2026",
+      "kind": "new_fact",
+      "summary": "저축은행 부실채권 정리 AMC 설립 연내 불투명"
+    },
+    {
+      "url_key": "https://newstomato.com/ReadNews.aspx?no=1320938",
+      "title_key": "카드수수료협상권달라마트협회등규탄기자회견",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "\"카드수수료 협상권 달라\"…마트협회 등 규탄 기자회견",
+      "story": "credit-card-fee-negotiation",
+      "event_group": "credit-card-fee-negotiation-demand",
+      "kind": "new_fact",
+      "summary": "마트협회 등 카드수수료 인하 및 단체협상권 요구"
+    },
+    {
+      "url_key": "https://ftoday.co.kr/news/articleView.html?idxno=370039",
+      "title_key": "모의시장도못연채개장멈춤삐걱대는신종증권시장",
+      "sent_at": "2026-11-18T17:02:35.958207+09:00",
+      "title_preview": "\"모의시장도 못 연 채 개장 멈춤\"…삐걱대는 신종증권시장",
+      "story": "sto-regulation-2026",
+      "event_group": "trust-securities-market-delay",
+      "kind": "new_fact",
+      "summary": "신탁수익증권 장외거래시장, 본인가 지연에 삐걱"
     }
   ]
 }
