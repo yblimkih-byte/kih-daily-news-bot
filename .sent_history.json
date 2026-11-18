@@ -1559,6 +1559,106 @@
       "event_group": "venture-investment-analysis-3q2026",
       "kind": "analysis",
       "summary": "벤처투자 역대 최대 실적에도 안전 분야 쏠림 현상 우려"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/119/0003156456?sid=101",
+      "title_key": "산업은행한국투자금융지주kdb생명매각협상결렬",
+      "sent_at": "2026-11-18T09:12:17.998829+09:00",
+      "title_preview": "산업은행-한국투자금융지주, KDB생명 매각 협상 결렬",
+      "story": "kifh-kdb-life-acquisition",
+      "event_group": "kifh-kdb-life-fail",
+      "kind": "new_fact",
+      "summary": "산은-한투지주, KDB생명 매각 협상 최종 결렬"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005442696?sid=101",
+      "title_key": "국내1호해외송금이나인페이코스닥상장돌입12월말입성목표",
+      "sent_at": "2026-11-18T09:12:17.998829+09:00",
+      "title_preview": "국내 1호 해외송금 '이나인페이', 코스닥 상장 돌입… 12월 말 입성 목표",
+      "story": "kis-ipo-e9pay",
+      "event_group": "kis-ipo-e9pay-filing",
+      "kind": "new_fact",
+      "summary": "해외송금 '이나인페이' 코스닥 상장 주관"
+    },
+    {
+      "url_key": "https://dealsite.co.kr/articles/172904",
+      "title_key": "16조빚낸농협금융강호동수사에어깨무거운이찬우",
+      "sent_at": "2026-11-18T09:12:17.998829+09:00",
+      "title_preview": "[DCM 레이더] 1.6조 빚낸 농협금융…강호동 수사에 어깨 무거운 이찬우",
+      "story": "kis-dcm-activity-2026",
+      "event_group": "kis-nh-bond-underwriting",
+      "kind": "new_fact",
+      "summary": "농협금융 1.6조 회사채 발행 인수단 참여"
+    },
+    {
+      "url_key": "https://catchnews.kr/news/articleView.html?idxno=130645",
+      "title_key": "11월17일주식시장주요공시",
+      "sent_at": "2026-11-18T09:12:17.998829+09:00",
+      "title_preview": "11월 17일 주식시장 주요공시",
+      "story": "kis-trust-contract-2026",
+      "event_group": "kis-gwangmu-trust",
+      "kind": "new_fact",
+      "summary": "광무와 50억 규모 자사주 취득 신탁 체결"
+    },
+    {
+      "url_key": "https://hansbiz.co.kr/news/articleView.html?idxno=884425",
+      "title_key": "26조실탄장전끝낸삼성바이오글로벌펩타이드영토확장본격화",
+      "sent_at": "2026-11-18T09:12:17.998829+09:00",
+      "title_preview": "2.6조 실탄 장전 끝낸 삼성바이오, 글로벌 펩타이드 영토 확장 본격화",
+      "story": "kis-ipo-samsung-bio-rights",
+      "event_group": "kis-samsung-bio-rights-success",
+      "kind": "new_fact",
+      "summary": "삼성바이오 2.6조 유증 청약 성공적 마무리"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005605922?sid=101",
+      "title_key": "한투운용ace고배당주etf11월분배금에삼성전자특별배당반영",
+      "sent_at": "2026-11-18T09:12:17.998829+09:00",
+      "title_preview": "한투운용, ACE 고배당주 ETF 11월 분배금에 삼성전자 특별배당 반영",
+      "story": "",
+      "event_group": "",
+      "kind": "new_fact",
+      "summary": "ACE 고배당주 ETF, 삼성전자 특별배당"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/001/0016447843?sid=101",
+      "title_key": "증권사계열사동원해회사채발행금리낮추기못한다",
+      "sent_at": "2026-11-18T09:12:17.998829+09:00",
+      "title_preview": "증권사, 계열사 동원해 회사채 발행금리 낮추기 못한다",
+      "story": "fss-captive-sales-ban",
+      "event_group": "fss-captive-sales-ban",
+      "kind": "new_fact",
+      "summary": "증권사 회사채 캡티브 영업 금지 추진"
+    },
+    {
+      "url_key": "https://globalepic.co.kr/view.php?ud=2026111808433519687cc35ccc5c_29",
+      "title_key": "금감원과당경쟁경고열흘만에db손보퇴직연금들여다본다",
+      "sent_at": "2026-11-18T09:12:17.998829+09:00",
+      "title_preview": "금감원, 과당경쟁 경고 열흘 만에 DB손보 퇴직연금 들여다본다",
+      "story": "fss-pension-inspection-2026",
+      "event_group": "fss-pension-inspection-db",
+      "kind": "new_fact",
+      "summary": "금감원, DB손보 퇴직연금 전격 검사"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445254",
+      "title_key": "미공개정보이용ts인베창업자수사기관행법인계좌수십억부당이",
+      "sent_at": "2026-11-18T09:12:17.998829+09:00",
+      "title_preview": "'미공개정보 이용' TS인베 창업자 수사기관행…법인계좌 수십억 부당이...",
+      "story": "ts-invest-unfair-info-probe",
+      "event_group": "ts-invest-unfair-info-probe",
+      "kind": "new_fact",
+      "summary": "TS인베 창업자 미공개정보 이용 수사"
+    },
+    {
+      "url_key": "https://raonnews.com/news/article.html?no=62845",
+      "title_key": "카드사6곳원화유동성비율하락단기부채대응여력감소",
+      "sent_at": "2026-11-18T09:12:17.998829+09:00",
+      "title_preview": "카드사 6곳 원화유동성비율 하락…단기 부채 대응 여력 감소",
+      "story": "card-liquidity-ratio-2026",
+      "event_group": "card-liquidity-ratio-2026",
+      "kind": "new_fact",
+      "summary": "카드사 6곳 원화유동성비율 하락세"
     }
   ]
 }
