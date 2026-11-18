@@ -1659,6 +1659,146 @@
       "event_group": "card-liquidity-ratio-2026",
       "kind": "new_fact",
       "summary": "카드사 6곳 원화유동성비율 하락세"
+    },
+    {
+      "url_key": "https://ebn.co.kr/news/articleView.html?idxno=1732086",
+      "title_key": "믿고담았는데회의론에휘청미국빅테크etf의굴욕",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "믿고 담았는데 회의론에 휘청…미국 빅테크 ETF의 굴욕",
+      "story": "kim-bigtech-etf-drop",
+      "event_group": "kim-bigtech-etf-drop",
+      "kind": "new_fact",
+      "summary": "미국 빅테크 회의론 확산에 ACE 미국빅테크 ETF 하락"
+    },
+    {
+      "url_key": "https://etoday.co.kr/news/view/2649718",
+      "title_key": "한국금융지주kdb생명인수불발보험업진출검토계속한다표류하",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "한국금융지주, KDB생명 인수 불발…\"보험업 진출 검토 계속 한다\"[표류하...",
+      "story": "kifh-kdb-life-acquisition",
+      "event_group": "kifh-kdb-life-official-stance",
+      "kind": "new_fact",
+      "summary": "KDB생명 인수 불발 후 보험업 진출 지속 검토 공식화"
+    },
+    {
+      "url_key": "https://biz.newdaily.co.kr/site/data/html/2026/11/18/2026111850118.html",
+      "title_key": "큰기업엔51더빌려주고자영업자는12줄이고저축은행의변심",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "큰 기업엔 51% 더 빌려주고, 자영업자는 12% 줄이고 … 저축은행의 변심",
+      "story": "savings-bank-loan-trend-2026",
+      "event_group": "kisb-loan-trend-2026",
+      "kind": "new_fact",
+      "summary": "개인사업자 대출 4767억 원 감축하며 건전성 관리 강화"
+    },
+    {
+      "url_key": "https://news2day.co.kr/article/20261118500148",
+      "title_key": "앤트로픽상장d1국내etf누가먼저담나경쟁본격화",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "앤트로픽 상장 D-1…국내 ETF '누가 먼저 담나' 경쟁 본격화",
+      "story": "kim-anthropic-etf-competition",
+      "event_group": "kim-anthropic-etf-competition",
+      "kind": "new_fact",
+      "summary": "앤트로픽 상장 앞두고 미국 빅테크 ETF 편입 경쟁"
+    },
+    {
+      "url_key": "https://srtimes.kr/news/articleView.html?idxno=217971",
+      "title_key": "한국투자증권12월투자자교육8회진행금융사기예방도",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "한국투자증권, 12월 투자자 교육 8회 진행…금융사기 예방도",
+      "story": "",
+      "event_group": "",
+      "kind": "new_fact",
+      "summary": ""
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/082/0001407745?sid=101",
+      "title_key": "증권사계열사동원회사채금리낮추기내년부터금지",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "증권사, ‘계열사 동원’ 회사채 금리 낮추기 내년부터 금지",
+      "story": "fss-captive-sales-ban",
+      "event_group": "fss-captive-sales-ban-policy",
+      "kind": "new_fact",
+      "summary": "증권사 계열사 동원 회사채 금리 왜곡 금지"
+    },
+    {
+      "url_key": "https://newstomato.com/ReadNews.aspx?no=1320871",
+      "title_key": "단독금감원중앙그룹채권발행판매신한키움제재절차",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "(단독)금감원, 중앙그룹 채권 발행·판매 신한·키움 제재 절차",
+      "story": "joongang-debt-lawsuit",
+      "event_group": "joongang-debt-sanction-procedure",
+      "kind": "new_fact",
+      "summary": "금감원, 중앙그룹 채권 발행 관련 증권사 제재"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/003/0014329081?sid=101",
+      "title_key": "저축은행부실채무15조부담한숨돌려특별계정연장안소위통과",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "저축은행 부실채무 1.5조 부담 한숨 돌려…특별계정 연장안 소위 통과",
+      "story": "savings-bank-restructuring-cost-extension",
+      "event_group": "savings-bank-special-account-pass",
+      "kind": "new_fact",
+      "summary": "저축은행 부실 수습 특별계정 연장안 소위 통과"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/003/0014329366?sid=101",
+      "title_key": "미래에셋생명해킹에고객1만명정보유출현대해상aig도공격",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "미래에셋생명 해킹에 고객 1만명 정보 유출…현대해상·AIG도 공격",
+      "story": "financial-data-leak-2026",
+      "event_group": "financial-data-leak-expansion",
+      "kind": "new_fact",
+      "summary": "미래에셋생명 등 금융권 연쇄 해킹 정보 유출"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445344",
+      "title_key": "앞으로금감원장제재재량좁아진다금융위판단우선",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "앞으로 금감원장 제재 재량 좁아진다…금융위 판단 우선",
+      "story": "fss-sanction-discretion-reform",
+      "event_group": "fss-sanction-discretion-reform",
+      "kind": "new_fact",
+      "summary": "금감원장 제재 재량 축소 및 금융위 판단 우선"
+    },
+    {
+      "url_key": "https://hansbiz.co.kr/news/articleView.html?idxno=884624",
+      "title_key": "3500개법인코인투자가이드내주지침공개",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "3500개 법인 코인투자 가이드···내주 지침 공개",
+      "story": "corporate-crypto-investment-guide",
+      "event_group": "corporate-crypto-investment-guide",
+      "kind": "new_fact",
+      "summary": "상장사 등 전문투자자 법인 코인 투자 가이드"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005606053?sid=102",
+      "title_key": "2027년주총정관정비부터상법개정에기업대응분주",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "\"2027년 주총, 정관 정비부터\"…상법 개정에 기업 대응 분주",
+      "story": "commercial-code-revision",
+      "event_group": "commercial-code-revision-articles",
+      "kind": "new_fact",
+      "summary": "상법 개정 대비 상장사 정관 정비 필요성 제기"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/016/0002725089?sid=101",
+      "title_key": "형식적체크리스트시대끝났다세종개정스튜어드십코드대응",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "“형식적 체크리스트 시대 끝났다”…세종, 개정 스튜어드십 코드 대응...",
+      "story": "stewardship-code-revision",
+      "event_group": "stewardship-code-revision-2026",
+      "kind": "new_fact",
+      "summary": "스튜어드십 코드 10년 만에 전면 개정 추진"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005606065?sid=101",
+      "title_key": "정책금융넘어민간투자까지기보스타트업성장지원확대",
+      "sent_at": "2026-11-18T13:32:53.907980+09:00",
+      "title_preview": "정책금융 넘어 민간 투자까지…기보, 스타트업 성장 지원 확대",
+      "story": "kibo-startup-support",
+      "event_group": "kibo-startup-support-expansion",
+      "kind": "new_fact",
+      "summary": "기보, 스타트업과 민간 투자자 연결 지원 확대"
     }
   ]
 }
