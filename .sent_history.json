@@ -1,176 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://straightnews.co.kr/news/articleView.html?idxno=315400",
-      "title_key": "반대매매유예일주일미뤄진빚투매물은어디로",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "반대매매 유예 일주일…미뤄진 '빚투' 매물은 어디로?",
-      "story": "market-volatility-2026",
-      "event_group": "kis-margin-loan-policy",
-      "kind": "new_fact",
-      "summary": "반대매매 유예 조치로 빚투 매물 압박 완화"
-    },
-    {
-      "url_key": "https://globalepic.co.kr/view.php?ud=2026111608450821187cc35ccc5c_29",
-      "title_key": "은행증권사irp한도완화에130조연금머니쟁탈전벌이나",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "은행·증권사, IRP 한도 완화에 130조 연금머니 쟁탈전 벌이나?",
-      "story": "pension-regulation-2026",
-      "event_group": "kis-pension-irp-limit",
-      "kind": "new_fact",
-      "summary": "IRP 한도 완화에 따른 연금 시장 대응 기대"
-    },
-    {
-      "url_key": "https://globalepic.co.kr/view.php?ud=2026111608361470457cc35ccc5c_29",
-      "title_key": "한투금융kdb생명우선협상연장하고도왜본계약못맺나",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "[Epic Why] 한투금융, KDB생명 우선협상 연장하고도 왜 본계약 못 맺나?",
-      "story": "kifh-kdb-life-acquisition",
-      "event_group": "kifh-kdb-life-contract-delay",
-      "kind": "new_fact",
-      "summary": "KDB생명 인수 우선협상 연장 및 본계약 지연"
-    },
-    {
-      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444846",
-      "title_key": "지난주증권사cp전단채11조8천693억원발행금주만기8조4천963억",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "지난주 증권사 CP·전단채 11조8천693억원 발행…금주 만기 8조4천963억",
-      "story": "kis-funding-strategy-2026",
-      "event_group": "kis-cp-issuance-nov-w3",
-      "kind": "new_fact",
-      "summary": "지난주 CP·전단채 1.2조 원 발행하며 조달"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/011/0004682493?sid=101",
-      "title_key": "한투운용ace美대표지수채권혼합etf2종에올해1조유입",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "한투운용 “ACE 美 대표지수 채권혼합 ETF 2종에 올해 1조 유입”",
-      "story": "kim-ace-etf-performance",
-      "event_group": "kim-ace-etf-1tr-inflow",
-      "kind": "new_fact",
-      "summary": "ACE 미국채혼합 ETF 2종 올해 1조 유입"
-    },
-    {
-      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4444861",
-      "title_key": "etf는한국이가장빠르다日무대에선배재규대",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "[금융가 이모저모] \"ETF는 한국이 가장 빠르다\"…日무대에 선 배재규 대...",
-      "story": "kim-ceo-global-activity",
-      "event_group": "kim-ceo-japan-conference",
-      "kind": "new_fact",
-      "summary": "배재규 대표, 일본 행사서 한국 ETF 시장 소개"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/243/0000105709?sid=101",
-      "title_key": "오를주식찾아줘한마디면끝ai증권앱어디까지왔나",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "“오를 주식 찾아줘” 한마디면 끝?…AI 증권앱 어디까지 왔나",
-      "story": "kis-ai-digital-strategy",
-      "event_group": "kis-ai-mts-info",
-      "kind": "new_fact",
-      "summary": "AI 활용 MTS 시황·종목 분석 서비스 도입"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/008/0005441395?sid=101",
-      "title_key": "속도가격장벽허문k원자현미경반도체검사새장연다",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "속도·가격 장벽 허문 K-원자현미경…반도체 검사 새장 연다",
-      "story": "kip-venture-investment-2026",
-      "event_group": "kip-multiscale-series-a",
-      "kind": "new_fact",
-      "summary": "원자현미경 기업 멀티스케일 시리즈A 투자"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/293/0000093278?sid=101",
-      "title_key": "美규제가연기회이차전지저점노린vcㆍpe피노에1830억투자",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "美 규제가 연 기회…이차전지 저점 노린 VCㆍPE, 피노에 1830억 투자",
-      "story": "kip-venture-investment-2026",
-      "event_group": "kip-pino-investment-deal",
-      "kind": "new_fact",
-      "summary": "이차전지 기업 피노에 150억 원 규모 투자"
-    },
-    {
-      "url_key": "https://slownews.kr/169536",
-      "title_key": "최민희감찰논란에가장힘든일은등뒤에서날아오는화살슬로",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "최민희 감찰 논란에 “가장 힘든 일은 등 뒤에서 날아오는 화살”: 슬로...",
-      "story": "mandatory-tender-offer-2026",
-      "event_group": "mandatory-tender-offer-debate",
-      "kind": "analysis",
-      "summary": "의무공개매수 50% 이상 자본시장법 개정안 논의"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/015/0005354111?sid=101",
-      "title_key": "내무반은삼전닉스주식방제대하면빚더미군대가어쩌다",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "내무반은 삼전닉스 주식방, 제대하면 빚더미…군대가 어쩌다",
-      "story": "military-loan-regulation",
-      "event_group": "military-loan-fss-check",
-      "kind": "new_fact",
-      "summary": "금감원, 현역병 신용대출 부실 우려에 따른 점검"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/018/0006410211?sid=101",
-      "title_key": "코스닥정책모멘텀동력부족해본격적수요회복아직",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "\"코스닥, 정책 모멘텀 동력 부족해...본격적 수요회복 아직\"",
-      "story": "kosdaq-policy-momentum",
-      "event_group": "kosdaq-policy-momentum-lack",
-      "kind": "new_fact",
-      "summary": "코스닥 정책 모멘텀 부족 및 수요 회복 시급 지적"
-    },
-    {
-      "url_key": "https://g-enews.com/view.php?ud=202611151328134733112616b072_1",
-      "title_key": "대기업55스타트업협업나서지만사업화성장지원은미흡",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "대기업 55% 스타트업 협업 나서지만…사업화·성장 지원은 미흡",
-      "story": "cvc-regulation-easing",
-      "event_group": "cvc-regulation-easing-proposal",
-      "kind": "new_fact",
-      "summary": "한경협, CVC 규제 완화 및 세제 혜택 확대 제언"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/277/0005842845?sid=101",
-      "title_key": "실증단계에머문대기업스타트업협업상용화26그쳐",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "\"실증 단계에 머문 대기업·스타트업 협업…상용화 26% 그쳐\"",
-      "story": "startup-collab-survey",
-      "event_group": "startup-collab-survey-2026",
-      "kind": "new_fact",
-      "summary": "대기업-스타트업 협업 상용화율 26% 불과"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/366/0001204941?sid=101",
-      "title_key": "비트코인6만6000달러시장은대외악재에약세지속전망",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "비트코인 6만6000달러↑… 시장은 “대외 악재에 약세 지속” 전망",
-      "story": "crypto-market-volatility",
-      "event_group": "bitcoin-etf-outflow-trend",
-      "kind": "new_fact",
-      "summary": "미국 비트코인 현물 ETF 12거래일 연속 자금 유출"
-    },
-    {
-      "url_key": "https://news.dealsitetv.com/articles/178497",
-      "title_key": "진옥동선구안무색대기업여신증가액",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "[생산적 금융 점검] [신한] 진옥동 '선구안' 무색…대기업 여신 증가액...",
-      "story": "financial-holding-loan-strategy",
-      "event_group": "shinhan-holding-loan-analysis",
-      "kind": "new_fact",
-      "summary": "신한금융, 대기업 여신 부동산·금융업 편중 분석"
-    },
-    {
-      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202611102036492560106571",
-      "title_key": "plus고배당주금융주배당늘자월분배금",
-      "sent_at": "2026-11-16T09:12:12.406445+09:00",
-      "title_preview": "[더벨][배당 ETF 돋보기] 'PLUS 고배당주', 금융주 배당 늘자 월 분배금...",
-      "story": "dividend-etf-trend",
-      "event_group": "dividend-etf-payout-increase",
-      "kind": "new_fact",
-      "summary": "금융주 배당 확대에 따른 고배당 ETF 분배금 증가"
-    },
-    {
       "url_key": "https://n.news.naver.com/mnews/article/629/0000552174?sid=101",
       "title_key": "보안강자자처한코인원굴욕외부업체해킹에신뢰흔들",
       "sent_at": "2026-11-16T13:32:30.041159+09:00",
@@ -1739,6 +1569,126 @@
       "event_group": "fss-pg-rent-pay-audit",
       "kind": "new_fact",
       "summary": "금감원, 카드 결제 우회 '월세페이' 여전법 위반 여부 점검"
+    },
+    {
+      "url_key": "https://theguru.co.kr/news/article.html?no=109929",
+      "title_key": "베트남에한국투자증권사기주의보연15수익보장내걸어",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "베트남에 ‘한국투자증권 사기’ 주의보…연 15% 수익 보장 내걸어",
+      "story": "kis-vietnam-scam-warning",
+      "event_group": "kis-vietnam-scam-warning",
+      "kind": "new_fact",
+      "summary": "한국투자증권 베트남 법인 사칭 투자 사기 주의보 발령"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445452",
+      "title_key": "작지만끌린다외국계보험사인수매력은",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "[보험사 이모저모] \"작지만 끌린다\"…외국계 보험사 인수 매력은",
+      "story": "kih-cardiff-life-acquisition",
+      "event_group": "kih-cardiff-life-acquisition",
+      "kind": "analysis",
+      "summary": "KDB생명 인수 무산 후 카디프생명 인수 유력 대안 부상"
+    },
+    {
+      "url_key": "https://eroun.net/news/articleView.html?idxno=95893",
+      "title_key": "공공의료에ai입힌다정부혁신속도up",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "[이로운체크] 공공의료에 AI 입힌다…정부, 혁신 속도 'UP'",
+      "story": "",
+      "event_group": "",
+      "kind": "new_fact",
+      "summary": "한국투자파트너스, 보건복지부 정책펀"
+    },
+    {
+      "url_key": "https://dealsite.co.kr/articles/173004",
+      "title_key": "500조시대연etf주역들대상은미래첫20",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "[2026 ETF 어워즈] [종합] 500조 시대 연 ETF 주역들…대상은 미래, 첫 20...",
+      "story": "kim-etf-awards-2026",
+      "event_group": "kim-etf-awards-2026",
+      "kind": "new_fact",
+      "summary": "한국투자신탁운용, 2026 ETF 어워즈 해외 연금 부문 수상"
+    },
+    {
+      "url_key": "https://dealsite.co.kr/articles/172209",
+      "title_key": "세탁기가노동을덜었다면런드리고는시간을돌려줬",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "[라이프 체인저] 세탁기가 노동을 덜었다면, 런드리고는 시간을 돌려줬...",
+      "story": "kip-laundrygo-investment",
+      "event_group": "kip-laundrygo-investment",
+      "kind": "new_fact",
+      "summary": "한국투자파트너스, 세탁 서비스 런드리고 신규 투자 참여"
+    },
+    {
+      "url_key": "https://wsobi.com/news/articleView.html?idxno=322082",
+      "title_key": "증권업계주식모으기챌린지이벤트실시light상품판매5000억",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "증권업계 '주식 모으기 챌린지' 이벤트 실시...'Light 상품' 판매 5000억 ...",
+      "story": "kis-stock-gathering-event",
+      "event_group": "kis-stock-gathering-event",
+      "kind": "new_fact",
+      "summary": "한국투자증권, 뱅키스 고객 대상 주식 모으기 이벤트 실시"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005355622?sid=102",
+      "title_key": "김건희3대의혹최종결론나온다오늘대법원선고",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "김건희 '3대 의혹' 최종 결론 나온다…오늘 대법원 선고",
+      "story": "kim-keon-hee-cma-ruling",
+      "event_group": "kim-keon-hee-ruling-day",
+      "kind": "new_fact",
+      "summary": "대법원, 김건희 여사 자본시장법 위반 혐의 오늘 최종 선고"
+    },
+    {
+      "url_key": "https://pinpointnews.co.kr/news/articleView.html?idxno=505718",
+      "title_key": "고위험금융상품허용하면서규제영향분석규제심사는생략투자자보",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "고위험 금융상품 허용하면서 규제영향분석·규제심사는 생략, \"투자자 보...",
+      "story": "etf-regulation-audit",
+      "event_group": "etf-audit-issue",
+      "kind": "new_fact",
+      "summary": "레버리지 ETF 허용 과정서 규제심사 생략 논란 제기"
+    },
+    {
+      "url_key": "https://newswell.co.kr/news/articleView.html?idxno=23743",
+      "title_key": "이재명대통령의5천피공약두번달성에애쓴금융당국조수연의",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "이재명 대통령의 '5천피 공약 두 번 달성'에 애쓴 금융 당국 [조수연의...",
+      "story": "capital-market-act-amendment",
+      "event_group": "gov-stock-market-policy",
+      "kind": "analysis",
+      "summary": "정부, 상법 및 자본시장법 개정 통한 증시 부양책 추진"
+    },
+    {
+      "url_key": "https://newsroad.co.kr/news/articleView.html?idxno=68028",
+      "title_key": "700억달러쓸어담는앤트로픽ipo코스피기대와경계사이에선다",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "\"700억 달러 쓸어담는 앤트로픽 IPO\"…코스피, 기대와 경계 사이에 선다",
+      "story": "anthropic-ipo-domestic-exclusion",
+      "event_group": "anthropic-listing-imminent",
+      "kind": "new_fact",
+      "summary": "앤트로픽 IPO 임박에 국내 증시 수급 영향 및 기대감 고조"
+    },
+    {
+      "url_key": "https://mediapen.com/news/view/1138464",
+      "title_key": "국채샀는데왜돈이줄지유럽서드러난6400억",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "[미르의 머니무브]“국채 샀는데 왜 돈이 줄지?”…유럽서 드러난 6400억...",
+      "story": "euro-bond-market-risk",
+      "event_group": "euro-bond-loss",
+      "kind": "new_fact",
+      "summary": "유럽 국채시장 6400억 손실 발생하며 규제 필요성 대두"
+    },
+    {
+      "url_key": "https://tokenpost.kr/news/economy/440420",
+      "title_key": "연준의사록서추가금리인상의견다수월러는0",
+      "sent_at": "2026-11-19T09:12:55.613169+09:00",
+      "title_preview": "[국제금융 브리핑] 연준 의사록서 추가 금리인상 의견 다수...월러는 0....",
+      "story": "global-macro-briefing",
+      "event_group": "ecb-hedge-fund-warning",
+      "kind": "new_fact",
+      "summary": "ECB, 헤지펀드 영향력 확대로 국채 변동성 확대 경고"
     }
   ]
 }
