@@ -1,186 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://ekn.kr/web/view.php?key=20261116021420153",
-      "title_key": "kdb생명ma발목잡는기본자본킥스한투도부담스러운1兆",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "‘KDB생명 M&A’ 발목 잡는 기본자본 킥스...한투도 부담스러운 1兆",
-      "story": "kifh-kdb-life-acquisition",
-      "event_group": "kifh-kdb-life-burden",
-      "kind": "analysis",
-      "summary": "KDB생명 인수, 1조원대 자본 확충 부담 부각"
-    },
-    {
-      "url_key": "https://g-enews.com/view.php?ud=202611161557097504153ddfb15a_1",
-      "title_key": "ipo대어잡기사활증권사ib회복온기는제각각",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "IPO 대어 잡기 '사활'…증권사 IB 회복 온기는 '제각각'",
-      "story": "kis-ipo-league-table-2026",
-      "event_group": "kis-ipo-league-table-2026",
-      "kind": "new_fact",
-      "summary": "올해 IPO 주관 실적 4위 기록, 대형 딜이 좌우"
-    },
-    {
-      "url_key": "https://topdaily.kr/articles/112935",
-      "title_key": "6625억딜착시내년매출7억전망불확실",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "[이노보테라퓨틱스 IPO] 6625억 딜 '착시'...내년 매출 7억 전망 불확실...",
-      "story": "kis-ipo-innovo",
-      "event_group": "kis-ipo-innovo",
-      "kind": "new_fact",
-      "summary": "이노보테라퓨틱스 IPO 추진, 기술이전 수익 의존"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/081/0003699858?sid=101",
-      "title_key": "와이즈넛ai에이전트매출비중531로절반넘어3분기누적흑자",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "와이즈넛, AI 에이전트 매출 비중 53.1%로 절반 넘어...3분기 누적 흑자...",
-      "story": "wisenut-share-buyback",
-      "event_group": "wisenut-share-buyback",
-      "kind": "new_fact",
-      "summary": "와이즈넛, 50억 규모 자사주 매입 및 소각 결정"
-    },
-    {
-      "url_key": "https://newsway.co.kr/news/view?ud=2026111614564709687",
-      "title_key": "나스닥23시간거래초읽기국내증권사서비스경쟁력시험대",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "나스닥 23시간 거래 초읽기…국내 증권사 서비스 경쟁력 '시험대'",
-      "story": "kis-nasdaq-trading-service",
-      "event_group": "kis-nasdaq-trading-service",
-      "kind": "new_fact",
-      "summary": "나스닥 23시간 거래 도입, 해외주식 서비스 경쟁"
-    },
-    {
-      "url_key": "https://ajunews.com/view/20261116145144460",
-      "title_key": "배재규젠슨황아니면ai생태계대안없어온라인청원동참도고민",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "배재규 \"젠슨 황 아니면 AI 생태계 대안 없어…온라인 청원 동참도 고민...",
-      "story": "kim-ceo-global-activity",
-      "event_group": "kim-ceo-nvidia-opinion",
-      "kind": "analysis",
-      "summary": "배재규 대표, 젠슨 황 부재에 따른 AI 혼란 우려"
-    },
-    {
-      "url_key": "https://m-i.kr/news/articleView.html?idxno=2018893",
-      "title_key": "충당금갚고주식투자성공등으로저축은행수익성개선",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "[기획] 충당금 갚고 주식투자 성공 등으로 저축은행 수익성 개선",
-      "story": "kisb-earnings-2026",
-      "event_group": "kisb-earnings-2026-detail",
-      "kind": "new_fact",
-      "summary": "상반기 순이익 1530억 달성, 전년비 7배 급증"
-    },
-    {
-      "url_key": "https://lkp.news/news/articleView.html?idxno=86114",
-      "title_key": "자본을거래로바꾸다한국투자증권의국제",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "[글로벌 IB로 가는길 ①] 자본을 거래로 바꾸다... 한국투자증권의 국제...",
-      "story": "kis-global-ib-strategy",
-      "event_group": "kis-global-ib-strategy",
-      "kind": "new_fact",
-      "summary": "해외 금융사와 거래 확장하며 글로벌 IB 도약"
-    },
-    {
-      "url_key": "https://metroseoul.co.kr/article/20261116500454",
-      "title_key": "이웃의오늘을지키고청년의내일을함께하는금",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "[살맛 나는 세상] 이웃의 '오늘'을 지키고, 청년의 '내일'을 함께하는 금...",
-      "story": "kis-youth-finance-support",
-      "event_group": "kis-youth-finance-support",
-      "kind": "new_fact",
-      "summary": "청년 대상 재무상담 지점 운영하며 상생금융 실천"
-    },
-    {
-      "url_key": "https://dailybrief.co.kr/news/articleView.html?idxno=7316",
-      "title_key": "계열사이익과실적에무너진방화벽고객은",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "[삼성증권 기관경고④] 계열사 이익과 실적에 무너진 방화벽...\"고객은 ...",
-      "story": "samsung-sec-sanction-2026",
-      "event_group": "samsung-sec-fss-sanction",
-      "kind": "new_fact",
-      "summary": "금감원, 삼성증권 무단 일임매매 기관경고 제재"
-    },
-    {
-      "url_key": "https://etoday.co.kr/news/view/2648518",
-      "title_key": "유지도폐기도쉽지않네구m2출구전략난감한한은",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "\"유지도, 폐기도 쉽지 않네\"⋯'구 M2 출구전략' 난감한 한은",
-      "story": "bok-m2-calculation-change",
-      "event_group": "bok-m2-etf-exclusion",
-      "kind": "new_fact",
-      "summary": "한은, M2 통화량 지표서 수익증권 제외 추진"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/293/0000093310?sid=101",
-      "title_key": "①꼴찌저축銀인수수백억자본수혈불투명",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "[핀다 확장 청구서]① 꼴찌 저축銀 인수…수백억 자본 수혈 '불투명'",
-      "story": "pinda-savings-bank-acquisition",
-      "event_group": "pinda-daewon-acquisition",
-      "kind": "new_fact",
-      "summary": "핀다, 대원저축은행 인수 및 자본 확충 추진"
-    },
-    {
-      "url_key": "https://4th.kr/news/articleView.html?idxno=2121944",
-      "title_key": "jt친애저축은행경영유의지점장횡령알고도적정보고",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "JT친애저축은행 경영유의..\"지점장, 횡령 알고도 '적정' 보고\"",
-      "story": "savings-bank-sanction-2026",
-      "event_group": "jt-chinae-fss-caution",
-      "kind": "new_fact",
-      "summary": "금감원, JT친애저축은행에 경영유의 및 개선 통보"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/003/0014324749?sid=101",
-      "title_key": "중기장관국감지적사항근본개선책마련해야",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "중기 장관 \"국감 지적사항, 근본 개선책 마련해야\"",
-      "story": "mss-audit-followup-2026",
-      "event_group": "mss-motae-fund-improvement",
-      "kind": "new_fact",
-      "summary": "중기부, 모태펀드 심사 및 사후관리 개선책 마련"
-    },
-    {
-      "url_key": "https://ajunews.com/view/20261116155203687",
-      "title_key": "조직키우려는데거취는안갯속금감원격랑의연말",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "조직 키우려는데 거취는 안갯속…금감원 '격랑의 연말'",
-      "story": "fss-it-security-audit-2026",
-      "event_group": "fss-it-security-staffing",
-      "kind": "new_fact",
-      "summary": "금감원, 금융권 IT 보안 검사 인력 확충 추진"
-    },
-    {
-      "url_key": "https://ftoday.co.kr/news/articleView.html?idxno=369828",
-      "title_key": "코스닥우량일반승강제에시장들썩하위군낙인효과우려",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "\"코스닥 우량·일반 승강제에 시장 들썩\"…하위군 낙인효과 우려",
-      "story": "kosdaq-policy-momentum",
-      "event_group": "kosdaq-tiering-policy-etf",
-      "kind": "analysis",
-      "summary": "코스닥 우량·일반 승강제 및 정책 ETF 조성 추진"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/293/0000093324?sid=101",
-      "title_key": "늘어난우리사주몫대주주부담줄였다",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "[삼성바이오 유증 후폭풍] 늘어난 우리사주 몫…대주주 부담 줄였다",
-      "story": "capital-market-act-application",
-      "event_group": "samsung-bio-rights-offering-rule",
-      "kind": "new_fact",
-      "summary": "삼성바이오 유증, 우리사주 20% 우선배정 적용"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/421/0009292157?sid=103",
-      "title_key": "관광벤처지원선발지급서검증연결로관광유니콘키운다",
-      "sent_at": "2026-11-16T17:02:30.522106+09:00",
-      "title_preview": "관광벤처 지원 '선발·지급'서 '검증·연결'로…'관광 유니콘' 키운다",
-      "story": "tourism-venture-support-2026",
-      "event_group": "tourism-venture-alliance-launch",
-      "kind": "new_fact",
-      "summary": "관광벤처 지원 '검증·연결' 민관 협력체 출범"
-    },
-    {
       "url_key": "https://n.news.naver.com/mnews/article/081/0003700058?sid=101",
       "title_key": "은행지주혁신하는데증권사지배구조낙제점",
       "sent_at": "2026-11-17T07:42:50.213222+09:00",
@@ -1759,6 +1579,66 @@
       "event_group": "fss-ombudsman-8th-2026",
       "kind": "new_fact",
       "summary": "금감원, 제8기 옴부즈만 위촉 및 금융 현장 관행 개선 추진"
+    },
+    {
+      "url_key": "https://news2day.co.kr/article/20261119500168",
+      "title_key": "대한상의차기리더십거론되는구자열김남구의강점",
+      "sent_at": "2026-11-19T17:04:24.227954+09:00",
+      "title_preview": "[재계 인사이드] 대한상의 차기 리더십 거론되는 구자열·김남구의 강점...",
+      "story": "kih-kcci-candidate",
+      "event_group": "kih-kcci-candidate",
+      "kind": "new_fact",
+      "summary": "김남구 회장, 대한상의 차기 회장 후보로 거론"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004684055?sid=101",
+      "title_key": "pef품은상장사주가도털썩ma도장기화",
+      "sent_at": "2026-11-19T17:04:24.227954+09:00",
+      "title_preview": "PEF 품은 상장사 주가도 털썩…M&A도 장기화 [시그널]",
+      "story": "kis-lotte-financing",
+      "event_group": "kis-lotte-financing",
+      "kind": "new_fact",
+      "summary": "한투증권, 롯데에너지머티리얼즈 인수금융 대주단 참여"
+    },
+    {
+      "url_key": "https://thevaluenews.co.kr/news/view.php?idx=203445",
+      "title_key": "캐피탈사조달비용률②차입부채중사채비중87202",
+      "sent_at": "2026-11-19T17:04:24.227954+09:00",
+      "title_preview": "[데이터 뉴스] 캐피탈사 조달비용률 ②: 차입부채 중 사채 비중 87%…202...",
+      "story": "",
+      "event_group": "",
+      "kind": "new_fact",
+      "summary": "한투캐피탈, 차입부채 중 사채 비중 84.4"
+    },
+    {
+      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202611171450141080103723",
+      "title_key": "교보운용초대etf본부장에nh아문디김현빈영입",
+      "sent_at": "2026-11-19T17:04:24.227954+09:00",
+      "title_preview": "[더벨]교보운용, 초대 ETF본부장에 NH아문디 김현빈 영입",
+      "story": "kim-etf-head-move",
+      "event_group": "kim-etf-head-move",
+      "kind": "new_fact",
+      "summary": "한투운용 김현빈 본부장, 교보운용 ETF본부장 이동"
+    },
+    {
+      "url_key": "https://insightkorea.co.kr/news/articleView.html?idxno=259303",
+      "title_key": "상반기성장주하반기파킹해외지수",
+      "sent_at": "2026-11-19T17:04:24.227954+09:00",
+      "title_preview": "[2026 돈의 흐름①] 상반기 '성장주', 하반기 '파킹·해외지수'",
+      "story": "kis-draft-balance",
+      "event_group": "kis-draft-balance",
+      "kind": "new_fact",
+      "summary": "한투증권 발행어음 잔액 24.4조원 돌파, 업계 1위"
+    },
+    {
+      "url_key": "https://shinailbo.co.kr/news/articleView.html?idxno=5085427",
+      "title_key": "운용사ai첨단산업펀드잇단출시성장성위험관리동시공략",
+      "sent_at": "2026-11-19T17:04:24.227954+09:00",
+      "title_preview": "운용사, AI·첨단산업 펀드 잇단 출시…성장성·위험관리 동시 공략",
+      "story": "kim-kivam-ai-fund",
+      "event_group": "kim-kivam-ai-fund",
+      "kind": "new_fact",
+      "summary": "한투운용·밸류운용, AI 및 첨단산업 신상품 출시"
     }
   ]
 }
