@@ -1,306 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://n.news.naver.com/mnews/article/081/0003700058?sid=101",
-      "title_key": "은행지주혁신하는데증권사지배구조낙제점",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "은행지주 혁신하는데… 증권사 지배구조 ‘낙제점’ [경제 블로그]",
-      "story": "kis-governance-rating",
-      "event_group": "kis-governance-rating-d",
-      "kind": "new_fact",
-      "summary": "한투증권, 지배구조 평가 최하위 D등급"
-    },
-    {
-      "url_key": "https://hansbiz.co.kr/news/articleView.html?idxno=883024",
-      "title_key": "ipo물거품sk에코장동현사퇴김영식능력시험대",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "'IPO 물거품' SK에코, 장동현 사퇴…김영식 능력 시험대[더시그널]",
-      "story": "kis-ipo-sk-ecoplant",
-      "event_group": "kis-ipo-sk-ecoplant-delay",
-      "kind": "new_fact",
-      "summary": "SK에코플랜트 IPO 지연, 한투증권 주관"
-    },
-    {
-      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202611121458128600102690",
-      "title_key": "미래에셋과한투엇갈린ir접근법",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "[더벨][thebell desk] 미래에셋과 한투, 엇갈린 IR 접근법",
-      "story": "kifh-ir-strategy",
-      "event_group": "kifh-ir-strategy-comparison",
-      "kind": "new_fact",
-      "summary": "한투지주, 미래에셋과 엇갈린 IR 전략 분석"
-    },
-    {
-      "url_key": "https://cbci.co.kr/news/articleView.html?idxno=627347",
-      "title_key": "옵토닉스17일코스닥상장공모가1만2000원천무천궁",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "[공모주 HOT] 옵토닉스 17일 코스닥 상장…공모가 1만2000원, 천무·천궁...",
-      "story": "kis-ipo-optonics",
-      "event_group": "kis-ipo-optonics-listing",
-      "kind": "new_fact",
-      "summary": "한투증권 주관 옵토닉스 17일 코스닥 상장"
-    },
-    {
-      "url_key": "https://rcast.co.kr/news/articleView.html?idxno=32072",
-      "title_key": "한화투자증권연금상담센터오픈이벤트실시外",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "한화투자증권, '연금상담센터 오픈 이벤트' 실시 外",
-      "story": "kis-product-sales",
-      "event_group": "kis-new-product-sales",
-      "kind": "new_fact",
-      "summary": "한투증권, 신규 금융상품 판매 개시"
-    },
-    {
-      "url_key": "https://vegannews.co.kr/news/article.html?no=406220",
-      "title_key": "율촌5억원자사주취득신탁취득분전량소각계획",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "율촌, 5억원 자사주 취득 신탁…취득분 전량 소각 계획",
-      "story": "yulchon-share-buy",
-      "event_group": "yulchon-share-buy",
-      "kind": "new_fact",
-      "summary": "율촌 자사주 소각 신탁, 한투증권 체결"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/001/0016445206?sid=100",
-      "title_key": "민주당정책의원총회개최관계성범죄대책논의",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "민주당, 정책의원총회 개최…'관계성 범죄' 대책 논의",
-      "story": "lee-capital-market-policy",
-      "event_group": "dp-capital-market-policy-meeting",
-      "kind": "new_fact",
-      "summary": "민주당, 주가누르기 방지법 등 자본시장 대책 논의"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/008/0005441858?sid=101",
-      "title_key": "올해만96번켜진사이드카실효성논란에당국제도손질검토",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "올해만 96번 켜진 사이드카…실효성 논란에 당국 제도 손질 검토",
-      "story": "market-volatility-2026",
-      "event_group": "sidecar-system-review-2026",
-      "kind": "new_fact",
-      "summary": "금융당국, 증시 변동성 관리를 위한 사이드카 제도 개선 검토"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/081/0003700063?sid=101",
-      "title_key": "한국개미들앤트로픽공모주못산다",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "한국 개미들, 앤트로픽 공모주 못 산다",
-      "story": "anthropic-ipo-domestic-exclusion",
-      "event_group": "fss-mirae-asset-ipo-audit",
-      "kind": "new_fact",
-      "summary": "금감원, 미래에셋증권 공모주 배정 과정 현장검사 착수"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/421/0009292532?sid=101",
-      "title_key": "인뱅지방은행공동대출저축은행으로넓히나인뱅은건전성부담",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "인뱅-지방은행 공동대출, 저축은행으로 넓히나…인뱅은 ‘건전성 부담’",
-      "story": "internet-savings-joint-loan",
-      "event_group": "internet-savings-joint-loan-expansion",
-      "kind": "new_fact",
-      "summary": "금융당국, 인터넷은행-저축은행 공동대출 확대 검토"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/037/0000039163?sid=101",
-      "title_key": "글로벌반도체주급락에도중국장비주는상한가",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "글로벌 반도체주 급락에도 중국 장비주는 상한가",
-      "story": "global-semiconductor-etf-volatility",
-      "event_group": "china-semiconductor-etf-surge",
-      "kind": "new_fact",
-      "summary": "중국 정부, 반도체 장비주 지원 정책에 관련 ETF 급등"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/008/0005441889?sid=101",
-      "title_key": "코벤비중맞춰라연말코스닥사모cb한달새6200억봇물",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "코벤 비중 맞춰라…연말 코스닥 사모CB 한 달 새 6200억 '봇물'",
-      "story": "kosdaq-venture-fund-outflow",
-      "event_group": "koven-fund-cb-investment-rush",
-      "kind": "analysis",
-      "summary": "코스닥벤처펀드, 연말 비중 준수를 위한 사모CB 투자 급증"
-    },
-    {
-      "url_key": "https://newsdream.kr/news/articleView.html?idxno=122262",
-      "title_key": "民이냐官이냐은행연합회장누가되든과제수두룩",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "[인선의 계절] 民이냐 官이냐…은행연합회장, 누가 되든 과제 '수두룩'",
-      "story": "bank-federation-chairman-selection",
-      "event_group": "bank-federation-chairman-selection-2026",
-      "kind": "new_fact",
-      "summary": "차기 은행연합회장 인선 본격화 및 규제 개선 과제 산적"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/018/0006410783?sid=101",
-      "title_key": "전자금융업매출145증가미정산미상환잔액15조원",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "전자금융업 매출 14.5% 증가…미정산·미상환 잔액 15조원",
-      "story": "electronic-finance-market-2026",
-      "event_group": "electronic-finance-market-report-2026",
-      "kind": "new_fact",
-      "summary": "전자금융업 미정산 잔액 15조 원 돌파 및 매출 성장세"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/009/0005764509?sid=101",
-      "title_key": "ai인프라글로벌큰손블랙스톤韓데이터센터시장진출하겠다",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "AI인프라 글로벌 큰손 블랙스톤 \"韓 데이터센터 시장 진출하겠다\"",
-      "story": "blackstone-korea-data-center",
-      "event_group": "blackstone-korea-data-center-entry",
-      "kind": "new_fact",
-      "summary": "블랙스톤, 한국 데이터센터 시장 진출 및 공모 시장 보완 시사"
-    },
-    {
-      "url_key": "https://magazine.hankyung.com/money/article/202610141539c",
-      "title_key": "다양한사모펀드에분산투자투자자접근성낮췄다",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "다양한 사모펀드에 분산투자… 투자자 접근성 낮췄다",
-      "story": "private-fund-retail-access",
-      "event_group": "private-fund-retail-access-product",
-      "kind": "new_fact",
-      "summary": "사모펀드와 공모펀드 결합한 분산투자 상품으로 접근성 확대"
-    },
-    {
-      "url_key": "https://bizwnews.com/news/articleView.html?idxno=152021",
-      "title_key": "보험사해외자산두배로성장이끈건은행증권인수",
-      "sent_at": "2026-11-17T07:42:50.213222+09:00",
-      "title_preview": "보험사 해외자산 두 배로…성장 이끈 건 은행·증권 인수",
-      "story": "insurance-overseas-expansion",
-      "event_group": "financial-holding-overseas-expansion",
-      "kind": "new_fact",
-      "summary": "국내 금융지주, 해외 은행·증권사 인수로 해외자산 확대"
-    },
-    {
-      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445061",
-      "title_key": "증시꺾이자고유재산직격탄운용사2분기1천억클럽10곳중8곳",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "증시 꺾이자 고유재산 '직격탄'…운용사 '2분기 1천억클럽' 10곳 중 8곳 ...",
-      "story": "kivam-q3-earnings-2026",
-      "event_group": "kivam-q3-loss-2026",
-      "kind": "new_fact",
-      "summary": "한투밸류운용, 3분기 400억 원 적자 기록"
-    },
-    {
-      "url_key": "https://socialvalue.kr/news/view/1065570729641553",
-      "title_key": "미래에셋k브랜드지수증권사부문부동의1위한투5계단하락한7위",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "미래에셋, K-브랜드지수 증권사 부문 부동의 1위…한투 5계단 하락한 7위",
-      "story": "kis-brand-reputation-2026",
-      "event_group": "kis-brand-reputation-drop",
-      "kind": "new_fact",
-      "summary": "한투증권, 브랜드지수 7위로 5계단 하락"
-    },
-    {
-      "url_key": "https://news.dealsitetv.com/articles/178472",
-      "title_key": "이석로대표사업재편이끌까",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "[CEO 전망대] [한국투자밸류자산운용] 이석로 대표, 사업 재편 이끌까…...",
-      "story": "kivam-ceo-lee-seok-ro",
-      "event_group": "kivam-ceo-lee-seok-ro-biz",
-      "kind": "new_fact",
-      "summary": "이석로 대표, 한투밸류운용 사업 재편 주도"
-    },
-    {
-      "url_key": "https://catchnews.kr/news/articleView.html?idxno=130589",
-      "title_key": "11월16일주식시장주요공시",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "11월 16일 주식시장 주요공시",
-      "story": "kis-daehan-cable-contract",
-      "event_group": "kis-daehan-cable-contract-2026",
-      "kind": "new_fact",
-      "summary": "한투증권, 대한전선과 2717억 규모 공급계약"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/011/0004682959?sid=101",
-      "title_key": "한투운용ace글로벌반도체etf비중1위교체sk하닉대신삼전",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "한투운용 ACE 글로벌반도체 ETF, 비중 1위 교체…SK하닉 대신 삼전",
-      "story": "kim-ace-semicon-rebalancing",
-      "event_group": "kim-ace-semicon-rebalancing-2026",
-      "kind": "new_fact",
-      "summary": "한투운용, ACE 글로벌반도체 ETF 리밸런싱"
-    },
-    {
-      "url_key": "https://eroun.net/news/articleView.html?idxno=95576",
-      "title_key": "서울한복판에서만나는새아파트돈의문마지막주거퍼즐경희궁",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "﻿서울 한복판에서 만나는 새 아파트…돈의문 마지막 주거 퍼즐 '경희궁...",
-      "story": "kit-gyeonghuigung-epit",
-      "event_group": "kit-gyeonghuigung-epit-project",
-      "kind": "new_fact",
-      "summary": "한투부동산신탁, 경희궁 에피트 시행 담당"
-    },
-    {
-      "url_key": "https://etoday.co.kr/news/view/2648962",
-      "title_key": "삼성easfa삼양컴텍등",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "[오늘의 IR] 삼성E&A·SFA·삼양컴텍 등",
-      "story": "kis-corp-day-2026",
-      "event_group": "kis-hanmi-corp-day-2026",
-      "kind": "new_fact",
-      "summary": "한투증권 주최 한미약품 Corp Day 참가"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/008/0005442102?sid=101",
-      "title_key": "방산용광학센서기업옵토닉스150상승하며코스닥데뷔",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "방산용 광학 센서 기업 옵토닉스, 150% 상승하며 코스닥 데뷔",
-      "story": "kis-ipo-optonics",
-      "event_group": "kis-ipo-optonics-listing",
-      "kind": "new_fact",
-      "summary": "한투증권 주관 옵토닉스, 코스닥 상장 첫날 급등"
-    },
-    {
-      "url_key": "https://asiaa.co.kr/news/articleView.html?idxno=271388",
-      "title_key": "포인트로채권투자까지kb증권토큰증권발행상환전과정검증",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "포인트로 채권 투자까지...KB증권, 토큰증권 발행·상환 전 과정 검증",
-      "story": "sto-regulation-2026",
-      "event_group": "kb-sto-verification",
-      "kind": "new_fact",
-      "summary": "KB증권, 토큰증권 발행·상환 전 과정 실증 완료"
-    },
-    {
-      "url_key": "https://raonnews.com/news/article.html?no=62816",
-      "title_key": "경영지도기준미달전금업자24곳선불잔액전체의8차지",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "경영지도기준 미달 전금업자 24곳…선불잔액 전체의 8% 차지",
-      "story": "electronic-finance-management-audit",
-      "event_group": "fss-electronic-finance-audit",
-      "kind": "new_fact",
-      "summary": "경영지도기준 미달 전금업자 24곳 금융위 조치 예고"
-    },
-    {
-      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4445066",
-      "title_key": "김연수칸서스대표100공개매수외엔답없어증시2배로",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "[인터뷰] 김연수 칸서스대표 \"100% 공개매수 외엔 답 없어…증시 2배로 ...",
-      "story": "mandatory-tender-offer-2026",
-      "event_group": "cansus-ceo-tender-offer-interview",
-      "kind": "new_fact",
-      "summary": "칸서스대표, 의무공개매수 100% 도입 필요성 주장"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/018/0006410814?sid=101",
-      "title_key": "번지진않았지만제이알중앙사태가남긴경고",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "[37th SRE][Cover]“번지진 않았지만”…제이알·중앙 사태가 남긴 경고",
-      "story": "joongang-debt-lawsuit",
-      "event_group": "joongang-debt-lawsuit-sre",
-      "kind": "new_fact",
-      "summary": "중앙그룹 채권 투자자, 증권사 임직원 등 검찰 고소"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/018/0006410826?sid=104",
-      "title_key": "美기관3분기데이터센터주서발뺐다전력주이탈2배",
-      "sent_at": "2026-11-17T09:11:58.903773+09:00",
-      "title_preview": "美 기관, 3분기 데이터센터주서 발 뺐다…전력주 이탈 2배",
-      "story": "us-data-center-stock-exit",
-      "event_group": "us-data-center-stock-exit",
-      "kind": "new_fact",
-      "summary": "美 기관투자자, 3분기 데이터센터 및 전력주 비중 축소"
-    },
-    {
       "url_key": "https://n.news.naver.com/mnews/article/310/0000141779?sid=101",
       "title_key": "500대기업영업이익235급증삼성전자sk하이닉스빼면17",
       "sent_at": "2026-11-17T13:32:39.618702+09:00",
@@ -1639,6 +1339,156 @@
       "event_group": "kim-kivam-ai-fund",
       "kind": "new_fact",
       "summary": "한투운용·밸류운용, AI 및 첨단산업 신상품 출시"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/293/0000093572?sid=101",
+      "title_key": "엠앤씨솔루션몸값1조6000억웰투시소시어스펀드만기재",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "[단독] 엠앤씨솔루션 몸값 1조→6000억…웰투시·소시어스 펀드만기 재...",
+      "story": "kipe-mnc-solution-deal",
+      "event_group": "kipe-mnc-solution-deal-fail",
+      "kind": "new_fact",
+      "summary": "엠앤씨솔루션 인수 협상 최종 결렬"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/243/0000105934?sid=101",
+      "title_key": "연5금리내건증권사들발행어음확대에커지는경고음",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "연 5% 금리 내건 증권사들…발행어음 확대에 커지는 경고음",
+      "story": "kis-draft-balance",
+      "event_group": "kis-draft-balance-warning",
+      "kind": "analysis",
+      "summary": "발행어음 잔액 24조 돌파 및 조달비용 경고"
+    },
+    {
+      "url_key": "https://raonnews.com/news/article.html?no=62920",
+      "title_key": "보험사자본성증권금리밴드상단몰려발행액287증권사인수",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "보험사 자본성증권 금리 밴드 상단 몰려…발행액 28.7% 증권사 인수",
+      "story": "kis-insurance-bond-underwriting",
+      "event_group": "kis-insurance-bond-underwriting",
+      "kind": "new_fact",
+      "summary": "보험사 자본성증권 발행액 28% 인수 참여"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/277/0005845416?sid=101",
+      "title_key": "한투운용25일라이브세미나돈버는ai에주목",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "한투운용, 25일 라이브 세미나…\"돈 버는 AI에 주목\"",
+      "story": "kim-hantu-station-ai",
+      "event_group": "kim-hantu-station-ai-live",
+      "kind": "new_fact",
+      "summary": "25일 'AI 수익화' 주제 유튜브 라이브 개최"
+    },
+    {
+      "url_key": "https://thebigdata.co.kr/view.php?ud=202611200755126567d0a8833aad_23",
+      "title_key": "미래에셋자산운용11월연금브랜드평판빅데이터1위하나우리은행",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "미래에셋자산운용, 11월 연금 브랜드평판 빅데이터 1위…하나·우리은행...",
+      "story": "kim-brand-reputation-pension",
+      "event_group": "kim-pension-brand-reputation-nov",
+      "kind": "new_fact",
+      "summary": "11월 연금 브랜드평판 상위권 기록"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/036/0000054479?sid=102",
+      "title_key": "대법계엄은내란인정했지만한덕수엔파기환송민주당조희대",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "대법, 계엄은 ‘내란’ 인정했지만, 한덕수엔 파기환송…민주당, 조희대...",
+      "story": "kim-keon-hee-cma-ruling",
+      "event_group": "kim-keon-hee-verdict-confirmed",
+      "kind": "new_fact",
+      "summary": "대법원, 김건희 여사 자본시장법 위반 확정"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005356189?sid=102",
+      "title_key": "징역15년vs시세조종증거없다김범수오늘항소심선고",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "\"징역 15년\" vs \"시세조종 증거 없다\"…김범수 오늘 항소심 선고",
+      "story": "kakao-sm-stock-manipulation",
+      "event_group": "kakao-sm-verdict-today",
+      "kind": "new_fact",
+      "summary": "카카오 김범수 SM 시세조종 혐의 2심 선고 진행"
+    },
+    {
+      "url_key": "https://srtimes.kr/news/articleView.html?idxno=218113",
+      "title_key": "최대실적에도물음표이환주는새회장이호성은",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "[은행장 인선 下] 최대 실적에도 물음표…이환주는 '새 회장', 이호성은...",
+      "story": "financial-governance-reform-2026",
+      "event_group": "fss-ceo-succession-reform-plan",
+      "kind": "analysis",
+      "summary": "금감원, 금융지주 CEO 승계 절차 개선안"
+    },
+    {
+      "url_key": "https://economytalk.kr/news/articleView.html?idxno=425427",
+      "title_key": "금융사퇴직임원고문자문특임직으로억대보수공시사",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "[진단] 금융사 퇴직 임원, 고문·자문·특임직으로 억대 보수…공시 사...",
+      "story": "financial-governance-reform-2026",
+      "event_group": "fss-exec-advisory-pay-audit",
+      "kind": "new_fact",
+      "summary": "금감원, 금융사 퇴직 임원 고액 보수 점검"
+    },
+    {
+      "url_key": "https://cbci.co.kr/news/articleView.html?idxno=628778",
+      "title_key": "한달새28조원넘게불어난법인자금금리증시불",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "[MMF역대최대] 한 달 새 28조 원 넘게 불어난 법인 자금… 금리·증시 불...",
+      "story": "mmf-record-high-2026",
+      "event_group": "mmf-corporate-fund-surge",
+      "kind": "new_fact",
+      "summary": "MMF 법인 자금 한 달 새 28조 원 급증"
+    },
+    {
+      "url_key": "https://smartbizn.com/news/articleView.html?idxno=160060",
+      "title_key": "가계빚2030조돌파속2금융권도빗장저신용자불법사금융내몰",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "가계빚 2030조 돌파 속 2금융권도 '빗장'···저신용자 불법사금융 내몰...",
+      "story": "household-debt-3q2026",
+      "event_group": "household-debt-2nd-tier-impact",
+      "kind": "analysis",
+      "summary": "가계빚 2030조 돌파에 2금융권 대출 강화"
+    },
+    {
+      "url_key": "https://g-enews.com/view.php?ud=202611200822453196923c501012_1",
+      "title_key": "lg유플러스lg전자hlb엘앤에프cjcgv등",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "[개장 전 주요 공시] LG유플러스·LG전자·HLB·엘앤에프·CJ CGV 등",
+      "story": "capital-market-act-amendment",
+      "event_group": "hlb-merger-cma-compliance",
+      "kind": "new_fact",
+      "summary": "HLB, 개정 자본시장법 반영해 합병 진행"
+    },
+    {
+      "url_key": "https://geconomy.co.kr/news/article.html?no=325880",
+      "title_key": "교보생명자회사에또800억수혈누적증자6580억에도차입부채5000",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "교보생명, 자회사에 또 800억 수혈…누적 증자 6580억에도 차입부채 5000...",
+      "story": "kyobo-life-subsidiary-injection",
+      "event_group": "kyobo-subsidiary-capital-injection",
+      "kind": "new_fact",
+      "summary": "교보생명, PF 부실 자회사에 800억 수혈"
+    },
+    {
+      "url_key": "https://thepublic.kr/news/articleView.html?idxno=327643",
+      "title_key": "네이버페이npay스타트업첫성과kb증권울산vc20억출자연계",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "네이버페이 'Npay 스타트업' 첫 성과…KB증권·울산 VC 20억 출자 연계",
+      "story": "npay-startup-investment",
+      "event_group": "npay-kb-vc-startup-fund",
+      "kind": "new_fact",
+      "summary": "네이버페이-KB증권, 스타트업 출자 연계"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/277/0005845423?sid=101",
+      "title_key": "ai가세계금융을움직인다싱가포르에서본미래",
+      "sent_at": "2026-11-20T09:12:53.031944+09:00",
+      "title_preview": "[디지털자산 2.0]AI가 세계 금융을 움직인다…싱가포르에서 본 미래",
+      "story": "global-finance-ai-summit",
+      "event_group": "singapore-mas-ai-finance-event",
+      "kind": "new_fact",
+      "summary": "싱가포르 MAS 주최 AI 금융 컨퍼런스 개최"
     }
   ]
 }
