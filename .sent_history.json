@@ -1489,6 +1489,166 @@
       "event_group": "singapore-mas-ai-finance-event",
       "kind": "new_fact",
       "summary": "싱가포르 MAS 주최 AI 금융 컨퍼런스 개최"
+    },
+    {
+      "url_key": "https://goodkyung.com/news/articleView.html?idxno=293682",
+      "title_key": "비상금은줄고빚은늘고연말만기앞둔저축은행유동성찜찜",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "비상금은 줄고 빚은 늘고…연말 만기 앞둔 저축은행 유동성 '찜찜'",
+      "story": "kisb-liquidity-2026",
+      "event_group": "kisb-liquidity-2026",
+      "kind": "new_fact",
+      "summary": "한투저축은행, 지주서 3000억 조달 등 유동성 관리"
+    },
+    {
+      "url_key": "https://globalepic.co.kr/view.php?ud=2026112009394711927cc35ccc5c_29",
+      "title_key": "보험업이숙원인데한투는왜kdb생명포기했나",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "[Epic Why] 보험업이 숙원인데…한투는 왜 KDB생명 포기했나?",
+      "story": "kifh-kdb-life-acquisition",
+      "event_group": "kifh-kdb-life-acquisition",
+      "kind": "analysis",
+      "summary": "KDB생명 인수 무산 배경, 자본확충 부담 지목"
+    },
+    {
+      "url_key": "https://ceoscoredaily.com/page/view/2026111915430062069",
+      "title_key": "증권업계전산운용비전년동기보다222토스카카오페이증권급",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "증권업계 전산운용비 전년 동기보다 22.2% ↑…토스·카카오페이증권 급...",
+      "story": "securities-it-cost-2026",
+      "event_group": "securities-it-cost-2026",
+      "kind": "new_fact",
+      "summary": "증권업계 전산운용비 증가세 속 대형사 지출 지속"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005356277?sid=101",
+      "title_key": "美운용사공략하는한투오너십vs파트너십한지붕두전략",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "美 운용사 공략하는 한투…'오너십 vs 파트너십' 한 지붕 두 전략?",
+      "story": "kih-us-strategy",
+      "event_group": "kih-us-strategy",
+      "kind": "new_fact",
+      "summary": "김남구 회장, 미국 시장 안착 위한 파트너십 강조"
+    },
+    {
+      "url_key": "https://sisacast.kr/news/articleView.html?idxno=101737",
+      "title_key": "한국투자증권복잡다난한시대투자길라잡이로나서해",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "[生기업TALK] 한국투자증권, 복잡다난한 시대 '투자 길라잡이'로 나서 해...",
+      "story": "",
+      "event_group": "",
+      "kind": "new_fact",
+      "summary": "모간스탠리운용과 협력, 글로벌 투자 가이드 강화"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/031/0001076980?sid=105",
+      "title_key": "2심무죄사법리스크덜어낸카카오김범수새로운도전힘보탤것",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "'2심 무죄' 사법 리스크 덜어낸 카카오⋯김범수 \"새로운 도전 힘 보탤 것...",
+      "story": "kakao-sm-stock-manipulation",
+      "event_group": "kakao-ceo-acquittal-2nd",
+      "kind": "new_fact",
+      "summary": "카카오 김범수, SM 시세조종 혐의 항소심서 무죄 선고"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/366/0001206184?sid=101",
+      "title_key": "캐피탈社렌터카한도확대에롯데sk반발중소형사찬성",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "캐피탈社 렌터카 한도 확대에… 롯데·SK ‘반발’, 중소형사 ‘찬성’",
+      "story": "capital-rental-limit-expansion",
+      "event_group": "fsc-capital-rental-rule",
+      "kind": "new_fact",
+      "summary": "금융위, 캐피탈사 렌터카 취급 한도 확대 규제 개정 추진"
+    },
+    {
+      "url_key": "https://naeil.com/news/read/609515",
+      "title_key": "코스닥상장폐지속도보다절차중요",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "코스닥 상장폐지 “속도보다 절차 중요”",
+      "story": "kosdaq-delisting-regulation",
+      "event_group": "kosdaq-delisting-debate",
+      "kind": "new_fact",
+      "summary": "코스닥 상장폐지 기준 강화 논의…절차적 정당성 확보 요구"
+    },
+    {
+      "url_key": "https://mhns.co.kr/news/articleView.html?idxno=769995",
+      "title_key": "역대최대143조끌어모은앤트로픽지금살까팔까투자자별셈법",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "역대 최대 143조 끌어모은 앤트로픽…'지금 살까 팔까' 투자자별 셈법",
+      "story": "anthropic-ipo-domestic-exclusion",
+      "event_group": "anthropic-nasdaq-debut",
+      "kind": "new_fact",
+      "summary": "앤트로픽 나스닥 상장 첫날 17% 급등…국내 투자자 주목"
+    },
+    {
+      "url_key": "https://economytalk.kr/news/articleView.html?idxno=425434",
+      "title_key": "k콘텐츠에돈이흐른다금융권생산적금융확대속",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "[주목 e-한류] \"K-콘텐츠에 돈이 흐른다\" 금융권…\"생산적 금융 확대 속...",
+      "story": "k-content-policy-fund",
+      "event_group": "k-content-policy-fund-plan",
+      "kind": "new_fact",
+      "summary": "정부, K-콘텐츠 생산적 금융 확대 위해 정책펀드 조성"
+    },
+    {
+      "url_key": "https://raonnews.com/news/article.html?no=62926",
+      "title_key": "공동재보험활성화움직임속fsb재보험사사모대출투자우려",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "공동재보험 활성화 움직임 속…FSB, 재보험사 사모대출 투자 우려",
+      "story": "fsb-private-debt-warning",
+      "event_group": "fsb-private-debt-report",
+      "kind": "new_fact",
+      "summary": "FSB, 재보험사 사모대출 투자 확대에 따른 규제차익 우려"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/421/0009300934?sid=101",
+      "title_key": "다시은행맨이재근호닻올렸다5살젊어진kb세대교체바람부",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "'다시 은행맨' 이재근호 닻 올렸다…'5살 젊어진' KB, 세대교체 바람 부...",
+      "story": "kb-financial-ceo-appointments",
+      "event_group": "kb-ceo-shareholder-approval",
+      "kind": "new_fact",
+      "summary": "KB금융 이재근 회장 선임안 주총 통과…세대교체 본격화"
+    },
+    {
+      "url_key": "https://widedaily.com/news/articleView.html?idxno=304232",
+      "title_key": "예보료율개편논의개별보험사까지확대인상폭낮췄지만업계부",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "예보료율 개편 논의 개별 보험사까지 확대…인상 폭 낮췄지만 업계 \"부...",
+      "story": "deposit-insurance-premium-hike",
+      "event_group": "kdic-premium-industry-meeting",
+      "kind": "new_fact",
+      "summary": "예보료율 개편 논의 보험업권 확대…업계 부담 완화 촉구"
+    },
+    {
+      "url_key": "https://fntimes.com/html/view.php?ud=2026112010444491619efc5ce4ae_18",
+      "title_key": "sgi서울보증코스피200편입눈앞고배당정책지속보험사주주환원",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "SGI서울보증, 코스피200 편입 눈앞…고배당 정책 지속 [보험사 주주환원...",
+      "story": "sgi-kospi200-inclusion",
+      "event_group": "sgi-kospi200-inclusion-plan",
+      "kind": "new_fact",
+      "summary": "SGI서울보증, 코스피200 편입 전망에 패시브 자금 기대"
+    },
+    {
+      "url_key": "https://topdaily.kr/articles/113024",
+      "title_key": "평가손실의역습상장벤처캐피털수익성상고하저",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "평가손실의 역습…상장 벤처캐피털 수익성 '상고하저'",
+      "story": "vc-profitability-slump-2026",
+      "event_group": "vc-profitability-analysis",
+      "kind": "new_fact",
+      "summary": "상장 VC, 투자자산 평가손실로 하반기 수익성 악화 우려"
+    },
+    {
+      "url_key": "https://the-biz.co.kr/news/articleView.html?idxno=731751",
+      "title_key": "보험사ma인수가보다자본확충이관건금융그룹부담커진다",
+      "sent_at": "2026-11-20T13:32:33.566880+09:00",
+      "title_preview": "보험사 M&A, 인수가보다 자본 확충이 관건… 금융그룹 부담 커진다",
+      "story": "insurance-mna-capital-burden",
+      "event_group": "insurance-mna-capital-analysis",
+      "kind": "analysis",
+      "summary": "보험사 M&A 시장, 인수가보다 자본 확충 규제 대응이 관건"
     }
   ]
 }
