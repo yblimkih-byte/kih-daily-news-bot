@@ -1,66 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://news2day.co.kr/article/20261119500168",
-      "title_key": "대한상의차기리더십거론되는구자열김남구의강점",
-      "sent_at": "2026-11-19T17:04:24.227954+09:00",
-      "title_preview": "[재계 인사이드] 대한상의 차기 리더십 거론되는 구자열·김남구의 강점...",
-      "story": "kih-kcci-candidate",
-      "event_group": "kih-kcci-candidate",
-      "kind": "new_fact",
-      "summary": "김남구 회장, 대한상의 차기 회장 후보로 거론"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/011/0004684055?sid=101",
-      "title_key": "pef품은상장사주가도털썩ma도장기화",
-      "sent_at": "2026-11-19T17:04:24.227954+09:00",
-      "title_preview": "PEF 품은 상장사 주가도 털썩…M&A도 장기화 [시그널]",
-      "story": "kis-lotte-financing",
-      "event_group": "kis-lotte-financing",
-      "kind": "new_fact",
-      "summary": "한투증권, 롯데에너지머티리얼즈 인수금융 대주단 참여"
-    },
-    {
-      "url_key": "https://thevaluenews.co.kr/news/view.php?idx=203445",
-      "title_key": "캐피탈사조달비용률②차입부채중사채비중87202",
-      "sent_at": "2026-11-19T17:04:24.227954+09:00",
-      "title_preview": "[데이터 뉴스] 캐피탈사 조달비용률 ②: 차입부채 중 사채 비중 87%…202...",
-      "story": "",
-      "event_group": "",
-      "kind": "new_fact",
-      "summary": "한투캐피탈, 차입부채 중 사채 비중 84.4"
-    },
-    {
-      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202611171450141080103723",
-      "title_key": "교보운용초대etf본부장에nh아문디김현빈영입",
-      "sent_at": "2026-11-19T17:04:24.227954+09:00",
-      "title_preview": "[더벨]교보운용, 초대 ETF본부장에 NH아문디 김현빈 영입",
-      "story": "kim-etf-head-move",
-      "event_group": "kim-etf-head-move",
-      "kind": "new_fact",
-      "summary": "한투운용 김현빈 본부장, 교보운용 ETF본부장 이동"
-    },
-    {
-      "url_key": "https://insightkorea.co.kr/news/articleView.html?idxno=259303",
-      "title_key": "상반기성장주하반기파킹해외지수",
-      "sent_at": "2026-11-19T17:04:24.227954+09:00",
-      "title_preview": "[2026 돈의 흐름①] 상반기 '성장주', 하반기 '파킹·해외지수'",
-      "story": "kis-draft-balance",
-      "event_group": "kis-draft-balance",
-      "kind": "new_fact",
-      "summary": "한투증권 발행어음 잔액 24.4조원 돌파, 업계 1위"
-    },
-    {
-      "url_key": "https://shinailbo.co.kr/news/articleView.html?idxno=5085427",
-      "title_key": "운용사ai첨단산업펀드잇단출시성장성위험관리동시공략",
-      "sent_at": "2026-11-19T17:04:24.227954+09:00",
-      "title_preview": "운용사, AI·첨단산업 펀드 잇단 출시…성장성·위험관리 동시 공략",
-      "story": "kim-kivam-ai-fund",
-      "event_group": "kim-kivam-ai-fund",
-      "kind": "new_fact",
-      "summary": "한투운용·밸류운용, AI 및 첨단산업 신상품 출시"
-    },
-    {
       "url_key": "https://n.news.naver.com/mnews/article/293/0000093572?sid=101",
       "title_key": "엠앤씨솔루션몸값1조6000억웰투시소시어스펀드만기재",
       "sent_at": "2026-11-20T09:12:53.031944+09:00",
@@ -689,6 +629,186 @@
       "event_group": "fsc-fsb-summit-ai",
       "kind": "new_fact",
       "summary": "금융위, FSB 총회서 AI 및 스테이블코인 규제 방향 논의"
+    },
+    {
+      "url_key": "https://ceoscoredaily.com/page/view/2026112015194799221",
+      "title_key": "금융지주계열저축은행실적희비한국투자웃고kb울었다",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "금융지주 계열 저축은행 실적 희비…한국투자 웃고 KB 울었다",
+      "story": "kisb-earnings-q3-2026",
+      "event_group": "kisb-q3-loss",
+      "kind": "new_fact",
+      "summary": "한투저축은행, 3분기 130억 원 적자 기록"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006413872?sid=105",
+      "title_key": "보로노이주가급락에담보가치뚝대표주담대400억차환부담",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "보로노이 주가 급락에 담보가치 뚝…대표 주담대 400억 차환 부담",
+      "story": "kis-stock-loan-voronoi",
+      "event_group": "kis-voronoi-loan-issue",
+      "kind": "new_fact",
+      "summary": "보로노이 대표, 한투증권 주담대 차환 부담"
+    },
+    {
+      "url_key": "https://dnews.co.kr/uhtml/view.jsp?idxno=202611211707188030016",
+      "title_key": "한투지주kdb생명대신카디프생명으로선회자본투입최소화",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "한투지주, KDB생명 대신 카디프생명으로 선회…“자본 투입 최소화”",
+      "story": "kifh-insurance-strategy",
+      "event_group": "kifh-cardif-life-push",
+      "kind": "new_fact",
+      "summary": "KDB생명 대신 카디프생명 인수 추진 선회"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/243/0000106036?sid=101",
+      "title_key": "손실나면직원책임대신증권반대매매완화에노조반발",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "“손실 나면 직원 책임?”…대신증권 반대매매 완화에 노조 반발",
+      "story": "kis-margin-call-policy",
+      "event_group": "kis-margin-call-delay",
+      "kind": "new_fact",
+      "summary": "고객 대상 반대매매 유예 정책 시행"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004684927?sid=101",
+      "title_key": "코스닥상장앞둔케이엠에프에이엔에이치스트럭쳐24일27일청약이",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "코스닥 상장 앞둔 케이엠에프·에이엔에이치스트럭쳐, 24일·27일 청약[이...",
+      "story": "",
+      "event_group": "",
+      "kind": "new_fact",
+      "summary": "케이엠에프 등 코스닥 상장 주관 진행"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004684923?sid=101",
+      "title_key": "전문가90이달금리인상최종금리375전망도",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "전문가 90% “이달 금리 인상”…최종금리 3.75% 전망도 [Pick코노미]",
+      "story": "kih-economist-view-2026",
+      "event_group": "kih-economist-rate-view",
+      "kind": "new_fact",
+      "summary": "이남강 이코노미스트, 기준금리 인상 전망"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/005/0001886720?sid=101",
+      "title_key": "금융행정쇄신안이번주발표금감원독립성약해져",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "금융행정 쇄신안 이번주 발표… “금감원 독립성 약해져”",
+      "story": "fss-inspection-reform-2026",
+      "event_group": "fss-inspection-reform-plan",
+      "kind": "new_fact",
+      "summary": "금감원, 금융사 검사·제재 절차 개편하는 쇄신안 발표 예정"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/648/0000052863?sid=101",
+      "title_key": "증안펀드가동준비만해도코스피반등과거사례보니",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "'증안펀드' 가동 준비만 해도 코스피 반등?…과거 사례 보니",
+      "story": "stock-stabilization-fund-2026",
+      "event_group": "stock-stabilization-fund-prep",
+      "kind": "new_fact",
+      "summary": "정부, 증시 급락 방어 위해 18년 만에 증안펀드 가동 준비"
+    },
+    {
+      "url_key": "https://etoday.co.kr/news/view/2651115",
+      "title_key": "hft시장교란논란에국회거래소허수주문감시강화",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "HFT시장교란 논란에⋯국회·거래소, 허수주문 감시 강화",
+      "story": "hft-market-disruption-regulation",
+      "event_group": "hft-market-disruption-regulation",
+      "kind": "new_fact",
+      "summary": "국회, 허수주문 방지 위한 과다호가 수수료 부과 법안 발의"
+    },
+    {
+      "url_key": "https://investchosun.com/site/data/html_dir/2026/11/20/2026112080095.html",
+      "title_key": "금투협회사채캡티브영업막겠다는데걸러낼방법이없다",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "[Invest]금투협, 회사채 '캡티브 영업' 막겠다는데…\"걸러낼 방법이 없다...",
+      "story": "captive-sales-regulation",
+      "event_group": "captive-sales-regulation",
+      "kind": "new_fact",
+      "summary": "금투협, 계열사 일감 몰아주기 '캡티브 영업' 규제 강화"
+    },
+    {
+      "url_key": "https://newslock.co.kr/news/articleView.html?idxno=140627",
+      "title_key": "캐피탈사11곳3분기순익21감소4분기도조달금리pf이중부담",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "캐피탈사 11곳, 3분기 순익 21% 감소… 4분기도 조달금리·PF '이중 부담...",
+      "story": "capital-q3-earnings-slump",
+      "event_group": "capital-q3-earnings-slump",
+      "kind": "new_fact",
+      "summary": "캐피탈사 3분기 순익 21% 급감, 조달금리·PF 부담 지속"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/003/0014338396?sid=101",
+      "title_key": "자사주로수급채우고공매도반대매매조여매도압력누른다검은",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "자사주로 수급 채우고 공매도·반대매매 조여 매도압력 누른다…'검은 ...",
+      "story": "treasury-stock-regulation-easing",
+      "event_group": "treasury-stock-regulation-easing",
+      "kind": "new_fact",
+      "summary": "정부, 기업 자사주 매입 규제 완화로 증시 수급 개선 도모"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006413791?sid=101",
+      "title_key": "예보료율한도05규정달라질까내년일몰앞두고과제로",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "예보료율 한도 ‘0.5%’ 규정 달라질까…내년 일몰 앞두고 과제로",
+      "story": "deposit-insurance-premium-hike",
+      "event_group": "deposit-insurance-limit-sunset",
+      "kind": "analysis",
+      "summary": "예보료율 한도 규정 일몰 앞두고 개편 논의 본격화"
+    },
+    {
+      "url_key": "https://investchosun.com/site/data/html_dir/2026/11/22/2026112280038.html",
+      "title_key": "89조풀려도회수막힌vcib기관수급빠진대통령처방",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "[Invest]8.9조 풀려도 회수 막힌 VC·IB…'기관 수급' 빠진 대통령 처방",
+      "story": "vc-exit-market-slump",
+      "event_group": "vc-exit-market-slump",
+      "kind": "new_fact",
+      "summary": "벤처 시장 자금 회수 난항 속 정책적 보완 요구 증대"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/023/0004011068?sid=101",
+      "title_key": "상법빈틈파고든4대금융세금0원배당",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "상법 빈틈 파고든 4대 금융… ‘세금 0원’ 배당",
+      "story": "bank-dividend-tax-avoidance",
+      "event_group": "bank-dividend-tax-avoidance",
+      "kind": "new_fact",
+      "summary": "4대 금융지주, 감액 배당 통한 비과세 배당 전면 시행"
+    },
+    {
+      "url_key": "https://ilemonde.com/news/articleView.html?idxno=31032",
+      "title_key": "6장엔진소리가요란한배는키를잊는다",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "[이용약관] 6장. 엔진 소리가 요란한 배는 키를 잊는다",
+      "story": "vc-investment-stats-2025",
+      "event_group": "vc-investment-stats-2025",
+      "kind": "new_fact",
+      "summary": "2025년 벤처투자 13.6조 원 기록, ICT 서비스 비중 확대"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/030/0003488280?sid=110",
+      "title_key": "전화성의기술창업targeting417규제지키",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "[전화성의 기술창업 Targeting] 〈417〉 [AC협회장 주간록127] 규제 지키...",
+      "story": "vc-evaluation-system",
+      "event_group": "vc-evaluation-system-incentive",
+      "kind": "new_fact",
+      "summary": "중기부, 우수 VC 대상 모태펀드 출자 가점 등 혜택 부여"
+    },
+    {
+      "url_key": "https://dnews.co.kr/uhtml/view.jsp?idxno=202611180945105730574",
+      "title_key": "①시민이버스주주국민펀드",
+      "sent_at": "2026-11-23T07:42:37.128263+09:00",
+      "title_preview": "[서울 버스, 시민 주주시대]①[단독]시민이 버스 주주… ‘국민 펀드’...",
+      "story": "seoul-bus-public-fund",
+      "event_group": "seoul-bus-public-fund",
+      "kind": "new_fact",
+      "summary": "서울시, 버스 준공영제 투명성 위해 공모펀드 전환 추진"
     }
   ]
 }
