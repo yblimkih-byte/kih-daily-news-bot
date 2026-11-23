@@ -1,166 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://businesspost.co.kr/BP?command=article_view&num=452534",
-      "title_key": "삼성증권발행어음진출에국고채과징금부담벗어나박종문첫연임",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "삼성증권 발행어음 진출에 국고채 과징금 부담 벗어나, 박종문 첫 연임...",
-      "story": "kis-fss-fine-ranking",
-      "event_group": "kis-fine-profit-impact",
-      "kind": "analysis",
-      "summary": "국고채 담합 과징금 반영 시 순익 순위 변동"
-    },
-    {
-      "url_key": "https://fetv.co.kr/news/articleView.html?idxno=313974",
-      "title_key": "③한국투자증권흔들리는운용ib가방어",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "[증권사 3Q 성적] ③한국투자증권, '흔들리는 운용' IB가 방어",
-      "story": "kis-q3-earnings-mix",
-      "event_group": "kis-q3-earnings-mix",
-      "kind": "new_fact",
-      "summary": "3분기 운용 부진을 IB 부문 수익으로 방어"
-    },
-    {
-      "url_key": "https://sisajournal-e.com/news/articleView.html?idxno=425206",
-      "title_key": "kb2계단메리츠삼성은5위다툼증권사자본순위쟁탈전",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "KB 2계단↑, 메리츠·삼성은 5위 다툼···증권사 자본 순위 '쟁탈전'",
-      "story": "kis-capital-ranking-2026",
-      "event_group": "kis-capital-ranking-1st",
-      "kind": "new_fact",
-      "summary": "3분기 자본 총계 13.5조 원으로 업계 1위"
-    },
-    {
-      "url_key": "https://newspost.kr/news/articleView.html?idxno=227646",
-      "title_key": "피지티증권신고서제출한투주관",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "피지티, 증권신고서 제출…한투 주관",
-      "story": "kis-ipo-pgt",
-      "event_group": "kis-ipo-pgt-filing",
-      "kind": "new_fact",
-      "summary": "피지티 코스닥 상장 주관 및 신고서 제출"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/014/0005607504?sid=101",
-      "title_key": "한투청년창업가육성에앞장선다멘토링부터판로지원까지",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "한투 '청년 창업가' 육성에 앞장선다…멘토링부터 판로 지원까지",
-      "story": "kis-dream-sherpa-event",
-      "event_group": "kis-dream-sherpa-networking",
-      "kind": "new_fact",
-      "summary": "청년 창업가 지원 네트워킹 데이 개최"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/020/0003763986?sid=102",
-      "title_key": "카카오김범수2심도무죄法sm시세조종목적증명안돼",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "카카오 김범수, 2심도 무죄…法 “SM 시세조종 목적 증명 안 돼”",
-      "story": "kakao-sm-stock-manipulation",
-      "event_group": "kakao-2nd-trial-acquittal",
-      "kind": "new_fact",
-      "summary": "카카오 김범수, SM 시세조종 2심 무죄 선고"
-    },
-    {
-      "url_key": "https://womaneconomy.co.kr/news/articleView.html?idxno=261422",
-      "title_key": "jp모건다크웹공습본게임전8개블랙홀에전세계털렸다",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "JP모건 다크웹 공습···본게임 전 8개 블랙홀에 전세계 털렸다",
-      "story": "financial-data-leak-2026",
-      "event_group": "hacking-victim-list-reveal",
-      "kind": "new_fact",
-      "summary": "해킹 피해 금융사 명단 공개 및 보안 관리 비상"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/008/0005444230?sid=101",
-      "title_key": "시총낮다고바로퇴출코스닥시총300억미만40가흑자",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "\"시총 낮다고 바로 퇴출?\"…코스닥 시총 300억 미만 40%가 흑자",
-      "story": "kosdaq-delisting-regulation",
-      "event_group": "kosdaq-delisting-criticism",
-      "kind": "analysis",
-      "summary": "코스닥 상폐 기준 강화에 획일적 퇴출 우려 제기"
-    },
-    {
-      "url_key": "https://insight.co.kr/news/582947",
-      "title_key": "해킹시도당한케이뱅크금감원경영보안전방위검사나섰다",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "해킹 시도 당한 케이뱅크...금감원, 경영·보안 전방위 검사 나섰다",
-      "story": "kbank-fss-inspection",
-      "event_group": "kbank-fss-security-audit",
-      "kind": "new_fact",
-      "summary": "금감원, 케이뱅크 경영·보안 전방위 검사 착수"
-    },
-    {
-      "url_key": "https://weekly.hankooki.com/news/articleView.html?idxno=7195006",
-      "title_key": "저성장에금리상승까지카드사연체율내년3분기025포인트오를",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "저성장에 금리 상승까지…\"카드사 연체율, 내년 3분기 0.25%포인트 오를...",
-      "story": "card-delinquency-forecast-2027",
-      "event_group": "card-delinquency-2027-outlook",
-      "kind": "new_fact",
-      "summary": "내년 카드사 연체율 상승 전망 및 조달 비용 부담"
-    },
-    {
-      "url_key": "https://pinpointnews.co.kr/news/articleView.html?idxno=506480",
-      "title_key": "수도권에집중된벤처투자구조개선과1조원출자예산확보논의",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "수도권에 집중된 벤처투자 구조 개선과 1조원 출자예산 확보 논의",
-      "story": "regional-vc-investment-policy",
-      "event_group": "regional-vc-investment-forum",
-      "kind": "new_fact",
-      "summary": "벤처투자 수도권 쏠림 심화 및 지역 투자 확대 논의"
-    },
-    {
-      "url_key": "https://newstomato.com/ReadNews.aspx?no=1321234",
-      "title_key": "서울잔류명분커진금감원금융위이전규모관건",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "'서울 잔류' 명분 커진 금감원…금융위 이전 규모 관건",
-      "story": "fss-relocation-seoul",
-      "event_group": "fss-seoul-retention-logic",
-      "kind": "new_fact",
-      "summary": "금감원, 서울 잔류 명분 강화 속 이전 규모 관건"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/421/0009301410?sid=101",
-      "title_key": "카드외상5조늘어4년9개월만에최대카드사들웃지못하는이유",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "카드 외상 5조 늘어 4년 9개월 만에 최대…카드사들 웃지 못하는 이유",
-      "story": "card-credit-receivables-increase",
-      "event_group": "card-receivables-record-high",
-      "kind": "new_fact",
-      "summary": "카드·할부금융 외상거래 5조 증가하며 역대 최대"
-    },
-    {
-      "url_key": "https://kpenews.com/View.aspx?No=4322595",
-      "title_key": "캐피탈사렌탈규제완화추진렌터카시장경쟁구도바뀌나",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "캐피탈사 렌탈 규제 완화 추진..렌터카 시장 경쟁구도 바뀌나",
-      "story": "capital-rental-limit-expansion",
-      "event_group": "capital-rental-regulation-debate",
-      "kind": "analysis",
-      "summary": "금융위, 캐피탈사 렌터카 취급 한도 확대 추진"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/018/0006413207?sid=104",
-      "title_key": "中국부펀드美사모펀드에다시돈푼다미중긴장완화",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "中국부펀드, 美사모펀드에 다시 돈 푼다…미중 긴장 완화",
-      "story": "cic-us-pe-investment",
-      "event_group": "cic-us-pe-fund-reentry",
-      "kind": "new_fact",
-      "summary": "중국 국부펀드, 미국 사모펀드 투자 재개 협상"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/310/0000141917?sid=101",
-      "title_key": "성미숙여성벤처협회장여성벤처돈맥경화심각공공",
-      "sent_at": "2026-11-20T17:03:21.192191+09:00",
-      "title_preview": "[인터뷰] 성미숙 여성벤처협회장 “여성벤처 ‘돈맥경화’ 심각… 공공...",
-      "story": "women-vc-support-policy",
-      "event_group": "women-vc-mou-expansion",
-      "kind": "new_fact",
-      "summary": "여성벤처협회, 공공 판로 및 투자 생태계 확대"
-    },
-    {
       "url_key": "https://n.news.naver.com/mnews/article/031/0001077183?sid=101",
       "title_key": "고려아연배당은ypc로영풍자회사에금융자산매각",
       "sent_at": "2026-11-21T17:02:07.280135+09:00",
@@ -859,6 +699,126 @@
       "event_group": "pepper-savings-bank-management-issue",
       "kind": "new_fact",
       "summary": "페퍼저축은행, 대주주 변경 후 정상화 과제"
+    },
+    {
+      "url_key": "https://theviewers.co.kr/View.aspx?No=4322563",
+      "title_key": "④과징금은회사몫성과급환수엔침묵",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "[국고채 담합 고발] ④과징금은 '회사 몫'...성과급 환수엔 '침묵'",
+      "story": "kis-fss-fine-ranking",
+      "event_group": "kis-fine-bonus",
+      "kind": "new_fact",
+      "summary": "국고채 담합 과징금 관련 성과급 환수 논란"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/293/0000093704?sid=110",
+      "title_key": "대우증권kdb생명좋은물건과비지떡",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "[허정수칼럼] 대우증권·KDB생명, 좋은 물건과 비지떡",
+      "story": "kifh-kdb-life-acquisition",
+      "event_group": "kifh-kdb-fail-recap",
+      "kind": "analysis",
+      "summary": "KDB생명 인수 협상 결렬 배경 및 과정 분석"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004685360?sid=101",
+      "title_key": "ff테일러메이드실사종결수순센트로이드spa만남았다",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "F&F, 테일러메이드 실사 종결 수순…센트로이드 SPA만 남았다 [시그널]",
+      "story": "kis-acquisition-finance-ff",
+      "event_group": "kis-loc-ff",
+      "kind": "new_fact",
+      "summary": "F&F 테일러메이드 인수금융 LOC 제공 확인"
+    },
+    {
+      "url_key": "https://ceoscoredaily.com/page/view/2026112315451425313",
+      "title_key": "발행어음금리최고6메리츠도가세증권사수익성부담은",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "발행어음 금리 최고 6%…메리츠도 가세, 증권사 수익성 부담은",
+      "story": "kis-promissory-note-growth",
+      "event_group": "kis-promissory-growth",
+      "kind": "new_fact",
+      "summary": "발행어음 잔액 4695억 원으로 전년比 18.5% 증가"
+    },
+    {
+      "url_key": "https://it.chosun.com/news/articleView.html?idxno=3000000001651",
+      "title_key": "거래절벽에채권손실까지배당수익률9증권주반등할까",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "거래 절벽에 채권손실까지… 배당수익률 9% 증권주, 반등할까",
+      "story": "kis-earnings-analysis",
+      "event_group": "kis-earnings-analysis",
+      "kind": "new_fact",
+      "summary": "3분기 순익 감소 속 영업이익 선전 분석"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005357270?sid=101",
+      "title_key": "k뷰티유통업체언락드브랜드320억규모시리즈b투자유치",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "[단독] K뷰티 유통업체 언락드브랜드, 320억 규모 시리즈B 투자 유치",
+      "story": "kip-investment-unlocked-brands",
+      "event_group": "kip-inv-unlocked",
+      "kind": "new_fact",
+      "summary": "K뷰티 유통사 언락드브랜드 시리즈B 투자 참여"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005608507?sid=101",
+      "title_key": "이억원중대민생범죄계좌정지확대자금세탁철저대응",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "이억원 \"중대민생범죄 계좌 정지 확대… 자금세탁 철저 대응\"",
+      "story": "aml-regulation-expansion-2026",
+      "event_group": "aml-regulation-expansion-fsc-3-tasks",
+      "kind": "new_fact",
+      "summary": "금융위, 중대민생범죄 계좌 정지 확대 및 자금세탁 대응"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006414330?sid=101",
+      "title_key": "금융위내일부터상장사자사주1일취득한도3개월간완화",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "금융위, 내일부터 상장사 자사주 1일 취득한도 3개월간 완화",
+      "story": "treasury-stock-regulation-easing",
+      "event_group": "treasury-stock-regulation-easing-fsc-decision",
+      "kind": "new_fact",
+      "summary": "금융위, 상장사 자사주 1일 취득한도 3개월 완화"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/009/0005767963?sid=100",
+      "title_key": "주가폭락두고엇갈린처방與주주보호野종부세폐지",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "주가 폭락 두고 엇갈린 처방…與 “주주 보호” 野 “종부세 폐지”",
+      "story": "capital-market-reform-2026",
+      "event_group": "capital-market-reform-political-debate",
+      "kind": "new_fact",
+      "summary": "여당, 자본시장법 개정 논의 가속화"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004685339?sid=101",
+      "title_key": "모태펀드와함께성장한걸그룹리센느",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "[시론] 모태펀드와 함께 성장한 걸그룹 ‘리센느’",
+      "story": "mother-fund-expansion-2026",
+      "event_group": "mother-fund-expansion-2026-record-budget",
+      "kind": "new_fact",
+      "summary": "모태펀드, 역대 최대 규모 벤처·스타트업 투자 확대"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/022/0004177545?sid=101",
+      "title_key": "부당지원의혹ok금융그룹제재심의외",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "[이코노 브리핑] 부당지원 의혹 OK금융그룹 제재 심의 외",
+      "story": "lottecard-disclosure-violation-fine",
+      "event_group": "lottecard-disclosure-violation-fine-fsc-decision",
+      "kind": "new_fact",
+      "summary": "금융위, 롯데카드 공시의무 위반 과징금 10억2천만원"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/003/0014340851?sid=101",
+      "title_key": "금융증권11월24일화요일",
+      "sent_at": "2026-11-24T07:43:35.828621+09:00",
+      "title_preview": "[오늘의 주요일정]금융·증권(11월24일 화요일)",
+      "story": "financial-schedule-",
+      "event_group": "financial-schedule-",
+      "kind": "new_fact",
+      "summary": "금융위, 증권사 랩어카운트 임원 간담회 개최"
     }
   ]
 }
