@@ -1,66 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://n.news.naver.com/mnews/article/031/0001077183?sid=101",
-      "title_key": "고려아연배당은ypc로영풍자회사에금융자산매각",
-      "sent_at": "2026-11-21T17:02:07.280135+09:00",
-      "title_preview": "고려아연 배당은 YPC로…영풍, 자회사에 금융자산 매각",
-      "story": "kih-bond-transaction-youngpoong",
-      "event_group": "kih-bond-sale-ypc",
-      "kind": "new_fact",
-      "summary": "영풍, 한투지주 신종자본증권 등 금융자산 처분"
-    },
-    {
-      "url_key": "https://shinailbo.co.kr/news/articleView.html?idxno=5085802",
-      "title_key": "kodex코스닥1502주연속1위커버드콜매수",
-      "sent_at": "2026-11-21T17:02:07.280135+09:00",
-      "title_preview": "[ETF머니플로우-11월3주] KODEX 코스닥150 2주 연속 1위…커버드콜 매수...",
-      "story": "kim-etf-money-flow",
-      "event_group": "kim-etf-flow-nov-3w",
-      "kind": "new_fact",
-      "summary": "한투운용 미국 지수형 ETF 순매수세 지속"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/014/0005607660?sid=101",
-      "title_key": "전화pc스마트폰주식주문다음은ai안경",
-      "sent_at": "2026-11-21T17:02:07.280135+09:00",
-      "title_preview": "[여의도는 지금] 전화→PC→스마트폰…주식 주문, 다음은 AI 안경?",
-      "story": "kis-open-api-strategy",
-      "event_group": "kis-ai-openapi-tool",
-      "kind": "analysis",
-      "summary": "한투증권, AI 도구용 오픈API 연결 도구 제공"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/015/0005356597?sid=101",
-      "title_key": "주가급등하면뭐하나中훈풍에웃는k엔터서늘한경고이수의et",
-      "sent_at": "2026-11-21T17:02:07.280135+09:00",
-      "title_preview": "주가 급등하면 뭐하나…中 훈풍에 웃는 'K엔터' 서늘한 경고 [이수의 ET...",
-      "story": "kim-ace-kpop-etf-perf",
-      "event_group": "kim-ace-kpop-performance",
-      "kind": "new_fact",
-      "summary": "한투운용 'ACE KPOP포커스' 수익률 3위 기록"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/016/0002726531?sid=100",
-      "title_key": "국힘이재명정권주가폭락하자시장내팽겨쳐",
-      "sent_at": "2026-11-21T17:02:07.280135+09:00",
-      "title_preview": "국힘 “이재명 정권, 주가 폭락하자 시장 내팽겨쳐”",
-      "story": "leverage-etf-regulation",
-      "event_group": "ppp-criticism-stock-policy-2026",
-      "kind": "new_fact",
-      "summary": "여권, 레버리지 ETF 등 증시 정책 비판"
-    },
-    {
-      "url_key": "https://ttlnews.com/news/articleView.html?idxno=3164864",
-      "title_key": "블록체인법학회한국블록체인산업진흥협회토큰증권시장활성화공동",
-      "sent_at": "2026-11-21T17:02:07.280135+09:00",
-      "title_preview": "블록체인법학회·한국블록체인산업진흥협회, 토큰증권 시장 활성화 공동...",
-      "story": "sto-regulation-2026",
-      "event_group": "sto-activation-seminar-2026",
-      "kind": "new_fact",
-      "summary": "블록체인법학회 등 토큰증권 활성화 논의"
-    },
-    {
       "url_key": "https://n.news.naver.com/mnews/article/008/0005444591?sid=101",
       "title_key": "흑자였는데적자전환공정위과징금리스크겹친증권사",
       "sent_at": "2026-11-22T17:02:12.208481+09:00",
@@ -1099,6 +1039,126 @@
       "event_group": "green-management-awards-2026",
       "kind": "new_fact",
       "summary": "정부, 녹색경영 우수기업 선정 및 ESG 규제 대응 지원"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/031/0001078069?sid=101",
+      "title_key": "거래소대주주지분20제한5대거래소경영권",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "[디지털자산법 윤곽] 거래소 대주주 지분 20% 제한⋯5대 거래소 경영권...",
+      "story": "kis-coinone-ownership-regulation",
+      "event_group": "kis-coinone-ownership-regulation",
+      "kind": "new_fact",
+      "summary": "가상자산법 대주주 지분 제한에 코인원 지배구조 비상"
+    },
+    {
+      "url_key": "https://insightkorea.co.kr/news/articleView.html?idxno=259642",
+      "title_key": "김남구한투회장kdb생명에서카디프생명으로ma갈아타나",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "김남구 한투 회장, KDB생명에서 카디프생명으로 M&A 갈아타나",
+      "story": "kifh-insurance-strategy",
+      "event_group": "kifh-cardiff-life-acquisition",
+      "kind": "new_fact",
+      "summary": "KDB생명 인수 무산 후 카디프생명 인수 재추진"
+    },
+    {
+      "url_key": "https://mdtoday.co.kr/news/articleView.html?idxno=627382",
+      "title_key": "금감원랩어카운트쏠림수수료관행개선22개증권사와논의",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "금감원, 랩어카운트 쏠림·수수료 관행 개선…22개 증권사와 논의",
+      "story": "kis-wrap-account-fss-meeting",
+      "event_group": "kis-wrap-account-fss-meeting",
+      "kind": "new_fact",
+      "summary": "금감원, 22개 증권사와 랩어카운트 관행 개선 논의"
+    },
+    {
+      "url_key": "https://wsobi.com/news/articleView.html?idxno=322441",
+      "title_key": "현대카드글로벌경쟁력강화수익원다변화",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "[금융계 10월 동향] 현대카드, 글로벌 경쟁력 강화···수익원 다변화 ...",
+      "story": "kih-hyundai-commercial-partnership",
+      "event_group": "kih-hyundai-commercial-partnership",
+      "kind": "new_fact",
+      "summary": "현대커머셜과 4개 계열사 전략적 파트너십 체결"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/025/0003567574?sid=101",
+      "title_key": "아보메드153억원시리즈d투자유치",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "아보메드, 153억원 시리즈D 투자 유치",
+      "story": "kis-ipo-abomed",
+      "event_group": "kis-ipo-abomed",
+      "kind": "new_fact",
+      "summary": "아보메드 시리즈D 유치, 2027년 상장 주관 추진"
+    },
+    {
+      "url_key": "https://popcornnews.net/news/articleView.html?idxno=141319",
+      "title_key": "cj프레시웨이800억조달카드600억차환하고200억실탄확보",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "CJ프레시웨이, 800억 조달 카드...600억 차환하고 200억 실탄 확보",
+      "story": "",
+      "event_group": "",
+      "kind": "new_fact",
+      "summary": "CJ프레시웨이 800억"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/056/0012300033?sid=101",
+      "title_key": "스테이블코인은행이주도가상자산거래소대주주지분20제한",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "‘스테이블코인’ 은행이 주도…가상자산 거래소 대주주 지분 20% 제한",
+      "story": "digital-asset-basic-law-2026",
+      "event_group": "fsc-digital-asset-law-announce",
+      "kind": "new_fact",
+      "summary": "가상자산법 제정, 거래소 대주주 지분 20% 제한"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004685652?sid=101",
+      "title_key": "국내ico허용했지만현물etf파생은빠져",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "국내 ICO 허용했지만…현물 ETF·파생은 빠져",
+      "story": "digital-asset-basic-law-2026",
+      "event_group": "ico-allow-spot-etf-exclude",
+      "kind": "new_fact",
+      "summary": "국내 ICO 허용, 가상자산 현물 ETF는 제외"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/029/0003060864?sid=100",
+      "title_key": "널뛰는증시에李대통령잘준비하고있나이억원준비하고있",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "널뛰는 증시에… 李대통령 “잘 준비하고 있나” 이억원 “준비하고 있...",
+      "story": "stock-market-contingency-plan-2026",
+      "event_group": "fsc-contingency-plan-ready",
+      "kind": "new_fact",
+      "summary": "대통령 증시 점검에 금융위 \"비상계획 준비 완료\""
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/374/0000545607?sid=101",
+      "title_key": "여전업앞ai스테이블코인등장금융위혁신노력지원",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "여전업 앞 AI·스테이블코인 등장…금융위 \"혁신 노력 지원\"",
+      "story": "credit-finance-ai-stablecoin-forum",
+      "event_group": "credit-finance-ai-forum-fsc",
+      "kind": "new_fact",
+      "summary": "여전업권 AI·스테이블코인 도입 지원 논의"
+    },
+    {
+      "url_key": "https://ajunews.com/view/20261124153006640",
+      "title_key": "민주당핀플루언서불공정거래조사방송서종목띄우고차익실현",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "민주당, 핀플루언서 불공정거래 조사…\"방송서 종목 띄우고 차익 실현 ...",
+      "story": "finfluencer-invest",
+      "event_group": "finfluencer-investigation-discuss",
+      "kind": "new_fact",
+      "summary": "민주당, 핀플루언서 불공정거래 조사 및 제도 개선"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/030/0003489158?sid=102",
+      "title_key": "지식재산처공공기술사업화생태계키운다iptlo얼라이언스첫성",
+      "sent_at": "2026-11-24T17:03:32.896105+09:00",
+      "title_preview": "지식재산처, 공공기술 사업화 생태계 키운다…'IP-TLO 얼라이언스' 첫 성...",
+      "story": "tech-startup-vc-policy-2026",
+      "event_group": "vc-tech-startup-policy-alliance",
+      "kind": "new_fact",
+      "summary": "공공기술 사업화 위한 VC 투자 생태계 강화"
     }
   ]
 }
