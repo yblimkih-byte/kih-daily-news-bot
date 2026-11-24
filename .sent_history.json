@@ -939,6 +939,166 @@
       "event_group": "kb-pension-fee-cut",
       "kind": "new_fact",
       "summary": "KB국민은행, 퇴직연금 활성화 위해 수수료 전면 인하"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/277/0005846988?sid=100",
+      "title_key": "李대통령16조국고채담합과징금아직도적은것같다",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "李대통령, 1.6조 국고채 담합 과징금 \"아직도 적은 것 같다\"",
+      "story": "kis-fss-fine-ranking",
+      "event_group": "kis-fss-fine-president-remark",
+      "kind": "new_fact",
+      "summary": "대통령, 국고채 담합 과징금 부족 지적"
+    },
+    {
+      "url_key": "https://topdaily.kr/articles/113071",
+      "title_key": "야반도주자티전자최대주주일가주당1원자회사",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "[이나인페이 IPO] '야반도주' 자티전자 최대주주 일가, '주당 1원 자회사...",
+      "story": "kis-ipo-e9pay",
+      "event_group": "kis-ipo-e9pay-controversy",
+      "kind": "new_fact",
+      "summary": "이나인페이 IPO, 구주매출 비중 논란"
+    },
+    {
+      "url_key": "https://newsway.co.kr/news/view?ud=2026112410095081723",
+      "title_key": "etf호황에도연임은안갯속자산운용사ceo인사촉각",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "ETF 호황에도 연임은 안갯속…자산운용사 CEO 인사 촉각",
+      "story": "kim-ceo-reappointment",
+      "event_group": "kim-ceo-reappointment-2026",
+      "kind": "new_fact",
+      "summary": "배재규 한투운용 대표, 내년 연임 여부 주목"
+    },
+    {
+      "url_key": "https://housingherald.co.kr/news/articleView.html?idxno=63509",
+      "title_key": "11월재개발재건축시공자선정동향20261192026126",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "11월 재개발·재건축 시공자 선정 동향(2026.11.9.~2026.12.6.)",
+      "story": "kit-redevelopment-dokbawi",
+      "event_group": "kit-redevelopment-dokbawi",
+      "kind": "new_fact",
+      "summary": "한투부동산신탁, 독바위역세권 재개발 추진"
+    },
+    {
+      "url_key": "https://the-today.com/news/articleView.html?idxno=94027",
+      "title_key": "고객에겐1만원회사는9조원꿈꾸는대신증권",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "고객에겐 1만원, 회사는 9조원 꿈꾸는 대신증권",
+      "story": "kis-promissory-note-growth",
+      "event_group": "kis-promissory-note-analysis",
+      "kind": "analysis",
+      "summary": "한투증권, 발행어음 시장 점유율 43% 기록"
+    },
+    {
+      "url_key": "https://it.donga.com/109997",
+      "title_key": "서울과기대신보첫공동데모데이스타트업6곳투자유치도전",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "서울과기대·신보 첫 공동 데모데이, 스타트업 6곳 투자 유치 도전",
+      "story": "kia-demoday-seoultech",
+      "event_group": "kia-demoday-seoultech",
+      "kind": "new_fact",
+      "summary": "한투AC, 서울과기대 데모데이 투자 심사"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006414713?sid=101",
+      "title_key": "엑세스바이오100억규모자사주취득신탁계약",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "엑세스바이오, 100억 규모 자사주 취득 신탁계약",
+      "story": "kis-treasury-stock-accessbio",
+      "event_group": "kis-treasury-stock-accessbio",
+      "kind": "new_fact",
+      "summary": "한투증권, 엑세스바이오 100억 자사주 계약"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/001/0016460029?sid=101",
+      "title_key": "완판행진ima4조원돌파모험자본공급확대는과제",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "'완판 행진' IMA 4조원 돌파…모험자본 공급 확대는 과제",
+      "story": "kis-ima-market-share",
+      "event_group": "kis-ima-market-share-2026",
+      "kind": "new_fact",
+      "summary": "한투증권, IMA 시장 점유율 75% 육박"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/001/0016460473?sid=101",
+      "title_key": "한국투자신탁운용전주사무소개소국민연금과협업강화",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "한국투자신탁운용 전주사무소 개소…국민연금과 협업 강화",
+      "story": "kim-jeonju-office-open",
+      "event_group": "kim-jeonju-office-open",
+      "kind": "new_fact",
+      "summary": "한투운용, 전주사무소 개소 및 국민연금 협업"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/001/0016460257?sid=101",
+      "title_key": "금투협일본시장진출지원협력본격화日협회와간담회",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "금투협, 일본 시장 진출 지원 협력 본격화…日협회와 간담회",
+      "story": "kofia-japan-am-meeting",
+      "event_group": "kofia-japan-am-meeting",
+      "kind": "new_fact",
+      "summary": "한투증권·운용, 일본 자산운용 시장 진출 논의"
+    },
+    {
+      "url_key": "https://dnews.co.kr/uhtml/view.jsp?idxno=202611240932044830301",
+      "title_key": "한국투자저축은행열린사랑의집에기부금후원물품전달",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "한국투자저축은행, ‘열린사랑의 집’에 기부금·후원물품 전달",
+      "story": "kisb-donation-2026",
+      "event_group": "kisb-donation-2026",
+      "kind": "new_fact",
+      "summary": "한투저축은행, 장애인 시설 기부금 전달"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006414712?sid=100",
+      "title_key": "월배당도가능기촉법4년연장합의종합",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "월 배당도 가능…기촉법 4년 연장 합의(종합)",
+      "story": "capital-market-act-dividend-reform",
+      "event_group": "fsc-dividend-reform-passed",
+      "kind": "new_fact",
+      "summary": "국회 정무위, 상장사 월배당 허용 자본시장법 개정안 의결"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006414636?sid=100",
+      "title_key": "수시배당도입저축은행부실비용분담1년연장",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "수시배당 도입…저축은행 부실 비용 분담 1년 연장",
+      "story": "savings-bank-special-account-extension",
+      "event_group": "fsc-savings-bank-account-extension",
+      "kind": "new_fact",
+      "summary": "정무위, 저축은행 구조조정 특별계정 운영 1년 연장 처리"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/123/0002394700?sid=100",
+      "title_key": "국힘63지선용증시부양이재명버블진상규명특검",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "국힘 \"6·3 지선용 증시부양...'이재명 버블' 진상규명 특검\"",
+      "story": "political-stock-market-clash",
+      "event_group": "ppp-stock-market-special-probe",
+      "kind": "new_fact",
+      "summary": "여권, 레버리지 ETF 등 증시 정책 비판 및 특검 추진"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/374/0000545527?sid=101",
+      "title_key": "디지털자산쟁탈전점화미래에셋토크나이저선수놨다",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "디지털자산 쟁탈전 점화…미래에셋, '토크나이저' 선수 놨다",
+      "story": "sto-regulation-2026",
+      "event_group": "sto-market-activation-analysis",
+      "kind": "analysis",
+      "summary": "내년 2월 토큰증권 제도 시행 앞두고 금융권 인프라 경쟁"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/119/0003158792?sid=102",
+      "title_key": "기후부녹색경영우수11곳선정esg규제대응지원",
+      "sent_at": "2026-11-24T13:32:05.020215+09:00",
+      "title_preview": "기후부, 녹색경영 우수 11곳 선정…ESG 규제 대응 지원",
+      "story": "green-management-awards-2026",
+      "event_group": "green-management-awards-2026",
+      "kind": "new_fact",
+      "summary": "정부, 녹색경영 우수기업 선정 및 ESG 규제 대응 지원"
     }
   ]
 }
