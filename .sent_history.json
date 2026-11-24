@@ -1159,6 +1159,286 @@
       "event_group": "vc-tech-startup-policy-alliance",
       "kind": "new_fact",
       "summary": "공공기술 사업화 위한 VC 투자 생태계 강화"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005445947?sid=101",
+      "title_key": "코인시장판이바뀐다은행엔열린문거래소엔높아지는벽",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "코인시장 판이 바뀐다…은행엔 열린 문, 거래소엔 높아지는 벽",
+      "story": "kis-coinone-ownership-regulation",
+      "event_group": "kis-coinone-ownership-risk",
+      "kind": "analysis",
+      "summary": "가상자산법 대주주 지분 제한에 코인원 지배구조 비상"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/009/0005768477?sid=101",
+      "title_key": "종목단타위험하대서etf갔는데17가상장5년내상폐됐다",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "“종목단타 위험하대서 ETF 갔는데”…17%가 상장 5년내 상폐됐다",
+      "story": "kim-ace-etf-delisting",
+      "event_group": "kim-ace-etf-delisting-issue",
+      "kind": "analysis",
+      "summary": "ACE ETF 3종 상장폐지 등 테마형 상품 리스크 부각"
+    },
+    {
+      "url_key": "https://newsway.co.kr/news/view?ud=2026112416410949625",
+      "title_key": "끝나지않은9200억위메이드매각박관호주담대한때1000억육박",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "끝나지 않은 9200억 위메이드 매각…박관호 주담대 한때 1000억 육박",
+      "story": "wemade-chairman-stock-loan",
+      "event_group": "kis-wemade-loan-repayment",
+      "kind": "new_fact",
+      "summary": "위메이드 박관호 의장, 한투증권 주담대 전액 상환"
+    },
+    {
+      "url_key": "https://kfenews.co.kr/news/articleView.html?idxno=668663",
+      "title_key": "우리투자증권회사채수요예측흥행자본경쟁력제고효과",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[Deal리뷰] 우리투자증권, 회사채 수요예측 흥행…자본경쟁력 제고 효과",
+      "story": "kis-bond-underwriting-woori",
+      "event_group": "kis-woori-ib-bond-underwriting",
+      "kind": "new_fact",
+      "summary": "우리투자증권 첫 회사채 발행 대표 주관 수행"
+    },
+    {
+      "url_key": "https://fetv.co.kr/news/articleView.html?idxno=314229",
+      "title_key": "하나증권모험자본투자신고식5년공들인엠비디난항",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "하나증권, 모험자본 투자 '신고식'…5년 공들인 '엠비디' 난항",
+      "story": "kis-ipo-track-record",
+      "event_group": "kis-bio-ipo-track-record",
+      "kind": "analysis",
+      "summary": "바이오 IPO 주관 트랙레코드 및 투자 회수 성과 조명"
+    },
+    {
+      "url_key": "https://vegannews.co.kr/news/article.html?no=410821",
+      "title_key": "크레버스최대주주담보대출잔액70억원",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[종목 브리핑] 크레버스, 최대주주 담보대출 잔액 70억원",
+      "story": "kis-stock-loan-creverse",
+      "event_group": "kis-creverse-loan-adjustment",
+      "kind": "new_fact",
+      "summary": "크레버스 최대주주 주식담보대출 계약 조건 변경"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/648/0000052948?sid=101",
+      "title_key": "한화에어로는왜로봇개투자계획접었을까",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "한화에어로는 왜 로봇개 투자 계획 접었을까",
+      "story": "kipe-ghost-robotics-acquisition",
+      "event_group": "kipe-ghost-robotics-history",
+      "kind": "analysis",
+      "summary": "미국 고스트로보틱스 인수 참여 이력 재조명"
+    },
+    {
+      "url_key": "https://greened.kr/news/articleView.html?idxno=355462",
+      "title_key": "금융業50곳1년새고용300명대증가한화손해보험",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[데이터 뉴스룸] 금융業 50곳 1년 새 고용 300명대 증가…한화손해보험...",
+      "story": "financial-sector-employment-2026",
+      "event_group": "kifh-employment-increase-2026",
+      "kind": "new_fact",
+      "summary": "금융업 고용 조사 결과 1년 새 직원 20명 증가"
+    },
+    {
+      "url_key": "https://vegannews.co.kr/news/article.html?no=410850",
+      "title_key": "엘리스2526일기관투자자대상3분기ndr",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "엘리스, 25~26일 기관투자자 대상 3분기 NDR",
+      "story": "kis-ndr-alis",
+      "event_group": "kis-ndr-support-alis",
+      "kind": "new_fact",
+      "summary": "에듀테크 기업 '엘리스' 3분기 NDR 후원"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/366/0001207098?sid=101",
+      "title_key": "앤트로픽ipo잭팟에재미본곳은한투지주1200억원대평가익",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "앤트로픽 IPO 잭팟에 재미본 곳은?... 한투지주, 1200억원대 평가익",
+      "story": "anthropic-ipo-kifh-gain",
+      "event_group": "kifh-anthropic-ipo-profit",
+      "kind": "new_fact",
+      "summary": "앤트로픽 상장으로 1200억 원대 평가이익 확보"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/119/0003159065?sid=101",
+      "title_key": "ib만잘하는줄알았는데한투증권키움턱밑추격",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "\"IB만 잘하는 줄 알았는데\"…한투증권, 키움 턱밑 추격",
+      "story": "kis-brokerage-market-share",
+      "event_group": "kis-brokerage-m-s-rise",
+      "kind": "new_fact",
+      "summary": "브로커리지 시장 점유율 확대로 키움증권 추격"
+    },
+    {
+      "url_key": "https://sateconomy.co.kr/news/view/1065612336934765",
+      "title_key": "cj프레시웨이600억영구채금리인상앞두고차환추진신규금리5",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "CJ프레시웨이, 600억 영구채 금리 인상 앞두고 차환 추진…신규 금리 5....",
+      "story": "kis-ima-cj-freshway",
+      "event_group": "kis-ima-cj-freshway-deal",
+      "kind": "new_fact",
+      "summary": "CJ프레시웨이 영구채 500억 원 IMA로 인수"
+    },
+    {
+      "url_key": "https://wikileaks-kr.org/news/articleView.html?idxno=195188",
+      "title_key": "②한국투자증권사람뽑고ai붙인다수익화는",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[증권사 AX 현주소]② 한국투자증권, '사람 뽑고 AI 붙인다'…수익화는...",
+      "story": "kis-ai-strategy-ax",
+      "event_group": "kis-ai-talent-management",
+      "kind": "new_fact",
+      "summary": "김남구 회장 경영 철학 반영한 AI 인재 육성 가속"
+    },
+    {
+      "url_key": "https://investchosun.com/site/data/html_dir/2026/11/24/2026112480160.html",
+      "title_key": "etf100조증발에테마주피로감채권섞어돌파구찾는운용",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[Invest]ETF 100조 증발에 '테마주 피로감'…채권 섞어 돌파구 찾는 운용...",
+      "story": "kim-ace-semi-bond-etf",
+      "event_group": "kim-ace-semi-bond-mixed-etf",
+      "kind": "new_fact",
+      "summary": "글로벌 메모리 반도체 TOP3 채권혼합 ETF 출시"
+    },
+    {
+      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202611241508121200108534",
+      "title_key": "2026코리아스타트업어워즈울산발완전자율제조인터엑스",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[더벨][2026 코리아 스타트업 어워즈] 울산발 완전 자율제조 '인터엑스'...",
+      "story": "kip-investment-interx",
+      "event_group": "kip-investment-interx-growth",
+      "kind": "new_fact",
+      "summary": "자율제조 솔루션 '인터엑스'에 누적 420억 투자"
+    },
+    {
+      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202611241542396880105124",
+      "title_key": "2026코리아스타트업어워즈하이퍼엑셀llm전용반도체로승",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[더벨][2026 코리아 스타트업 어워즈] 하이퍼엑셀, LLM 전용 반도체로 승...",
+      "story": "kip-investment-hyperaccel",
+      "event_group": "kip-investment-hyperaccel-b",
+      "kind": "new_fact",
+      "summary": "AI 반도체 팹리스 '하이퍼엑셀' 시리즈B 투자 참여"
+    },
+    {
+      "url_key": "https://ceoscoredaily.com/page/view/2026112416135723285",
+      "title_key": "자기자본8조클럽6곳으로늘었지만ima문턱넘은곳은한투등",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "자기자본 ‘8조 클럽’ 6곳으로 늘었지만…IMA 문턱 넘은 곳은 한투 등 ...",
+      "story": "kis-ima-market-share",
+      "event_group": "kis-ima-market-dominance",
+      "kind": "analysis",
+      "summary": "자기자본 8조 돌파 및 IMA 시장 독보적 점유율 유지"
+    },
+    {
+      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202611241351324200101678",
+      "title_key": "2026코리아스타트업어워즈갤럭스ai항체설계기술력바",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[더벨][2026 코리아 스타트업 어워즈] 갤럭스, AI 항체 설계 기술력…바...",
+      "story": "kis-investment-galux",
+      "event_group": "kis-investment-galux-ai",
+      "kind": "new_fact",
+      "summary": "AI 항체 설계 기업 '갤럭스' 투자 참여"
+    },
+    {
+      "url_key": "https://magazine.hankyung.com/money/article/202610153526c",
+      "title_key": "한국투자증권창업도와금융의사회적가치높인다",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "한국투자증권, 창업 도와 금융의 사회적 가치 높인다",
+      "story": "kis-social-contribution-startup",
+      "event_group": "kis-startup-social-contribution",
+      "kind": "new_fact",
+      "summary": "그룹 네트워크 활용한 유망 스타트업 성장 지원"
+    },
+    {
+      "url_key": "https://startuptoday.co.kr/news/articleView.html?idxno=819986",
+      "title_key": "etf투자자잡아라자산운용사가유튜브에공들이는이유",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[기획] \"ETF 투자자 잡아라\"…자산운용사가 유튜브에 공들이는 이유",
+      "story": "kim-youtube-marketing",
+      "event_group": "kim-youtube-marketing-growth",
+      "kind": "new_fact",
+      "summary": "유튜브 채널 구독자 급증하며 ETF 마케팅 강화"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006415017?sid=102",
+      "title_key": "ai황제의귀환美증시4000조축포",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[미리보는 이데일리 신문] AI황제의 귀환 美증시 4000조 축포",
+      "story": "kis-fss-fine-ranking",
+      "event_group": "president-comment-ktb-fine",
+      "kind": "new_fact",
+      "summary": "대통령, 국고채 담합 과징금 1.6조원도 부족하다 지적"
+    },
+    {
+      "url_key": "https://wolyo.co.kr/news/articleView.html?idxno=320993",
+      "title_key": "박봉권이석기대표체제교보증권펀드간부당거래로과태료11억90",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "박봉권·이석기 대표 체제 교보증권, 펀드 간 부당거래로 과태료 11억90...",
+      "story": "kyobo-securities-fund-churning-fine",
+      "event_group": "kyobo-fund-churning-fine",
+      "kind": "new_fact",
+      "summary": "교보증권, 펀드 간 부당 자금 돌려막기로 과태료 11.9억"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006415012?sid=101",
+      "title_key": "또뚫린금융권하나저축은행서552명개인정보유출",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "또 뚫린 금융권…하나저축은행서 552명 개인정보 유출",
+      "story": "financial-data-leak-2026",
+      "event_group": "hana-savings-data-leak",
+      "kind": "new_fact",
+      "summary": "하나저축은행 해킹으로 고객 552명 개인정보 유출 발생"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005609114?sid=102",
+      "title_key": "걸리면패가망신선행매매22억챙긴핀플루언서실형",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "'걸리면 패가망신' 선행매매… 22억 챙긴 핀플루언서 실형",
+      "story": "finfluencer-invest",
+      "event_group": "finfluencer-front-running-sentence",
+      "kind": "new_fact",
+      "summary": "선행매매로 22억 챙긴 핀플루언서, 징역 2년 6개월 실형"
+    },
+    {
+      "url_key": "https://newspim.com/news/view/20261124001219",
+      "title_key": "국회정무위해킹금융사매출3과징금법안결론못내내달재논",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "국회 정무위, 해킹 금융사 '매출 3% 과징금' 법안 결론 못 내…내달 재논...",
+      "story": "financial-hacking-penalty-bill",
+      "event_group": "hacking-penalty-bill-stalled",
+      "kind": "new_fact",
+      "summary": "국회, 해킹 피해 금융사에 매출 3% 과징금 부과안 재논의"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005357694?sid=101",
+      "title_key": "과도한자료요청개선을금융당국향한쓴소리",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "[단독] \"과도한 자료 요청 개선을\"…금융당국 향한 '쓴소리'",
+      "story": "fsc-fss-data-request-reform",
+      "event_group": "fsc-data-request-reform-demand",
+      "kind": "new_fact",
+      "summary": "금융권, 당국에 과도한 자료 요청 및 강압적 검사 개선 요구"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005445960?sid=101",
+      "title_key": "뉴스페이스펀드4곳중2곳오버부킹우주투자본격시동",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "뉴스페이스 펀드 4곳 중 2곳 '오버부킹'…\"우주 투자 본격 시동\"",
+      "story": "new-space-fund-overbooking",
+      "event_group": "new-space-fund-overbooking-status",
+      "kind": "new_fact",
+      "summary": "뉴스페이스 펀드 목표액 초과 달성하며 우주 투자 본격화"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006414960?sid=101",
+      "title_key": "블랙록홍콩첫토큰mmf출시홍콩달러스테이블코인결제",
+      "sent_at": "2026-11-25T07:42:21.110587+09:00",
+      "title_preview": "블랙록, 홍콩 첫 토큰 MMF 출시…홍콩달러 스테이블코인 결제",
+      "story": "blackrock-hk-token-mmf",
+      "event_group": "blackrock-hk-token-mmf-launch",
+      "kind": "new_fact",
+      "summary": "블랙록, 홍콩서 첫 토큰화 MMF 출시 및 스테이블코인 결제"
     }
   ]
 }
