@@ -819,6 +819,126 @@
       "event_group": "financial-schedule-",
       "kind": "new_fact",
       "summary": "금융위, 증권사 랩어카운트 임원 간담회 개최"
+    },
+    {
+      "url_key": "https://kjdaily.com/article.php?aid=1795477633693331276",
+      "title_key": "진에어에어부산lg화학등",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "[오늘 IR 일정] 진에어·에어부산·LG화학 등",
+      "story": "kis-ir-hosting-jinair",
+      "event_group": "kis-ir-hosting-jinair",
+      "kind": "new_fact",
+      "summary": "진에어 등 3사, 한투증권 본사서 IR 개최"
+    },
+    {
+      "url_key": "https://vegannews.co.kr/news/article.html?no=410265",
+      "title_key": "파마리서치싱가포르홍콩서3분기실적설명",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "파마리서치, 싱가포르·홍콩서 3분기 실적 설명",
+      "story": "kis-ir-hosting-pharmaresearch",
+      "event_group": "kis-ir-hosting-pharmaresearch",
+      "kind": "new_fact",
+      "summary": "파마리서치, 한투증권 주관 해외 IR 실시"
+    },
+    {
+      "url_key": "https://g-enews.com/view.php?ud=202611240812236747923c501012_1",
+      "title_key": "삼부토건유니슨바로팜한신공영신한지주우",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "[개장 전 주요 공시] 삼부토건·유니슨·바로팜·한신공영·신한지주·우...",
+      "story": "kis-bond-underwriting-nov-4w",
+      "event_group": "kis-bond-underwriting-nov-4w",
+      "kind": "new_fact",
+      "summary": "한투증권, 한신공영 사채 200억 인수 참여"
+    },
+    {
+      "url_key": "https://catchnews.kr/news/articleView.html?idxno=130893",
+      "title_key": "11월23일주식시장주요공시",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "11월 23일 주식시장 주요공시",
+      "story": "kis-treasury-stock-hwaseung",
+      "event_group": "kis-treasury-stock-hwaseung",
+      "kind": "new_fact",
+      "summary": "화승인더, 한투증권과 20억 자사주 계약"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/277/0005846796?sid=101",
+      "title_key": "한투운용토스뱅크서펀드2종단독판매",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "한투운용, 토스뱅크서 펀드 2종 단독 판매",
+      "story": "kim-toss-bank-exclusive-funds",
+      "event_group": "kim-toss-bank-exclusive-funds",
+      "kind": "new_fact",
+      "summary": "한투운용, 토스뱅크서 공모펀드 2종 단독 판매"
+    },
+    {
+      "url_key": "https://thebigdata.co.kr/view.php?ud=202611240749263112d0a8833aad_23",
+      "title_key": "미래에셋자산운용11월etf발행기업브랜드평판빅데이터1위",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "미래에셋자산운용, 11월 ETF 발행기업 브랜드평판 빅데이터 1위",
+      "story": "kim-brand-reputation-nov",
+      "event_group": "kim-brand-reputation-nov",
+      "kind": "new_fact",
+      "summary": "한투운용, 11월 ETF 브랜드평판 3위 기록"
+    },
+    {
+      "url_key": "https://dealsite.co.kr/articles/173359",
+      "title_key": "젠슨황복귀나스닥65폭등엔비디아시총1조달러늘",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "[뉴스모음] '젠슨황 복귀' 나스닥 6.5% 폭등…엔비디아 시총 1조달러 늘...",
+      "story": "capital-market-reform-2026",
+      "event_group": "capital-market-reform-debate",
+      "kind": "new_fact",
+      "summary": "자본시장법 개정안 실효성 의구심 및 당내 이견 표출"
+    },
+    {
+      "url_key": "https://kfenews.co.kr/news/articleView.html?idxno=668597",
+      "title_key": "의무공개매수제경영권프리미엄의향방",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "[기획] 의무공개매수제, 경영권 프리미엄의 향방",
+      "story": "mandatory-tender-offer-2026",
+      "event_group": "mandatory-tender-offer-debate",
+      "kind": "new_fact",
+      "summary": "의무공개매수제 도입 자본시장법 개정안 본회의 계류 중"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446130",
+      "title_key": "sk에코플랜트완전자회사화에소액주주반발매수가저평가",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "SK에코플랜트 완전 자회사화에 소액주주 반발…\"매수가 저평가\"",
+      "story": "capital-market-reform-2026",
+      "event_group": "sk-ecoplant-merger-regulation",
+      "kind": "new_fact",
+      "summary": "개정 자본시장법 시행 앞두고 소액주주 외부평가 규정 반발"
+    },
+    {
+      "url_key": "https://topdaily.kr/articles/113065",
+      "title_key": "김범수2심도무죄카카오뱅크신사업족쇄풀리나",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "김범수 2심도 무죄…카카오뱅크 신사업 족쇄 풀리나",
+      "story": "kakao-kim-innocent-2026",
+      "event_group": "kakao-kim-2nd-trial-innocent",
+      "kind": "new_fact",
+      "summary": "카카오 김범수 2심 무죄 판결로 카카오뱅크 신사업 탄력"
+    },
+    {
+      "url_key": "https://econotelling.com/news/articleView.html?idxno=21709",
+      "title_key": "반토막코스피는어디로가고있나",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "[입체취재] '반토막 코스피'는 어디로 가고 있나",
+      "story": "leverage-etf-market-impact",
+      "event_group": "leverage-etf-market-impact",
+      "kind": "new_fact",
+      "summary": "레버리지 ETF 상품 증가에 따른 증시 변동성 증폭 우려"
+    },
+    {
+      "url_key": "https://choicenews.co.kr/news/articleView.html?idxno=173451",
+      "title_key": "kb국민은행기업형퇴직연금수수료인하신한하나은행은",
+      "sent_at": "2026-11-24T09:13:10.128604+09:00",
+      "title_preview": "KB국민은행, 기업형 퇴직연금 수수료 인하...신한·하나은행은?",
+      "story": "retirement-pension-fee-cut-2026",
+      "event_group": "kb-pension-fee-cut",
+      "kind": "new_fact",
+      "summary": "KB국민은행, 퇴직연금 활성화 위해 수수료 전면 인하"
     }
   ]
 }
