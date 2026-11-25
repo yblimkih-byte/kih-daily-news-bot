@@ -1589,6 +1589,126 @@
       "event_group": "pef-sports-investment-trend",
       "kind": "new_fact",
       "summary": "글로벌 사모펀드, 스포츠 구단 및 리그 투자 확대"
+    },
+    {
+      "url_key": "https://the-today.com/news/articleView.html?idxno=94068",
+      "title_key": "최태원9440억마련했지만정산부담은남았다",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "[이슈] 최태원, 9440억 마련했지만…정산 부담은 남았다",
+      "story": "kis-sk-prs-deal",
+      "event_group": "kis-sk-prs-deal",
+      "kind": "new_fact",
+      "summary": "최태원, 한투증권과 4000억 규모 PRS 계약"
+    },
+    {
+      "url_key": "https://ebn.co.kr/news/articleView.html?idxno=1732955",
+      "title_key": "팔린보험사안팔린보험사③kdb생명매각전패원매자선정부터",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "[팔린 보험사, 안 팔린 보험사③] KDB생명 매각 전패…원매자 선정부터...",
+      "story": "",
+      "event_group": "",
+      "kind": "new_fact",
+      "summary": "KDB생명 매각 실패 배경 및 협상 종료 분석"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/277/0005847398?sid=101",
+      "title_key": "한투증권디폴트옵션3년누적수익률10097전체1위",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "한투증권, 디폴트옵션 3년 누적수익률 100.97%… 전체 1위",
+      "story": "kis-default-option-no1",
+      "event_group": "kis-default-option-no1",
+      "kind": "new_fact",
+      "summary": "한투증권 디폴트옵션 3년 수익률 전체 1위"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004685996?sid=102",
+      "title_key": "단국대총동창회자랑스러운단국인선정",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "단국대 총동창회, ‘자랑스러운 단국인’ 선정",
+      "story": "kis-jung-il-moon-award",
+      "event_group": "kis-jung-il-moon-award",
+      "kind": "new_fact",
+      "summary": "정일문 부회장, '자랑스러운 단국인' 선정"
+    },
+    {
+      "url_key": "https://econovill.com/news/articleView.html?idxno=758448",
+      "title_key": "한투운용신한證통해앤트로픽공모주확보",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "[단독] 한투운용, 신한證 통해 앤트로픽 공모주 확보",
+      "story": "anthropic-ipo-domestic-exclusion",
+      "event_group": "kim-anthropic-ipo-shares",
+      "kind": "new_fact",
+      "summary": "한투운용, 앤트로픽 공모주 확보 사실 확인"
+    },
+    {
+      "url_key": "https://newsworks.co.kr/news/articleView.html?idxno=904321",
+      "title_key": "증권사모험자본3개월새2조증가금감원규제더푼다",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "증권사 모험자본 3개월 새 2조 증가…금감원, 규제 더 푼다",
+      "story": "kis-risk-capital-increase",
+      "event_group": "kis-risk-capital-increase",
+      "kind": "new_fact",
+      "summary": "증권사 모험자본 2조 증가 및 규제 완화 추진"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006415299?sid=101",
+      "title_key": "종투사모험자본공급11조넘어kb증권투자플랫폼첫출자성사",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "종투사 모험자본 공급 11조 넘어…KB증권 투자플랫폼 첫 출자 성사",
+      "story": "kis-risk-capital-increase",
+      "event_group": "securities-risk-capital-reform-fss",
+      "kind": "new_fact",
+      "summary": "금감원, 종투사 모험자본 규제 완화 및 시행세칙 개정 추진"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/016/0002728139?sid=101",
+      "title_key": "거래소엔지분장벽매매운용엔새길디지털자산시장판바뀐다크",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "거래소엔 지분 장벽, 매매·운용엔 새 길…디지털자산시장 판 바뀐다 [크...",
+      "story": "digital-asset-basic-law-2026",
+      "event_group": "digital-asset-law-analysis-2026",
+      "kind": "analysis",
+      "summary": "디지털자산법 제정안 공개, 거래소 대주주 지분 20% 제한"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/421/0009309025?sid=101",
+      "title_key": "의무공개매수지배주주먼저팔려면일반주주승인받아야",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "\"의무공개매수, 지배주주 먼저 팔려면 일반주주 승인받아야\"",
+      "story": "mandatory-tender-offer-2026",
+      "event_group": "mandatory-tender-offer-sustinvest",
+      "kind": "analysis",
+      "summary": "서스틴베스트, 의무공개매수제 안분비례 매수 원칙 제안"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/277/0005847606?sid=102",
+      "title_key": "檢마지막직접수사연내종결못하면언제끝날지모른다",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "檢 '마지막 직접수사' 연내 종결 못하면, 언제 끝날지 모른다",
+      "story": "mbk-partners-investigation",
+      "event_group": "mbk-partners-investigation-status",
+      "kind": "new_fact",
+      "summary": "검찰, MBK 김병주 회장 자본시장법 위반 수사 종결 협의"
+    },
+    {
+      "url_key": "https://m-i.kr/news/articleView.html?idxno=2023081",
+      "title_key": "지방소형사살리겠다던오화경핀테크품앗이로1조길냈다",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "지방 소형사 살리겠다던 오화경, '핀테크 품앗이'로 1조 길 냈다",
+      "story": "savings-bank-ontu-up-linkage",
+      "event_group": "savings-bank-ontu-up-1trillion",
+      "kind": "new_fact",
+      "summary": "저축은행 온투업 연계대출 누적 1조 원 돌파 및 PF 정리"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/293/0000093789?sid=101",
+      "title_key": "ok금융보험업꿈깨지나자금출처에최윤회장고발변수",
+      "sent_at": "2026-11-25T13:33:34.946312+09:00",
+      "title_preview": "OK금융 보험업 꿈 깨지나…자금 출처에 최윤 회장 고발 변수",
+      "story": "",
+      "event_group": "",
+      "kind": "new_fact",
+      "summary": "공정위 OK금융 제재 심의, 예별손보 인수전 변수 부각"
     }
   ]
 }
