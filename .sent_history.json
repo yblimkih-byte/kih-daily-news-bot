@@ -1439,6 +1439,156 @@
       "event_group": "blackrock-hk-token-mmf-launch",
       "kind": "new_fact",
       "summary": "블랙록, 홍콩서 첫 토큰화 MMF 출시 및 스테이블코인 결제"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446366",
+      "title_key": "전우였던카카오tpg15조법적분쟁",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "[중복상장 금지 유탄-①] 전우였던 카카오-TPG, 1.5조 법적분쟁",
+      "story": "kipe-kakao-tpg-dispute",
+      "event_group": "kipe-kakao-tpg-dispute",
+      "kind": "new_fact",
+      "summary": "카카오모빌리티 투자 관련 1.5조 법적 분쟁 부각"
+    },
+    {
+      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202611231048414760108690",
+      "title_key": "국민성장펀드1호유치연매출200억달성관건",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "[더벨][나눔에너지 IPO] 국민성장펀드 1호 유치…연매출 200억 달성 관건",
+      "story": "kivam-investment-nanum-energy",
+      "event_group": "kivam-investment-nanum-energy",
+      "kind": "new_fact",
+      "summary": "나눔에너지 CB에 40억 원 투자 집행"
+    },
+    {
+      "url_key": "https://cbci.co.kr/news/articleView.html?idxno=630434",
+      "title_key": "에버스핀전국대학에웹보안무상poc방어수준점검",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "에버스핀, 전국 대학에 웹 보안 무상 PoC…방어 수준 점검",
+      "story": "kis-everspin-poc",
+      "event_group": "kis-everspin-poc",
+      "kind": "new_fact",
+      "summary": "보안 솔루션 에버세이프 웹 도입 및 안정성 인정"
+    },
+    {
+      "url_key": "https://beyondpost.co.kr/view.php?ud=20261125074412767446a9e4dd7f_30",
+      "title_key": "미래에셋증권채권브랜드평판2026년11월1위",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "미래에셋증권, 채권 브랜드평판 2026년 11월...1위",
+      "story": "kis-bond-brand-reputation",
+      "event_group": "kis-bond-brand-reputation",
+      "kind": "new_fact",
+      "summary": "11월 채권 브랜드평판 7위 기록"
+    },
+    {
+      "url_key": "https://raonnews.com/news/article.html?no=63044",
+      "title_key": "코인리딩방도금융당국감독받는다시세조종혐의계좌는동결",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "코인 리딩방도 금융당국 감독받는다…시세조종 혐의 계좌는 동결",
+      "story": "digital-asset-basic-law-2026",
+      "event_group": "digital-asset-law-monitoring",
+      "kind": "new_fact",
+      "summary": "디지털자산법 추진, 리딩방 감독 및 계좌 동결"
+    },
+    {
+      "url_key": "https://cstimes.com/news/articleView.html?idxno=729195",
+      "title_key": "최윤회장에부실채권1조원넘긴ok저축은행매각적정성도마",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "최윤 회장에 부실채권 1조원 넘긴 OK저축은행…매각 적정성 도마",
+      "story": "ok-financial-ftc-prosecution",
+      "event_group": "ok-savings-bank-npl-sale",
+      "kind": "new_fact",
+      "summary": "OK저축은행, 회장 측에 1조 원대 부실채권 매각"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006415136?sid=101",
+      "title_key": "서스틴베스트지배주주우선매각일반주주승인거쳐야",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "서스틴베스트 “지배주주 우선매각, 일반주주 승인 거쳐야”",
+      "story": "mandatory-tender-offer-2026",
+      "event_group": "sustinvest-tender-offer-view",
+      "kind": "new_fact",
+      "summary": "서스틴베스트, 의무공개매수 개정안 논평 발표"
+    },
+    {
+      "url_key": "https://globalepic.co.kr/view.php?ud=2026112508201099957cc35ccc5c_29",
+      "title_key": "우리금융영업점해외법인이어지주본사회장직속조직서도4억대",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "우리금융, 영업점·해외법인 이어 지주 본사 회장 직속 조직서도 4억대...",
+      "story": "woori-financial-embezzlement-2026",
+      "event_group": "woori-financial-hq-embezzlement",
+      "kind": "new_fact",
+      "summary": "우리금융지주 본사, 4억 원대 횡령 사고 발생"
+    },
+    {
+      "url_key": "https://raonnews.com/news/article.html?no=63047",
+      "title_key": "4대금융지주올해환원율50안팎내년roe는제자리전망",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "4대 금융지주 올해 환원율 50% 안팎…내년 ROE는 제자리 전망",
+      "story": "major-holding-shareholder-return-2026",
+      "event_group": "major-holding-shareholder-return",
+      "kind": "new_fact",
+      "summary": "4대 금융지주, 올해 주주환원율 50% 안팎 전망"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/421/0009308338?sid=110",
+      "title_key": "코스닥가로막는사나운개",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "[팀장칼럼] 코스닥 가로막는 ‘사나운 개’",
+      "story": "bdc-regulation-2026",
+      "event_group": "bdc-regulation-column",
+      "kind": "new_fact",
+      "summary": "BDC 도입 통한 코스닥 및 벤처 투자 활성화 제언"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/018/0006415121?sid=104",
+      "title_key": "日금리1993년이후최고2가나내년중반까지세번더",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "日 금리 1993년 이후 최고 2% 가나…\"내년 중반까지 세 번 더\"",
+      "story": "boj-monetary-policy-2026",
+      "event_group": "boj-etf-sale-forecast",
+      "kind": "new_fact",
+      "summary": "일본은행, 내년 금리 인상 및 ETF 매각 가속 전망"
+    },
+    {
+      "url_key": "https://jemin.com/news/articleView.html?idxno=848396",
+      "title_key": "비트코인반등무산에6만달러이탈선물시장8억4400만달러청산",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "비트코인, 반등 무산에 6만 달러 이탈…선물시장 8억4400만 달러 청산",
+      "story": "crypto-market-volatility-2026",
+      "event_group": "crypto-market-crash-60k",
+      "kind": "new_fact",
+      "summary": "비트코인 6만 달러 붕괴 및 선물시장 대규모 청산"
+    },
+    {
+      "url_key": "https://public25.com/news/articleView.html?idxno=58998",
+      "title_key": "코스피코스닥삼성ea에코프로비엠일성건설제일기획유니테스트",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "[코스피·코스닥, 삼성E&A 에코프로비엠 일성건설 제일기획 유니테스트...",
+      "story": "daol-savings-bank-capital-injection",
+      "event_group": "daol-savings-bank-capital",
+      "kind": "new_fact",
+      "summary": "다올투자증권, 다올저축은행 주식 222억 원 취득"
+    },
+    {
+      "url_key": "https://dealsite.co.kr/articles/173365",
+      "title_key": "나라셀라와인투자한에이벤처스284억이45억됐다",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "나라셀라 와인 투자한 에이벤처스…284억이 45억 됐다",
+      "story": "vc-investment-loss-case",
+      "event_group": "a-ventures-investment-loss",
+      "kind": "new_fact",
+      "summary": "에이벤처스, 나라셀라 투자로 200억 원대 손실"
+    },
+    {
+      "url_key": "https://fortunekorea.co.kr/news/articleView.html?idxno=54860",
+      "title_key": "구단도사고야구공도산다스포츠에꽂힌사모펀드",
+      "sent_at": "2026-11-25T09:11:48.791929+09:00",
+      "title_preview": "구단도 사고 야구공도 산다…스포츠에 꽂힌 사모펀드",
+      "story": "pef-sports-investment",
+      "event_group": "pef-sports-investment-trend",
+      "kind": "new_fact",
+      "summary": "글로벌 사모펀드, 스포츠 구단 및 리그 투자 확대"
     }
   ]
 }
