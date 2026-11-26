@@ -1929,6 +1929,246 @@
       "event_group": "kofr-5th-anniversary",
       "kind": "new_fact",
       "summary": "예탁원, KOFR 산출 5주년 및 산출 오류 0건 달성"
+    },
+    {
+      "url_key": "https://investchosun.com/site/data/html_dir/2026/11/26/2026112680212.html",
+      "title_key": "랩신탁기관경고여파에펀드공동운용제동걸린증권사들",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[Invest]랩·신탁 기관경고 여파에…펀드 공동운용 제동 걸린 증권사들",
+      "story": "kis-wrap-account-fss-meeting",
+      "event_group": "kis-fss-warning-fund-impact",
+      "kind": "new_fact",
+      "summary": "금감원 기관경고 여파로 펀드 공동운용 제약"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005358772?sid=101",
+      "title_key": "지분이어자기자본규제까지코인원디지털엑스인가촉각",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[단독] 지분 이어 자기자본 규제까지…코인원·디지털엑스 인가 '촉각'",
+      "story": "kis-coinone-ownership-regulation",
+      "event_group": "kis-coinone-capital-issue",
+      "kind": "new_fact",
+      "summary": "코인원 투자 관련 자기자본 규제 리스크 부각"
+    },
+    {
+      "url_key": "https://hansbiz.co.kr/news/articleView.html?idxno=887540",
+      "title_key": "순익75급감본사적자김가람더블유게임즈휘청",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "순익 75% 급감·본사 적자…김가람 더블유게임즈 '휘청'",
+      "story": "kis-bridge-loan-doubleu",
+      "event_group": "kis-bridge-loan-doubleu",
+      "kind": "new_fact",
+      "summary": "더블유게임즈에 3000억 규모 브릿지론 제공"
+    },
+    {
+      "url_key": "https://news.ifm.kr/news/articleView.html?idxno=485615",
+      "title_key": "8개사재무건전성극과극pf부실정리끝나",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[부동산신탁 진단⑨끝] 8개사 재무건전성 '극과 극'…PF 부실 정리 끝나...",
+      "story": "kit-earnings-analysis",
+      "event_group": "kit-earnings-analysis",
+      "kind": "new_fact",
+      "summary": "부동산 PF 부실 속 3분기 69억 흑자 유지"
+    },
+    {
+      "url_key": "https://dealsite.co.kr/articles/173514",
+      "title_key": "상장후석달유통물량21배늘어난다오버행",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[이노보테라퓨틱스 IPO] 상장 후 석달 유통물량 2.1배 늘어난다…오버행...",
+      "story": "kis-ipo-innovo",
+      "event_group": "kis-ipo-innovo",
+      "kind": "new_fact",
+      "summary": "이노보테라퓨틱스 IPO 단독 대표주관 수행"
+    },
+    {
+      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202611251008266360102047",
+      "title_key": "ax자율제조전면에수요예측서가치입증나선다",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[더벨][인터엑스 IPO] AX 자율제조 전면에…수요예측서 가치 입증 나선다",
+      "story": "kip-investment-interx",
+      "event_group": "kis-ipo-interx",
+      "kind": "new_fact",
+      "summary": "자율제조 기업 인터엑스 IPO 주관 가치 입증"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004686579?sid=101",
+      "title_key": "한투證신보기금3차유동화수익증권단독주관",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "한투證, 신보기금 3차 유동화수익증권 단독 주관 [시그널]",
+      "story": "kis-sib-pcbo-lead",
+      "event_group": "kis-sib-pcbo-lead",
+      "kind": "new_fact",
+      "summary": "신보 제3차 유동화수익증권 단독 주관 완료"
+    },
+    {
+      "url_key": "https://hansbiz.co.kr/news/articleView.html?idxno=887751",
+      "title_key": "바람개비냐인동초냐엇갈린증시폭락해법",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[마켓H] 바람개비냐 인동초냐…엇갈린 증시 폭락 해법",
+      "story": "kim-ceo-reappointment",
+      "event_group": "kim-ceo-market-proposal",
+      "kind": "new_fact",
+      "summary": "배재규 대표, 아동 장기 금융자산 배정안 제시"
+    },
+    {
+      "url_key": "https://it.chosun.com/news/articleView.html?idxno=3000000001927",
+      "title_key": "美주식사는데투자성향안따져증권사마다기준제각각",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "美주식 사는데 투자성향 안 따져… 증권사마다 기준 제각각",
+      "story": "kis-overseas-stock-policy",
+      "event_group": "kis-overseas-stock-policy",
+      "kind": "new_fact",
+      "summary": "해외주식 거래 시 투자성향 진단 의무화 적용"
+    },
+    {
+      "url_key": "https://news2day.co.kr/article/20261126500030",
+      "title_key": "n2모닝경제브리핑11월27일美증시추수감사절휴장주요공시",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[N2 모닝 경제 브리핑-11월 27일] 美 증시, 추수감사절 휴장…주요공시...",
+      "story": "kis-treasury-stock-ajnw",
+      "event_group": "kis-treasury-stock-ajnw",
+      "kind": "new_fact",
+      "summary": "AJ네트웍스와 23억 규모 자사주 신탁 체결"
+    },
+    {
+      "url_key": "https://newswatch.kr/news/articleView.html?idxno=82056",
+      "title_key": "삼성자산운용김우석의딜레마②투자자피눈물흘릴때쌓이는",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[삼성자산운용 김우석의 딜레마②] 투자자 '피눈물' 흘릴 때…쌓이는 '...",
+      "story": "kim-etf-fee-comparison",
+      "event_group": "kim-etf-fee-comparison",
+      "kind": "new_fact",
+      "summary": "단일종목 레버리지 ETF 운용보수 경쟁력 확인"
+    },
+    {
+      "url_key": "https://asiatoday.co.kr/kn/view.php?key=20261126010010519",
+      "title_key": "미래에셋證자본16조증발유증나선한투자본1위역전가시권",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "미래에셋證 자본 1.6조 증발…유증 나선 한투, 자본 1위 역전 가시권",
+      "story": "kis-capital-status-3q",
+      "event_group": "kis-capital-no1-status",
+      "kind": "analysis",
+      "summary": "자기자본 1위 역전 가시화 및 자본 방어 성공"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004686587?sid=101",
+      "title_key": "한투pe車부품사에대출첫하이브리드펀드조성",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "한투PE “車 부품사에 대출”…첫 하이브리드 펀드 조성 [시그널]",
+      "story": "kipe-hybrid-fund-launch",
+      "event_group": "kipe-hybrid-fund-launch",
+      "kind": "new_fact",
+      "summary": "3000억 규모 첫 하이브리드 펀드 조성 착수"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/023/0004012003?sid=101",
+      "title_key": "미래건축문화대상시상식",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "미래건축문화대상 시상식",
+      "story": "kit-award-2026",
+      "event_group": "kit-award-2026",
+      "kind": "new_fact",
+      "summary": "2026 미래건축문화대상 신탁 부문 수상"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005358771?sid=101",
+      "title_key": "은행증권사디지털자산보관업진출쉬워진다",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "은행·증권사, 디지털자산 보관업 진출 쉬워진다",
+      "story": "digital-asset-basic-law-2026",
+      "event_group": "trustee-digital-asset-special",
+      "kind": "new_fact",
+      "summary": "디지털자산법에 신탁업자 보관업 진출 특례 명시"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/022/0004178501?sid=101",
+      "title_key": "개인사업자가계부실채권비율급등외",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[이코노 브리핑] 개인사업자·가계 부실채권비율 급등 외",
+      "story": "npl-ratio-surge-2026",
+      "event_group": "npl-ratio-peak-2026",
+      "kind": "new_fact",
+      "summary": "은행권 개인사업자 부실채권비율 12년 만에 최고"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/293/0000093895?sid=101",
+      "title_key": "ok금융예별손보인수잡음최윤회장고발취하요구의혹",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[단독]OK금융, 예별손보 인수 잡음…최윤 회장 '고발취하' 요구 의혹",
+      "story": "ok-financial-ftc-prosecution",
+      "event_group": "ok-financial-acquisition-risk",
+      "kind": "new_fact",
+      "summary": "OK금융 예별손보 인수전 최윤 회장 고발 변수 부각"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/011/0004686620?sid=101",
+      "title_key": "etf분할병합길열리나당국의견수렴",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[단독] ETF 분할·병합 길 열리나…당국 “의견 수렴”",
+      "story": "etp-split-merge-amendment",
+      "event_group": "etp-split-merge-bill",
+      "kind": "new_fact",
+      "summary": "ETP 분할·병합 허용 자본시장법 개정안 발의"
+    },
+    {
+      "url_key": "https://sejungilbo.com/news/articleView.html?idxno=61304",
+      "title_key": "강민국의원농축협표적과세미래에셋의혹도점",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[안덕수 청문회] 강민국 의원, \"농·축협 표적 과세·미래에셋 의혹도 점...",
+      "story": "assembly-hearing-finance-scrutiny",
+      "event_group": "assembly-hearing-scrutiny",
+      "kind": "new_fact",
+      "summary": "국회, 미래에셋 등 증권업계 주요 의혹 점검 촉구"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/421/0009313292?sid=101",
+      "title_key": "코인백서중요내용빠지면백서에서명한회계사변호사도배상책",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "'코인 백서' 중요 내용 빠지면…백서에 서명한 회계사·변호사도 배상책...",
+      "story": "digital-asset-basic-law-2026",
+      "event_group": "crypto-whitepaper-liability",
+      "kind": "new_fact",
+      "summary": "코인 백서 허위 기재 시 외부 전문가 배상책임 부과"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/015/0005358866?sid=101",
+      "title_key": "잘나가는종목만모았다더니개미들울린etf의함정",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "\"잘나가는 종목만 모았다더니\"…개미들 울린 ETF의 함정 [분석+]",
+      "story": "etf-regulation-limit-issue",
+      "event_group": "etf-regulation-limit-analysis",
+      "kind": "new_fact",
+      "summary": "ETF 종목 비중 제한 등 자본시장법 규제 리스크 분석"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/029/0003061444?sid=105",
+      "title_key": "김상훈거래소대주주지분제한즉각폐기해야기업성장가로막는",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "김상훈 “거래소 대주주 지분 제한 즉각 폐기해야…기업 성장 가로막는...",
+      "story": "digital-asset-basic-law-2026",
+      "event_group": "political-opposition-crypto-limit",
+      "kind": "new_fact",
+      "summary": "여당, 가상자산거래소 대주주 지분 제한 폐기 요구"
+    },
+    {
+      "url_key": "https://investchosun.com/site/data/html_dir/2026/11/26/2026112680125.html",
+      "title_key": "금융그룹생산적금융첫성적표내달18일전후공개",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "[Invest]금융그룹 생산적 금융 첫 성적표, 내달 18일 전후 공개",
+      "story": "productive-finance-report-2026",
+      "event_group": "productive-finance-report-schedule",
+      "kind": "new_fact",
+      "summary": "금융그룹 생산적 금융 첫 성적표 내달 18일 공개"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/119/0003160071?sid=101",
+      "title_key": "주식샀지만반대표는못던졌다운용사주주권행사뒷전",
+      "sent_at": "2026-11-27T07:42:14.135652+09:00",
+      "title_preview": "주식 샀지만 반대표는 못 던졌다?…운용사 주주권 행사 ‘뒷전’",
+      "story": "am-stewardship-issue",
+      "event_group": "am-stewardship-status",
+      "kind": "new_fact",
+      "summary": "공모 운용사 67곳 중 주주권 전담조직 운영 18곳 불과"
     }
   ]
 }
