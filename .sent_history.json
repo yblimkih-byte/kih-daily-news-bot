@@ -1969,6 +1969,126 @@
       "event_group": "cornerstone-investor-system",
       "kind": "new_fact",
       "summary": "코너스톤 투자자 제도 자본시장법 시행"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/022/0004178646?sid=101",
+      "title_key": "금감원스페이스xetf광고논란한투운용제재착수",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "금감원, ‘스페이스X ETF 광고 논란’ 한투운용 제재 착수",
+      "story": "kim-ace-spacex-penalty",
+      "event_group": "kim-ace-spacex-penalty-start",
+      "kind": "new_fact",
+      "summary": "금감원, '스페이스X ETF' 과장 광고 제재 착수"
+    },
+    {
+      "url_key": "https://thebell.co.kr/free/content/ArticleView.asp?key=202611271404081760105528",
+      "title_key": "한투저축비대면채널보안체계재정비",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "[더벨]한투저축, 비대면 채널 보안체계 재정비",
+      "story": "kisb-security-reorg",
+      "event_group": "kisb-security-system-reorg",
+      "kind": "new_fact",
+      "summary": "한국투자저축은행, 비대면 채널 보안 체계 재정비"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005447443?sid=101",
+      "title_key": "은행지역재투자평가상대평가로바꾼다최우수7곳1곳",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "은행 지역재투자 평가 상대평가로 바꾼다…최우수 7곳→1곳",
+      "story": "kisb-regional-reinvest-eval",
+      "event_group": "kisb-regional-reinvest-2026",
+      "kind": "new_fact",
+      "summary": "2026년 지역재투자 평가 '우수' 등급 획득"
+    },
+    {
+      "url_key": "https://businesspost.co.kr/BP?command=article_view&num=453144",
+      "title_key": "부산행통합진에어이진호노조달래기와인건비관리사이줄타기",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "'부산행 통합' 진에어 이진호, 노조 달래기와 인건비 관리 사이 줄타기",
+      "story": "kis-jinair-briefing",
+      "event_group": "kis-jinair-integration-briefing",
+      "kind": "new_fact",
+      "summary": "진에어 3사 통합 설명회 본사 개최 및 지원"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/293/0000093937?sid=101",
+      "title_key": "맥쿼리kodm베팅화성나우코스3000억딜클로징",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "맥쿼리, K-ODM 베팅…화성·나우코스 3000억 딜 클로징",
+      "story": "kipe-hwasung-deal-exit",
+      "event_group": "kipe-hwasung-deal-result",
+      "kind": "new_fact",
+      "summary": "화성·나우코스 인수전 탈락 및 맥쿼리 낙찰"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/001/0016468203?sid=101",
+      "title_key": "미국ai기업투자등etf3종내달1일신규상장",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "'미국 AI 기업 투자' 등 ETF 3종, 내달 1일 신규 상장",
+      "story": "kim-ace-new-etf-listing",
+      "event_group": "kim-ace-new-etf-listing-dec",
+      "kind": "new_fact",
+      "summary": "AI 반도체 및 미국 지수 ETF 3종 신규 상장"
+    },
+    {
+      "url_key": "https://pinpointnews.co.kr/news/articleView.html?idxno=508895",
+      "title_key": "한국투자증권뱅키스고객대상2027학년도정시전략대입설명회개",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "한국투자증권, 뱅키스 고객 대상 '2027학년도 정시 전략 대입 설명회' 개...",
+      "story": "kis-cs-admission-event",
+      "event_group": "kis-cs-admission-strategy-2027",
+      "kind": "new_fact",
+      "summary": "뱅키스 고객 대상 2027학년도 대입 설명회 개최"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/277/0005848882?sid=100",
+      "title_key": "박상혁공개매수시이사회의견표명의무화한국형베어허그법발",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "박상혁, 공개매수 시 이사회 의견표명 의무화…'한국형 베어허그법' 발...",
+      "story": "mandatory-tender-offer-2026",
+      "event_group": "fsc-mandatory-tender-offer-bill",
+      "kind": "new_fact",
+      "summary": "박상혁 의원, 공개매수 시 이사회 의견표명 의무화 법안 발의"
+    },
+    {
+      "url_key": "https://ftoday.co.kr/news/articleView.html?idxno=370744",
+      "title_key": "민간주도자본시장개혁시동정책실행력이관건",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "민간 주도 자본시장 개혁 시동…정책 실행력이 관건",
+      "story": "capital-market-reform-committee",
+      "event_group": "fsc-capital-market-reform-committee",
+      "kind": "analysis",
+      "summary": "민간 주도 자본시장 대전환 위원회 구성... 증시 체질 개선"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/008/0005447404?sid=102",
+      "title_key": "벤처1세대이종원호서대부총장창업벤처규제혁파이끈다",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "'벤처 1세대' 이종원 호서대 부총장, 창업·벤처 규제 혁파 이끈다",
+      "story": "tech-startup-vc-policy-2026",
+      "event_group": "mss-startup-regulation-committee",
+      "kind": "new_fact",
+      "summary": "중기부, 창업·벤처 규제 혁파 위한 민관 합동 위원회 출범"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/293/0000093949?sid=101",
+      "title_key": "서남소액공모유증청약률361조달액1억불과",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "서남, 소액공모 유증 청약률 3.61%…조달액 1억 불과",
+      "story": "capital-market-act-reform-2026",
+      "event_group": "fsc-small-public-offering-limit",
+      "kind": "new_fact",
+      "summary": "자본시장법 시행령 개정으로 소액공모 한도 30억 상향"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/293/0000093946?sid=101",
+      "title_key": "남기천재연임은행실세전진배치임종룡호우리금융친정체제다졌",
+      "sent_at": "2026-11-27T17:02:36.662388+09:00",
+      "title_preview": "남기천 재연임·은행 실세 전진 배치…임종룡호 우리금융 친정체제 다졌...",
+      "story": "woori-",
+      "event_group": "woori-",
+      "kind": "new_fact",
+      "summary": "우리금융, 자회사 대표 4명 교체 및 7명 연임... 안정 선택"
     }
   ]
 }
