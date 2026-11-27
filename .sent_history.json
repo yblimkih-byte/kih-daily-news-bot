@@ -1,126 +1,6 @@
 {
   "entries": [
     {
-      "url_key": "https://theviewers.co.kr/View.aspx?No=4322563",
-      "title_key": "④과징금은회사몫성과급환수엔침묵",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "[국고채 담합 고발] ④과징금은 '회사 몫'...성과급 환수엔 '침묵'",
-      "story": "kis-fss-fine-ranking",
-      "event_group": "kis-fine-bonus",
-      "kind": "new_fact",
-      "summary": "국고채 담합 과징금 관련 성과급 환수 논란"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/293/0000093704?sid=110",
-      "title_key": "대우증권kdb생명좋은물건과비지떡",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "[허정수칼럼] 대우증권·KDB생명, 좋은 물건과 비지떡",
-      "story": "kifh-kdb-life-acquisition",
-      "event_group": "kifh-kdb-fail-recap",
-      "kind": "analysis",
-      "summary": "KDB생명 인수 협상 결렬 배경 및 과정 분석"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/011/0004685360?sid=101",
-      "title_key": "ff테일러메이드실사종결수순센트로이드spa만남았다",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "F&F, 테일러메이드 실사 종결 수순…센트로이드 SPA만 남았다 [시그널]",
-      "story": "kis-acquisition-finance-ff",
-      "event_group": "kis-loc-ff",
-      "kind": "new_fact",
-      "summary": "F&F 테일러메이드 인수금융 LOC 제공 확인"
-    },
-    {
-      "url_key": "https://ceoscoredaily.com/page/view/2026112315451425313",
-      "title_key": "발행어음금리최고6메리츠도가세증권사수익성부담은",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "발행어음 금리 최고 6%…메리츠도 가세, 증권사 수익성 부담은",
-      "story": "kis-promissory-note-growth",
-      "event_group": "kis-promissory-growth",
-      "kind": "new_fact",
-      "summary": "발행어음 잔액 4695억 원으로 전년比 18.5% 증가"
-    },
-    {
-      "url_key": "https://it.chosun.com/news/articleView.html?idxno=3000000001651",
-      "title_key": "거래절벽에채권손실까지배당수익률9증권주반등할까",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "거래 절벽에 채권손실까지… 배당수익률 9% 증권주, 반등할까",
-      "story": "kis-earnings-analysis",
-      "event_group": "kis-earnings-analysis",
-      "kind": "new_fact",
-      "summary": "3분기 순익 감소 속 영업이익 선전 분석"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/015/0005357270?sid=101",
-      "title_key": "k뷰티유통업체언락드브랜드320억규모시리즈b투자유치",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "[단독] K뷰티 유통업체 언락드브랜드, 320억 규모 시리즈B 투자 유치",
-      "story": "kip-investment-unlocked-brands",
-      "event_group": "kip-inv-unlocked",
-      "kind": "new_fact",
-      "summary": "K뷰티 유통사 언락드브랜드 시리즈B 투자 참여"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/014/0005608507?sid=101",
-      "title_key": "이억원중대민생범죄계좌정지확대자금세탁철저대응",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "이억원 \"중대민생범죄 계좌 정지 확대… 자금세탁 철저 대응\"",
-      "story": "aml-regulation-expansion-2026",
-      "event_group": "aml-regulation-expansion-fsc-3-tasks",
-      "kind": "new_fact",
-      "summary": "금융위, 중대민생범죄 계좌 정지 확대 및 자금세탁 대응"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/018/0006414330?sid=101",
-      "title_key": "금융위내일부터상장사자사주1일취득한도3개월간완화",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "금융위, 내일부터 상장사 자사주 1일 취득한도 3개월간 완화",
-      "story": "treasury-stock-regulation-easing",
-      "event_group": "treasury-stock-regulation-easing-fsc-decision",
-      "kind": "new_fact",
-      "summary": "금융위, 상장사 자사주 1일 취득한도 3개월 완화"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/009/0005767963?sid=100",
-      "title_key": "주가폭락두고엇갈린처방與주주보호野종부세폐지",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "주가 폭락 두고 엇갈린 처방…與 “주주 보호” 野 “종부세 폐지”",
-      "story": "capital-market-reform-2026",
-      "event_group": "capital-market-reform-political-debate",
-      "kind": "new_fact",
-      "summary": "여당, 자본시장법 개정 논의 가속화"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/011/0004685339?sid=101",
-      "title_key": "모태펀드와함께성장한걸그룹리센느",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "[시론] 모태펀드와 함께 성장한 걸그룹 ‘리센느’",
-      "story": "mother-fund-expansion-2026",
-      "event_group": "mother-fund-expansion-2026-record-budget",
-      "kind": "new_fact",
-      "summary": "모태펀드, 역대 최대 규모 벤처·스타트업 투자 확대"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/022/0004177545?sid=101",
-      "title_key": "부당지원의혹ok금융그룹제재심의외",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "[이코노 브리핑] 부당지원 의혹 OK금융그룹 제재 심의 외",
-      "story": "lottecard-disclosure-violation-fine",
-      "event_group": "lottecard-disclosure-violation-fine-fsc-decision",
-      "kind": "new_fact",
-      "summary": "금융위, 롯데카드 공시의무 위반 과징금 10억2천만원"
-    },
-    {
-      "url_key": "https://n.news.naver.com/mnews/article/003/0014340851?sid=101",
-      "title_key": "금융증권11월24일화요일",
-      "sent_at": "2026-11-24T07:43:35.828621+09:00",
-      "title_preview": "[오늘의 주요일정]금융·증권(11월24일 화요일)",
-      "story": "financial-schedule-",
-      "event_group": "financial-schedule-",
-      "kind": "new_fact",
-      "summary": "금융위, 증권사 랩어카운트 임원 간담회 개최"
-    },
-    {
       "url_key": "https://kjdaily.com/article.php?aid=1795477633693331276",
       "title_key": "진에어에어부산lg화학등",
       "sent_at": "2026-11-24T09:13:10.128604+09:00",
@@ -2169,6 +2049,96 @@
       "event_group": "am-stewardship-status",
       "kind": "new_fact",
       "summary": "공모 운용사 67곳 중 주주권 전담조직 운영 18곳 불과"
+    },
+    {
+      "url_key": "https://dealsite.co.kr/articles/173504",
+      "title_key": "금감원은놓치고증선위는깎아주고한투증권제재잣대도마",
+      "sent_at": "2026-11-27T09:12:29.373446+09:00",
+      "title_preview": "금감원은 놓치고 증선위는 깎아주고…한투증권 제재 잣대 도마",
+      "story": "kis-fss-penalty-ipo-docs",
+      "event_group": "kis-fss-penalty-ipo",
+      "kind": "new_fact",
+      "summary": "IPO 인수업무조서 미작성으로 과태료 제재 확정"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446864",
+      "title_key": "박현주이어김용범李정부자본시장빅샷에키맡긴까닭",
+      "sent_at": "2026-11-27T09:12:29.373446+09:00",
+      "title_preview": "박현주 이어 김용범…李정부, 자본시장 '빅샷'에 키 맡긴 까닭",
+      "story": "kih-chairman-candidate-gov",
+      "event_group": "kih-chairman-candidate",
+      "kind": "new_fact",
+      "summary": "김남구 회장, 정부 자본시장 주요 인사 후보군 거론"
+    },
+    {
+      "url_key": "https://youthdaily.co.kr/news/article.html?no=230346",
+      "title_key": "항공기팔아당기순익늘린제주항공부채비율하락은대출회계처리",
+      "sent_at": "2026-11-27T09:12:29.373446+09:00",
+      "title_preview": "항공기 팔아 당기순익 늘린 제주항공…부채비율 하락은 \"대출 회계처리...",
+      "story": "kis-jeju-air-perpetual-loan",
+      "event_group": "kis-jeju-air-loan",
+      "kind": "new_fact",
+      "summary": "제주항공에 1000억 원 규모 영구채 대출 제공"
+    },
+    {
+      "url_key": "https://catchnews.kr/news/articleView.html?idxno=131058",
+      "title_key": "11월26일주식시장주요공시",
+      "sent_at": "2026-11-27T09:12:29.373446+09:00",
+      "title_preview": "11월 26일 주식시장 주요공시",
+      "story": "kis-treasury-stock-trust-nov",
+      "event_group": "kis-treasury-stock-trust",
+      "kind": "new_fact",
+      "summary": "삼성SDI 등 주요 기업 자사주 취득 신탁계약 체결"
+    },
+    {
+      "url_key": "https://kfenews.co.kr/news/articleView.html?idxno=668895",
+      "title_key": "반대매매막겠다더니증권사마다제각각",
+      "sent_at": "2026-11-27T09:12:29.373446+09:00",
+      "title_preview": "[기획] 반대매매 막겠다더니…증권사마다 '제각각'",
+      "story": "kis-margin-call-policy",
+      "event_group": "kis-margin-call-deferral",
+      "kind": "new_fact",
+      "summary": "담보비율 미달 계좌 대상 반대매매 유예 신청 접수"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005610636?sid=101",
+      "title_key": "금감원칼날무뎌지나금융위사전협의등통제권강화저인망식검",
+      "sent_at": "2026-11-27T09:12:29.373446+09:00",
+      "title_preview": "'금감원 칼날 무뎌지나'…금융위 사전협의 등 통제권 강화·저인망식 검...",
+      "story": "fsc-fss-inspection-reform-2026",
+      "event_group": "fsc-fss-inspection-reform-2026",
+      "kind": "new_fact",
+      "summary": "금융당국, 금융사 정기검사 사전협의 강화"
+    },
+    {
+      "url_key": "https://financialpost.co.kr/news/articleView.html?idxno=303547",
+      "title_key": "은행연합회장에박종복前sc제일은행장",
+      "sent_at": "2026-11-27T09:12:29.373446+09:00",
+      "title_preview": "은행연합회장에 박종복 前 SC제일은행장",
+      "story": "kfb-chairman-election-2026",
+      "event_group": "kfb-chairman-park-jong-bok",
+      "kind": "new_fact",
+      "summary": "은행연합회장에 박종복 전 SC행장 선임"
+    },
+    {
+      "url_key": "https://n.news.naver.com/mnews/article/014/0005610605?sid=100",
+      "title_key": "국힘李대통령재산18억늘때국민주식563조손실",
+      "sent_at": "2026-11-27T09:12:29.373446+09:00",
+      "title_preview": "국힘 \"李대통령 재산 18억 늘 때 국민 주식 563조 손실\"",
+      "story": "political-stock-market-clash",
+      "event_group": "political-stock-market-clash-nov27",
+      "kind": "new_fact",
+      "summary": "여당, 정부 증시 정책 비판 및 대책 요구"
+    },
+    {
+      "url_key": "https://news.einfomax.co.kr/news/articleView.html?idxno=4446871",
+      "title_key": "가난한코스닥과부자벤처",
+      "sent_at": "2026-11-27T09:12:29.373446+09:00",
+      "title_preview": "[양용비의 VAR] 가난한 코스닥과 부자 벤처",
+      "story": "vc-investment-growth-2026",
+      "event_group": "vc-investment-growth-3q2026",
+      "kind": "new_fact",
+      "summary": "올해 3분기 벤처투자 규모 12.6조 원 돌파"
     }
   ]
 }
